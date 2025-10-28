@@ -89,6 +89,7 @@ if(isset($_POST["btnIniciarSesion"])) {
         $usuario = IniciarSesionModel($correo);
         if($usuario && password_verify($contrasenna, $usuario["Contrasenna"])) {
             $_SESSION["UsuarioID"] = $usuario["IdUsuario"];
+            $_SESSION["Cedula"] = $usuario["Cedula"];
             $_SESSION["Nombre"] = $usuario["Nombre"];
             $_SESSION["Apellido"] = $usuario["Apellido"];
             $_SESSION["ApellidoDos"] = $usuario["ApellidoDos"];

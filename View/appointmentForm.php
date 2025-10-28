@@ -320,7 +320,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div id="selectionPreview" class="alert alert-info">Sin selección</div>
+          <!--<div id="selectionPreview" class="alert alert-info">Sin selección</div>-->
           <form method="post" id="appointmentForm">
             <input type="hidden" name="date" id="selectedDate">
             <input type="hidden" name="time" id="selectedTime">
@@ -337,19 +337,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="col-md-6">
                 <label class="form-label">Cédula</label>
                 <input type="text" class="form-control" name="Cedula" required
-                  value="<?= $usuarioLoggeado["Cedula"] ?>">
+                  value="<?= $_SESSION["Cedula"] ?>">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="Nombre" required
-                  value="<?= $usuarioLoggeado["Nombre"] ?>">
+                  value="<?= $_SESSION["Nombre"] ?>">
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-6">
                 <label class="form-label">Apellidos</label>
                 <input type="text" class="form-control" name="Apellido" required
-                  value="<?= $usuarioLoggeado["Apellido"] ?>">
+                  value="<?= $_SESSION["Apellido"] ?>">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Edad</label>
@@ -360,12 +360,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="col-md-6">
                 <label class="form-label">Correo electrónico</label>
                 <input type="email" class="form-control" name="CorreoElectronico" required
-                  value="<?= $usuarioLoggeado["CorreoElectronico"] ?>">
+                  value="<?= $_SESSION["CorreoElectronico"] ?>">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Teléfono</label>
                 <input type="tel" class="form-control" name="Telefono" required
-                  value="<?= $usuarioLoggeado["Telefono"] ?>">
+                  value="<?= $_SESSION["Telefono"] ?>">
               </div>
             </div>
             <div class="mb-3">
@@ -386,6 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const loggedUser = <?php echo json_encode($usuarioLoggeado); ?>;
+    console.log("$$$$ usuario " + loggedUser);
     const citasExistentes = <?php echo json_encode($citasExistentes); ?>;
     const datePicker = document.getElementById("datePicker");
 
