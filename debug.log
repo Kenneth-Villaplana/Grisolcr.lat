@@ -1,0 +1,7 @@
+[01-Nov-2025 08:38:24 Europe/Berlin] 🎬 ===== CONSTRUCTOR INICIADO =====
+[01-Nov-2025 08:38:24 Europe/Berlin] 🔍 checkGoogleClientAvailability() llamado
+[01-Nov-2025 08:38:24 Europe/Berlin] 🔍 Ruta autoload: C:\xampp\htdocs\OptiGestion\Model/../../vendor/autoload.php
+[01-Nov-2025 08:38:24 Europe/Berlin] 🔍 Autoload existe: NO
+[01-Nov-2025 08:38:24 Europe/Berlin] ❌ AUTOLOAD NO EXISTE
+[01-Nov-2025 08:38:24 Europe/Berlin] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: NO =====
+[01-Nov-2025 08:38:24 Europe/Berlin] 🔍 isGoogleClientAvailable() - retornando: FALSE
