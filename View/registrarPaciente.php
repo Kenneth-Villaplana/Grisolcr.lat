@@ -15,7 +15,7 @@
     <body>
        <?php MostrarMenu();?>
     
-    <section class=" d-flex align-items-center justify-content-center min-vh-100">
+    <section class="registrer-section">
         <div class="container ">
             <?php
                 if(isset($_SESSION["txtMensaje"])){
@@ -25,71 +25,71 @@
           }
           ?>  
         <div class="register-container" data-aos="fade-up">
-                  <h4 class="text-center mb-1">Ingrese sus Datos</h4>
+                  <h4 class="text-center mb-1" style="color: black;">Ingrese sus Datos</h4>
                    <form method="POST" name="contactForm" class="row g-3" >
                    
                       
                                           <div class="col-md-6">           
-                                                <label for="Cedula" class="form-label">Cédula</label>
+                                                <label for="Cedula" class="form-label" style="color: black;">Cédula</label>
                                                 <input type="text" class="form-control" name="Cedula" id="Cedula"
                                                 placeholder="" required>
                                             </div>
 
                                           <div class="col-md-6">          
-                                           <label for="Nombre" class="form-label">Nombre</label>
+                                           <label for="Nombre" class="form-label" style="color: black;">Nombre</label>
                                                 <input type="text" class="form-control" name="Nombre" id="Nombre"
                                                 placeholder="" required>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label for="Apellido" class="form-label">Primer Apellido</label>
+                                                <label for="Apellido" class="form-label" style="color: black;">Primer Apellido</label>
                                                 <input type="text" class="form-control" name="Apellido" id="Apellido"
                                                     placeholder="" required>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="ApellidoDos" class="form-label">Segundo Apellido</label>
+                                                <label for="ApellidoDos" class="form-label" style="color: black;">Segundo Apellido</label>
                                                 <input type="text" class="form-control" name="ApellidoDos" id="ApellidoDos"
                                                     placeholder="" required>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label for="CorreoElectronico" class="form-label">Correo Electrónico</label>
+                                                <label for="CorreoElectronico" class="form-label" style="color: black;">Correo Electrónico</label>
                                                 <input type="email" class="form-control" name="CorreoElectronico" id="CorreoElectronico"
                                                     placeholder="" required>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label for="Contrasenna" class="form-label">Contraseña</label>
+                                                <label for="Contrasenna" class="form-label" style="color: black;">Contraseña</label>
                                                 <input type="password" class="form-control" name="Contrasenna"
                                                     id="Contrasenna" placeholder="" required>
                                             </div>
 
                                            <div class="col-md-6">
-                                                <label for="ConfirmarContrasenna" class="form-label">Confirmar Contraseña</label>
+                                                <label for="ConfirmarContrasenna" class="form-label" style="color: black;">Confirmar Contraseña</label>
                                                 <input type="password" class="form-control" name="ConfirmarContrasenna"
                                                     id="ConfirmarContrasenna" placeholder="" required>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label for="Telefono" class="form-label">Teléfono</label>
+                                                <label for="Telefono" class="form-label" style="color: black;">Teléfono</label>
                                                 <input type="text" class="form-control" name="Telefono" id="Telefono"
                                                     placeholder="" required>
                                             </div>
 
                                             <div class="col-md-12">
-                                                <label for="Direccion" class="form-label">Dirección</label>
+                                                <label for="Direccion" class="form-label" style="color: black;">Dirección</label>
                                                 <input type="text" class="form-control" name="Direccion" id="Direccion"
                                                     placeholder="">
                                             </div>
                                              <div class="col-md-12">
-                                                <label for="FechaNacimiento" class="form-label">Fecha Nacimiento</label>
+                                                <label for="FechaNacimiento" class="form-label" style="color: black;">Fecha Nacimiento</label>
                                                 <input type="date" class="form-control" name="FechaNacimiento" id="FechaNacimiento"
                                                 required max="<?= date('Y-m-d') ?>" placeholder="">
                                             </div>
 
                                             <div class="col-md-12 text-center">
                                                 <div class="form-group">
-                                                    <p>¿Ya tienes cuenta? <a class="link-azul" href="iniciarSesion.php">Iniciar sesión</a></p>
+                                                    <p style="color: black;">¿Ya tienes cuenta? <a class="link-azul" href="iniciarSesion.php">Iniciar sesión</a></p>
                                                 </div>
                                             
                                             <div class="col-md-12 text-center ">
@@ -98,6 +98,7 @@
                                       </form>
                                 </div>
                              </div>
+                             
                    </section>
     <?php MostrarFooter(); ?>
     <?php IncluirScripts(); ?>
