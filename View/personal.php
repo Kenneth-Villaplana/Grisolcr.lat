@@ -1,7 +1,7 @@
 
 <?php
- include('layout.php');
- include_once __DIR__ . '/../Model/personalModel.php';
+include('layout.php');
+include_once __DIR__ . '/../Model/personalModel.php';
 
  $cedulaFiltro = $_GET['cedula'] ?? null;
 
@@ -24,7 +24,7 @@
 <main class="container py-5">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="text-center mb-4">Datos de personal</h2>
-     <a href="registrarpersonal.php" class="btn btn-custom "><i class="bi bi-plus-circle"></i>Agregar personall</a>
+     <a href="registrarPersonal.php" class="btn btn-custom "><i class="bi bi-plus-circle"></i>Agregar personal</a>
 </div>
 
 <div class="mb-4 d-flex justify-content-center">

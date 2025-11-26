@@ -1,12 +1,11 @@
 <?php
-if(session_status() == PHP_SESSION_NONE) {
+
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 function MostrarMenu() {
-   
-
-    $rol = $_SESSION['RolID'] ?? null;       
+    $rol = $_SESSION['RolID'] ?? null;
     $EmpleadoRol = $_SESSION['EmpleadoRol'] ?? null;
 
     echo '
@@ -22,17 +21,9 @@ function MostrarMenu() {
                     <li class="nav-item"><a class="nav-link" href="/OptiGestion/view/about.php">Sobre Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link" href="/OptiGestion/view/anteojos.php">Anteojos</a></li>';
 
-    // controla el usuario no logueado
     if (!$rol) {
         echo '<li class="nav-item ms-lg-3"><a class="nav-link" href="/OptiGestion/view/iniciarSesion.php">Iniciar Sesión</a></li>';
-    }
-
-    // este es para el de paciente
-    else if ($rol === 'Paciente') {
-
-        //se pone debajo del primer 
-           // </ul>
-        //</li>
+    } else if ($rol === 'Paciente') {
         echo '
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCitas" role="button" data-bs-toggle="dropdown">
@@ -43,28 +34,19 @@ function MostrarMenu() {
                 <li><a class="dropdown-item" href="/OptiGestion/view/historialMedico.php">Historial Médico</a></li>
             </ul>
         </li>';
-    }
-
-    // este para el de empleado
-    else if ($rol === 'Empleado') {
-        // este es para el empleado con rol de administrador
+    } else if ($rol === 'Empleado') {
         if ($EmpleadoRol == 1) {
-            //de aqui(sin el echo y las ') despues de ponerlo arriba se comenta desde el else a la llave
-            // para que les funcione y luego se pone todo como estaba
-              echo ' 
-             <li class="nav-item dropdown">
-                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPersonal" role="button" data-bs-toggle="dropdown">
-                     Personal
-                 </a>
+            echo ' 
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPersonal" role="button" data-bs-toggle="dropdown">
+                    Personal
+                </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPersonal">
                     <li><a class="dropdown-item" href="/OptiGestion/view/personal.php">Ver Personal</a></li>
-                     
                 </ul>
             </li>';
-            //hasta aqui (igual sin ' y ;)
         }
 
-        // este para todos los demás empleados
         echo '
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button" data-bs-toggle="dropdown">
@@ -74,11 +56,12 @@ function MostrarMenu() {
                 <li><a class="dropdown-item" href="/OptiGestion/view/reportes.php">Reportes</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/inventario.php">Inventario</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/facturacion.php">Facturación</a></li>
-                <li class="nav-item"><a class="nav-link" href="/OptiGestion/view/historialExpedientes.php">Historial de Expedientes</a></li>
+                <li><a class="dropdown-item" href="/OptiGestion/view/historialExpedientes.php">Historial de Expedientes</a></li>
             </ul>
         </li>';
     }
-if ($rol) {
+
+    if ($rol) {
         echo '
         <li class="nav-item dropdown ms-lg-3">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPerfil" role="button" data-bs-toggle="dropdown">
@@ -90,6 +73,7 @@ if ($rol) {
             </ul>
         </li>';
     }
+
     echo '
                 </ul>
             </div>
@@ -97,15 +81,14 @@ if ($rol) {
     </nav>';
 }
 
-
 function MostrarFooter() {
     echo '
-    <footer class="footer bg-dark text-light pt-5 pb-3 ">
+    <footer class="footer bg-dark text-light pt-5 pb-3">
         <div class="container text-center">
             <div class="row justify-content-center">
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold text-uppercase">Sucursal</h6>
-                    <a href="https://maps.app.goo.gl/8xCe7rQRBhBzRZsr7" class="text-light text-decoration-none small">Ver ubicacion</a>
+                    <a href="https://maps.app.goo.gl/8xCe7rQRBhBzRZsr7" class="text-light text-decoration-none small">Ver ubicación</a>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold text-uppercase">Redes Sociales</h6>
@@ -120,9 +103,9 @@ function MostrarFooter() {
                         </a>
                     </p>
                     <p class="mb-1 small">
-                    <a href="https://wa.me/50612345678" class="text-light text-decoration-none" target="_blank">
-                   <i class="bi bi-whatsapp"></i> WhatsApp
-                     </a>
+                        <a href="https://wa.me/50612345678" class="text-light text-decoration-none" target="_blank">
+                            <i class="bi bi-whatsapp"></i> WhatsApp
+                        </a>
                     </p>
                 </div>
                 <div class="col-md-3 mb-4">
@@ -147,48 +130,35 @@ function MostrarFooter() {
     </footer>';
 }
 
-
 function IncluirCSS() {
     echo '
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/animate.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/flaticon.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/OptiGestion/assets/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=2.2">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="/OptiGestion/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/OptiGestion/assets/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/OptiGestion/assets/vendor/bootstrap-icons/bootstrap-icons.min.css">
     
+    <link rel="stylesheet" href="/OptiGestion/assets/vendor/glightbox/css/glightbox.min.css">
+    <link rel="stylesheet" href="/OptiGestion/assets/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=3.4">
+    <link rel="icon" type="image/x-icon" href="/OptiGestion/assets/favicon.ico">
     ';
 }
-
 
 function IncluirScripts() {
     echo '
-    <script src="/OptiGestion/assets/js/jquery.min.js"></script>
-    <script src="/OptiGestion/assets/js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="/OptiGestion/assets/js/popper.min.js"></script>
-    <script src="/OptiGestion/assets/js/bootstrap.min.js"></script>
-    <script src="/OptiGestion/assets/js/jquery.easing.1.3.js"></script>
-    <script src="/OptiGestion/assets/js/jquery.waypoints.min.js"></script>
-    <script src="/OptiGestion/assets/js/jquery.stellar.min.js"></script>
-    <script src="/OptiGestion/assets/js/jquery.animateNumber.min.js"></script>
-    <script src="/OptiGestion/assets/js/bootstrap-datepicker.js"></script>
-    <script src="/OptiGestion/assets/js/jquery.timepicker.min.js"></script>
-    <script src="/OptiGestion/assets/js/owl.carousel.min.js"></script>
-    <script src="/OptiGestion/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="/OptiGestion/assets/js/scrollax.min.js"></script>
-    <script src="/OptiGestion/assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/OptiGestion/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/OptiGestion/assets/vendor/aos/aos.js"></script>
+    <script src="/OptiGestion/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/OptiGestion/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/OptiGestion/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/OptiGestion/assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/OptiGestion/assets/js/registro.js"></script>
+    <script src="/OptiGestion/assets/js/scripts.js"></script>
+   
+  
     ';
 }
-
 ?>

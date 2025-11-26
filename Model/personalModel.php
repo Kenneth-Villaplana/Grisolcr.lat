@@ -86,5 +86,5 @@ function EditarPersonalModel($idUsuario, $cedula, $nombre, $apellido, $apellidoD
     }
 }
 
-?>
+
 ?>

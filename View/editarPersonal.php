@@ -17,7 +17,14 @@
     <body>
        <?php MostrarMenu();?>
 
+      
  <section class="full-height-section">
+  <main class="container py-4">
+          <div class="d-flex justify-content-end mt-3">
+        <a href="personal.php" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left"></i> Volver a personal
+        </a>
+      </div>
   <div class="container" data-aos="fade-up">
          <?php
                 if(isset($_SESSION["txtMensaje"])){
@@ -26,7 +33,8 @@
                  unset($_SESSION["CambioExitoso"]);        
           }
           ?>  
-    
+      
+
         <div class="profile-card" data-aos="fade-up">
             <div class="profile-header">
                   <h4 class="mb-0">Datos Personal</h4>
@@ -94,7 +102,7 @@
             <div class="col-12 text-center mt-3">
               <div class="form-check d-inline-block">
                 <input class="form-check-input" type="checkbox" name="Estado" id="Estado" value="0"
-                <?php if ($usuario['Estado'] == 0) echo 'checked'; ?>>
+                <?php if ($usuario['Estado'] == 0) echo 'checked'; ?>
                 <label class="form-check-label" for="Estado">Inactivar</label>
               </div>
             </div>

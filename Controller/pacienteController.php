@@ -15,7 +15,7 @@ if ($action === 'crearPaciente' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $conexion = AbrirBD();
-    // Aquí llamas a tu procedimiento para crear paciente desde un usuario
+   
     $stmt = $conexion->prepare("CALL CrearPacienteDesdeUsuario(?)");
     $stmt->bind_param("i", $usuarioId);
     if ($stmt->execute()) {
@@ -30,7 +30,7 @@ if ($action === 'crearPaciente' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// Caso búsqueda por cédula
+//  búsqueda por cédula
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cedula = $_POST['cedula'] ?? '';
     if (!$cedula) {

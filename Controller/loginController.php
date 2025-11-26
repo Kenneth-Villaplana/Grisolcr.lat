@@ -18,6 +18,7 @@ if(isset($_GET["cerrarSesion"])) {
 
 // Registro de paciente
 if(isset($_POST["btnRegistrarPaciente"])) {
+
     $cedula = $_POST["Cedula"];
     $nombre = $_POST["Nombre"];
     $apellido = $_POST["Apellido"];
@@ -32,19 +33,49 @@ if(isset($_POST["btnRegistrarPaciente"])) {
     
     if($contrasenna != $confirmarContrasenna) {
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
-    } else {
+    } 
+    else 
+    {
         $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
-        $resultadoReg = RegistrarPacienteModel( $cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $hash, $telefono, $direccion, $fechaNacimiento);
+
+        // Llamada al Model
+        $resultadoReg = RegistrarPacienteModel(
+            $cedula,
+            $nombre,
+            $apellido,
+            $apellidoDos,
+            $correoElectronico,
+            $hash,
+            $telefono,
+            $direccion,
+            $fechaNacimiento
+        );
        
-         if($resultadoReg['resultado'] == 1) {
+        if($resultadoReg['resultado'] == 1) {
+
+          
+            //    redirecciona si viene del punto de venta
+         
+            if (isset($_POST["origen"]) && $_POST["origen"] === "POS") {
+
+                
+                unset($_SESSION["txtMensaje"]);
+                unset($_SESSION["registroExitoso"]);
+
+                header("Location: /OptiGestion/View/puntoVenta.php?cedula=" . urlencode($cedula));
+                exit;
+            }
+          
 
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'];
             $_SESSION["registroExitoso"] = true;
-        } else {
+        } 
+        else 
+        {
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Error en el registro.";
         }
     }
-  }
+}
 
 
 // Registro de empleado

@@ -82,6 +82,56 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+
+ /* el diseño de la factura */
+.invoice-ticket {
+    font-family: "Arial", sans-serif;
+    width: 300px;          
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+}
+
+.ticket-header h3 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.ticket-header p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.ticket-table {
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+}
+
+.ticket-table thead {
+    border-bottom: 1px solid #000;
+}
+
+.ticket-table th {
+    padding: 4px 0;
+    font-weight: bold;
+}
+
+.ticket-table td {
+    padding: 3px 0;
+}
+
+.ticket-totales {
+    font-size: 14px;
+    text-align: right;
+}
+
+.ticket-footer {
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+
 .navbar.bg-blue-dark {
   background-color: rgb(var(--bs-blue-dark-rgb)) !important;
 }
@@ -135,46 +185,328 @@ body {
 }
 
 
-.cart {
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-}
-
-.cart-headers {
-  display: flex;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  gap: 10px;
-}
-
-.cart-col-nombre {
-  flex: 3;
-}
-
-.cart-col-cantidad {
-  flex: 1;
-  text-align: center;
-}
-
-.cart-col-descuento {
-  flex: 1;
-  text-align: center;
-}
-
-.cart-col-eliminar {
-  flex: 0.5;
-  text-align: center;
-}
-
 .cart-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  gap: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
 }
 
+.producto-info strong {
+    font-size: 14px;
+}
+
+.cantidad-input,
+.descuento-input {
+    width: 90px;
+}
+
+.precio-item {
+    width: 80px;
+    font-size: 14px;
+}
+
+.delete-icon {
+    cursor: pointer;
+}
+
+#cart-items {
+    max-height: 350px;
+    overflow-y: auto;
+}
+.cart-item-modern {
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    transition: 0.2s;
+}
+
+
+#ticketFactura {
+    font-family: monospace;
+    font-size: 13px;
+    width: 260px;
+}
+
+#ticketFactura table {
+    width: 100%;
+}
+
+/* Quitar flechas de inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+
+/* Ticket dentro del modal */
+.ticket {
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+/* registro desde carrito */
+
+        .pos-card {
+            max-width: 550px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .pos-title {
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            height: 45px;
+        }
+
+        .btn-pos {
+            width: 100%;
+            height: 48px;
+            font-size: 16px;
+            border-radius: 12px;
+        }
+
+        .volver-pos {
+            display: inline-block;
+            margin-top: 12px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .volver-pos a {
+            color: #0066d6;
+            font-weight: 600;
+        }
+
+ /* para facturacion*/
+.facturacion-wrapper {
+    max-width: 1200px;
+}
+
+/* Contenedor principal como card */
+
+.facturacion-card {
+    border-radius: 1.5rem;
+    border: 1px solid rgba(15, 23, 42, 0.05);
+    background: #ffffff;
+}
+
+
+
+.titulo-facturacion {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1.7rem;
+}
+
+.subtitulo-facturacion {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+/* Botón dr Nueva factura */
+
+.btn-nueva-factura {
+    background: linear-gradient(135deg, #0f766e, #22c55e);
+    border: none;
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.55rem 1.4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 10px 25px rgba(15, 118, 110, 0.25);
+    transition: all 0.2s ease;
+}
+.btn-nueva-factura:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(15, 118, 110, 0.3);
+}
+
+
+/* Filtros */
+
+
+.filter-card {
+    background: #f9fafb;
+    border-radius: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.filtro-input {
+    border-radius: 0.75rem;
+    border-color: rgba(148, 163, 184, 0.6);
+    font-size: 0.95rem;
+}
+.filtro-input:focus {
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35);
+    border-color: #22c55e;
+}
+
+
+/* Para la tabla de facturas */
+
+
+.tabla-facturas-wrapper {
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(100, 116, 139, 0.35);
+}
+
+
+.tabla-facturas thead {
+    background: #f1f5f9;
+    color: #1e293b;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.tabla-facturas thead th {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    text-transform: uppercase;
+}
+
+/* Filas */
+.tabla-facturas tbody tr {
+    background: #fff;
+    border-bottom: 1px solid rgba(100, 116, 139, 0.25);
+    transition: all 0.2s ease;
+}
+
+.tabla-facturas tbody tr:hover {
+    background: #f8fafc;
+}
+
+.tabla-facturas tbody td {
+    padding: 18px 12px;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+
+/* Boton de ver más */
+
+
+.btn-ver {
+    background: #2563eb;
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 64px;  
+    text-align: center;
+}
+.btn-ver:hover {
+    background: #1d4ed8;
+}
+
+/* Botón Abonar */
+.btn-abonar {
+    background: #10b981;
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    min-width: 80px;
+}
+.btn-abonar:hover {
+    background: #059669;
+}
+
+
+/* BADGES DE ESTADO */
+
+.badge-estado {
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.badge-pagada {
+    background-color: rgba(34,197,94,0.2);
+    color: #166534;
+}
+
+.badge-pendiente {
+    background-color: rgba(234,179,8,0.25);
+    color: #92400e;
+}
+
+.low-stock-card {
+    background: #fff8e6;
+    border-left: 5px solid #ff9800;
+    transition: transform .2s ease;
+}
+
+.low-stock-card:hover {
+    transform: translateY(-3px);
+}
+
+.low-stock-icon {
+    font-size: 1.4rem;
+}
+
+@media (max-width: 768px) {
+    .low-stock-card {
+        text-align: center;
+    }
+}
+/* registro pos*/
+  .pos-card {
+            max-width: 550px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .pos-title {
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            height: 45px;
+        }
+
+        .btn-pos {
+            width: 100%;
+            height: 48px;
+            font-size: 16px;
+            border-radius: 12px;
+        }
+
+        .volver-pos {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .volver-pos a {
+            color: #0066d6;
+            font-weight: 600;
+        }
+    
 
 #calculator {
   display: none;
@@ -269,6 +601,170 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.agregar-producto-section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+  background-color: #fff;
+}
+
+
+/* Centra y estiliza el formulario */
+.formulario-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* Cuadro del formulario */
+.php-email-form {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Título centrado */
+.section-title h2 {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+
+.btn-custom {
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 25px;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: #0056b3;
+}
+.transition-color {
+  transition: color 0.5s ease, transform 0.3s ease;
+}
+
+.transition-color.active {
+  transform: scale(1.05);
+}
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.cart-col-nombre {
+    font-weight: 500;
+    color: #333;
+}
+
+.cart-col-cantidad input,
+.cart-col-descuento input {
+    width: 70px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 3px 5px;
+}
+
+.cart-col-descuento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.cart-col-total {
+    font-weight: 600;
+    color: #198754;
+}
+
+.cart-col-eliminar i {
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+}
+
+.cart-col-eliminar i:hover {
+    transform: scale(1.2);
+}
+
+/* Botón personalizado */
+.btn-primary-custom {
+    background-color: #0d6efd;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary-custom:hover {
+    background-color: #0b5ed7;
+}
+/* --- Modal factura digital --- */
+.factura-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.factura-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.factura-contenido {
+  position: relative;
+  z-index: 10000;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 650px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ Solo imprimir la factura */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #factura-digital, #factura-digital * {
+    visibility: visible;
+  }
+  #factura-digital {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+footer {
+  margin-top: auto;
+}
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
 /*Botones */
 .btn.btn-custom {
   background-color: #1F4C52 !important;
@@ -13229,21 +13725,21 @@ html {
 
 @font-face {
   font-family: 'Poppins';
-  src: url('fonts/Poppins-Regular.ttf') format('truetype');
+  src: url('../fonts/Poppins-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Poppins';
-  src: url('fonts/Poppins-Bold.ttf') format('truetype');
+  src: url('../fonts/Poppins-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Poppins';
-  src: url('fonts/Poppins-Italic.ttf') format('truetype');
+  src: url('../fonts/Poppins-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
 }

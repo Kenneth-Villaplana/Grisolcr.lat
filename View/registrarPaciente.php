@@ -1,5 +1,6 @@
 <?php 
 include_once 'layout.php';
+
 include_once __DIR__ . '/../Controller/loginController.php';
 ?>
 <!DOCTYPE html>
@@ -10,6 +11,7 @@ include_once __DIR__ . '/../Controller/loginController.php';
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Óptica Grisol</title>
+     <script src="../js/registro.js"></script>
     <?php IncluirCSS();?>
 </head>
 <body>
@@ -18,7 +20,7 @@ include_once __DIR__ . '/../Controller/loginController.php';
     <section class="d-flex align-items-center justify-content-center min-vh-100">
         <div class="container">
             <?php
-            if(isset($_SESSION["txtMensaje"])){
+            if (isset($_SESSION["txtMensaje"])) {
                 echo '<div class="alert alert-' . (isset($_SESSION["registroExitoso"]) ? 'success' : 'danger') . '">' . $_SESSION["txtMensaje"] . '</div>';
                 unset($_SESSION["txtMensaje"]);   
                 unset($_SESSION["registroExitoso"]);        
@@ -28,35 +30,33 @@ include_once __DIR__ . '/../Controller/loginController.php';
             <div class="register-container" data-aos="fade-up">
                 <h4 class="text-center mb-1">Ingrese sus Datos</h4>
                 <form method="POST" name="contactForm" class="row g-3">
-                    
                     <?php
-                    // Si llegamos desde el tercer escenario, la cédula se pasa por GET
                     $cedulaPrefill = $_GET['cedula'] ?? '';
                     ?>
 
-                    <div class="col-md-6">           
-                        <label for="Cedula" class="form-label">Cédula</label>
-                        <input type="text" class="form-control" name="Cedula" id="Cedula"
-                               placeholder="" value="<?= htmlspecialchars($cedulaPrefill) ?>" required>
-                    </div>
+                   <div class="col-md-6">           
+    <label for="Cedula" class="form-label">Cédula</label>
+    <input type="text" class="form-control" name="Cedula" id="Cedula"
+           placeholder="" value="<?= htmlspecialchars($cedulaPrefill) ?>" required onkeyup="ConsultarNombre();">
+</div>
 
-                    <div class="col-md-6">          
-                        <label for="Nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="Nombre" id="Nombre"
-                               placeholder="" required>
-                    </div>
+<div class="col-md-6">          
+    <label for="Nombre" class="form-label">Nombre</label>
+    <input type="text" class="form-control" name="Nombre" id="Nombre"
+           placeholder="" required>
+</div>
 
-                    <div class="col-md-6">
-                        <label for="Apellido" class="form-label">Primer Apellido</label>
-                        <input type="text" class="form-control" name="Apellido" id="Apellido"
-                               placeholder="" required>
-                    </div>
+<div class="col-md-6">
+    <label for="Apellido" class="form-label">Primer Apellido</label>
+    <input type="text" class="form-control" name="Apellido" id="Apellido"
+           placeholder="" required >
+</div>
 
-                    <div class="col-md-6">
-                        <label for="ApellidoDos" class="form-label">Segundo Apellido</label>
-                        <input type="text" class="form-control" name="ApellidoDos" id="ApellidoDos"
-                               placeholder="" required>
-                    </div>
+<div class="col-md-6">
+    <label for="ApellidoDos" class="form-label">Segundo Apellido</label>
+    <input type="text" class="form-control" name="ApellidoDos" id="ApellidoDos"
+           placeholder="" required >
+</div>
 
                     <div class="col-md-6">
                         <label for="CorreoElectronico" class="form-label">Correo Electrónico</label>
@@ -103,7 +103,6 @@ include_once __DIR__ . '/../Controller/loginController.php';
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-custom" name="btnRegistrarPaciente">Registrarse</button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -111,5 +110,7 @@ include_once __DIR__ . '/../Controller/loginController.php';
 
     <?php MostrarFooter(); ?>
     <?php IncluirScripts(); ?>
+
+
 </body>
 </html>

@@ -11,7 +11,7 @@ function RegistrarPersonalModel($cedula, $nombre, $apellido, $apellidoDos, $corr
             throw new Exception($enlace->error);
         }
 
-        // 8 strings y 1 int "ssssssssi"
+        
         $sentencia->bind_param("ssssssssi", 
             $cedula, 
             $nombre, 
