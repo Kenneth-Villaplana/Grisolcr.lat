@@ -83,14 +83,14 @@ function MostrarMenu() {
 
 function MostrarFooter() {
     echo '
-    <footer class="footer bg-dark text-light pt-5 pb-3">
+<footer class="bg-dark text-light pt-3 pb-2 mt-auto">
         <div class="container text-center">
             <div class="row justify-content-center">
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 mb-2">
                     <h6 class="fw-bold text-uppercase">Sucursal</h6>
                     <a href="https://maps.app.goo.gl/8xCe7rQRBhBzRZsr7" class="text-light text-decoration-none small">Ver ubicación</a>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 mb-2">
                     <h6 class="fw-bold text-uppercase">Redes Sociales</h6>
                     <p class="mb-1 small">
                         <a href="https://www.instagram.com/opticagrisol?igsh=cm5zMXprZmphczAz" class="text-light text-decoration-none">
@@ -108,7 +108,7 @@ function MostrarFooter() {
                         </a>
                     </p>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 mb-2">
                     <h6 class="fw-bold text-uppercase">Oficina Central</h6>
                     <p class="mb-1 small">Avenida 1A, Cartago Province, Cartago</p>
                     <h6 class="fw-bold mt-2 small">Contacto</h6>
@@ -141,7 +141,7 @@ function IncluirCSS() {
     
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/glightbox/css/glightbox.min.css">
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=3.4">
+    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=5.5">
     <link rel="icon" type="image/x-icon" href="/OptiGestion/assets/favicon.ico">
     ';
 }

@@ -1,8 +1,6 @@
 const PACIENTE_CONTROLLER = "/OptiGestion/Controller/pacienteController.php";
 
-// ================================
-//   FUNCIÓN PRINCIPAL
-// ================================
+
 async function buscarPaciente() {
     const cedula = document.getElementById('cedula').value.trim();
     const resultadoDiv = document.getElementById('resultado');

@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
-    echo '<div class="alert alert-success text-center">✅ El expediente se ha creado correctamente.</div>';
+    echo '<div class="alert alert-success text-center">El expediente se ha creado correctamente.</div>';
 }
 
 include('layout.php');
@@ -36,7 +36,7 @@ include('layout.php');
         <?php endif; ?>
 
         <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'actualizado'): ?>
-            <div class="alert alert-success text-center">✅ El expediente se actualizó correctamente.</div>
+            <div class="alert alert-success text-center"> El expediente se actualizó correctamente.</div>
         <?php endif; ?>
 
         <div class="banner-expediente">
@@ -51,14 +51,14 @@ include('layout.php');
             <div class="card p-4 shadow">
                 <h4 class="mb-3">Buscar Paciente por Cédula</h4>
                 <input type="text" id="cedula" class="form-control mb-3" placeholder="Ingrese la cédula">
-                <button class="btn btn-primary" onclick="buscarPaciente()">Buscar</button>
+                <button class="btn btn-outline-primary" onclick="buscarPaciente()">Buscar</button>
 
                 <div id="resultado" class="mt-4"></div>
 
-                <!-- Grupo de botones para paciente registrado -->
+                
                 <div class="col-md-8 mb-3 text-center d-flex flex-column justify-content-center mt-3">
                     <div class="btn-group-vertical mx-auto" style="width: 70%;">
-                        <a id="btnAgregarExpediente" class="btn btn-primary mb-2" style="display:none;">
+                        <a id="btnAgregarExpediente" class="btn btn-outline-primary mb-2" style="display:none;">
                             <i class="bi bi-plus-square"></i> Agregar Expediente
                         </a>
                         <a id="btnHistorial" class="btn btn-outline-secondary mb-2" style="display:none;">

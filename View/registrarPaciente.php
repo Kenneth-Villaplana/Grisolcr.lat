@@ -34,29 +34,29 @@ include_once __DIR__ . '/../Controller/loginController.php';
                     $cedulaPrefill = $_GET['cedula'] ?? '';
                     ?>
 
-                   <div class="col-md-6">           
-    <label for="Cedula" class="form-label">Cédula</label>
-    <input type="text" class="form-control" name="Cedula" id="Cedula"
-           placeholder="" value="<?= htmlspecialchars($cedulaPrefill) ?>" required onkeyup="ConsultarNombre();">
-</div>
+                                <div class="col-md-6">           
+                    <label for="Cedula" class="form-label">Cédula</label>
+                    <input type="text" class="form-control" name="Cedula" id="Cedula"
+                        placeholder="" value="<?= htmlspecialchars($cedulaPrefill) ?>" required onkeyup="ConsultarNombre();">
+                </div>
 
-<div class="col-md-6">          
-    <label for="Nombre" class="form-label">Nombre</label>
-    <input type="text" class="form-control" name="Nombre" id="Nombre"
-           placeholder="" required>
-</div>
+                <div class="col-md-6">          
+                    <label for="Nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="Nombre" id="Nombre"
+                        placeholder="" required>
+                </div>
 
-<div class="col-md-6">
-    <label for="Apellido" class="form-label">Primer Apellido</label>
-    <input type="text" class="form-control" name="Apellido" id="Apellido"
-           placeholder="" required >
-</div>
+                <div class="col-md-6">
+                    <label for="Apellido" class="form-label">Primer Apellido</label>
+                    <input type="text" class="form-control" name="Apellido" id="Apellido"
+                        placeholder="" required >
+                </div>
 
-<div class="col-md-6">
-    <label for="ApellidoDos" class="form-label">Segundo Apellido</label>
-    <input type="text" class="form-control" name="ApellidoDos" id="ApellidoDos"
-           placeholder="" required >
-</div>
+                <div class="col-md-6">
+                    <label for="ApellidoDos" class="form-label">Segundo Apellido</label>
+                    <input type="text" class="form-control" name="ApellidoDos" id="ApellidoDos"
+                        placeholder="" required >
+                </div>
 
                     <div class="col-md-6">
                         <label for="CorreoElectronico" class="form-label">Correo Electrónico</label>

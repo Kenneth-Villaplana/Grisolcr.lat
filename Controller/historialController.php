@@ -127,8 +127,8 @@ try {
         $esferaOD,
         $cilindroOD,
         $ejeOD,
-        $dpOD,      // aquí estás usando DP como "Adición", lo dejamos igual a como lo tenías
-        $dpOD,      // y de nuevo como DP real; no toco esto para no romper nada que ya te funcionaba
+        $dpOD,      
+        $dpOD,     
         $prismaOD,
         $baseOD,
         $avOD,
@@ -163,7 +163,7 @@ try {
     $stmt->execute();
     $stmt->close();
 
-    // REDIRECCIÓN FINAL
+    
     CerrarBD($conn);
     header("Location: ../Controller/historialExpedientePacienteController.php?PacienteId=$pacienteId");
     exit;

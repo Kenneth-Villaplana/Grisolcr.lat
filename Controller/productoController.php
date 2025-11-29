@@ -1,7 +1,6 @@
 <?php
 
 include_once __DIR__ . '/../Model/productoModel.php';
-include_once __DIR__ . '/../Model/proveedorModel.php';
 
 if(session_status() == PHP_SESSION_NONE) {
     session_start();

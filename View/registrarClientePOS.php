@@ -23,16 +23,20 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 <?php MostrarMenu(); ?>
 
 <div class="container">
+     
+    <div class="d-flex justify-content-end mt-5 mb-3">
+      <a href="puntoVenta.php" class="btn btn-outline-secondary btn-back-custom">
+        ← Volver al punto de venta
+      </a>
+    </div>
     <div class="pos-card">
 
         <h2 class="pos-title">Registrar Nuevo Cliente</h2>
 
         <form method="POST">
 
-            <!-- Indica que viene desde POS -->
-            <input type="hidden" name="origen" value="POS">
-
            
+            <input type="hidden" name="origen" value="POS">
             <div class="mb-3">
                 <label class="form-label fw-semibold">Cédula</label>
                 <input type="text" 
@@ -41,20 +45,21 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                        name="Cedula"
                        value="<?= htmlspecialchars($cedulaPrefill) ?>"
                        onkeyup="ConsultarNombre()"
-                       required>
+                       required 
+                       readonly >
             </div>
 
             <div class="row">
                 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-semibold">Nombre</label>
-                    <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+                    <input type="text" class="form-control" id="Nombre" name="Nombre" readonly required>
                 </div>
 
                 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-semibold">Primer Apellido</label>
-                    <input type="text" class="form-control" id="Apellido" name="Apellido" required>
+                    <input type="text" class="form-control" id="Apellido" name="Apellido" readonly required>
                 </div>
             </div>
 
@@ -62,7 +67,7 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-semibold">Segundo Apellido</label>
-                    <input type="text" class="form-control" id="ApellidoDos" name="ApellidoDos" required>
+                    <input type="text" class="form-control" id="ApellidoDos" name="ApellidoDos" readonly required>
                 </div>
 
                
@@ -105,13 +110,9 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                 <input type="date" class="form-control" name="FechaNacimiento" required>
             </div>
 
-            <button class="btn btn-primary btn-pos" type="submit" name="btnRegistrarPaciente">
+            <button class="btn btn-outline-primary btn-pos" type="submit" name="btnRegistrarPaciente">
                 Registrar Cliente
             </button>
-
-            <div class="volver-pos">
-                <a href="/OptiGestion/View/puntoVenta.php">← Volver al Punto de Venta</a>
-            </div>
 
         </form>
     </div>

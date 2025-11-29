@@ -16,7 +16,7 @@ include('layout.php');
 
     <main class="container my-5">
 
-        <!-- ENCABEZADO -->
+        
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold text-primary mb-0">
                 👁️ Historia Clínica de Optometría
@@ -26,10 +26,10 @@ include('layout.php');
             </a>
         </div>
 
-        <!-- MENSAJE SUPERIOR (OPCIONAL, LO MANEJARÁ EL CONTROLLER POR GET) -->
+       
         <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito'): ?>
             <div class="alert alert-success text-center">
-                ✅ El expediente se ha creado correctamente.
+                 El expediente se ha creado correctamente.
             </div>
         <?php endif; ?>
 
@@ -337,10 +337,10 @@ include('layout.php');
 
             </div>
 
-            <!-- BOTÓN GUARDAR -->
+            
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success px-4">
-                    💾 Guardar expediente
+                <button type="submit" class="btn btn-outline-primary px-4">
+                     Guardar expediente
                 </button>
             </div>
 
@@ -370,7 +370,7 @@ include('layout.php');
             if (idOculto) idOculto.value = paciente.PacienteId ?? '';
         });
 
-        // Validación sencilla al enviar
+        // Validación al enviar
         document.getElementById('formExpediente').addEventListener('submit', function (e) {
             let errores = [];
 
@@ -397,7 +397,5 @@ include('layout.php');
             }
         });
     </script>
-
 </body>
-
 </html>

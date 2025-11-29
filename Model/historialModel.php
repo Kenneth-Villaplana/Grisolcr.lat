@@ -3,7 +3,7 @@ include_once('../Model/baseDatos.php');
 
 class HistorialModel {
 
-    // ✅ Obtener historial completo de expedientes de un paciente
+    //  historial completo de expedientes de un paciente
     public static function obtenerHistorialPorPaciente($pacienteId) {
         $conn = AbrirBD();
 

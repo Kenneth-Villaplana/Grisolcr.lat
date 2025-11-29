@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (ced.length === 0) empresaNombreInput.value = "";
         });
     }
+      
 });
 
 
@@ -195,12 +196,13 @@ function renderCarrito() {
                         class="form-control" onchange="actualizarCantidad(${item.id}, this.value)">
                 </div>
 
-                <div class="input-group input-group-sm" style="width:110px;">
-                    <span class="input-group-text">Desc.</span>
-                    <input type="number" min="0" max="100" value="${item.descuento}" 
-                        class="form-control" onchange="actualizarDescuento(${item.id}, this.value)">
-                    <span class="input-group-text">%</span>
-                </div>
+               <div class="input-group input-group-sm input-descuento">
+    <span class="input-group-text">Desc.</span>
+    <input type="number" min="0" max="100" value="${item.descuento}" 
+           class="form-control"
+           onchange="actualizarDescuento(${item.id}, this.value)">
+    <span class="input-group-text">%</span>
+</div>
 
                 <div class="fw-bold text-end">₡${totalProducto.toFixed(2)}</div>
 
@@ -560,4 +562,16 @@ ${
 
         setTimeout(() => modal.hide(), 300);
     };
+}
+    document.getElementById("toggleDarkMode").addEventListener("click", () => {
+    document.body.classList.toggle("modo-oscuro");
+
+    localStorage.setItem("darkModePOS", 
+        document.body.classList.contains("modo-oscuro") ? "1" : "0"
+    );
+});
+
+// Mantener modo oscuro cuando recarga
+if (localStorage.getItem("darkModePOS") === "1") {
+    document.body.classList.add("modo-oscuro");
 }

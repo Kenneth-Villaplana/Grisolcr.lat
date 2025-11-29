@@ -70,7 +70,9 @@ function agregarFilaFactura(f) {
 
     const botonAbono =
         pendiente > 0
-            ? `<button class="btn-abonar" onclick="abrirAbono(${f.FacturaId}, ${pendiente})">Abonar</button>`
+            ? `<button class="btn btn-outline-secondary btn-sm" onclick="abrirAbono(${f.FacturaId}, ${pendiente})">
+                Abonar
+            </button>`
             : "";
 
     const fila = `
@@ -89,7 +91,9 @@ function agregarFilaFactura(f) {
 
             <td class="text-center">
                 <div class="d-flex justify-content-center align-items-center gap-2">
-                    <button class="btn-ver" onclick="verFactura(${f.FacturaId})">Ver</button>
+                    <button class="btn btn-outline-primary btn-sm" onclick="verFactura(${f.FacturaId})">
+                        Ver
+                    </button>
                     ${botonAbono}
                 </div>
             </td>
@@ -203,8 +207,7 @@ async function guardarAbono() {
 
     if (result.success) {
 
-        alert("Abono registrado correctamente");
-
+       
         document.querySelector("#modalAbono .btn-close").click();
 
         mostrarReciboAbono(facturaId, monto);
@@ -248,7 +251,7 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
             <strong>Factura #:</strong> ${f.Id}<br>
             <strong>Fecha:</strong> ${f.Fecha}<br>
             <strong>Cliente:</strong> ${f.Cliente || "-"}<br>
-
+            <strong>Telefono:</strong> ${f.Telefono || "-"}<br>
             <hr>
 
                 <table style="width:100%; font-size:12px; border-collapse: collapse;">

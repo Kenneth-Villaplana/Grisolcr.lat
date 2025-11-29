@@ -12,7 +12,7 @@ $stmt = $conn->prepare("CALL ObtenerExpedienteCompleto(?)");
 $stmt->bind_param("i", $expedienteId);
 $stmt->execute();
 
-/* Cada SELECT devuelve un resultset */
+/* Cada select devuelve un resultset */
 $exp = [];
 if ($result = $stmt->get_result())
     $exp['expediente'] = $result->fetch_assoc();
@@ -173,7 +173,7 @@ function campo($label, $valor)
                 </div>
             </div>
 
-            <!--FÓRMULA FINAL + DATOS ADICIONALES-->
+           
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"

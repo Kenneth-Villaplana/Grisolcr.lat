@@ -286,166 +286,181 @@ input[type=number]::-webkit-outer-spin-button {
         }
 
  /* para facturacion*/
-.facturacion-wrapper {
-    max-width: 1200px;
-}
-
-/* Contenedor principal como card */
-
+/* Card principal */
 .facturacion-card {
-    border-radius: 1.5rem;
-    border: 1px solid rgba(15, 23, 42, 0.05);
     background: #ffffff;
+    border-radius: 18px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
 }
 
-
-
+/* Título */
 .titulo-facturacion {
     font-weight: 700;
-    letter-spacing: 0.04em;
-    font-size: 1.7rem;
+    font-size: 1.8rem;
+    color: #2c3e50;
 }
 
-.subtitulo-facturacion {
-    font-size: 0.9rem;
-    color: #6b7280;
-}
-
-/* Botón dr Nueva factura */
-
+/* Botón Nueva factura */
 .btn-nueva-factura {
-    background: linear-gradient(135deg, #0f766e, #22c55e);
-    border: none;
+    background: #0d6efd;
     color: #fff;
-    border-radius: 999px;
-    padding: 0.55rem 1.4rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-    box-shadow: 0 10px 25px rgba(15, 118, 110, 0.25);
-    transition: all 0.2s ease;
+    padding: 0.6rem 1.2rem;
+    border-radius: 40px;
+    font-weight: 500;
+    transition: 0.2s;
 }
 .btn-nueva-factura:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 35px rgba(15, 118, 110, 0.3);
+    background: #0b5ed7;
+    color: white;
 }
 
-
-/* Filtros */
-
-
+/* ===========================
+   Filtros
+   =========================== */
 .filter-card {
-    background: #f9fafb;
-    border-radius: 1rem;
-    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: #f4f6f9;
+    border-radius: 15px;
+    border: 1px solid #e0e6ed;
 }
 
+.filter-form .form-label {
+    font-weight: 600;
+    color: #6c757d;
+}
+
+/* Inputs de filtro */
 .filtro-input {
-    border-radius: 0.75rem;
-    border-color: rgba(148, 163, 184, 0.6);
-    font-size: 0.95rem;
-}
-.filtro-input:focus {
-    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35);
-    border-color: #22c55e;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #d7dde5;
 }
 
+/* Filtros lado a lado */
+.filtros-grid {
+    display: flex;
+    gap: 1.5rem;
+}
 
-/* Para la tabla de facturas */
+.filtros-grid .form-group {
+    flex: 1;
+}
 
+/* Responsive */
+@media (max-width: 768px) {
+    .filtros-grid {
+        flex-direction: column;
+    }
+}
+
+/* Botones filtro */
+.btn-custom {
+    background: #198754;
+    color: white;
+    border-radius: 40px;
+    padding: 0.6rem 1.3rem;
+}
+.btn-custom:hover {
+    background: #157347;
+}
+
+.btn-outline-secondary {
+    border-radius: 40px;
+}
+
+
+/* ===========================
+   Tabla con scroll
+   =========================== */
 
 .tabla-facturas-wrapper {
-    border-radius: 1.2rem;
-    overflow: hidden;
-    background: #ffffff;
-    border: 1px solid rgba(100, 116, 139, 0.35);
+    max-height: 430px;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 1px solid #e0e6ed;
 }
 
-
-.tabla-facturas thead {
-    background: #f1f5f9;
-    color: #1e293b;
-    font-size: 0.9rem;
-    font-weight: 700;
-}
-
+/* Encabezado fijo */
 .tabla-facturas thead th {
-    padding-top: 14px;
-    padding-bottom: 14px;
-    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 3;
+    font-weight: 600;
 }
 
 /* Filas */
 .tabla-facturas tbody tr {
-    background: #fff;
-    border-bottom: 1px solid rgba(100, 116, 139, 0.25);
-    transition: all 0.2s ease;
+    transition: background 0.2s ease;
 }
-
 .tabla-facturas tbody tr:hover {
-    background: #f8fafc;
+    background: #f7f9fc;
 }
 
-.tabla-facturas tbody td {
-    padding: 18px 12px;
-    font-size: 0.95rem;
-    vertical-align: middle;
-}
-
-
-/* Boton de ver más */
-
-
-.btn-ver {
-    background: #2563eb;
-    color: #fff;
-    border-radius: 0.5rem;
-    padding: 0.35rem 1rem;
-    font-size: 0.82rem;
+/* Estado badges */
+.badge-estado {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
     font-weight: 600;
+}
+
+.badge-pagada {
+    background: #d1f7d6;
+    color: #137a2d;
+}
+
+.badge-pendiente {
+    background: #fde2e2;
+    color: #c62828;
+}
+
+/* Botón Ver */
+.btn-ver {
+    background: #0d6efd;
+    color: #fff;
     border: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 64px;  
-    text-align: center;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: .2s;
 }
 .btn-ver:hover {
-    background: #1d4ed8;
+    background: #0b5ed7;
+    color: #fff;
 }
 
 /* Botón Abonar */
 .btn-abonar {
-    background: #10b981;
+    background: #198754;
     color: #fff;
-    border-radius: 0.5rem;
-    padding: 0.35rem 0.8rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    min-width: 80px;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
 }
 .btn-abonar:hover {
-    background: #059669;
+    background: #157347;
 }
 
-
-/* BADGES DE ESTADO */
-
-.badge-estado {
-    padding: 0.35rem 0.85rem;
-    border-radius: 999px;
-    font-weight: 700;
-    font-size: 0.8rem;
+/* Botones outline primary mejorados */
+.btn-outline-primary {
+    border-radius: 40px;
+    padding: 0.55rem 1.3rem;
+    font-weight: 500;
+    transition: 0.2s ease;
 }
 
-.badge-pagada {
-    background-color: rgba(34,197,94,0.2);
-    color: #166534;
+.btn-outline-primary:hover {
+    background: #0d6efd;
+    color: #fff;
 }
 
-.badge-pendiente {
-    background-color: rgba(234,179,8,0.25);
-    color: #92400e;
+/* Botón pequeño para tabla (Ver y Abonar si aplica) */
+.btn-outline-primary.btn-sm {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
 }
+
 
 .low-stock-card {
     background: #fff8e6;
@@ -536,8 +551,155 @@ input[type=number]::-webkit-outer-spin-button {
   color: #333;
   margin-bottom: 1.5rem;
 }
+/* =======================
+   editar personal
+======================= */
+
+main.editar-section .profile-card {
+    margin: 0 auto; 
+}
+main.editar-section {
+    padding-bottom: 120px; 
+}
+
+.profile-card,
+.register-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.07);
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/****************************************
+ *           HEADER DEL CARD
+ ****************************************/
+
+.profile-card-header,
+.register-card-header {
+    background: #f8f9fa;
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-card-header h4,
+.register-card-header h4 {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.profile-card-header small,
+.register-card-header small {
+    color: #6c757d;
+    display: block;
+}
+
+/****************************************
+ *             CONTENIDO
+ ****************************************/
+
+.profile-card .p-4,
+.register-card .p-4 {
+    flex-grow: 1;
+    padding-bottom: 30px !important;
+}
+
+/****************************************
+ *              TITULITOS
+ ****************************************/
+
+.profile-section-title,
+.register-section-title {
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    display: block;
+    text-align: center;
+}
+
+/****************************************
+ *              BOTONES
+ ****************************************/
+
+.btn-save-custom,
+.btn-register-custom {
+    padding: 0.6rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+}
+
+/****************************************
+ *              RESPONSIVE
+ ****************************************/
+
+@media (max-width: 768px) {
+
+    .profile-section-title,
+    .register-section-title {
+        text-align: left;
+    }
+
+    .form-section,
+    .editar-section {
+        padding-top: 20px;
+        padding-bottom: 70px;
+    }
+}
 
 
+.register-card-compact {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.07);
+    max-width: 600px !important;   /* más angosto */
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Header del card compacto */
+.register-card-compact .register-card-header {
+    background: #f8f9fa;
+    padding: 25px 20px;  /* más pequeño */
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+
+.register-card-compact .register-card-header h4 {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.register-card-compact .register-card-header small {
+    color: #6c757d;
+}
+
+/* Contenido */
+.register-card-compact .p-4 {
+    padding: 24px 26px !important; /* más compacto */
+}
+
+/* Títulos */
+.register-card-compact .register-section-title {
+    font-weight: 600;
+    margin-bottom: .6rem;
+    text-align: center;
+}
+
+/* Botón */
+.register-card-compact .btn-register-custom {
+    padding: 0.55rem 2.3rem;
+    border-radius: 50px;
+    font-size: .95rem;
+}
 /* =======================
    Productos
 ======================= */
@@ -753,9 +915,7 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-footer {
-  margin-top: auto;
-}
+
 html, body {
   height: 100%;
   display: flex;
@@ -1031,69 +1191,187 @@ main {
   padding: 0.5rem 2rem;
 }
 
-.stock-bajo {
-  background-color: #dc3545 !important;
+/* Alerta de inventario bajo */
+.low-stock-card {
+    background: #fff8e6 !important;
+    border-left: 4px solid #ffb300 !important;
+    transition: 0.2s ease-in-out;
 }
 
-.stock-medio {
-  background-color: #ffc107 !important;
+.low-stock-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
 }
 
-.stock-alto {
-  background-color: #28a745 !important;
+/* Título de sección */
+h2.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1c1c1c;
 }
 
-.stock-0 {
-  width: 0%;
+/* Botón moderno */
+.btn-custom {
+    background-color: #0f4c5c;
+    color: white;
+    border-radius: 50px;
+    padding: 0.5rem 1.4rem;
 }
 
-.stock-5 {
-  width: 5%;
+.btn-custom:hover {
+    background-color: #08343f;
+    color: #fff;
 }
 
-.stock-10 {
-  width: 10%;
+/* Cards de productos */
+.card.product-card {
+    border-radius: 18px;
+    overflow: hidden;
+    transition: 0.2s;
 }
 
-.stock-15 {
-  width: 15%;
+.card.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.12);
 }
 
-.stock-18 {
-  width: 18%;
+.card.product-card .card-body {
+    padding: 1.5rem;
 }
 
-.stock-20 {
-  width: 20%;
+/* Título del producto */
+.card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
-.stock-30 {
-  width: 30%;
+/* Precio */
+.product-price {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #0a58ca;
 }
 
-.stock-40 {
-  width: 40%;
+/* Barra de progreso */
+.progress {
+    height: 10px;
+    border-radius: 50px;
 }
 
-.stock-50 {
-  width: 50%;
+.progress-bar {
+    border-radius: 50px;
 }
 
-.stock-60 {
-  width: 60%;
+/* Filtro */
+.filter-form {
+    background: #fff;
+    padding: 1.2rem;
+    border-radius: 16px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.07);
 }
 
-.stock-70 {
-  width: 70%;
+.filter-form input {
+    padding: 0.6rem;
+    border-radius: 12px;
 }
 
-.stock-80 {
-  width: 80%;
+.filter-form label {
+    font-weight: 600;
 }
 
-.stock-100 {
-  width: 100%;
+
+
+
+
+
+
+/* Responsive ajuste */
+@media (max-width: 768px) {
+    h2.section-title {
+        text-align: center;
+    }
+
+    .btn-custom {
+        width: 100%;
+        text-align: center;
+    }
 }
+
+/* ============================
+   EDITAR PRODUCTO - CARD
+============================ */
+
+.edit-product-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.07);     
+    padding: 0;
+    overflow: hidden;
+}
+/* Textarea auto-ajustable */
+textarea.auto-grow {
+    overflow: hidden;
+    resize: none; /* evita que el usuario rompa el diseño */
+}
+.edit-product-header {
+    background: #f8f9fa;
+    padding: 22px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.edit-product-header h4 {
+    font-weight: 600;
+}
+
+.edit-section-title {
+    font-weight: 600;
+}
+
+/* Botón */
+.btn-save-custom {
+    padding: 0.6rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .edit-product-card {
+        max-width: 95%;
+    }
+}
+
+/* ===========================
+   AGREGAR PRODUCTO CARD
+=========================== */
+
+.product-register-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
+    padding: 0;
+    overflow: hidden;
+}
+
+.product-register-header {
+    background: #f8f9fa;
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.product-register-header h4 {
+    font-weight: 600;
+}
+
+.btn-save-custom {
+    padding: 0.6rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+}
+
+
 
 .btn-editar {
   background-color: #5f88b6 !important;
@@ -1112,6 +1390,432 @@ main {
 .filtro-personal input,
 .filtro-personal .form-select.is-valid:not([multiple]):not([size]) {
   max-width: 250px;
+}
+
+/****************************************
+ *  PUNTO DE VENTA – CONTENEDOR GENERAL
+ ****************************************/
+/****************************************
+ *  PRODUCTOS: Tarjeta moderna redondeada
+ ****************************************/
+.pv-products-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 1.8rem 1.6rem;
+    border: 2px solid #e2e8f0;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+}
+
+/* CARD sin foto, limpia pero marcada */
+.pv-products .card {
+    background: #fdfdfd;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    transition: 0.2s ease;
+    padding: 0.6rem;
+}
+
+.pv-products .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    border-color: #93c5fd;
+}
+
+/* Cuerpo del producto */
+.pv-products .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pv-products .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Precio */
+.pv-products .card-text {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* Botón agregar */
+.btn-primary-custom {
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    border: 1px solid #2563eb;
+    background: #ffffff;
+    color: #2563eb;
+    transition: 0.2s;
+}
+
+.btn-primary-custom:hover {
+    background: #2563eb;
+    color: white;
+}
+
+/****************************************
+ * CARRITO: Caja moderna estilo POS
+ ****************************************/
+.pv-cart-card {
+    border-radius: 22px !important;
+    border: 2px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.pv-cart-header {
+    border-radius: 0;
+    background: linear-gradient(135deg, #0d6efd 0%, #3b82f6 100%);
+}
+
+/* Lista del carrito */
+.pv-cart-items {
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.pv-cart-items::-webkit-scrollbar {
+    width: 6px;
+}
+.pv-cart-items::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+/****************************************
+ *  ITEM DEL CARRITO — Moderno
+ ****************************************/
+.cart-item-modern {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px !important;
+    padding: 0.9rem;
+    margin-bottom: 10px;
+    transition: 0.1s;
+}
+
+.cart-item-modern:hover {
+    border-color: #60a5fa;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/****************************************
+ * INPUTS modernos redondos
+ ****************************************/
+input.form-control,
+select.form-select,
+.input-group-text {
+    border-radius: 12px !important;
+}
+
+.input-group input {
+    border-radius: 0 12px 12px 0 !important;
+}
+.input-group .input-group-text {
+    border-radius: 12px 0 0 12px !important;
+}
+
+/****************************************
+ * Inputs de cantidad y descuento
+ ****************************************/
+.cart-item-modern .input-group {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #d1d5db;
+}
+
+.cart-item-modern .input-group input {
+    border: none;
+    border-left: 1px solid #e5e7eb;
+}
+
+.cart-item-modern .input-group .input-group-text {
+    font-size: 0.75rem;
+    background: #f1f5f9;
+    border-right: 1px solid #e5e7eb;
+}
+
+/****************************************
+ * Totales
+ ****************************************/
+.pv-totals div {
+    font-size: 0.95rem;
+}
+
+.pv-totals span:last-child {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/****************************************
+ * Botón Finalizar
+ ****************************************/
+#btnFinalizar {
+    border-radius: 999px !important;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px;
+}
+
+/****************************************
+ * FORMULARIOS
+ ****************************************/
+.pv-cart-card input,
+.pv-cart-card select {
+    border-radius: 14px !important;
+}
+
+/****************************************
+ * FACTURA — estilo POS simple
+ ****************************************/
+#ticketFactura {
+    font-family: "Segoe UI", sans-serif !important;
+    font-size: 0.9rem;
+}
+
+#ticketFactura hr {
+    border-top: 1px dashed #cbd5e1;
+}
+
+#ticketFactura .ticket-table {
+    font-size: 0.85rem;
+}
+
+#ticketFactura .ticket-table td,
+#ticketFactura .ticket-table th {
+    padding: 3px 0;
+}
+
+.pv-modal-factura .modal-content {
+    border-radius: 18px !important;
+}
+
+/* Contenedor de productos con scroll moderno */
+#productos-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+/* Scroll stylizado */
+#productos-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+#productos-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+#productos-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Activar modo oscuro agregando la clase .modo-oscuro al <body> */
+
+body.modo-oscuro {
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+body.modo-oscuro .card,
+body.modo-oscuro .pv-cart-card,
+body.modo-oscuro .cart-item-modern,
+body.modo-oscuro .pv-products-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0;
+}
+
+body.modo-oscuro .card-title,
+body.modo-oscuro .card-text {
+    color: #e2e8f0 !important;
+}
+
+/* Inputs */
+body.modo-oscuro input.form-control,
+body.modo-oscuro select.form-select {
+    background: #334155;
+    border-color: #475569;
+    color: #e2e8f0;
+}
+
+/* Placeholder */
+body.modo-oscuro input::placeholder {
+    color: #94a3b8;
+}
+
+/* Elementos del carrito */
+body.modo-oscuro .cart-item-modern {
+    background: #1e293b;
+    border: 1px solid #475569;
+}
+
+/* Totales */
+body.modo-oscuro .pv-totals span:last-child {
+    color: #f1f5f9;
+}
+
+/* Botón agregar */
+body.modo-oscuro .btn-primary-custom {
+    border-color: #60a5fa;
+    color: #60a5fa;
+}
+
+body.modo-oscuro .btn-primary-custom:hover {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+/* Botón finalizar */
+body.modo-oscuro #btnFinalizar {
+    background: #22c55e !important;
+    color: #0f172a !important;
+    border: none !important;
+}
+
+/* Scrollbar oscuro */
+body.modo-oscuro #productos-container::-webkit-scrollbar-thumb {
+    background: #64748b;
+}
+
+
+.input-descuento {
+    width: 120px !important; /* un poco más ancho */
+}
+
+/* ============================================
+   CARD PRINCIPAL DEL POS
+============================================ */
+.pos-card {
+    max-width: 650px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 35px 40px;
+    border-radius: 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.pos-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* ============================================
+   INPUTS
+============================================ */
+.pos-card .form-control {
+    border-radius: 12px !important;
+    padding: 10px 14px;
+    border: 1px solid #d4d4d4;
+    background-color: #fafafa;
+    transition: all .2s ease;
+}
+
+.pos-card .form-control:focus {
+    border-color: #0d6efd;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(13, 110, 253, .3);
+}
+
+/* Desactivar estilo de readonly */
+.pos-card input[readonly] {
+    background-color: #e9ecef !important;
+    cursor: not-allowed;
+}
+
+/* Etiquetas */
+.pos-card .form-label {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* ============================================
+   BOTÓN PRINCIPAL
+============================================ */
+.btn-pos {
+    width: 100%;
+    padding: 12px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ============================================
+   ENLACE VOLVER
+============================================ */
+.volver-pos {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.volver-pos a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #6c757d;
+    transition: color .2s;
+}
+
+.volver-pos a:hover {
+    color: #0d6efd;
+}
+
+/* ===========================================
+      PERFIL - CARD PRINCIPAL
+=========================================== */
+.profile-card {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* HEADER */
+.profile-header {
+    background: #f8f9fa;
+    padding: 22px;
+    text-align: center;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.profile-header h4 {
+    font-weight: 600;
+}
+
+/* TITULITOS */
+.profile-section-title {
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0 15px 0;
+}
+
+/* INPUTS */
+.profile-card .form-control {
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid #d1d1d1;
+    background: #fafafa;
+    transition: .2s ease;
+}
+
+.profile-card .form-control:focus {
+    background: #fff;
+    border-color: #0d6efd;
+    box-shadow: 0 0 4px rgba(13, 110, 253, 0.3);
+}
+
+/* BOTÓN */
+.profile-card .btn-custom {
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 1rem;
 }
 
 
@@ -6538,7 +7242,14 @@ body,
     animation: none;
   }
 }
-
+.card-expandible {
+    min-height: 65vh;   
+    display: flex;
+    flex-direction: column;
+}
+.card-expandible .table-responsive {
+    flex-grow: 1;
+}
 .list-group {
   --bs-list-group-color: #212529;
   --bs-list-group-bg: #fff;
@@ -13763,12 +14474,6 @@ main {
   flex: 5;
 }
 
-.footer {
-  background-color: #f8f9fa;
-  padding: 1rem 0;
-  text-align: center;
-}
-
 body {
   background-color: #f8f9fa;
 }
@@ -13890,3 +14595,40 @@ textarea {
   text-align: center;
 }
 
+/* Ajustar ancho del card de editar producto */
+.register-container.edit-product-card {
+    max-width: 600px !important;  /* Ajuste: un poco más ancho */
+    width: 100%;
+}
+
+/* --- FIX TEXTO INVISIBLE EN MODO OSCURO --- */
+
+/* ----------------------------------------------------------
+   FIX DEFINITIVO: Texto del carrito en modo oscuro
+---------------------------------------------------------- */
+.dark-mode #cart-items *,
+.dark-mode #cart-items strong,
+.dark-mode #cart-items .text-dark,
+.dark-mode #cart-items .fw-bold,
+.dark-mode #cart-items .input-group-text,
+.dark-mode #cart-items .form-control,
+.dark-mode #cart-items .form-label {
+    color: #ffffff !important;
+}
+
+/* Fondo claro interno en inputs dentro del carrito */
+.dark-mode #cart-items .form-control {
+    background-color: #2f2f2f !important;
+    border-color: #555 !important;
+}
+
+/* Input-group-text más visibles */
+.dark-mode #cart-items .input-group-text {
+    background-color: #3a3a3a !important;
+    border-color: #555 !important;
+}
+
+/* Total del producto */
+.dark-mode #cart-items .fw-bold.text-end {
+    color: #ffffff !important;
+}

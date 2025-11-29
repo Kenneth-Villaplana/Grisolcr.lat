@@ -17,7 +17,7 @@ if (empty($historial))
 <body>
     <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito'): ?>
         <div class="alert alert-success text-center shadow fw-bold">
-            🎉 ¡Expediente creado correctamente!
+            ¡Expediente creado correctamente!
         </div>
     <?php endif; ?>
     <main class="container my-5">
