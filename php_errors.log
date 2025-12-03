@@ -1,0 +1,21 @@
+[01-Nov-2025 08:30:14 Europe/Berlin] 🎬 ===== GoogleCalendarModel CONSTRUCTOR INICIADO =====
+[01-Nov-2025 08:30:14 Europe/Berlin] 🔍 checkGoogleClientAvailability() llamado
+[01-Nov-2025 08:30:14 Europe/Berlin] 🔍 Ruta autoload: C:\xampp\htdocs\OptiGestion\Model/../../vendor/autoload.php
+[01-Nov-2025 08:30:14 Europe/Berlin] 🔍 Autoload existe: NO
+[01-Nov-2025 08:30:14 Europe/Berlin] ❌ AUTOLOAD NO EXISTE en: C:\xampp\htdocs\OptiGestion\Model/../../vendor/autoload.php
+[01-Nov-2025 08:30:14 Europe/Berlin] 🎬 ===== GoogleCalendarModel CONSTRUCTOR FINALIZADO =====
+[01-Nov-2025 08:30:14 Europe/Berlin] 🔍 isGoogleClientAvailable() llamado - retornando: FALSE
+[01-Nov-2025 08:30:14 Europe/Berlin] 🔍 isGoogleClientAvailable() llamado - retornando: FALSE
+[01-Nov-2025 08:30:14 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\OptiGestion/model/UserModel.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\OptiGestion\check-logs.php on line 62
+[01-Nov-2025 08:30:14 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\OptiGestion/model/UserModel.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\OptiGestion\check-logs.php:62
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\OptiGestion\check-logs.php on line 62
+[01-Nov-2025 08:31:41 Europe/Berlin] 🎬 ===== GoogleCalendarModel CONSTRUCTOR INICIADO =====
+[01-Nov-2025 08:31:41 Europe/Berlin] 🔍 checkGoogleClientAvailability() llamado
+[01-Nov-2025 08:31:41 Europe/Berlin] 🔍 Ruta autoload: C:\xampp\htdocs\OptiGestion\Model/../../vendor/autoload.php
+[01-Nov-2025 08:31:41 Europe/Berlin] 🔍 Autoload existe: NO
+[01-Nov-2025 08:31:41 Europe/Berlin] ❌ AUTOLOAD NO EXISTE en: C:\xampp\htdocs\OptiGestion\Model/../../vendor/autoload.php
+[01-Nov-2025 08:31:41 Europe/Berlin] 🎬 ===== GoogleCalendarModel CONSTRUCTOR FINALIZADO =====
+[01-Nov-2025 08:31:41 Europe/Berlin] 🔍 isGoogleClientAvailable() llamado - retornando: FALSE
+[01-Nov-2025 08:31:41 Europe/Berlin] 🔍 isGoogleClientAvailable() llamado - retornando: FALSE

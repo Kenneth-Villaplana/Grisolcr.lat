@@ -31,6 +31,7 @@ function MostrarMenu() {
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownCitas">
                 <li><a class="dropdown-item" href="/OptiGestion/view/appointmentForm.php">Agendar Cita</a></li>
+                <li><a class="dropdown-item" href="/OptiGestion/view/editarcita.php">Mis Citas</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/historialMedico.php">Historial Médico</a></li>
             </ul>
         </li>';
@@ -69,6 +70,7 @@ function MostrarMenu() {
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPerfil">
                 <li><a class="dropdown-item" href="/OptiGestion/view/editarPerfil.php">Editar Perfil</a></li>
+                <li><a class="dropdown-item" href="/OptiGestion/view/editarcita.php">Mis Citas</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/logout.php">Cerrar Sesión</a></li>
             </ul>
         </li>';

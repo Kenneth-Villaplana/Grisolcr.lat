@@ -1,0 +1,1537 @@
+[2025-11-01 08:38:24] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-01 08:38:24] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-01 08:38:24] 🔍 Ruta autoload: C:\xampp\htdocs\OptiGestion\Model/../../vendor/autoload.php
+[2025-11-01 08:38:24] 🔍 Autoload existe: NO
+[2025-11-01 08:38:24] ❌ AUTOLOAD NO EXISTE
+[2025-11-01 08:38:24] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: NO =====
+[2025-11-01 08:38:24] 🔍 isGoogleClientAvailable() - retornando: FALSE
+[2025-11-01 08:42:55] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-01 08:42:55] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-01 08:42:55] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-01 08:42:55] 🔍 Ruta autoload (realpath): 
+[2025-11-01 08:42:55] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-01 08:42:55] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:42:55] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:42:55] 🔍 Google_Client: ✅ EXISTE
+[2025-11-01 08:42:55] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-01 08:42:55] 🎯 ✅ Google Client disponible
+[2025-11-01 08:42:55] 🔧 initializeGoogleClient() llamado
+[2025-11-01 08:42:55] ✅ Google_Client instanciado
+[2025-11-01 08:42:55] ✅ ApplicationName configurado
+[2025-11-01 08:42:55] ✅ Scopes configurados
+[2025-11-01 08:42:55] ✅ AccessType configurado
+[2025-11-01 08:42:55] 🔍 Ruta credenciales: 
+[2025-11-01 08:42:55] ⚠️ Usando credenciales manuales
+[2025-11-01 08:42:55] ✅ Credenciales manuales configuradas
+[2025-11-01 08:42:55] ✅ Redirect URI: http://localhost/OptiGestion/google-calendar/callback
+[2025-11-01 08:42:55] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-01 08:42:55] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-01 08:52:40] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-01 08:52:40] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-01 08:52:40] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-01 08:52:40] 🔍 Ruta autoload (realpath): 
+[2025-11-01 08:52:40] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-01 08:52:40] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:52:40] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:52:40] 🔍 Google_Client: ✅ EXISTE
+[2025-11-01 08:52:40] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-01 08:52:40] 🎯 ✅ Google Client disponible
+[2025-11-01 08:52:40] 🔧 initializeGoogleClient() llamado
+[2025-11-01 08:52:40] ✅ Google_Client instanciado
+[2025-11-01 08:52:40] ✅ ApplicationName configurado
+[2025-11-01 08:52:40] ✅ Scopes configurados
+[2025-11-01 08:52:40] ✅ AccessType configurado
+[2025-11-01 08:52:40] 🔍 Ruta credenciales: 
+[2025-11-01 08:52:40] ⚠️ Usando credenciales manuales
+[2025-11-01 08:52:40] ✅ Credenciales manuales configuradas
+[2025-11-01 08:52:40] ✅ Redirect URI: http://localhost/OptiGestion/google-calendar/callback
+[2025-11-01 08:52:40] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-01 08:52:40] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-01 08:52:41] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-01 08:52:41] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-01 08:52:41] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-01 08:52:41] 🔍 Ruta autoload (realpath): 
+[2025-11-01 08:52:41] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-01 08:52:41] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:52:41] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:52:41] 🔍 Google_Client: ✅ EXISTE
+[2025-11-01 08:52:41] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-01 08:52:41] 🎯 ✅ Google Client disponible
+[2025-11-01 08:52:41] 🔧 initializeGoogleClient() llamado
+[2025-11-01 08:52:41] ✅ Google_Client instanciado
+[2025-11-01 08:52:41] ✅ ApplicationName configurado
+[2025-11-01 08:52:41] ✅ Scopes configurados
+[2025-11-01 08:52:41] ✅ AccessType configurado
+[2025-11-01 08:52:41] 🔍 Ruta credenciales: 
+[2025-11-01 08:52:41] ⚠️ Usando credenciales manuales
+[2025-11-01 08:52:41] ✅ Credenciales manuales configuradas
+[2025-11-01 08:52:41] ✅ Redirect URI: http://localhost/OptiGestion/google-calendar/callback
+[2025-11-01 08:52:41] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-01 08:52:41] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-01 08:55:31] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-01 08:55:31] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-01 08:55:31] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-01 08:55:31] 🔍 Ruta autoload (realpath): 
+[2025-11-01 08:55:31] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-01 08:55:31] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:55:31] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:55:31] 🔍 Google_Client: ✅ EXISTE
+[2025-11-01 08:55:31] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-01 08:55:31] 🎯 ✅ Google Client disponible
+[2025-11-01 08:55:31] 🔧 initializeGoogleClient() llamado
+[2025-11-01 08:55:31] ✅ Google_Client instanciado
+[2025-11-01 08:55:31] ✅ ApplicationName configurado
+[2025-11-01 08:55:31] ✅ Scopes configurados
+[2025-11-01 08:55:31] ✅ AccessType configurado
+[2025-11-01 08:55:31] 🔍 Ruta credenciales: 
+[2025-11-01 08:55:31] ⚠️ Usando credenciales manuales
+[2025-11-01 08:55:31] ✅ Credenciales manuales configuradas
+[2025-11-01 08:55:31] ✅ Redirect URI: http://localhost/OptiGestion/google-calendar/callback
+[2025-11-01 08:55:31] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-01 08:55:31] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-01 08:59:51] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-01 08:59:51] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-01 08:59:51] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-01 08:59:51] 🔍 Ruta autoload (realpath): 
+[2025-11-01 08:59:51] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-01 08:59:51] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:59:51] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-01 08:59:51] 🔍 Google_Client: ✅ EXISTE
+[2025-11-01 08:59:51] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-01 08:59:51] 🎯 ✅ Google Client disponible
+[2025-11-01 08:59:51] 🔧 initializeGoogleClient() llamado
+[2025-11-01 08:59:51] ✅ Google_Client instanciado
+[2025-11-01 08:59:51] ✅ ApplicationName configurado
+[2025-11-01 08:59:51] ✅ Scopes configurados
+[2025-11-01 08:59:51] ✅ AccessType configurado
+[2025-11-01 08:59:51] 🔍 Ruta credenciales: 
+[2025-11-01 08:59:51] ⚠️ Usando credenciales manuales
+[2025-11-01 08:59:51] ✅ Credenciales manuales configuradas
+[2025-11-01 08:59:51] ✅ Redirect URI: http://localhost/OptiGestion/google-calendar/callback
+[2025-11-01 08:59:51] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-01 08:59:51] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 09:00:00, Fin: 2025-11-15 09:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 09:30:00, Fin: 2025-11-15 10:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 10:00:00, Fin: 2025-11-15 10:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 10:30:00, Fin: 2025-11-15 11:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 11:00:00, Fin: 2025-11-15 11:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 11:30:00, Fin: 2025-11-15 12:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 12:00:00, Fin: 2025-11-15 12:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 12:30:00, Fin: 2025-11-15 13:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 13:00:00, Fin: 2025-11-15 13:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 13:30:00, Fin: 2025-11-15 14:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 14:00:00, Fin: 2025-11-15 14:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 14:30:00, Fin: 2025-11-15 15:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 15:00:00, Fin: 2025-11-15 15:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 15:30:00, Fin: 2025-11-15 16:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 16:00:00, Fin: 2025-11-15 16:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 16:30:00, Fin: 2025-11-15 17:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 17:00:00, Fin: 2025-11-15 17:30:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:18:50] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:18:50] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:18:50] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:18:50] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:18:50] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:18:50] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:18:50] 🎯 ✅ Google Client disponible
+[2025-11-09 08:18:50] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:18:50] ✅ Google_Client instanciado
+[2025-11-09 08:18:50] ✅ ApplicationName configurado
+[2025-11-09 08:18:50] ✅ Scopes configurados
+[2025-11-09 08:18:50] ✅ AccessType configurado
+[2025-11-09 08:18:50] 🔍 Ruta credenciales: 
+[2025-11-09 08:18:50] ⚠️ Usando credenciales manuales
+[2025-11-09 08:18:50] ✅ Credenciales manuales configuradas
+[2025-11-09 08:18:50] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:18:50] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:18:50] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:18:50] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:18:50] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 17:30:00, Fin: 2025-11-15 18:00:00
+[2025-11-09 08:18:50] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:18:50] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:19:11] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:19:11] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:19:11] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:19:11] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:19:11] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:19:11] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:19:11] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:19:11] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:19:11] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:19:11] 🎯 ✅ Google Client disponible
+[2025-11-09 08:19:11] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:19:11] ✅ Google_Client instanciado
+[2025-11-09 08:19:11] ✅ ApplicationName configurado
+[2025-11-09 08:19:11] ✅ Scopes configurados
+[2025-11-09 08:19:11] ✅ AccessType configurado
+[2025-11-09 08:19:11] 🔍 Ruta credenciales: 
+[2025-11-09 08:19:11] ⚠️ Usando credenciales manuales
+[2025-11-09 08:19:11] ✅ Credenciales manuales configuradas
+[2025-11-09 08:19:11] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:19:11] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:19:11] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:19:11] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:19:11] 🔍 checkAvailability() llamado - Inicio: 2025-11-15 16:00:00, Fin: 2025-11-15 16:30:00
+[2025-11-09 08:19:11] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:19:11] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 09:00:00, Fin: 2025-11-23 09:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 09:30:00, Fin: 2025-11-23 10:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 10:00:00, Fin: 2025-11-23 10:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 10:30:00, Fin: 2025-11-23 11:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 11:00:00, Fin: 2025-11-23 11:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 11:30:00, Fin: 2025-11-23 12:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 12:00:00, Fin: 2025-11-23 12:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 12:30:00, Fin: 2025-11-23 13:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 13:00:00, Fin: 2025-11-23 13:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 13:30:00, Fin: 2025-11-23 14:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 14:00:00, Fin: 2025-11-23 14:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 14:30:00, Fin: 2025-11-23 15:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 15:00:00, Fin: 2025-11-23 15:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 15:30:00, Fin: 2025-11-23 16:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 16:00:00, Fin: 2025-11-23 16:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 16:30:00, Fin: 2025-11-23 17:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 17:00:00, Fin: 2025-11-23 17:30:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:39] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:39] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:39] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:39] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:39] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:39] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:39] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:39] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:39] ✅ Google_Client instanciado
+[2025-11-09 08:32:39] ✅ ApplicationName configurado
+[2025-11-09 08:32:39] ✅ Scopes configurados
+[2025-11-09 08:32:39] ✅ AccessType configurado
+[2025-11-09 08:32:39] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:39] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:39] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:39] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:39] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:39] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:39] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:39] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 17:30:00, Fin: 2025-11-23 18:00:00
+[2025-11-09 08:32:39] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:39] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:32:48] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:32:48] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:32:48] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:32:48] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:32:48] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:32:48] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:48] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:32:48] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:32:48] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:32:48] 🎯 ✅ Google Client disponible
+[2025-11-09 08:32:48] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:32:48] ✅ Google_Client instanciado
+[2025-11-09 08:32:48] ✅ ApplicationName configurado
+[2025-11-09 08:32:48] ✅ Scopes configurados
+[2025-11-09 08:32:48] ✅ AccessType configurado
+[2025-11-09 08:32:48] 🔍 Ruta credenciales: 
+[2025-11-09 08:32:48] ⚠️ Usando credenciales manuales
+[2025-11-09 08:32:48] ✅ Credenciales manuales configuradas
+[2025-11-09 08:32:48] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:32:48] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:32:48] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:32:48] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:32:48] 🔍 checkAvailability() llamado - Inicio: 2025-11-23 12:30:00, Fin: 2025-11-23 13:00:00
+[2025-11-09 08:32:48] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:32:48] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:46:59] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:46:59] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:46:59] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:46:59] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:46:59] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:46:59] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:46:59] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:46:59] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:46:59] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:46:59] 🎯 ✅ Google Client disponible
+[2025-11-09 08:46:59] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:46:59] ✅ Google_Client instanciado
+[2025-11-09 08:46:59] ✅ ApplicationName configurado
+[2025-11-09 08:46:59] ✅ Scopes configurados
+[2025-11-09 08:46:59] ✅ AccessType configurado
+[2025-11-09 08:46:59] 🔍 Ruta credenciales: 
+[2025-11-09 08:46:59] ⚠️ Usando credenciales manuales
+[2025-11-09 08:46:59] ✅ Credenciales manuales configuradas
+[2025-11-09 08:46:59] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:46:59] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:46:59] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:46:59] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:46:59] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 09:00:00, Fin: 2025-11-16 09:30:00
+[2025-11-09 08:46:59] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:46:59] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:46:59] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:46:59] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:46:59] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:46:59] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:46:59] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:46:59] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:46:59] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:46:59] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:46:59] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:46:59] 🎯 ✅ Google Client disponible
+[2025-11-09 08:46:59] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:46:59] ✅ Google_Client instanciado
+[2025-11-09 08:46:59] ✅ ApplicationName configurado
+[2025-11-09 08:46:59] ✅ Scopes configurados
+[2025-11-09 08:46:59] ✅ AccessType configurado
+[2025-11-09 08:46:59] 🔍 Ruta credenciales: 
+[2025-11-09 08:46:59] ⚠️ Usando credenciales manuales
+[2025-11-09 08:46:59] ✅ Credenciales manuales configuradas
+[2025-11-09 08:46:59] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:46:59] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:46:59] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:46:59] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:46:59] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 09:30:00, Fin: 2025-11-16 10:00:00
+[2025-11-09 08:46:59] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:46:59] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 10:00:00, Fin: 2025-11-16 10:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 10:30:00, Fin: 2025-11-16 11:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 11:00:00, Fin: 2025-11-16 11:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 11:30:00, Fin: 2025-11-16 12:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 12:00:00, Fin: 2025-11-16 12:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 12:30:00, Fin: 2025-11-16 13:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 13:00:00, Fin: 2025-11-16 13:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 13:30:00, Fin: 2025-11-16 14:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 14:00:00, Fin: 2025-11-16 14:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 14:30:00, Fin: 2025-11-16 15:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 15:00:00, Fin: 2025-11-16 15:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 15:30:00, Fin: 2025-11-16 16:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 16:00:00, Fin: 2025-11-16 16:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 16:30:00, Fin: 2025-11-16 17:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 17:00:00, Fin: 2025-11-16 17:30:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:00] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:00] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:00] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:00] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:00] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:00] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:00] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:00] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:00] ✅ Google_Client instanciado
+[2025-11-09 08:47:00] ✅ ApplicationName configurado
+[2025-11-09 08:47:00] ✅ Scopes configurados
+[2025-11-09 08:47:00] ✅ AccessType configurado
+[2025-11-09 08:47:00] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:00] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:00] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:00] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:00] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:00] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:00] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:00] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 17:30:00, Fin: 2025-11-16 18:00:00
+[2025-11-09 08:47:00] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:00] ❌ Token de acceso no válido o expirado
+[2025-11-09 08:47:08] 🎬 ===== CONSTRUCTOR INICIADO =====
+[2025-11-09 08:47:08] 🔍 Directorio actual: C:\xampp\htdocs\OptiGestion\Model
+[2025-11-09 08:47:08] 🔍 checkGoogleClientAvailability() llamado
+[2025-11-09 08:47:08] 🔍 Ruta autoload (realpath): 
+[2025-11-09 08:47:08] 🔍 Ruta directa: C:\xampp\htdocs/vendor/autoload.php
+[2025-11-09 08:47:08] ✅ AUTOLOAD ENCONTRADO en: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:08] ✅ Autoload cargado desde: C:/xampp/htdocs/OptiGestion/vendor/autoload.php
+[2025-11-09 08:47:08] 🔍 Google_Client: ✅ EXISTE
+[2025-11-09 08:47:08] 🔍 Google_Service_Calendar: ✅ EXISTE
+[2025-11-09 08:47:08] 🎯 ✅ Google Client disponible
+[2025-11-09 08:47:08] 🔧 initializeGoogleClient() llamado
+[2025-11-09 08:47:08] ✅ Google_Client instanciado
+[2025-11-09 08:47:08] ✅ ApplicationName configurado
+[2025-11-09 08:47:08] ✅ Scopes configurados
+[2025-11-09 08:47:08] ✅ AccessType configurado
+[2025-11-09 08:47:08] 🔍 Ruta credenciales: 
+[2025-11-09 08:47:08] ⚠️ Usando credenciales manuales
+[2025-11-09 08:47:08] ✅ Credenciales manuales configuradas
+[2025-11-09 08:47:08] ✅ Redirect URI: http://localhost/OptiGestion/google_calendar_callback.php
+[2025-11-09 08:47:08] 🎯 ✅ Google Client INICIALIZADO EXITOSAMENTE
+[2025-11-09 08:47:08] 🎬 ===== CONSTRUCTOR FINALIZADO - Disponible: SÍ =====
+[2025-11-09 08:47:08] 💥 Error en setAccessToken: invalid json token
+[2025-11-09 08:47:08] 🔍 checkAvailability() llamado - Inicio: 2025-11-16 11:30:00, Fin: 2025-11-16 12:00:00
+[2025-11-09 08:47:08] ✅ Google_Service_Calendar inicializado en checkAvailability
+[2025-11-09 08:47:08] ❌ Token de acceso no válido o expirado
