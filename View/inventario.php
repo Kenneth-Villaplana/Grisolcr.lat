@@ -5,8 +5,11 @@ include_once __DIR__ . '/../Model/productoModel.php';
 $productoFiltro = $_GET['idProducto'] ?? null;
 $listaProductos = ObtenerProductos($productoFiltro);
 
+// FIXED: Check if 'Cantidad' exists before filtering
 $productosBajos = array_filter($listaProductos, function ($producto) {
-    return $producto['Cantidad'] <= 10;
+    // Check if 'Cantidad' key exists and has a value
+    $cantidad = isset($producto['Cantidad']) ? (int)$producto['Cantidad'] : 0;
+    return $cantidad <= 10;
 });
 ?>
 
@@ -39,12 +42,12 @@ $productosBajos = array_filter($listaProductos, function ($producto) {
           <strong class="text-danger fs-6">Inventario bajo</strong>
 
           <p class="fw-semibold mt-2 mb-1">
-            <?php echo htmlspecialchars($p['Nombre']); ?>
+            <?php echo htmlspecialchars($p['Nombre'] ?? ''); ?>
           </p>
 
           <p class="text-muted mb-0">
             Cantidad restante:
-            <strong class="text-dark"><?php echo $p['Cantidad']; ?> unidades</strong>
+            <strong class="text-dark"><?php echo isset($p['Cantidad']) ? $p['Cantidad'] : 0; ?> unidades</strong>
           </p>
 
         </div>
@@ -104,43 +107,46 @@ $productosBajos = array_filter($listaProductos, function ($producto) {
   <div class="row" id="listaProductos">
 
     <?php if (!empty($listaProductos)) {
-      foreach ($listaProductos as $producto) { ?>
+      foreach ($listaProductos as $producto) { 
+        // FIXED: Check if 'Cantidad' exists before displaying
+        $cantidad = isset($producto['Cantidad']) ? $producto['Cantidad'] : 0;
+        ?>
 
         <div class="col-md-6 mb-4 producto">
           <div class="card shadow-sm product-card">
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="card-title mb-0">
-                  <?php echo htmlspecialchars($producto['Nombre']); ?>
+                  <?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>
                 </h5>
                 <span class="product-price">
-                  ₡<?php echo number_format($producto['Precio'], 2); ?>
+                  ₡<?php echo isset($producto['Precio']) ? number_format($producto['Precio'], 2) : '0.00'; ?>
                 </span>
               </div>
 
               <p class="mb-2">Cantidad disponible:
-                <strong><?php echo $producto['Cantidad']; ?></strong>
+                <strong><?php echo $cantidad; ?></strong>
               </p>
 
               <div class="progress mb-3">
-                <div class="progress-bar <?php echo $producto['ColorBarra']; ?>"
+                <div class="progress-bar <?php echo $producto['ColorBarra'] ?? ''; ?>"
                   role="progressbar"
-                  style="width: <?php echo $producto['AnchoBarra']; ?>%;"
-                  aria-valuenow="<?php echo $producto['Cantidad']; ?>"
+                  style="width: <?php echo $producto['AnchoBarra'] ?? 0; ?>%;"
+                  aria-valuenow="<?php echo $cantidad; ?>"
                   aria-valuemin="0"
                   aria-valuemax="100"></div>
               </div>
 
-              <h6 class="text-muted">ID: <?php echo $producto['ProductoId']; ?></h6>
+              <h6 class="text-muted">ID: <?php echo $producto['ProductoId'] ?? ''; ?></h6>
 
               <div class="d-flex justify-content-end mt-3">
-                <a href="editarProducto.php?id=<?php echo $producto['ProductoId']; ?>" 
+                <a href="editarProducto.php?id=<?php echo $producto['ProductoId'] ?? ''; ?>" 
                    class="btn btn-custom me-2">Editar</a>
 
                 <button 
                   class="btn btn-danger btn-sm btn-confirmar-eliminar" 
-                  data-id="<?php echo $producto['ProductoId']; ?>" 
-                  data-nombre="<?php echo htmlspecialchars($producto['Nombre']); ?>" 
+                  data-id="<?php echo $producto['ProductoId'] ?? ''; ?>" 
+                  data-nombre="<?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>" 
                   data-bs-toggle="modal" 
                   data-bs-target="#confirmarEliminarModal">
                   Eliminar
