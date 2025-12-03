@@ -2,17 +2,17 @@
 include_once __DIR__ . '/../Model/baseDatos.php';
 
 // Registrar Personal
-function RegistrarPersonalModel($cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $contrasenna, $telefono, $direccion, $rolId)
+function RegistrarPersonalModel($cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $contrasenna, $telefono, $direccion, $rolId, $fechaNacimiento)
 {
     try {
         $enlace = AbrirBD();
-        $sentencia = $enlace->prepare("CALL RegistrarPersonal(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $sentencia = $enlace->prepare("CALL RegistrarPersonal(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         if(!$sentencia) {
             throw new Exception($enlace->error);
         }
 
-        // 8 strings y 1 int "ssssssssi"
-        $sentencia->bind_param("ssssssssi", 
+        
+       $sentencia->bind_param("ssssssssss", 
             $cedula, 
             $nombre, 
             $apellido, 
@@ -21,7 +21,8 @@ function RegistrarPersonalModel($cedula, $nombre, $apellido, $apellidoDos, $corr
             $contrasenna,  
             $telefono, 
             $direccion, 
-            $rolId
+            $rolId,
+            $fechaNacimiento
         );
 
         $sentencia->execute();

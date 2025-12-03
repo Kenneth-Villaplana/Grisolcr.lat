@@ -18,6 +18,7 @@ if(isset($_GET["cerrarSesion"])) {
 
 // Registro de paciente
 if(isset($_POST["btnRegistrarPaciente"])) {
+
     $cedula = $_POST["Cedula"];
     $nombre = $_POST["Nombre"];
     $apellido = $_POST["Apellido"];
@@ -29,23 +30,45 @@ if(isset($_POST["btnRegistrarPaciente"])) {
     $direccion = $_POST["Direccion"];
     $fechaNacimiento = $_POST["FechaNacimiento"];  
 
-    
     if($contrasenna != $confirmarContrasenna) {
-        $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
-    } else {
-        $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
-        $resultadoReg = RegistrarPacienteModel( $cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $hash, $telefono, $direccion, $fechaNacimiento);
-       
-         if($resultadoReg['resultado'] == 1) {
 
-            $_SESSION["txtMensaje"] = $resultadoReg['mensaje'];
+        $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
+
+    } else {
+
+        $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
+
+        $resultadoReg = RegistrarPacienteModel(
+            $cedula,
+            $nombre,
+            $apellido,
+            $apellidoDos,
+            $correoElectronico,
+            $hash,
+            $telefono,
+            $direccion,
+            $fechaNacimiento
+        );
+
+        
+        if($resultadoReg['resultado'] == 1) {
+
+            $_SESSION["txtMensaje"] = "Paciente registrado con éxito";
             $_SESSION["registroExitoso"] = true;
-        } else {
+
+            //cuando viene desde pos → redirige al Punto de Venta 
+            if (isset($_POST["origen"]) && $_POST["origen"] === "POS") {
+                header("Location: /OptiGestion/View/puntoVenta.php?cedula=" . urlencode($cedula));
+                exit;
+            }
+
+        } 
+        
+        else {
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Error en el registro.";
         }
     }
-  }
-
+}
 
 // Registro de empleado
 if(isset($_POST["btnRegistrarPersonal"])) {
@@ -59,14 +82,14 @@ if(isset($_POST["btnRegistrarPersonal"])) {
     $telefono = $_POST["Telefono"];
     $direccion = $_POST["Direccion"];
     $rolId = $_POST["RolId"]; 
-
+    $fechaNacimiento = $_POST["FechaNacimiento"]; 
  
     if($contrasenna != $confirmarContrasenna) {
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
     } else {
          $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
-        $resultadoReg = RegistrarPersonalModel( $cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $hash, $telefono, $direccion, $rolId);
+        $resultadoReg = RegistrarPersonalModel( $cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $hash, $telefono, $direccion, $rolId,$fechaNacimiento);
        
          if($resultadoReg['resultado'] == 1) {
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'];
