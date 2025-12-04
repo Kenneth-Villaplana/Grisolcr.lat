@@ -19,53 +19,62 @@ if(session_status() == PHP_SESSION_NONE) {
     <body>
        <?php MostrarMenu();?>
     
-    <section class="registrer-section">
-        <div class="container full-height">
-       <div class="row justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="100">
-        <?php
-                                        if(isset($_SESSION["txtMensaje"])){
-                                        echo '<div class="alert alert-danger">' . $_SESSION["txtMensaje"] . '</div>';
-                                        unset($_SESSION['txtMensaje']);           
-                            }
-                                    ?>           
-       <div class="col-auto form-container data-aos fade-up" data-aos-delay="100">  
-                   <h4 class="mb-4 text-center my-2">Iniciar Sesión</h4>
-                       
-                   <form method="POST" id="contactForm" name="contactForm" class="contactForm aling-items-center">
-                     <div class="text-center mb-3">           
-                            <label for="email" class="form-label">Correo Electrónico</label>
-                                               <input type="email" class="form-control" name="CorreoElectronico" id="CorreoElectronico" required>
+   <section class="login-page-bg">
+    <div class="container">
+        
+        <div class="row justify-content-center">
 
-                                            <div class="text-center mb-3"> 
-                                                <label for="password" class="form-label">Contraseña</label>
-                                                <input type="password" class="form-control" name="Contrasenna" id="Contrasenna" required>
-                                            </div>
-                                            
-                                           <div class="text-center mb-3"> 
-                                                <div class="form-group">
-                                                    <a class="text link-azul" href="recuperarCuenta.php">Recuperar acceso</a>
-                                                </div>
-                                            </div>
+            <?php
+                if(isset($_SESSION["txtMensaje"])){
+                    echo '<div class="alert alert-danger w-50 text-center">' . $_SESSION["txtMensaje"] . '</div>';
+                    unset($_SESSION["txtMensaje"]);
+                }
+            ?>
 
-                                            <div class="text-center mb-3"> 
-                                                <div class="form-group">
-                                                    <p>¿No tienes cuenta? <a class="link-azul" href="RegistrarPaciente.php">Registrarse</a></p>
-                                                </div>
-                                            </div>
+            <div class="col-lg-5 col-md-7">
+                <div class="login-card glass-card">
 
-                                            <div class="text-center my-2">
-                                               <button type="submit" class="btn btn-custom" name="btnIniciarSesion">Iniciar sesión</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                             </div>
+                    <h3 class="text-center mb-3 login-title">Iniciar Sesión</h3>
+                    <p class="text-center mb-4 login-subtitle">
+                        Accede a tu cuenta para continuar
+                    </p>
+
+                    <form method="POST">
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Correo Electrónico</label>
+                            <input type="email" class="form-control login-input" name="CorreoElectronico" required>
                         </div>
-                    </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Contraseña</label>
+                            <input type="password" class="form-control login-input" name="Contrasenna" required>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <a href="recuperarCuenta.php" class="login-link fw-semibold">Recuperar acceso</a>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <p class="small">
+                                ¿No tienes cuenta?
+                                <a href="RegistrarPaciente.php" class="login-link fw-semibold">Registrarse</a>
+                            </p>
+                        </div>
+
+                        <button type="submit" class="btn-login w-100" name="btnIniciarSesion">
+                            Iniciar sesión
+                        </button>
+
+                    </form>
+
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
+
     <?php MostrarFooter(); ?>
     <?php IncluirScripts(); ?>
 </body>

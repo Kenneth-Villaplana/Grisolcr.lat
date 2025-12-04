@@ -1819,6 +1819,525 @@ body.modo-oscuro #productos-container::-webkit-scrollbar-thumb {
 }
 
 
+.beneficio-card {
+    background: #ffffff;
+    transition: 0.3s ease;
+}
+.beneficio-card:hover {
+    transform: translateY(-5px);
+}
+.icono-beneficio {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #e9f9f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #00a478;
+}
+
+  /* Altura elegante */
+.hero-home {
+    height: 70vh;
+    min-height: 500px;
+    background: url("/OptiGestion/assets/img/Portada.jpg") no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px; /* <<< separa del menú */
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+}
+
+.hero-content {
+    position: relative;
+    margin-top: 40px; /* ayuda a centrar aún más */
+    padding: 40px 45px;
+    max-width: 760px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+.hero-title {
+    color: #fff;
+    font-size: 2.8rem;
+}
+
+.hero-subtitle {
+    color: #f4f4f4;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.btn-cta-agendar {
+    display: inline-block;
+    background-color: #00a478;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-cta-agendar:hover {
+    background-color: #008e65;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+
+/* =============================== */
+/* CARRUSEL PEQUEÑO + FUNCIONAL   */
+/* =============================== */
+
+
+.carousel-glass {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 18px;
+    border-radius: 22px;
+
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* Borde iluminado */
+    border: 2px solid rgba(0, 164, 120, 0.55); /* verde brillante suave */
+    box-shadow:
+        0 0 12px rgba(0, 164, 120, 0.35),   /* halo exterior suave */
+        0 0 22px rgba(0, 164, 120, 0.25),   /* brillo difuminado */
+        0 10px 28px rgba(0,0,0,0.22);       /* sombra elegante */
+    
+    transition: 0.4s ease;
+}
+
+/* Hover: iluminación más intensa */
+.carousel-glass:hover {
+    box-shadow:
+        0 0 18px rgba(0, 164, 120, 0.55),
+        0 0 32px rgba(0, 164, 120, 0.45),
+        0 12px 35px rgba(0,0,0,0.28);
+    transform: scale(1.01);
+}
+
+/* ===== Ajustes del carrusel interno ===== */
+
+.carousel-glass .carousel-small {
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+/* Imágenes adaptadas sin deformar */
+.img-carrusel-small {
+    width: 100%;
+    height: 380px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.55);
+    padding: 15px;
+    border-radius: 14px;
+    transition: transform 0.35s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto cuando se activa la imagen */
+.carousel-item.active .img-carrusel-small {
+    transform: scale(1.03);
+}
+
+/* Hover en imagen */
+.img-carrusel-small:hover {
+    transform: scale(1.05);
+}
+
+
+
+/* Efecto suave al cambiar imagen */
+.carousel-item.active .img-carrusel-small {
+    transform: scale(1.02);
+}
+
+/* Hover premium */
+.img-carrusel-small:hover {
+    transform: scale(1.04);
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+    .img-carrusel-small {
+        height: 250px;
+        padding: 10px;
+    }
+}
+
+/* =============================== */
+/* BENEFICIOS MISMO TAMAÑO         */
+/* =============================== */
+
+.beneficio-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 28px;
+    height: 100%; /* Asegura misma altura */
+    transition: .3s ease;
+    border: 1px solid #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.beneficio-card p {
+    flex-grow: 1; /* Hace los textos igualados */
+}
+
+.beneficio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.icono-beneficio {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #e8f7f1;
+    color: #00a478;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+}
+
+
+
+/* =============================== */
+/* NEWSLETTER MODERNO              */
+/* =============================== */
+
+.bg-blue-dark {
+    background-color: #00756b !important;
+}
+
+.btn-custom {
+    background-color: #00a478;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 22px;
+}
+
+.btn-custom:hover {
+    background-color: #008e65;
+}
+
+/* =============================== */
+/* NEWSLETTER MODERNO              */
+/* =============================== */
+
+.about-hero {
+    height: 42vh;
+    min-height: 300px;
+    background: url("/OptiGestion/assets/img/Portada.jpg") center/cover no-repeat;
+    position: relative;
+}
+
+.about-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+}
+
+.about-hero .container {
+    position: relative;
+}
+
+.about-title {
+    color: #fff;
+    font-size: 2.2rem;
+}
+
+.about-subtitle {
+    color: #e8e8e8;
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* =============================== */
+/* SECCIONES MODERNAS Y COMPACTAS */
+/* =============================== */
+
+.about-section {
+    padding: 60px 0;
+}
+
+.about-section.alt {
+    background: #f8f9fa;
+}
+
+.about-section-title {
+    font-size: 1.9rem;
+    color: #00a478;
+    margin-bottom: 12px;
+}
+
+.about-text {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Imagen dentro de card */
+.about-img-wrapper {
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    transition: 0.35s ease;
+}
+
+.about-img-wrapper img {
+    transition: 0.4s ease;
+}
+
+.about-img-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+/* Efecto suave */
+.about-section .row {
+    animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================ */
+/* FONDO COMPLETO CON IMAGEN DESENFOCADA        */
+/* ============================================ */
+
+.login-page-bg {
+    min-height: 100vh;
+    padding: 120px 0; /* más espacio arriba y abajo */
+    background: url("/OptiGestion/assets/img/Portada.jpg") center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* capa oscura + blur */
+.login-page-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.50);
+    backdrop-filter: blur(6px);
+    z-index: 0;
+}
+
+
+/* ============================================ */
+/* CARD TRANSPARENTE GLASS                      */
+/* ============================================ */
+
+.login-card {
+    position: relative;
+    z-index: 1;
+    padding: 35px 30px;
+    border-radius: 22px;
+    width: 100%;
+}
+
+/* efecto glass */
+.glass-card {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    animation: fadeInUp 0.8s ease both;
+}
+
+
+/* TITULOS */
+.login-title {
+    color: #0c0c0c;
+    font-weight: 700;
+}
+
+.login-subtitle {
+    font-size: 0.95rem;
+    color: #0a0a0a;
+}
+
+
+/* INPUTS */
+.login-input {
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #dae3e0;
+    transition: 0.3s;
+}
+
+.login-input:focus {
+    border-color: #00a478;
+    box-shadow: 0 0 0 0.15rem rgba(0,164,120,0.35);
+}
+
+
+/* BOTÓN */
+.btn-login {
+    background-color: #00a478;
+    color: #fff;
+    padding: 12px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #008e65;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 16px rgba(0, 164, 120, 0.4);
+}
+
+
+/* LINKS */
+.login-link {
+    color: #293b34;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ANIMACIÓN */
+@keyframes fadeInUp {
+    from {opacity:0; transform:translateY(25px);}
+    to   {opacity:1; transform:translateY(0);}
+}
+
+/* ========================================== */
+/* FONDO DEL REGISTRO                         */
+/* ========================================== */
+
+.register-bg {
+    min-height: 100vh;
+    padding: 70px 0;
+    background: url("/OptiGestion/assets/img/Portada.jpg") center/cover no-repeat;
+    position: relative;
+}
+
+/* Filtro de oscurecimiento + blur */
+.register-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    z-index: 0;
+}
+
+/* ========================================== */
+/* CARD DE REGISTRO (GLASS)                   */
+/* ========================================== */
+
+.register-card {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    border-radius: 24px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 12px 45px rgba(0,0,0,0.25);
+}
+
+.register-title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.7rem;
+}
+
+.register-link {
+    color: #aef7da;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+/* ========================================== */
+/* INPUTS MODERNOS                            */
+/* ========================================== */
+
+.input-modern {
+    border-radius: 14px !important;
+    padding: 11px 13px;
+    border: 1px solid #e5ecea;
+    transition: 0.3s;
+}
+
+.input-modern:focus {
+    border-color: #00a478;
+    box-shadow: 0 0 0 0.15rem rgba(0, 164, 120, 0.35);
+}
+
+/* ========================================== */
+/* BOTÓN MODERNO                              */
+/* ========================================== */
+
+.btn-custom-modern {
+    background-color: #00a478;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.btn-custom-modern:hover {
+    background-color: #008e65;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(0,164,120,0.35);
+}
+
+/* Fade Up Animation */
+@keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(25px);}
+    to   {opacity: 1; transform: translateY(0);}
+}
+
+
 /* PHP Email Form Messages
 ------------------------------*/
 .php-email-form .error-message {

@@ -16,72 +16,128 @@
     <body>
        <?php MostrarMenu();?>
         
-            <!-- Header-->
-            <header class="py-5 inicio-vitra">
-                <div class="container px-5 ">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 col-xxl-6">
-                            <div class="header-content">
-                                <h1 class="fw-bolder mb-3">Bienvenido a Óptica Grisol</h1>
-                                <p class="lead fw-normal mb-4">En Óptica Grisol combinamos tecnología, salud visual y estilo para brindarte la mejor experiencia.</p>
-                              </div>
-                            </div>
-                        </div>
+<header class="hero-home">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content text-center">
+        <h1 class="hero-title fw-bold">Bienvenido a Óptica Grisol</h1>
+        <p class="hero-subtitle">
+            En Óptica Grisol combinamos tecnología, salud visual y estilo para brindarte la mejor experiencia.
+        </p>
+
+        
+        <a href="/OptiGestion/View/RegistrarPaciente.php" class="btn-cta-agendar mt-3">
+            Agendar Cita
+        </a>
+    </div>
+
+</header>
+            
+            <section class="py-5">
+    <div class="container px-4">
+        <h2 class="text-center fw-bold mb-5">Mejor forma de cuidar tu vista</h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="beneficio-card shadow-sm p-4 text-center rounded-4">
+                    <div class="icono-beneficio mx-auto mb-3">
+                        <i class="bi bi-eye-fill"></i>
                     </div>
-             </header>
-            <!-- Features section-->
-            <section class="bg-white-gray" id="features">
-                <div class="container px-5 pt-3">
-                    <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0 pt-6"><h2 class="fw-bolder mb-0">Mejor forma de cuidar tu vista</h2></div>
-                        <div class="col-lg-8">
-                            <div class="row gx-5 row-cols-1 row-cols-md-2">
-                                <div class="col mb-5 h-100">
-                                    <div class="feature bg-blue-dark bg-gradient text-white rounded-3 mb-3"><i class="bi bi-eye-fill"></i></div>
-                                    <h2 class="h5">Servicios innovadores</h2>
-                                    <p class="mb-0">En Óptica Grisol, nos comprometemos a ofrecerte soluciones personalizadas para tu salud visual, utilizando tecnología avanzada y lentes de última generación.</p>
-                                </div>
-                                <div class="col mb-5 h-100">
-                                    <div class="feature bg-blue-dark bg-gradient text-white rounded-3 mb-3"><i class="bi bi-geo-alt"></i></div>
-                                    <h2 class="h5">Visítanos para un diagnóstico personalizado</h2>
-                                    <p class="mb-0">Nuestros profesionales te brindan un examen ocular detallado para detectar cualquier problema de visión y ofrecerte la mejor opción de lentes..</p>
-                                </div>
-                                <div class="col mb-5 mb-md-0 h-100">
-                                    <div class="feature bg-blue-dark bg-gradient text-white rounded-3 mb-3"><i class="bi bi-eyeglasses"></i></div>
-                                    <h2 class="h5">Lentes de alta calidad</h2>
-                                    <p class="mb-0">Trabajamos con las mejores marcas de lentes para garantizar una visión clara y cómoda, adaptada a tus necesidades específicas.</p>
-                                </div>
-                                <div class="col h-100">
-                                    <div class="feature bg-blue-dark bg-gradient text-white rounded-3 mb-3"><i class="bi bi-eye"></i></div>
-                                    <h2 class="h5">Conoce nuestras opciones de lentes de contacto</h2>
-                                    <p class="mb-0">Descubre nuestra variedad de lentes de contacto que se adaptan perfectamente a tu estilo de vida, con opciones que brindan comodidad durante todo el día.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <h5 class="fw-bold">Servicios innovadores</h5>
+                    <p class="text-muted small">
+                        Soluciones personalizadas y tecnología avanzada para tu salud visual.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="beneficio-card shadow-sm p-4 text-center rounded-4">
+                    <div class="icono-beneficio mx-auto mb-3">
+                        <i class="bi bi-geo-alt"></i>
                     </div>
+                    <h5 class="fw-bold">Diagnóstico profesional</h5>
+                    <p class="text-muted small">
+                        Exámenes oculares completos y asesoría experta.
+                    </p>
                 </div>
-            </section>
-          
-                    <!-- Call to action-->
-                    <aside class="bg-blue-dark bg-gradient rounded-3 p-4 p-sm-5 ">
-                        <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
-                            <div class="mb-4 mb-xl-0">
-                                <div class="fs-3 fw-bold text-white">Noticias de promociones</div>
-                                <div class="text-white">Registre su correo para recibir las promociones disponibles</div>
-                            </div>
-                            <div class="ms-xl-4">
-                                <div class="input-group mb-2">
-                                    <input class="form-control" type="text" placeholder="Correo Electronico" aria-label="Email address..." aria-describedby="button-newsletter" />
-                                    <button class="btn btn-custom" id="button-newsletter" type="button">Registrarse</button>
-                                </div>
-                                <div class="small text-white">Nos preocupamos por suprivacidad, sus datos no serán compartidos.</div>
-                            </div>
-                        </div>
-                    </aside>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="beneficio-card shadow-sm p-4 text-center rounded-4">
+                    <div class="icono-beneficio mx-auto mb-3">
+                        <i class="bi bi-eyeglasses"></i>
+                    </div>
+                    <h5 class="fw-bold">Lentes de alta calidad</h5>
+                    <p class="text-muted small">
+                        Trabajamos con marcas premium para visión clara y comodidad total.
+                    </p>
                 </div>
-            </section>
-        </main>
-        <?php MostrarFooter(); ?>
-    <?php IncluirScripts(); ?>
-    </body>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="beneficio-card shadow-sm p-4 text-center rounded-4">
+                    <div class="icono-beneficio mx-auto mb-3">
+                        <i class="bi bi-eye"></i>
+                    </div>
+                    <h5 class="fw-bold">Lentes de contacto</h5>
+                    <p class="text-muted small">
+                        Opciones cómodas y seguras para tu estilo de vida.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+<div class="carousel-glass">
+
+    <div id="carouselAuto" 
+         class="carousel slide carousel-fade carousel-small" 
+         data-bs-ride="carousel" 
+         data-bs-interval="3000">
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <img src="/OptiGestion/assets/img/carrusel1.jpg" class="d-block w-100 img-carrusel-small">
+            </div>
+
+            <div class="carousel-item">
+                <img src="/OptiGestion/assets/img/prueba2.jpg" class="d-block w-100 img-carrusel-small">
+            </div>
+
+            <div class="carousel-item">
+                <img src="/OptiGestion/assets/img/ejemplo.jpg" class="d-block w-100 img-carrusel-small">
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</section>
+
+<!-- NEWSLETTER 
+<aside class="bg-blue-dark bg-gradient rounded-3 p-4 p-sm-5 my-5">
+    <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+        <div class="mb-4 mb-xl-0">
+            <div class="fs-3 fw-bold text-white">Noticias de promociones</div>
+            <div class="text-white">Registre su correo para recibir promociones</div>
+        </div>
+        <div class="ms-xl-4">
+            <div class="input-group mb-2">
+                <input class="form-control" type="text" placeholder="Correo Electrónico" />
+                <button class="btn btn-custom" type="button">Registrarse</button>
+            </div>
+            <div class="small text-white">Nos preocupamos por su privacidad.</div>
+        </div>
+    </div>
+</aside>
+-->
+<?php MostrarFooter(); ?>
+<?php IncluirScripts(); ?>
+
+</body>
 </html>
