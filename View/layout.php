@@ -58,7 +58,8 @@ function MostrarMenu() {
                 <li><a class="dropdown-item" href="/OptiGestion/view/inventario.php">Inventario</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/facturacion.php">Facturación</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/historialExpedientes.php">Historial de Expedientes</a></li>
-            </ul>
+               <li><a class="dropdown-item" href="/OptiGestion/view/editarcita.php">Manipular Citas</a></li>
+                </ul>
         </li>';
     }
 
@@ -70,7 +71,7 @@ function MostrarMenu() {
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPerfil">
                 <li><a class="dropdown-item" href="/OptiGestion/view/editarPerfil.php">Editar Perfil</a></li>
-                <li><a class="dropdown-item" href="/OptiGestion/view/editarcita.php">Mis Citas</a></li>
+                
                 <li><a class="dropdown-item" href="/OptiGestion/logout.php">Cerrar Sesión</a></li>
             </ul>
         </li>';
@@ -143,7 +144,7 @@ function IncluirCSS() {
     
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/glightbox/css/glightbox.min.css">
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=5.5">
+    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=5.8">
     <link rel="icon" type="image/x-icon" href="/OptiGestion/assets/favicon.ico">
     ';
 }
