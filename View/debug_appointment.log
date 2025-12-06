@@ -1,0 +1,33 @@
+🎯 appointmentForm.php INICIADO
+🔍 Incluyendo archivos...
+📁 baseDatos.php: EXISTE
+📁 vendor/autoload.php: EXISTE
+📁 GoogleCalendarModel.php: EXISTE
+📁 UsuarioModel.php: EXISTE
+✅ Archivos incluidos correctamente
+📊 Obteniendo datos para vista...
+✅ Datos obtenidos - Doctores: 2
+🏁 appointmentForm.php FINALIZADO SIN ERRORES
+🎯 appointmentForm.php INICIADO
+🔍 Incluyendo archivos...
+📁 baseDatos.php: EXISTE
+📁 vendor/autoload.php: EXISTE
+📁 GoogleCalendarModel.php: EXISTE
+📁 UsuarioModel.php: EXISTE
+✅ Archivos incluidos correctamente
+📊 Obteniendo datos para vista...
+✅ Datos obtenidos - Doctores: 2
+🏁 appointmentForm.php FINALIZADO SIN ERRORES
+🎯 appointmentForm.php INICIADO
+🔍 Incluyendo archivos...
+📁 baseDatos.php: EXISTE
+📁 vendor/autoload.php: EXISTE
+📁 GoogleCalendarModel.php: EXISTE
+📁 UsuarioModel.php: EXISTE
+✅ Archivos incluidos correctamente
+📊 Obteniendo datos para vista...
+✅ Datos obtenidos - Doctores: 2
+🏁 appointmentForm.php FINALIZADO SIN ERRORES
+🎯 appointmentForm.php INICIADO
+💥 ERROR FATAL: baseDatos.php no encontrado en: C:\xampp\htdocs\OptiGestion\View/../../Model/baseDatos.php
+🎯 appointmentForm.php INICIADO
