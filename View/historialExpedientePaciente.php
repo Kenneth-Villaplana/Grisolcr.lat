@@ -49,12 +49,41 @@ if (empty($historial))
                                 class="btn btn-sm btn-info">
                                 <i class="bi bi-eye"></i> Ver Expediente
                             </a>
+                            <!-- imprimir -->
+                            <button class="btn btn-sm btn-info" onclick="cargarReceta(<?= $fila['IdExpediente'] ?>)">
+                                <i class="bi bi-printer"></i> Imprimir
+                            </button>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </main>
+    <div class="modal fade" id="modalImprimir" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Receta del Paciente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="contenedorReceta"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/receta.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

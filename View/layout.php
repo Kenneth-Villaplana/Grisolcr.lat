@@ -33,6 +33,7 @@ function MostrarMenu() {
                 <li><a class="dropdown-item" href="/OptiGestion/view/appointmentForm.php">Agendar Cita</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/editarcita.php">Mis Citas</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/historialMedico.php">Historial Médico</a></li>
+                <li><a class="dropdown-item" href="/OptiGestion/view/misRecetas.php">Mi Receta</a></li>
             </ul>
         </li>';
     } else if ($rol === 'Empleado') {

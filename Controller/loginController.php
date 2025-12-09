@@ -4,11 +4,11 @@ include_once __DIR__ . '/../Model/loginModel.php';
 //include_once __DIR__ . '/../Model/usuarioModel.php';
 
 
-if(session_status() == PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if(isset($_GET["cerrarSesion"])) {
+if (isset($_GET["cerrarSesion"])) {
     $_SESSION = array();
     session_destroy();
     header('Location: /OptiGestion/View/iniciarSesion.php');
@@ -17,7 +17,7 @@ if(isset($_GET["cerrarSesion"])) {
 
 
 // Registro de paciente
-if(isset($_POST["btnRegistrarPaciente"])) {
+if (isset($_POST["btnRegistrarPaciente"])) {
 
     $cedula = $_POST["Cedula"];
     $nombre = $_POST["Nombre"];
@@ -28,9 +28,9 @@ if(isset($_POST["btnRegistrarPaciente"])) {
     $confirmarContrasenna = $_POST["ConfirmarContrasenna"];
     $telefono = $_POST["Telefono"];
     $direccion = $_POST["Direccion"];
-    $fechaNacimiento = $_POST["FechaNacimiento"];  
+    $fechaNacimiento = $_POST["FechaNacimiento"];
 
-    if($contrasenna != $confirmarContrasenna) {
+    if ($contrasenna != $confirmarContrasenna) {
 
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
 
@@ -50,8 +50,8 @@ if(isset($_POST["btnRegistrarPaciente"])) {
             $fechaNacimiento
         );
 
-        
-        if($resultadoReg['resultado'] == 1) {
+
+        if ($resultadoReg['resultado'] == 1) {
 
             $_SESSION["txtMensaje"] = "Paciente registrado con éxito";
             $_SESSION["registroExitoso"] = true;
@@ -62,16 +62,14 @@ if(isset($_POST["btnRegistrarPaciente"])) {
                 exit;
             }
 
-        } 
-        
-        else {
+        } else {
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Error en el registro.";
         }
     }
 }
 
 // Registro de empleado
-if(isset($_POST["btnRegistrarPersonal"])) {
+if (isset($_POST["btnRegistrarPersonal"])) {
     $cedula = $_POST["Cedula"];
     $nombre = $_POST["Nombre"];
     $apellido = $_POST["Apellido"];
@@ -81,17 +79,17 @@ if(isset($_POST["btnRegistrarPersonal"])) {
     $confirmarContrasenna = $_POST["ConfirmarContrasenna"];
     $telefono = $_POST["Telefono"];
     $direccion = $_POST["Direccion"];
-    $rolId = $_POST["RolId"]; 
-    $fechaNacimiento = $_POST["FechaNacimiento"]; 
- 
-    if($contrasenna != $confirmarContrasenna) {
+    $rolId = $_POST["RolId"];
+    $fechaNacimiento = $_POST["FechaNacimiento"];
+
+    if ($contrasenna != $confirmarContrasenna) {
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
     } else {
-         $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
+        $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
-        $resultadoReg = RegistrarPersonalModel( $cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $hash, $telefono, $direccion, $rolId,$fechaNacimiento);
-       
-         if($resultadoReg['resultado'] == 1) {
+        $resultadoReg = RegistrarPersonalModel($cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $hash, $telefono, $direccion, $rolId, $fechaNacimiento);
+
+        if ($resultadoReg['resultado'] == 1) {
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'];
             $_SESSION["registroExitoso"] = true;
         } else {
@@ -102,15 +100,15 @@ if(isset($_POST["btnRegistrarPersonal"])) {
 
 
 // para el inicio de sesión
-if(isset($_POST["btnIniciarSesion"])) {
+if (isset($_POST["btnIniciarSesion"])) {
     $correo = $_POST["CorreoElectronico"] ?? '';
     $contrasenna = $_POST["Contrasenna"] ?? '';
 
-    if(empty($correo) || empty($contrasenna)) {
+    if (empty($correo) || empty($contrasenna)) {
         $_SESSION["txtMensaje"] = "Debe ingresar correo y contraseña.";
     } else {
         $usuario = IniciarSesionModel($correo);
-        if($usuario && password_verify($contrasenna, $usuario["Contrasenna"])) {
+        if ($usuario && password_verify($contrasenna, $usuario["Contrasenna"])) {
             $_SESSION["UsuarioID"] = $usuario["IdUsuario"];
             $_SESSION["Cedula"] = $usuario["Cedula"];
             $_SESSION["Nombre"] = $usuario["Nombre"];
@@ -121,6 +119,10 @@ if(isset($_POST["btnIniciarSesion"])) {
             $_SESSION["Direccion"] = $usuario["Direccion"];
             $_SESSION["RolID"] = $usuario["RolUsuario"];
             $_SESSION['EmpleadoRol'] = $usuario['RolEmpleado'] ?? null;
+
+            if (!empty($usuario["PacienteId"])) {
+                $_SESSION["PacienteId"] = $usuario["PacienteId"];
+            }
 
             header('Location: /OptiGestion/index.php');
             exit();
