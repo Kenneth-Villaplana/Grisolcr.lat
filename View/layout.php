@@ -32,7 +32,7 @@ function MostrarMenu() {
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownCitas">
                 <li><a class="dropdown-item" href="/OptiGestion/view/appointmentForm.php">Agendar Cita</a></li>
                 <li><a class="dropdown-item" href="/OptiGestion/view/editarcita.php">Mis Citas</a></li>
-                <li><a class="dropdown-item" href="/OptiGestion/view/historialMedico.php">Historial Médico</a></li>
+                <li><a class="dropdown-item" href="/OptiGestion/view/misRecetas.php">Historial Médico</a></li>
             </ul>
         </li>';
     } else if ($rol === 'Empleado') {
@@ -144,7 +144,7 @@ function IncluirCSS() {
     
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/glightbox/css/glightbox.min.css">
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=5.8">
+    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=8.9">
     <link rel="icon" type="image/x-icon" href="/OptiGestion/assets/favicon.ico">
     ';
 }
@@ -157,6 +157,7 @@ function IncluirScripts() {
     <script src="/OptiGestion/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="/OptiGestion/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="/OptiGestion/assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/OptiGestion/assets/js/registro.js"></script>
     <script src="/OptiGestion/assets/js/scripts.js"></script>

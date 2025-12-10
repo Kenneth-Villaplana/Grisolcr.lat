@@ -21,7 +21,7 @@ include_once __DIR__ . '/../Controller/loginController.php';
     <div class="container">
 
         <div class="mb-3 text-end mt-3">
-            <a href="personal.php" class="btn btn-outline-secondary btn-back-custom">
+            <a href="personal.php" class="btn  btn-back-custom">
                 ← Volver a personal
             </a>
         </div>

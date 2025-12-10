@@ -16,111 +16,106 @@
 
 <?php MostrarMenu(); ?>
 
-<main class="editar-section">
+<main class="editar-section py-5">
     <div class="container">
 
-        <div class="d-flex justify-content-end mt-3 mb-3">
-            <a href="personal.php" class="btn btn-outline-secondary btn-back-custom">
+      
+        <div class="d-flex justify-content-end mb-4" data-aos="fade-down">
+            <a href="personal.php" class="btn btn-back-custom">
                 <i class="bi bi-arrow-left"></i> Volver a personal
             </a>
         </div>
 
-        
+        <!-- Mensajes -->
         <?php if(isset($_SESSION["txtMensaje"])): ?>
-            <div class="alert alert-<?= isset($_SESSION["CambioExitoso"]) ? 'success' : 'danger' ?> text-center mb-4">
+            <div class="alert alert-<?= isset($_SESSION["CambioExitoso"]) ? 'success' : 'danger' ?> text-center modern-alert mb-4">
                 <?= $_SESSION["txtMensaje"]; ?>
             </div>
             <?php unset($_SESSION["txtMensaje"], $_SESSION["CambioExitoso"]); ?>
         <?php endif; ?>
 
-       
-        <div class="profile-card shadow-sm" data-aos="fade-up">
-            <div class="profile-header">
-                <h4 class="mb-0">Datos Personal</h4>
-                <small class="text-muted">Actualice los datos del colaborador</small>
+    
+        <div class="edit-card shadow-modern" data-aos="fade-up">
+
+            <div class="edit-header text-center">
+                <h4>Editar Personal</h4>
+                <p>Actualice los datos del colaborador</p>
             </div>
 
-            <form method="POST" name="contactForm" class="row g-3 p-4">
-                <input type="hidden" name="IdUsuario" id="IdUsuario" 
-                    value="<?= $usuario['IdUsuario']; ?>" required>
+           <form method="POST" class="p-4 row g-4">
 
-                
-                <div class="col-md-6">
-                    <h6 class="profile-section-title">Datos Personales</h6>
+    <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario']; ?>">
 
-                    <label class="form-label">Cédula</label>
-                    <input type="text" name="Cedula" class="form-control mb-3"
-                           value="<?= $usuario['Cedula']; ?>" required>
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="col-md-6">
+        <h6 class="section-title">Datos Personales</h6>
 
-                    <label class="form-label">Nombre</label>
-                    <input type="text" name="Nombre" class="form-control mb-3"
-                           value="<?= $usuario['Nombre']; ?>" required>
+        <label class="form-label mt-2">Cédula</label>
+        <input type="text" name="Cedula" class="form-control input-modern"
+            value="<?= $usuario['Cedula']; ?>" required readonly>
 
-                    <label class="form-label">Primer Apellido</label>
-                    <input type="text" name="Apellido" class="form-control mb-3"
-                           value="<?= $usuario['Apellido']; ?>" required>
+        <label class="form-label mt-2">Nombre</label>
+        <input type="text" name="Nombre" class="form-control input-modern"
+            value="<?= $usuario['Nombre']; ?>" required readonly>
 
-                    <label class="form-label">Segundo Apellido</label>
-                    <input type="text" name="ApellidoDos" class="form-control mb-3"
-                           value="<?= $usuario['ApellidoDos']; ?>" required>
+        <label class="form-label mt-2">Primer Apellido</label>
+        <input type="text" name="Apellido" class="form-control input-modern"
+            value="<?= $usuario['Apellido']; ?>" required readonly>
 
-                    <label class="form-label">Seleccione el rol</label>
-                    <select name="RolId" class="form-select mb-3" required>
-                        <option value="">Seleccionar</option>
-                        <option value="1" <?= $usuario['Id_rol']==1?'selected':'' ?>>Administrador/a</option>
-                        <option value="2" <?= $usuario['Id_rol']==2?'selected':'' ?>>Asistente</option>
-                        <option value="3" <?= $usuario['Id_rol']==3?'selected':'' ?>>Doctor/a</option>
-                        <option value="4" <?= $usuario['Id_rol']==4?'selected':'' ?>>Cajero/a</option>
-                    </select>
+        <label class="form-label mt-2">Segundo Apellido</label>
+        <input type="text" name="ApellidoDos" class="form-control input-modern"
+            value="<?= $usuario['ApellidoDos']; ?>" required readonly>
 
-                </div>
+        <label class="form-label mt-2">Rol</label>
+        <select name="RolId" class="form-select input-modern" required>
+            <option value="">Seleccionar</option>
+            <option value="1" <?= $usuario['Id_rol']==1?'selected':'' ?>>Administrador/a</option>
+            <option value="2" <?= $usuario['Id_rol']==2?'selected':'' ?>>Asistente</option>
+            <option value="3" <?= $usuario['Id_rol']==3?'selected':'' ?>>Doctor/a</option>
+            <option value="4" <?= $usuario['Id_rol']==4?'selected':'' ?>>Cajero/a</option>
+        </select>
 
-                
-                <div class="col-md-6">
-                    <h6 class="profile-section-title">Contacto</h6>
+        
+        <label class="form-label mt-2">Fecha de nacimiento</label>
+        <input type="date" name="FechaNacimiento" class="form-control input-modern"
+            value="<?= $usuario['FechaNacimiento']; ?>">
+    </div>
 
-                    <label class="form-label">Correo Electrónico</label>
-                    <input type="email" name="CorreoElectronico" class="form-control mb-3"
-                           value="<?= $usuario['CorreoElectronico']; ?>" required>
+    <!-- COLUMNA DERECHA -->
+    <div class="col-md-6">
+        <h6 class="section-title">Contacto</h6>
 
-                    <label class="form-label">Teléfono</label>
-                    <input type="text" name="Telefono" class="form-control mb-3"
-                           value="<?= $usuario['Telefono']; ?>" required>
+        <label class="form-label mt-2">Correo Electrónico</label>
+        <input type="email" name="CorreoElectronico" class="form-control input-modern"
+            value="<?= $usuario['CorreoElectronico']; ?>" required>
 
-                    <label class="form-label">Dirección</label>
-                    <input type="text" name="Direccion" class="form-control mb-3"
-                           value="<?= $usuario['Direccion']; ?>" required>
+        <label class="form-label mt-2">Teléfono</label>
+        <input type="text" name="Telefono" class="form-control input-modern"
+            value="<?= $usuario['Telefono']; ?>" required>
 
-                    <label class="form-label">Fecha de nacimiento</label>
-                    <input type="date" name="FechaNacimiento" class="form-control mb-3"
-                           value="<?= $usuario['FechaNacimiento']; ?>">
-                </div>
+        <label class="form-label mt-2">Dirección</label>
+        <input type="text" name="Direccion" class="form-control input-modern"
+            value="<?= $usuario['Direccion']; ?>" required>
+    </div>
 
-                <
-               <div class="col-12 text-center mt-2">
-    <input type="hidden" name="Estado" value="1">
-
-    <div class="form-check d-inline-block">
-        <input class="form-check-input" 
-               type="checkbox" 
-               name="Estado" 
-               id="Estado" 
-               value="0"
-               <?= $usuario['Estado']==0 ? 'checked' : '' ?>>
-        <label class="form-check-label" for="Estado">
-            Inactivar
-        </label>
-             </div>
-
+   
+    <div class="col-12 text-center">
+        <div class="switch-container mt-2">
+            <input class="form-check-input form-switch" 
+                type="checkbox" name="Estado" id="Estado" value="0"
+                <?= $usuario['Estado']==0 ? 'checked' : '' ?>>
+            <label class="form-check-label ms-2" for="Estado">Inactivar</label>
         </div>
-              
-                <div class="col-12 text-center mt-3">
-                    <button type="submit" class="btn btn-custom px-4"
-                            id="btnEditarPersonal" name="btnEditarPersonal">
-                        <i class="bi bi-pencil-square"></i> Guardar Cambios
-                    </button>
-                </div>
-            </form>
+    </div>
+
+  
+    <div class="col-12 text-center">
+        <button type="submit" class="btn-save-modern" name="btnEditarPersonal">
+            <i class="bi bi-pencil-square"></i> Guardar Cambios
+        </button>
+    </div>
+
+</form>
         </div>
     </div>
 </main>

@@ -1,82 +1,73 @@
 <?php 
-if(session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-    include_once 'layout.php';
-  include_once __DIR__ . '/../Controller/loginController.php';
+if(session_status() == PHP_SESSION_NONE) { session_start(); }
+include_once 'layout.php';
+include_once __DIR__ . '/../Controller/loginController.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
- <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Óptica Grisol</title>
-   <?php IncluirCSS();?>
-</head>
-    <body>
-       <?php MostrarMenu();?>
-    
-   <section class="login-page-bg">
-    <div class="container">
-        
-        <div class="row justify-content-center">
 
-            <?php
-                if(isset($_SESSION["txtMensaje"])){
-                    echo '<div class="alert alert-danger w-50 text-center">' . $_SESSION["txtMensaje"] . '</div>';
-                    unset($_SESSION["txtMensaje"]);
-                }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Óptica Grisol - Login</title>
+    <?php IncluirCSS(); ?>
+</head>
+
+<body>
+    <?php MostrarMenu(); ?>
+
+<section class="login-modern-wrapper">
+    <div class="login-modern-container">
+
+    <?php
+            if(isset($_SESSION["txtMensaje"])){
+                echo '<div class="alert alert-danger text-center py-2">' . $_SESSION["txtMensaje"] . '</div>';
+                unset($_SESSION["txtMensaje"]);
+            }
             ?>
 
-            <div class="col-lg-5 col-md-7">
-                <div class="login-card glass-card">
+        <!-- Panel Izquierdo -->
+        <div class="login-modern-left">
+            <h1 class="login-title text-center">Bienvenido</h1>
+            <p class="login-subtitle text-center">Acceda a su cuenta para continuar.</p>
 
-                    <h3 class="text-center mb-3 login-title">Iniciar Sesión</h3>
-                    <p class="text-center mb-4 login-subtitle">
-                        Accede a tu cuenta para continuar
-                    </p>
+            <form method="POST">
 
-                    <form method="POST">
-
-                        <div class="mb-4">
-                            <label class="form-label fw-semibold">Correo Electrónico</label>
-                            <input type="email" class="form-control login-input" name="CorreoElectronico" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Contraseña</label>
-                            <input type="password" class="form-control login-input" name="Contrasenna" required>
-                        </div>
-
-                        <div class="text-center mb-3">
-                            <a href="recuperarCuenta.php" class="login-link fw-semibold">Recuperar acceso</a>
-                        </div>
-
-                        <div class="text-center mb-3">
-                            <p class="small">
-                                ¿No tienes cuenta?
-                                <a href="RegistrarPaciente.php" class="login-link fw-semibold">Registrarse</a>
-                            </p>
-                        </div>
-
-                        <button type="submit" class="btn-login w-100" name="btnIniciarSesion">
-                            Iniciar sesión
-                        </button>
-
-                    </form>
-
+                <div class="input-group-modern mb-3">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" class="modern-input" name="CorreoElectronico" placeholder="Correo Electrónico" required>
                 </div>
-            </div>
 
+                <div class="input-group-modern mb-2">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" class="modern-input" name="Contrasenna" placeholder="Contraseña" required>
+                </div>
+
+                <div class="text-center mb-3">
+                    <a href="recuperarCuenta.php" class="forgot-modern-link">¿Olvidó su contraseña?</a>
+                </div>
+
+                <button type="submit" class="btn-modern-login" name="btnIniciarSesion">
+                    Iniciar Sesión
+                </button>
+
+                <div class="text-center mt-4">
+                    <span class="register-text">¿No tienes cuenta?</span>
+                    <a href="RegistrarPaciente.php" class="register-modern-link">Registrarse</a>
+                </div>
+
+            </form>
         </div>
+
+        <!-- Panel Derecho -->
+        <div class="login-modern-right">
+            <div class="login-right-overlay"></div>
+        </div>
+
     </div>
 </section>
 
-    <?php MostrarFooter(); ?>
-    <?php IncluirScripts(); ?>
+<?php MostrarFooter(); ?>
+<?php IncluirScripts(); ?>
 </body>
-
 </html>

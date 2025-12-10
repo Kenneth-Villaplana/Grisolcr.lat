@@ -3,21 +3,18 @@ include_once('../Model/baseDatos.php');
 
 class HistorialModel {
 
-    //  historial completo de expedientes de un paciente
+    // Obtener historial usando el procedimiento almacenado
     public static function obtenerHistorialPorPaciente($pacienteId) {
         $conn = AbrirBD();
 
-        $sql = "SELECT IdExpediente, PacienteId, Ocupacion, MotivoConsulta, UsaLentes, UltimoControl, FechaRegistro, Estado 
-                FROM Expediente 
-                WHERE PacienteId = ? 
-                ORDER BY FechaRegistro DESC";
-
-        $stmt = $conn->prepare($sql);
+        // Llamada al procedimiento almacenado
+        $stmt = $conn->prepare("CALL ObtenerHistorialPorPaciente(?)");
         $stmt->bind_param("i", $pacienteId);
         $stmt->execute();
-        $result = $stmt->get_result();
 
+        $result = $stmt->get_result();
         $expedientes = [];
+
         while ($row = $result->fetch_assoc()) {
             $expedientes[] = $row;
         }

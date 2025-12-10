@@ -1,49 +1,83 @@
- <?php
- include('layout.php'); 
+<?php 
+include('layout.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
- <head>
+<html lang="es">
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Óptica Grisol</title>
-   <?php IncluirCSS();?>
+    <title>Recuperar Contraseña</title>
+    <?php IncluirCSS(); ?>
 </head>
-    <body>
-       <?php MostrarMenu();?>
+<body>
 
- <section class="full-height-section">
-        <div class="container" data-aos="fade-up">
-       <div class="row justify-content-center">
-        <div class="col-md-6">  
-                   
-                   <h4 class="text-center mb-3 ">Recuperar Contraseña</h4>
-                   <p class="text-center mb-4">Por favor ingrese el correo electronico que tiene asignado su cuenta.</p>
-                   <form method="POST" id="contactForm" name="contactForm" class="contactForm">
-                     <div class="mb-3 text-center">           
-                            <label for="Email" class="form-label">Correo Electrónico</label>
-                                                <input type="email" class="form-control" name="Email" id="Email"
-                                                    placeholder="" required>
-                                            </div>
-                                            <div class="text-center mb-3"> 
-                                                <p>¿No tienes cuenta? <a class="link-azul" href="RegistrarPaciente.php">Registrarse</a></p>
-                                                </div>
-                                            
+<?php MostrarMenu(); ?>
 
-                                            <div class="text-center">
-                                                <button type="submit" class="btn btn-custom" id="btnRecuperar" name="btnRecuperar">Recuperar</button>
-                                            </div>
-                                       
-                                    </form>
-                                </div>
-                             </div>
+<section class="editar-section d-flex align-items-center justify-content-center py-5 my-5">
+    <div class="container">
+
+        
+        <div class="row justify-content-center mb-3">
+            <div class="col-12 col-lg-8">
+                <?php
+                if (isset($_SESSION["txtMensaje"])) {
+                    echo '<div class="alert alert-info text-center">' .
+                            $_SESSION["txtMensaje"] .
+                        '</div>';
+                    unset($_SESSION["txtMensaje"]);
+                }
+                ?>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="register-card-compact">
+                <div class="register-card-header text-center">
+                    <h4 class="mb-0">Recuperar Contraseña</h4>
+                    <small class="text-muted">Ingrese el correo asociado a su cuenta</small>
+                </div>
+
+                
+                <div class="p-4">
+                    <form method="POST" action="../Controller/recuperarController.php" class="row g-4">
+
+                        <div class="col-12">
+                            <label class="form-label">Correo Electrónico</label>
+                            <input 
+                                type="email" 
+                                class="form-control" 
+                                name="Email"
+                                id="CorreoRecuperacion" 
+                                required
+                                placeholder="ejemplo@correo.com"
+                            >
                         </div>
-                    </div>
-            </section>
-    <?php MostrarFooter(); ?>
-    <?php IncluirScripts(); ?>
-</body>
 
+                        <div class="col-12 text-center mt-2">
+                            <p class="small mb-0">
+                                ¿No tienes cuenta?
+                                <a class="link-azul" href="RegistrarPaciente.php">Registrarse</a>
+                            </p>
+                        </div>
+
+                        <div class="col-12 text-center mt-1">
+                            <button 
+                                type="submit" 
+                                class="btn btn-primary btn-register-custom"
+                                name="btnRecuperar">
+                                Recuperar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<?php MostrarFooter(); ?>
+<?php IncluirScripts(); ?>
+
+</body>
 </html>

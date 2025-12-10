@@ -70,9 +70,10 @@ function agregarFilaFactura(f) {
 
     const botonAbono =
         pendiente > 0
-            ? `<button class="btn btn-outline-secondary btn-sm" onclick="abrirAbono(${f.FacturaId}, ${pendiente})">
-                Abonar
-            </button>`
+            ? `<button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1"
+                    onclick="abrirAbono(${f.FacturaId}, ${pendiente})">
+                <i class=""></i> Abonar
+           </button>`
             : "";
 
     const fila = `

@@ -94,5 +94,31 @@ function IniciarSesionModel($correo)
     } catch(Exception $ex) {
         return null;
     }
+    function CambiarContrasennaModel($token, $nuevaContrasenna)
+{
+    try {
+        $enlace = AbrirBD();
+
+        $sentencia = $enlace->prepare("CALL CambiarContrasenna(?, ?)");
+        if (!$sentencia) {
+            throw new Exception($enlace->error);
+        }
+
+        $hash = password_hash($nuevaContrasenna, PASSWORD_DEFAULT);
+
+        $sentencia->bind_param("ss", $token, $hash);
+        $sentencia->execute();
+
+        $resultado = $sentencia->get_result()->fetch_assoc();
+
+        $sentencia->close();
+        CerrarBD($enlace);
+
+        return $resultado;
+
+    } catch (Exception $ex) {
+        return ['resultado' => 0, 'mensaje' => 'Error en el servidor: '.$ex->getMessage()];
+    }
+}
 }
 ?>

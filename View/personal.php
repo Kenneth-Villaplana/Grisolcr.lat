@@ -14,91 +14,172 @@ $listaPersonal = ObtenerPersonal($cedulaFiltro);
     <?php IncluirCSS(); ?>
 </head>
 
-<body style="min-height:100vh; margin:0; padding:0;">
-<div style="min-height:100vh; display:flex; flex-direction:column;">
-
-    
+<body class="body-fullscreen">
+<div class="layout-vertical">
     <?php MostrarMenu(); ?>
 
-    <main style="flex:1 0 auto;" class="container-fluid py-4 px-4">
-        <div class="mx-auto" style="max-width: 1500px;">
-            <div class="text-center mb-4">
-                <h2 class="fw-bold">Gestión de Personal</h2>
+   
+  <header class="hero-img-header personal-hero">
+    <div class="container position-relative">
+        <h1 class="catalogo-title">Gestión de Personal</h1>
+    </div>
+</header>
+
+
+
+    <main class="staff-main-wrapper">
+        <div class="container-xl px-4">
+
+
+         <div class="inventario-filters shadow-sm rounded-4 mb-5">
+
+    <form method="GET" class="row g-3 align-items-end">
+
+        <!-- CÉDULA -->
+        <div class="col-md-6">
+            <label class="form-label fw-semibold inventario-label">
+                Filtrar por cédula:
+            </label>
+
+            <input type="text"
+                   name="cedula"
+                   class="form-control inventario-input"
+                   placeholder="Ingrese número de cédula"
+                   value="<?php echo htmlspecialchars($cedulaFiltro ?? '', ENT_QUOTES); ?>">
+        </div>
+
+        <!-- BOTONES -->
+        <div class="col-md-3 text-md-end">
+            <label class="form-label d-none d-md-block">&nbsp;</label>
+
+            <div class="d-flex justify-content-md-end justify-content-center gap-2">
+
+                <button type="submit" class="btn-inv-primary">
+                    <i class="bi bi-search me-2"></i> Buscar
+                </button>
+
+               <a href="personal.php" class="btn-inv-ghost btn-inv-ghost-link">
+                <i class="me-1"></i> Limpiar
+            </a>
+
             </div>
+        </div>
 
-            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center mb-4 gap-3">
+        <!-- AGREGAR PERSONAL -->
+        <div class="col-md-3 text-md-end">
+            <label class="form-label d-none d-md-block">&nbsp;</label>
 
-                <form method="GET" 
-                      class="d-flex flex-column flex-sm-row align-items-center gap-2 w-100" 
-                      style="max-width: 900px;">
+            <a href="registrarPersonal.php"
+               class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2 w-100 justify-content-center">
+                <i class="bi bi-plus-circle"></i>
+                Agregar personal
+            </a>
+        </div>
 
-                    <input type="text" 
-                        name="cedula" 
-                        class="form-control"
-                        placeholder="Filtrar por cédula">
+    </form>
+</div>
 
-                    <button type="submit" class="btn btn-outline-primary px-4">Buscar</button>
-                    <a href="personal.php" class="btn btn-outline-secondary px-4">Limpiar</a>
-                </form>
+          
+            <div class="staff-card-wrapper mt-4 mb-5">
+                <div class="staff-card-inner">
 
-                <a href="registrarPersonal.php" 
-                class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 px-4 py-2">
-                    <i class="bi bi-plus-circle"></i> Agregar personal
-                </a>
-            </div>
+                    <div class="staff-card-header d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h5 class="mb-0 fw-semibold">Listado de personal</h5>
+                            <span class="staff-chip-count">
+                                <i class="bi bi-people-fill me-1"></i>
+                                <?php echo count($listaPersonal); ?> personas registradas
+                            </span>
+                        </div>
+                    </div>
 
-           <div class="card shadow-sm border-0 p-4 h-100 card-expandible">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Cédula</th>
-                                <th>Nombre</th>
-                                <th>Correo Electrónico</th>
-                                <th>Teléfono</th>
-                                <th>Dirección</th>
-                                <th>Rol</th>
-                                <th>Estado</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+                    <div class="table-responsive staff-table-responsive">
+                        <table class="table staff-table align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Cédula</th>
+                                    <th>Nombre</th>
+                                    <th>Correo electrónico</th>
+                                    <th>Teléfono</th>
+                                    <th>Dirección</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                     <th class="text-center">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
+                            <tbody>
                             <?php foreach ($listaPersonal as $personal): ?>
                                 <tr>
-                                    <td><?= $personal['Cedula']; ?></td>
-                                    <td><?= $personal['Nombre'] . ' ' . $personal['Apellido'] . ' ' . $personal['ApellidoDos']; ?></td>
-                                    <td><?= $personal['CorreoElectronico']; ?></td>
-                                    <td><?= $personal['Telefono']; ?></td>
-                                    <td><?= $personal['Direccion']; ?></td>
-                                    <td>
-                                        <?php
-                                        switch ($personal['Id_rol']) {
-                                            case 1: echo "Administrador/a"; break;
-                                            case 2: echo "Asistente"; break;
-                                            case 3: echo "Doctor/a"; break;
-                                            case 4: echo "Cajero/a"; break;
-                                            default: echo "Desconocido";
-                                        }
-                                        ?>
+                                    <td class="staff-col-id">
+                                        <span class="staff-id-pill">
+                                            <?php echo $personal['Cedula']; ?>
+                                        </span>
                                     </td>
 
-                                    <td>
-                                        <span class="badge <?= $personal['Estado'] == 1 ? 'bg-success' : 'bg-danger'; ?>">
-                                            <?= $personal['Estado'] == 1 ? 'Activo' : 'Inactivo'; ?>
+                                    <td class="staff-col-name">
+                                        <div class="d-flex align-items-center">
+                                            
+                                              
+                                            </div>
+                                            <div>
+                                                <div class="staff-name">
+                                                    <?php echo $personal['Nombre'] . ' ' . $personal['Apellido'] . ' ' . $personal['ApellidoDos']; ?>
+                                              
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="staff-col-email">
+                                        <span class="staff-text-muted">
+                                            <?php echo $personal['CorreoElectronico']; ?>
+                                        </span>
+                                    </td>
+
+                                    <td><?php echo $personal['Telefono']; ?></td>
+
+                                    <td class="staff-col-address">
+                                        <span class="staff-text-muted">
+                                            <?php echo $personal['Direccion']; ?>
                                         </span>
                                     </td>
 
                                     <td>
-                                        <a href="editarpersonal.php?id=<?= $personal['IdUsuario']; ?>" 
-                                        class="btn btn-outline-primary btn-sm rounded-pill">
+                                        <?php
+                                        switch ($personal['Id_rol']) {
+                                            case 1: $rolTexto = "Administrador/a"; break;
+                                            case 2: $rolTexto = "Asistente"; break;
+                                            case 3: $rolTexto = "Doctor/a"; break;
+                                            case 4: $rolTexto = "Cajero/a"; break;
+                                            default: $rolTexto = "Desconocido";
+                                        }
+                                        ?>
+                                        <span class="staff-role-pill">
+                                            <i class="bi bi-person-badge me-1"></i><?php echo $rolTexto; ?>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <?php $esActivo = ($personal['Estado'] == 1); ?>
+                                        <span class="staff-status-pill <?php echo $esActivo ? 'status-activo' : 'status-inactivo'; ?>">
+                                            <span class="status-dot"></span>
+                                            <?php echo $esActivo ? 'Activo' : 'Inactivo'; ?>
+                                        </span>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a href="editarpersonal.php?id=<?php echo $personal['IdUsuario']; ?>"
+                                           class="btn btn-sm staff-btn-edit">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

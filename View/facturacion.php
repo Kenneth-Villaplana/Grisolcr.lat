@@ -18,57 +18,68 @@ $controller = new PuntoVentaController();
 <body>
 <?php MostrarMenu(); ?>
 
-
 <main class="container py-5 facturacion-wrapper">
-  <div class="facturacion-card shadow-lg bg-white rounded-4 p-4 p-md-5">
+
+  <!-- CARD PRINCIPAL -->
+  <div class="facturacion-card shadow-lg rounded-4 p-4 p-md-5">
+
+    <!-- TÍTULO + NUEVA FACTURA -->
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
       <div>
-        <h2 class="mb-1 titulo-facturacion fw-bold">Facturación</h2>
+        <h2 class="mb-1 titulo-facturacion">Facturación</h2>
         <span class="text-muted small">Consulta, gestiona y administra las facturas.</span>
       </div>
 
       <div>
-        <a href="puntoVenta.php" class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
-    <i class="bi bi-plus-circle"></i>
-    <span>Nueva Factura</span>
-</a>
+        <a href="puntoVenta.php"
+           class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2 justify-content-center">
+                <i class="bi bi-plus-circle"></i>
+                <span>Nueva factura</span>
+        </a>
       </div>
     </div>
 
-  
-   <div class="filter-card shadow-sm rounded-3 p-3 p-md-4 mb-4">
-  <form class="filter-form" style="max-width: 700px; margin: 0 auto;">
-      <div class="filtros-grid mb-3">
+    <!-- FILTROS -->
+    <div class="filter-card shadow-sm rounded-4 mb-4">
+      <form class="filter-form" style="max-width: 780px; margin: 0 auto;">
 
+        <div class="filtros-grid mb-3">
+          <!-- Filtro número -->
           <div class="form-group">
-              <label class="form-label mb-1">Número de factura</label>
-              <input type="text" id="codigoInput" class="form-control filtro-input text-center">
+            <label class="form-label mb-1">Número de factura</label>
+            <input type="text"
+                   id="codigoInput"
+                   class="form-control filtro-input text-center"
+                   placeholder="Ej. 1023">
           </div>
 
+          <!-- Filtro cédula -->
           <div class="form-group">
-              <label class="form-label mb-1">Cédula del cliente</label>
-              <input type="text" id="cedulaInput" class="form-control filtro-input text-center">
+            <label class="form-label mb-1">Cédula del cliente</label>
+            <input type="text"
+                   id="cedulaInput"
+                   class="form-control filtro-input text-center"
+                   placeholder="Ej. 01XXXXXX">
           </div>
+        </div>
 
-      </div>
-
-      <div class="d-flex justify-content-center gap-3">
-         <button type="button" id="btnBuscar" class="btn btn-outline-primary px-4">
-    <i class="bi bi-search"></i> Buscar
-</button>
-          <button type="button" id="btnLimpiar" class="btn btn-outline-secondary px-4">
-              Limpiar
+        <div class="d-flex justify-content-center gap-3">
+          <button type="button" id="btnBuscar" class="btn-inv-primary d-inline-flex align-items-center gap-2">
+            <i class="bi bi-search"></i><span>Buscar</span>
           </button>
-      </div>
 
-  </form>
+          <button type="button" id="btnLimpiar" class="btn-inv-ghost">
+            Limpiar
+          </button>
+        </div>
 
-</div>
+      </form>
+    </div>
 
-   
-    <div class="table-responsive tabla-facturas-wrapper">
-      <table class="table table-hover align-middle mb-0 tabla-facturas" id="facturasTable">
-        <thead class="table-light">
+    <!-- TABLA CON SCROLL -->
+    <div class="table-responsive tabla-facturas-wrapper rounded-4">
+      <table class="table align-middle tabla-facturas" id="facturasTable">
+        <thead>
           <tr>
             <th>Número</th>
             <th>Fecha</th>
@@ -90,12 +101,13 @@ $controller = new PuntoVentaController();
             </td>
           </tr>
         </tbody>
-
       </table>
     </div>
 
-  </div>
+  </div> 
 </main>
+
+
 
 
 <div class="modal fade" id="modalFactura" tabindex="-1" aria-labelledby="modalFacturaLabel" aria-hidden="true">
@@ -114,13 +126,12 @@ $controller = new PuntoVentaController();
               <div class="text-center py-5 text-muted">Seleccione una factura para visualizar.</div>
           </div>
 
-          <div class="modal-footer border-0 pt-0">
-              <button class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cerrar</button>
-          </div>
+      
 
       </div>
   </div>
 </div>
+
 
 
 <div class="modal fade" id="modalAbono" tabindex="-1">
@@ -147,15 +158,16 @@ $controller = new PuntoVentaController();
           </div>
 
           <div class="modal-footer border-0 pt-0">
-              <button class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cancelar</button>
-              <button class="btn btn-success rounded-pill" onclick="guardarAbono()">
-                  <i class="bi bi-cash-coin"></i> Confirmar abono
+             
+              <button class="btn btn-save-modern rounded-pill d-flex align-items-center gap-2" onclick="guardarAbono()">
+                  <i class=" "></i> Confirmar
               </button>
           </div>
 
       </div>
   </div>
 </div>
+
 
 
 <div class="modal fade" id="modalReciboAbono" tabindex="-1">
@@ -170,7 +182,7 @@ $controller = new PuntoVentaController();
           <div class="modal-body" id="reciboAbonoBody"></div>
 
           <div class="modal-footer border-0 pt-0">
-              <button class="btn btn-primary rounded-pill" onclick="imprimirReciboAbono()">
+              <button class="btn btn-primary rounded-pill d-flex align-items-center gap-2" onclick="imprimirReciboAbono()">
                   <i class="bi bi-printer"></i> Imprimir
               </button>
           </div>
@@ -179,9 +191,9 @@ $controller = new PuntoVentaController();
   </div>
 </div>
 
+
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
-
 <script src="../assets/js/facturacion.js?v=<?= time(); ?>"></script>
 
 </body>

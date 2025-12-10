@@ -62,182 +62,260 @@ function campo($label, $valor)
 <body>
     <?php MostrarMenu(); ?>
 
-    <main class="container my-5">
-
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold text-primary mb-0">🩺 Expediente Clínico</h2>
-            <a href="javascript:history.back();" class="btn btn-outline-secondary">⬅ Volver</a>
+ <main class="container my-5">
+<div class="d-flex justify-content-end mb-4" data-aos="fade-down">
+            <a href="javascript:history.back();" class="btn btn-back-custom">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
         </div>
 
-        <div class="accordion" id="accordionVer">
+    <!-- Encabezado principal -->
+    <div class="expediente-header d-flex justify-content-between align-items-center flex-wrap">
+        <h2 class="m-0 d-flex align-items-center gap-2">
+            <i data-lucide="notebook"></i>
+            Expediente Clínico
+        </h2>
 
-            <!--DATOS GENERALES-->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dg">
-                        🧩 Datos Generales
-                    </button>
-                </h2>
-                <div id="dg" class="accordion-collapse collapse show">
-                    <div class="accordion-body">
-                        <div class="row g-3">
-                            <?= campo("Ocupación", $exp['expediente']['Ocupacion'] ?? '') ?>
-                            <?= campo("Motivo de Consulta", $exp['expediente']['MotivoConsulta'] ?? '') ?>
-                            <?= campo("Usa Lentes", $exp['expediente']['UsaLentes'] ?? '') ?>
-                            <?= campo("Último Control", $exp['expediente']['UltimoControl'] ?? '') ?>
-                        </div>
 
-                        <label class="fw-bold mt-3">Antecedentes</label>
-                        <textarea class="form-control" rows="2"
-                            disabled><?= $exp['antecedente']['Descripcion'] ?? '' ?></textarea>
+    </div>
+
+    <div class="accordion" id="accordionVer">
+
+
+        <!-- ===========================
+             DATOS GENERALES
+        ============================ -->
+        <div class="accordion-item expediente-section-card">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dg">
+                    <i data-lucide="file-text" class="me-2"></i>
+                    Datos Generales
+                </button>
+            </h2>
+
+            <div id="dg" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+
+                    <h5 class="section-title d-flex align-items-center gap-2">
+                        <i data-lucide="info"></i>
+                        Información General
+                    </h5>
+
+                    <div class="row g-3">
+                        <?= campo("Ocupación", $exp['expediente']['Ocupacion'] ?? '') ?>
+                        <?= campo("Motivo de Consulta", $exp['expediente']['MotivoConsulta'] ?? '') ?>
+                        <?= campo("Usa Lentes", $exp['expediente']['UsaLentes'] ?? '') ?>
+                        <?= campo("Último Control", $exp['expediente']['UltimoControl'] ?? '') ?>
                     </div>
+
+                    <h5 class="section-title mt-4 d-flex align-items-center gap-2">
+                        <i data-lucide="book-open"></i>
+                        Antecedentes
+                    </h5>
+
+                    <textarea class="form-control input-modern" rows="2" disabled>
+                        <?= $exp['antecedente']['Descripcion'] ?? '' ?>
+                    </textarea>
+
                 </div>
             </div>
-
-            <!--LENSOMETRÍA-->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#lens">
-                        👁️ Lensometría
-                    </button>
-                </h2>
-                <div id="lens" class="accordion-collapse collapse">
-                    <div class="accordion-body">
-
-                        <table class="table table-bordered text-center">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Ojo</th>
-                                    <th>Esfera</th>
-                                    <th>Cilindro</th>
-                                    <th>Eje</th>
-                                    <th>Agudeza Visual</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($exp['lensometria'] as $row): ?>
-                                    <tr>
-                                        <td><?= $row['Ojo'] ?></td>
-                                        <td><?= $row['Esfera'] ?></td>
-                                        <td><?= $row['Cilindro'] ?></td>
-                                        <td><?= $row['Eje'] ?></td>
-                                        <td><?= $row['AgudezaVisual'] ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-
-            <!--EXAMEN EXTERNO-->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#exext">
-                        🔬 Examen Externo
-                    </button>
-                </h2>
-                <div id="exext" class="accordion-collapse collapse">
-                    <div class="accordion-body">
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['examenExterno']['orbitaCejas'] ?? '' ?></textarea>
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['examenExterno']['parpadosPestanas'] ?? '' ?></textarea>
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['examenExterno']['sistemaLagrimal'] ?? '' ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!--OFTALMOSCOPÍA-->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#oft">
-                        🩻 Oftalmoscopía
-                    </button>
-                </h2>
-                <div id="oft" class="accordion-collapse collapse">
-                    <div class="accordion-body">
-                        <label class="fw-bold">Ojo Derecho</label>
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['oftalmoscopia']['DescripcionOD'] ?? '' ?></textarea>
-
-                        <label class="fw-bold">Ojo Izquierdo</label>
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['oftalmoscopia']['DescripcionOI'] ?? '' ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-           
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#final">
-                        👓 Fórmula Final y Datos Adicionales
-                    </button>
-                </h2>
-                <div id="final" class="accordion-collapse collapse">
-                    <div class="accordion-body">
-
-                        <table class="table table-bordered text-center mb-4">
-                            <thead>
-                                <tr>
-                                    <th>Ojo</th>
-                                    <th>Esfera</th>
-                                    <th>Cilindro</th>
-                                    <th>Eje</th>
-                                    <th>DP</th>
-                                    <th>Prisma</th>
-                                    <th>Base</th>
-                                    <th>AV</th>
-                                    <th>AO</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <?php foreach ($exp['examenFinal'] as $row): ?>
-                                    <tr>
-                                        <td><?= $row['Ojo'] ?></td>
-                                        <td><?= $row['Esfera'] ?></td>
-                                        <td><?= $row['Cilindro'] ?></td>
-                                        <td><?= $row['Eje'] ?></td>
-                                        <td><?= $row['DP'] ?></td>
-                                        <td><?= $row['Prisma'] ?></td>
-                                        <td><?= $row['Base'] ?></td>
-                                        <td><?= $row['AV'] ?></td>
-                                        <td><?= $row['AO'] ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-
-                        <label class="fw-bold">Observaciones</label>
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['datosAdicionales']['Observaciones'] ?? '' ?></textarea>
-
-                        <label class="fw-bold">Altura</label>
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['datosAdicionales']['Altura'] ?? '' ?></textarea>
-
-                        <label class="fw-bold">Diagnóstico</label>
-                        <textarea disabled
-                            class="form-control mb-2"><?= $exp['datosAdicionales']['Diagnostico'] ?? '' ?></textarea>
-
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </main>
+
+
+        <!-- ===========================
+             LENSOMETRÍA
+        ============================ -->
+        <div class="accordion-item expediente-section-card">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lens">
+                    <i data-lucide="focus" class="me-2"></i>
+                    Lensometría
+                </button>
+            </h2>
+
+            <div id="lens" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <h5 class="section-title d-flex align-items-center gap-2">
+                        <i data-lucide="scan"></i>
+                        Medición
+                    </h5>
+
+                    <table class="table table-bordered text-center table-header-blue shadow-sm">
+                        <thead>
+                            <tr>
+                                <th>Ojo</th>
+                                <th>Esfera</th>
+                                <th>Cilindro</th>
+                                <th>Eje</th>
+                                <th>Agudeza Visual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($exp['lensometria'] as $row): ?>
+                            <tr>
+                                <td><?= $row['Ojo'] ?></td>
+                                <td><?= $row['Esfera'] ?></td>
+                                <td><?= $row['Cilindro'] ?></td>
+                                <td><?= $row['Eje'] ?></td>
+                                <td><?= $row['AgudezaVisual'] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ===========================
+             EXAMEN EXTERNO
+        ============================ -->
+        <div class="accordion-item expediente-section-card">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#exext">
+                    <i data-lucide="scan-eye" class="me-2"></i>
+                    Examen Externo
+                </button>
+            </h2>
+
+            <div id="exext" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <h5 class="section-title d-flex align-items-center gap-2">
+                        <i data-lucide="list"></i>
+                        Observaciones
+                    </h5>
+
+                    <textarea disabled class="form-control input-modern mb-2">
+                        <?= $exp['examenExterno']['orbitaCejas'] ?? '' ?>
+                    </textarea>
+
+                    <textarea disabled class="form-control input-modern mb-2">
+                        <?= $exp['examenExterno']['parpadosPestanas'] ?? '' ?>
+                    </textarea>
+
+                    <textarea disabled class="form-control input-modern mb-2">
+                        <?= $exp['examenExterno']['sistemaLagrimal'] ?? '' ?>
+                    </textarea>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ===========================
+             OFTALMOSCOPÍA
+        ============================ -->
+        <div class="accordion-item expediente-section-card">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#oft">
+                    <i data-lucide="eye" class="me-2"></i>
+                    Oftalmoscopía
+                </button>
+            </h2>
+
+            <div id="oft" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <h5 class="section-title">Ojo Derecho (OD)</h5>
+                    <textarea disabled class="form-control input-modern mb-3">
+                        <?= $exp['oftalmoscopia']['DescripcionOD'] ?? '' ?>
+                    </textarea>
+
+                    <h5 class="section-title">Ojo Izquierdo (OI)</h5>
+                    <textarea disabled class="form-control input-modern">
+                        <?= $exp['oftalmoscopia']['DescripcionOI'] ?? '' ?>
+                    </textarea>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ===========================
+             FÓRMULA FINAL
+        ============================ -->
+        <div class="accordion-item expediente-section-card">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#final">
+                    <i data-lucide="ruler" class="me-2"></i>
+                    Fórmula Final y Datos Adicionales
+                </button>
+            </h2>
+
+            <div id="final" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <h5 class="section-title d-flex align-items-center gap-2">
+                        <i data-lucide="pipette"></i>
+                        Fórmula Final
+                    </h5>
+
+                    <table class="table table-bordered text-center table-header-blue shadow-sm mb-4">
+                        <thead>
+                            <tr>
+                                <th>Ojo</th>
+                                <th>Esfera</th>
+                                <th>Cilindro</th>
+                                <th>Eje</th>
+                                <th>DP</th>
+                                <th>Prisma</th>
+                                <th>Base</th>
+                                <th>AV</th>
+                                <th>AO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($exp['examenFinal'] as $row): ?>
+                            <tr>
+                                <td><?= $row['Ojo'] ?></td>
+                                <td><?= $row['Esfera'] ?></td>
+                                <td><?= $row['Cilindro'] ?></td>
+                                <td><?= $row['Eje'] ?></td>
+                                <td><?= $row['DP'] ?></td>
+                                <td><?= $row['Prisma'] ?></td>
+                                <td><?= $row['Base'] ?></td>
+                                <td><?= $row['AV'] ?></td>
+                                <td><?= $row['AO'] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+
+                    <h5 class="section-title d-flex align-items-center gap-2">
+                        <i data-lucide="file-output"></i>
+                        Datos Adicionales
+                    </h5>
+
+                    <textarea disabled class="form-control input-modern mb-2">
+                        <?= $exp['datosAdicionales']['Observaciones'] ?? '' ?>
+                    </textarea>
+
+                    <textarea disabled class="form-control input-modern mb-2">
+                        <?= $exp['datosAdicionales']['Altura'] ?? '' ?>
+                    </textarea>
+
+                    <textarea disabled class="form-control input-modern">
+                        <?= $exp['datosAdicionales']['Diagnostico'] ?? '' ?>
+                    </textarea>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
 
     <?php MostrarFooter(); ?>
     <?php IncluirScripts(); ?>
-
+<script> lucide.createIcons(); </script>
 </body>
 
 </html>

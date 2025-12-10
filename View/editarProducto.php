@@ -20,8 +20,8 @@ include_once __DIR__ . '/../Controller/productoController.php';
     <div class="container">
 
         <div class="d-flex justify-content-end mt-3 mb-3">
-            <a href="inventario.php" class="btn btn-outline-secondary btn-back-custom">
-                ← Volver al inventario
+            <a href="inventario.php" class="btn btn-back-custom">
+                <i class="bi bi-arrow-left"></i> Volver al inventario
             </a>
         </div>
 
@@ -74,7 +74,7 @@ include_once __DIR__ . '/../Controller/productoController.php';
 
                     <div class="col-12 text-center mt-2">
                         <button type="button"
-                            class="btn btn-outline-primary btn-save-custom px-5"
+                            class="btn-save-modern px-5"
                             id="btnAbrirModalEditar">
                             Guardar Cambios
                         </button>
