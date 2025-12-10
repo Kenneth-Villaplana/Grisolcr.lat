@@ -133,4 +133,33 @@ if (isset($_POST["btnIniciarSesion"])) {
 
 }
 
+//cambiar contrasenna
+if (isset($_POST["btnCambiarContrasenna"])) {
+
+    $token = $_POST["Token"] ?? '';
+    $nueva = $_POST["NuevaContrasenna"] ?? '';
+    $confirmar = $_POST["ConfirmarContrasenna"] ?? '';
+
+    if ($nueva != $confirmar) {
+        $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
+        header("Location: /OptiGestion/View/restablecerContrasenna.php?token=".$token);
+        exit;
+    }
+
+    include_once __DIR__ . '/../Model/loginModel.php';
+
+    $resultado = CambiarContrasennaModel($token, $nueva);
+
+    if ($resultado['resultado'] == 1) {
+        $_SESSION["txtMensaje"] = "Contraseña actualizada correctamente. Ahora puede iniciar sesión.";
+        header("Location: /OptiGestion/View/iniciarSesion.php");
+        exit;
+    } else {
+        $_SESSION["txtMensaje"] = $resultado['mensaje'];
+        header("Location: /OptiGestion/View/restablecerContrasenna.php?token=".$token);
+        exit;
+    }
+}
+
+
 ?>
