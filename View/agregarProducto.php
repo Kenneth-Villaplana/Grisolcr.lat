@@ -7,7 +7,7 @@ include('layout.php');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agregar Producto</title>
+  <title>Óptica Grisol - Agregar Producto</title>
   <?php IncluirCSS(); ?>
 </head>
 
@@ -15,61 +15,68 @@ include('layout.php');
 
 <?php MostrarMenu(); ?>
 
+
 <main class="container py-5">
 
- 
-    <div class="d-flex justify-content-end mt-3 mb-3">
-      <a href="inventario.php" class="btn btn-outline-secondary btn-back-custom">
-        ← Volver al inventario
-      </a>
+    <!-- Botón volver -->
+    <div class="d-flex justify-content-end mb-4">
+        <a href="inventario.php" class="btn btn-back-custom">
+                <i class="bi bi-arrow-left"></i>Volver al inventario
+        </a>
     </div>
 
-   
-    <div class="register-container product-register-card">
+    <!-- Card principal -->
+    <div class="product-register-card shadow-lg">
 
-      <div class="product-register-header">
-          <h4 class="mb-0">Agregar Producto</h4>
-          <small class="text-muted">Complete los datos del nuevo producto</small>
-      </div>
+        <!-- Header -->
+        <div class="product-register-header text-center">
+            <h4 class="mb-1 fw-bold">Agregar Producto</h4>
+            <small>Complete los datos del nuevo producto</small>
+        </div>
 
-      <div class="p-4">
+        <!-- Form -->
+        <div class="px-4 py-4">
 
-        <form action="../Controller/productoController.php" method="POST">
+            <form action="../Controller/productoController.php" method="POST">
 
-          <div class="mb-3">
-            <label for="Nombre" class="form-label">Nombre</label>
-            <input type="text" name="Nombre" id="Nombre" class="form-control" required>
-          </div>
+                <!-- Nombre -->
+                <div class="mb-4">
+                    <label for="Nombre" class="form-label fw-semibold">Nombre del producto</label>
+                    <input type="text" name="Nombre" id="Nombre" class="form-control input-modern" required>
+                </div>
 
-          <div class="mb-3">
-            <label for="Descripcion" class="form-label">Descripción</label>
-            <textarea name="Descripcion" id="Descripcion" class="form-control" rows="4" required></textarea>
-          </div>
+                <!-- Descripción -->
+                <div class="mb-4">
+                    <label for="Descripcion" class="form-label fw-semibold">Descripción</label>
+                    <textarea name="Descripcion" id="Descripcion" class="form-control input-modern" rows="3" required></textarea>
+                </div>
 
-          <div class="mb-3">
-            <label for="Precio" class="form-label">Precio</label>
-            <input type="number" name="Precio" id="Precio" class="form-control" required>
-          </div>
+                <!-- Fila precio y cantidad -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="Precio" class="form-label fw-semibold">Precio</label>
+                        <input type="number" name="Precio" id="Precio" class="form-control input-modern" required>
+                    </div>
 
-          <div class="mb-3">
-            <label for="Cantidad" class="form-label">Cantidad</label>
-            <input type="number" name="Cantidad" id="Cantidad" class="form-control" required>
-          </div>
+                    <div class="col-md-6">
+                        <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
+                        <input type="number" name="Cantidad" id="Cantidad" class="form-control input-modern" required>
+                    </div>
+                </div>
 
-          <div class="text-center mt-3">
-            <button type="submit" class="btn btn-outline-primary btn-save-custom px-5" name="btnAgregarProducto">
-              Guardar Producto
-            </button>
-          </div>
+                <!-- Botón -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn-save-modern px-5 py-2" name="btnAgregarProducto">
+                        Guardar Producto
+                    </button>
+                </div>
 
-        </form>
+            </form>
 
-      </div>
-
+        </div>
     </div>
 
 </main>
-
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
 

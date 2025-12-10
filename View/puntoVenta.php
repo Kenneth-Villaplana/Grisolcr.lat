@@ -21,11 +21,7 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 
 <main class="container py-5 pv-wrapper ">
 
-<div class="d-flex justify-content-end mb-3">
-    <button id="toggleDarkMode" class="btn btn-outline-secondary align-items-center gap-2 px-4 py-2">
-        Modo oscuro
-    </button>
-</div>
+
 
     
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 pv-header">
@@ -82,6 +78,7 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                     <div class="mb-3" id="telefonoClienteDiv" style="display:none;">
                         <label for="telefonoCliente" class="form-label fw-semibold">Teléfono</label>
                         <input type="text" id="telefonoCliente" class="form-control" placeholder="Ingrese teléfono">
+                    <small id="telefonoError" class="text-danger d-none">El número debe tener al menos 8 dígitos.</small>
                     </div>
 
                  
@@ -97,13 +94,6 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                         <input id="empresaIdentificacion" class="form-control" placeholder="Identificación jurídica">
                     </div>
 
-                    
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" id="facturaElectronica">
-                        <label class="form-check-label fw-semibold" for="facturaElectronica">
-                            Solicitar factura electrónica
-                        </label>
-                    </div>
 
                     <hr>
 
@@ -141,6 +131,7 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                     
                     <div class="d-flex align-items-center gap-2 mt-3">
                         <label class="form-label fw-semibold mb-0">Método de pago</label>
+                        
                         <select id="metodoPago" class="form-select pv-metodo-select">
                             <option value="efectivo">Efectivo</option>
                             <option value="tarjeta">Tarjeta</option>
@@ -149,7 +140,7 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                         </select>
                     </div>
 
-                    
+                    <div id="pv-error-msg" class="pv-error-msg" style="display:none;"></div>
                     <div class="d-grid mt-3">
                         <button class="btn btn-outline-success w-100" id="btnFinalizar">
                             <i class="bi bi-check2-circle"></i> Finalizar venta
@@ -177,6 +168,28 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
         </div>
     </div>
 
+<div class="modal fade" id="modalAlertaPOS" tabindex="-1">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content shadow rounded-4">
+
+      <div class="modal-header border-0 pb-0 text-center">
+        <h6 class="modal-title fw-bold text-center">Aviso</h6>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body text-center" id="modalAlertaPOSBody"
+           style="font-size: 0.95rem; padding-top: 0;">
+      </div>
+
+      <div class="modal-footer border-0 pt-0 d-flex justify-content-center">
+        <button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">
+          Aceptar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 </main>
 
 <?php MostrarFooter(); ?>

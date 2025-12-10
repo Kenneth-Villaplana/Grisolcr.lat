@@ -21,20 +21,5 @@ function CerrarBD($enlace)
     mysqli_close($enlace);
 }
 
-function getAllDoctors() {
-    $conn = AbrirBD();
-    $query = "SELECT id_empleado, nombre, apellido, correo_electronico, telefono 
-              FROM empleado 
-              WHERE activo = 1 AND es_doctor = 1";
-    $result = mysqli_query($conn, $query);
-    
-    $doctores = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $doctores[] = $row;
-    }
-    
-    CerrarBD($conn);
-    return $doctores;
-}
 
 ?>

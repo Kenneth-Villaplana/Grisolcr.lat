@@ -66,6 +66,24 @@ document.addEventListener("DOMContentLoaded", () => {
             if (ced.length === 0) empresaNombreInput.value = "";
         });
     }
+    
+    
+const telefonoInput = document.getElementById("telefonoCliente");
+const telefonoError = document.getElementById("telefonoError");
+
+if (telefonoInput) {
+    telefonoInput.addEventListener("input", () => {
+        const valor = telefonoInput.value.replace(/\D/g, ""); // solo números
+        telefonoInput.value = valor;
+
+        if (valor.length > 0 && valor.length < 8) {
+            telefonoError.classList.remove("d-none");
+        } else {
+            telefonoError.classList.add("d-none");
+        }
+    });
+}
+
       
 });
 
@@ -178,36 +196,40 @@ function renderCarrito() {
         const totalProducto = item.precio * item.cantidad * (1 - item.descuento / 100);
 
         const div = document.createElement("div");
-        div.className = "cart-item-modern shadow-sm p-3 rounded";
+        div.className = "";
 
         div.innerHTML = `
-            <div class="d-flex justify-content-between">
-                <strong class="fs-6 text-dark">${item.nombre}</strong>
-                <button class="btn btn-sm text-danger" onclick="eliminarProducto(${item.id})">
-                    <i class="bi bi-trash"></i>
-                </button>
-            </div>
+            <div class="cart-item-modern shadow-sm p-3 rounded">
 
-            <div class="d-flex justify-content-between align-items-center mt-2">
+    <div class="item-header">
+        <strong class="item-title">${item.nombre}</strong>
 
-                <div class="input-group input-group-sm" style="width:100px;">
-                    <span class="input-group-text">Cant.</span>
-                    <input type="number" min="1" value="${item.cantidad}" 
-                        class="form-control" onchange="actualizarCantidad(${item.id}, this.value)">
-                </div>
+        <button class="delete-btn" onclick="eliminarProducto(${item.id})">
+            <i class="bi bi-trash"></i>
+        </button>
+    </div>
 
-               <div class="input-group input-group-sm input-descuento">
-    <span class="input-group-text">Desc.</span>
-    <input type="number" min="0" max="100" value="${item.descuento}" 
-           class="form-control"
-           onchange="actualizarDescuento(${item.id}, this.value)">
-    <span class="input-group-text">%</span>
-</div>
+    <div class="item-controls">
+        
+        <div class="input-group input-group-sm" style="width:100px;">
+            <span class="input-group-text">Cant.</span>
+            <input type="number" min="1" value="${item.cantidad}" 
+                   class="form-control"
+                   onchange="actualizarCantidad(${item.id}, this.value)">
+        </div>
 
-                <div class="fw-bold text-end">₡${totalProducto.toFixed(2)}</div>
+        <div class="input-group input-group-sm input-descuento">
+            <span class="input-group-text">Desc.</span>
+            <input type="number" min="0" max="100" value="${item.descuento}" 
+                   class="form-control"
+                   onchange="actualizarDescuento(${item.id}, this.value)">
+            <span class="input-group-text">%</span>
+        </div>
 
-            </div>
-        `;
+        <div class="item-total">₡${totalProducto.toFixed(2)}</div>
+    </div>
+
+</div>`;
 
         container.appendChild(div);
     });
@@ -360,11 +382,10 @@ async function consultarEmpresaPorCedula(ced) {
 
 
 
-
 async function finalizarVenta() {
 
     if (cart.length === 0) {
-        alert("Debe agregar productos.");
+        mostrarAlertaPOS("Debe agregar productos.");
         return;
     }
 
@@ -376,18 +397,30 @@ async function finalizarVenta() {
     const montoAbono = parseFloat(montoAbonoInput?.value || 0);
 
     if (montoAbono < 0) {
-        alert("El abono no puede ser negativo.");
+        mostrarAlertaPOS("El abono no puede ser negativo.");
         return;
     }
 
     if (montoAbono > total) {
-        alert("El abono no puede ser mayor al total de la factura.");
+        mostrarAlertaPOS("El abono no puede ser mayor al total de la factura.");
         return;
     }
 
-    const facturarEmpresa = facturarEmpresaCheckbox.checked;
-
+    // ==========================================================
+    // 📌 VALIDACIÓN DE TELÉFONO (mínimo 8 dígitos)
+    // ==========================================================
     const telefono = document.getElementById("telefonoCliente")?.value || "";
+    const soloNumeros = telefono.replace(/\D/g, "");
+
+    if (soloNumeros.length > 0 && soloNumeros.length < 8) {
+        document.getElementById("telefonoError").classList.remove("d-none");
+        mostrarAlertaPOS("El número de teléfono debe tener mínimo 8 dígitos.");
+        return;
+    }
+    // ==========================================================
+
+
+    const facturarEmpresa = facturarEmpresaCheckbox.checked;
 
     const payload = {
         action: "generarVenta",
@@ -398,7 +431,6 @@ async function finalizarVenta() {
             : (nombreClienteSpan.dataset.nombre || nombreClienteSpan.textContent || ""),
 
         metodoPago: metodoPagoSelect.value,
-
         telefono: telefono,  
 
         facturarEmpresa: facturarEmpresa ? 1 : 0,
@@ -410,7 +442,6 @@ async function finalizarVenta() {
             : cedulaInput.value,    
     
         facturaElectronica: document.getElementById("facturaElectronica")?.checked ? 1 : 0,
-
         montoAbono: montoAbono,
 
         productos: cart.map(i => ({
@@ -446,6 +477,14 @@ async function finalizarVenta() {
     document.getElementById("telefonoClienteDiv").style.display = "none";
 }
 
+
+function mostrarAlertaPOS(mensaje) {
+    const body = document.getElementById("modalAlertaPOSBody");
+    body.textContent = mensaje;
+
+    const modal = new bootstrap.Modal(document.getElementById("modalAlertaPOS"));
+    modal.show();
+}
 
 
 function mostrarFacturaTicket(factura) {

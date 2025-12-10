@@ -37,7 +37,7 @@ function ObtenerProductos($ProductoId = null)
         $sentencia->execute();
         $resultado = $sentencia->get_result();
 
-        // DEBUG 1: Check what columns are returned from database
+    
         error_log("=== DEBUG ObtenerProductos START ===");
         
         if ($resultado->num_rows > 0) {
@@ -47,7 +47,7 @@ function ObtenerProductos($ProductoId = null)
                 $fieldNames[] = $field->name;
             }
             error_log("Database columns returned: " . implode(', ', $fieldNames));
-            $resultado->data_seek(0); // Reset pointer
+            $resultado->data_seek(0); 
         } else {
             error_log("No rows returned from database");
         }
@@ -58,12 +58,12 @@ function ObtenerProductos($ProductoId = null)
         while ($row = $resultado->fetch_assoc()) {
             $rowCount++;
             
-            // DEBUG 2: Log each row structure
+           
             error_log("--- Row {$rowCount} ---");
             error_log("Row keys: " . implode(', ', array_keys($row)));
             error_log("Row data: " . print_r($row, true));
             
-            // Check what key actually exists for cantidad
+          
             $cantidadKey = null;
             $cantidadValue = 0;
             
@@ -81,7 +81,7 @@ function ObtenerProductos($ProductoId = null)
                 error_log("Found 'CANTIDAD' key with value: {$cantidadValue}");
             } else {
                 error_log("No cantidad key found in row. Available keys: " . implode(', ', array_keys($row)));
-                // Try to find any key that might contain quantity
+                
                 foreach ($row as $key => $value) {
                     if (stripos($key, 'cant') !== false || stripos($key, 'stock') !== false || stripos($key, 'quantity') !== false) {
                         $cantidadKey = $key;
@@ -92,10 +92,10 @@ function ObtenerProductos($ProductoId = null)
                 }
             }
             
-            // Store with consistent key name
+         
             $row['Cantidad'] = $cantidadValue;
 
-            // Color según cantidad
+           
             if ($cantidadValue < 20) {
                 $colorBarra = 'bg-danger';
             } elseif ($cantidadValue <= 50) {
@@ -109,7 +109,7 @@ function ObtenerProductos($ProductoId = null)
             $row['ColorBarra'] = $colorBarra;
             $row['AnchoBarra'] = $anchoBarra;
             
-            // DEBUG 3: Log final row structure
+         
             error_log("Final row structure keys: " . implode(', ', array_keys($row)));
             
             $productos[] = $row;
@@ -121,7 +121,7 @@ function ObtenerProductos($ProductoId = null)
         $sentencia->close();
         CerrarBD($enlace);
         
-        // DEBUG 4: Check final productos array
+    
         error_log("Returning " . count($productos) . " products");
         if (!empty($productos)) {
             error_log("First product keys: " . implode(', ', array_keys($productos[0])));
