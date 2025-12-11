@@ -77,7 +77,7 @@
 
             <div class="col-lg-6 mb-4 order-first order-lg-last" data-aos="fade-left">
                 <div class="about-img-card shadow-glass">
-                    <img class="img-fluid rounded-4" src="/OptiGestion/assets/img/AboutUS3.jpg" alt="Productos">
+                    <img class="img-fluid rounded-4" src="/assets/img/AboutUS3.jpg" alt="Productos">
                 </div>
             </div>
 
