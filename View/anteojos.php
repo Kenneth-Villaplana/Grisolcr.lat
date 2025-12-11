@@ -96,7 +96,7 @@ $productos = ObtenerProductos();
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
 
-<script src="../assets/js/producto.js"></script>
+<script src="/assets/js/producto.js"></script>
 
 </body>
 </html>
