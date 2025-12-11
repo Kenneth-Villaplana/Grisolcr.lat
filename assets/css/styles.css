@@ -2261,6 +2261,453 @@ footer {
 }
 
 
+/*vista de citas*/
+
+/* ============================================
+   COLORES PRINCIPALES DEL SISTEMA
+   ============================================ */
+:root {
+    --cita-primary: #1e40af;     /* azul fuerte */
+    --cita-primary-light: #3b82f6;
+    --cita-secondary: #0ea5e9;
+    --cita-success: #10b981;
+    --cita-danger: #ef4444;
+    --cita-bg-light: #f1f5f9;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.cita-hero {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 0 0 30px 30px;
+}
+
+.cita-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+.cita-hero p {
+    opacity: .9;
+    margin-top: 8px;
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL DEL WIZARD
+   ============================================ */
+.cita-wizard-wrapper {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    margin-top: -30px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+}
+
+/* ============================================
+   PROGRESO DEL WIZARD
+   ============================================ */
+.cita-wizard-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.cita-progress-line {
+    flex: 1;
+    height: 3px;
+    background: #d1d5db;
+    margin: 0 12px;
+}
+
+.cita-progress-step {
+    text-align: center;
+}
+
+.cita-step-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 3px solid #d1d5db;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto 8px;
+    transition: .2s;
+}
+
+.cita-progress-step.active .cita-step-circle {
+    border-color: var(--cita-primary);
+    color: var(--cita-primary);
+    transform: scale(1.1);
+}
+
+.cita-progress-step.completed .cita-step-circle {
+    background: var(--cita-primary);
+    color: white;
+    border-color: var(--cita-primary);
+}
+
+/* ============================================
+   TITULOS DE SECCIÓN
+   ============================================ */
+.cita-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--cita-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ============================================
+   DOCTOR GRID
+   ============================================ */
+.cita-doctor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 20px;
+}
+
+.cita-doctor-card {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    padding: 20px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: .25s;
+    text-align: center;
+}
+
+.cita-doctor-card.selected {
+    border-color: var(--cita-primary);
+    background: #eff6ff;
+}
+
+.cita-doctor-card:hover {
+    border-color: var(--cita-secondary);
+    transform: translateY(-4px);
+}
+
+.cita-doctor-avatar {
+    width: 70px;
+    height: 70px;
+    background: var(--cita-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: white;
+}
+
+/* ============================================
+   PASOS DEL WIZARD
+   ============================================ */
+.cita-step-content {
+    display: none;
+}
+
+.cita-step-content.active {
+    display: block;
+    animation: fadeIn .35s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0px); }
+}
+
+/* ============================================
+   FECHA & HORARIOS
+   ============================================ */
+.cita-date-hour-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 25px;
+}
+
+.cita-panel-box {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.05);
+}
+
+.cita-panel-label {
+    font-weight: bold;
+    color: var(--cita-primary);
+    margin-bottom: 12px;
+    display: block;
+}
+/* Input de fecha moderno */
+.cita-date-input {
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 2px solid #dbe3f0;
+    background: #f8fbff;
+    transition: .25s ease;
+    font-size: 16px;
+}
+
+.cita-date-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .2);
+    background: white;
+}
+
+/* Ocultar icono feo de Chrome */
+.cita-date-input::-webkit-calendar-picker-indicator {
+    opacity: .7;
+    cursor: pointer;
+    filter: invert(25%) sepia(50%) saturate(300%) hue-rotate(200deg);
+}
+
+/* PANEL FECHA */
+#datePicker {
+    padding: 12px 16px;
+    font-size: 1.1rem;
+}
+
+/* HORARIOS */
+.cita-time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+    gap: 10px;
+}
+
+.time-slot {
+    padding: 12px 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    transition: .2s;
+    border: 2px solid transparent;
+}
+
+.time-slot.available {
+    background: #e0f2fe;
+    color: #0369a1;
+    cursor: pointer;
+}
+
+.time-slot.available:hover {
+    background: #bae6fd;
+}
+
+.time-slot.unavailable {
+    background: #f3f4f6;
+    color: #9ca3af;
+    opacity: .6;
+}
+
+.time-slot.selected {
+    background: var(--cita-primary);
+    color: white !important;
+}
+
+/* DISPONIBILIDAD */
+.availability-message {
+    font-size: .95rem;
+    margin-bottom: 10px;
+}
+
+.availability-message.available {
+    color: var(--cita-success);
+}
+
+.availability-message.unavailable {
+    color: var(--cita-danger);
+}
+
+.availability-message.loading {
+    color: #6b7280;
+}
+/* ============================================
+   BOTONES MODERNOS DEL SISTEMA
+============================================ */
+.btn-modern {
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    transition: .25s;
+}
+
+.btn-blue {
+    background: #1e40af;
+    color: white;
+}
+.btn-blue:hover {
+    background: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.btn-outline-blue {
+    border: 2px solid #1e40af;
+    color: #1e40af;
+}
+.btn-outline-blue:hover {
+    background: #1e40af;
+    color: white;
+}
+
+.btn-green {
+    background: #059669;
+    color: white;
+}
+.btn-green:hover {
+    background: #10b981;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
+.btn-danger:hover {
+    background: #ef4444;
+}
+/* ===========================================================
+   MODAL DE ERROR – DISEÑO FINAL E INQUEBRANTABLE
+=========================================================== */
+
+/* Asegura prioridad máxima */
+.custom-error-modal .custom-error-modal-content {
+    border-radius: 18px !important;
+    border: none !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    animation: modalPop 0.25s ease-out;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.28) !important;
+    background: #ffffff !important;
+}
+
+@keyframes modalPop {
+    from { transform: scale(.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Header rojo */
+.custom-error-modal .custom-error-header {
+    background: #e63946 !important;
+    color: #fff !important;
+    padding: 1.2rem 1.5rem !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.custom-error-modal .custom-error-header h5 {
+    font-size: 1.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.custom-error-modal .custom-close-btn {
+    filter: invert(1) !important;
+    opacity: 0.9 !important;
+}
+
+/* Body */
+.custom-error-modal .custom-error-body {
+    padding: 2rem !important;
+    text-align: center !important;
+}
+
+.custom-error-modal .custom-error-body p {
+    font-size: 1.15rem !important;
+    color: #475569 !important;
+    font-weight: 500 !important;
+}
+
+/* Footer */
+.custom-error-modal .custom-error-footer {
+    padding: 1.5rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    border-top: none !important;
+}
+
+/* Botón */
+.custom-error-modal .custom-error-btn {
+    background: #e63946 !important;
+    color: white !important;
+    border-radius: 12px !important;
+    padding: 10px 26px !important;
+    border: none !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    transition: .25s ease !important;
+}
+
+.custom-error-modal .custom-error-btn:hover {
+    background: #c9232e !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(233, 63, 63, .35) !important;
+}
+
+/* ============================================
+   BOTONES DEL WIZARD
+   ============================================ */
+.cita-btn-next,
+.cita-btn-submit {
+    background: var(--cita-primary);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.cita-btn-next:hover,
+.cita-btn-submit:hover {
+    background: var(--cita-primary-light);
+}
+
+/* ============================================
+   RESUMEN FINAL
+   ============================================ */
+.cita-summary-box {
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 14px;
+    border-left: 5px solid var(--cita-primary);
+}
+
+.cita-summary-box p {
+    font-size: 1.1rem;
+}
+.highlight-input:focus {
+    border-color: var(--cita-primary-light);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.3);
+}
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+
+    .cita-date-hour-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cita-wizard-wrapper {
+        padding: 20px;
+    }
+}
+
+/**/
+
 
 /* login*/
 .login-modern-wrapper {
