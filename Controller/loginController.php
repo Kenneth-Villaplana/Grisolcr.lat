@@ -11,7 +11,7 @@ if(session_status() == PHP_SESSION_NONE) {
 if(isset($_GET["cerrarSesion"])) {
     $_SESSION = array();
     session_destroy();
-    header('Location: /OptiGestion/View/iniciarSesion.php');
+    header('Location: /View/iniciarSesion.php');
     exit();
 }
 
@@ -58,7 +58,7 @@ if(isset($_POST["btnRegistrarPaciente"])) {
 
             //cuando viene desde pos → redirige al Punto de Venta 
             if (isset($_POST["origen"]) && $_POST["origen"] === "POS") {
-                header("Location: /OptiGestion/View/puntoVenta.php?cedula=" . urlencode($cedula));
+                header("Location: /View/puntoVenta.php?cedula=" . urlencode($cedula));
                 exit;
             }
 
@@ -122,7 +122,7 @@ if(isset($_POST["btnIniciarSesion"])) {
             $_SESSION["RolID"] = $usuario["RolUsuario"];
             $_SESSION['EmpleadoRol'] = $usuario['RolEmpleado'] ?? null;
 
-            header('Location: /OptiGestion/index.php');
+            header('Location: /index.php');
             exit();
         } else {
             $_SESSION["txtMensaje"] = "Correo electrónico o contraseña incorrectos.";
@@ -137,7 +137,7 @@ if (isset($_POST["btnCambiarContrasenna"])) {
 
     if ($nueva != $confirmar) {
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
-        header("Location: /OptiGestion/View/restablecerContrasenna.php?token=".$token);
+        header("Location: /View/restablecerContrasenna.php?token=".$token);
         exit;
     }
 
@@ -147,11 +147,11 @@ if (isset($_POST["btnCambiarContrasenna"])) {
 
     if ($resultado['resultado'] == 1) {
         $_SESSION["txtMensaje"] = "Contraseña actualizada correctamente. Ahora puede iniciar sesión.";
-        header("Location: /OptiGestion/View/iniciarSesion.php");
+        header("Location: /View/iniciarSesion.php");
         exit;
     } else {
         $_SESSION["txtMensaje"] = $resultado['mensaje'];
-        header("Location: /OptiGestion/View/restablecerContrasenna.php?token=".$token);
+        header("Location: /View/restablecerContrasenna.php?token=".$token);
         exit;
     }
 }
