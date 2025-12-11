@@ -37,7 +37,7 @@
 
             <div class="col-lg-6 mb-4" data-aos="fade-right">
                 <div class="about-img-card shadow-glass">
-                    <img class="img-fluid rounded-4" src="/OptiGestion/assets/img/AboutUS.jpg" alt="Sobre nosotros">
+                    <img class="img-fluid rounded-4" src="/assets/img/AboutUS.jpg" alt="Sobre nosotros">
                 </div>
             </div>
 

@@ -1,7 +1,7 @@
 <?php 
 include('layout.php');
 include_once __DIR__ . '/../Model/productoModel.php';
-$baseUrl = "http://{$_SERVER['HTTP_HOST']}/OptiGestion";
+$baseUrl = "http://{$_SERVER['HTTP_HOST']}/Grisolcr.lat";
 $productos = ObtenerProductos(); 
 ?>
 <!DOCTYPE html>
