@@ -39,7 +39,7 @@
             </p>
 
             <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start gap-3">
-              <a href="/OptiGestion/View/RegistrarPaciente.php" class="btn-primary-modern">
+              <a href="/View/RegistrarPaciente.php" class="btn-primary-modern">
                 Agendar cita
               </a>
               <a href="#servicios" class="btn-secondary-modern">
@@ -166,27 +166,27 @@
                     <div class="carousel-item active">
                         <div class="carousel-card">
                             <div class="glow-bg"></div>
-                            <img src="/OptiGestion/assets/img/carrusel1.jpg" class="carousel-card-img">
+                            <img src="/assets/img/carrusel1.jpg" class="carousel-card-img">
                         </div>
                     </div>
 
                     <div class="carousel-item">
                         <div class="carousel-card">
                             <div class="glow-bg"></div>
-                            <img src="/OptiGestion/assets/img/carrusel2.jpg" class="carousel-card-img">
+                            <img src="/assets/img/carrusel2.jpg" class="carousel-card-img">
                         </div>
                     </div>
 
                     <div class="carousel-item">
                         <div class="carousel-card">
                             <div class="glow-bg"></div>
-                            <img src="/OptiGestion/assets/img/carrusel3.jpg" class="carousel-card-img">
+                            <img src="/assets/img/carrusel3.jpg" class="carousel-card-img">
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="carousel-card">
                             <div class="glow-bg"></div>
-                            <img src="/OptiGestion/assets/img/carrusel4.jpg" class="carousel-card-img">
+                            <img src="/assets/img/carrusel4.jpg" class="carousel-card-img">
                         </div>
                     </div>
                 </div>
