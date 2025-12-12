@@ -1,26 +1,42 @@
 <?php
-include_once __DIR__ . '/../Model/baseDatos.php';
+include_once __DIR__ . '/baseDatos.php';
 
 class PacienteModel {
 
-    private $db;
+   public function buscarPorCedula($cedula) 
+    {
+        $conn = AbrirBD();
 
-    public function __construct() {
-        $this->db = new BaseDatos();
-    }
-
-    public function buscarPorCedula($cedula) {
-        $dbConn = $this->db->conectar();
-
-        
-        $stmt = $dbConn->prepare("CALL BuscarPacientePorCedulaUsuario(:cedula)");
-        $stmt->bindParam(':cedula', $cedula);
+        $stmt = $conn->prepare("CALL BuscarPacientePorCedulaUsuario(?)");
+        $stmt->bind_param("s", $cedula);
         $stmt->execute();
 
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt->closeCursor(); 
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
 
-        return $resultado ?: null;
+        $stmt->close();
+        CerrarBD($conn);
+
+        return $data ?: null;
+    }
+// ===========================================================
+    // NUEVO MÉTODO PARA EL AGENDAMIENTO DE CITAS
+    // ===========================================================
+    public function buscarPacienteParaCita($cedula) {
+
+        $conn = AbrirBD();
+
+        $stmt = $conn->prepare("CALL p_BuscarPacientePorCedulaUsuario(?)");
+        $stmt->bind_param("s", $cedula);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
+
+        $stmt->close();
+        CerrarBD($conn);
+
+        return $data ?: null;
     }
 }
 ?>

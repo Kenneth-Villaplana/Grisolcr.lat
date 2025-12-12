@@ -3,276 +3,301 @@ session_start();
 require_once __DIR__ . '/../Controller/citaController.php';
 include('layout.php');
 
-// Nombre del paciente para el resumen
-$nombrePaciente = $_SESSION["Nombre"] . " " . $_SESSION["Apellido"];
+$rol = $_SESSION['RolID'] ?? null;  
+$nombrePaciente = ($rol === 'Paciente') 
+    ? (($_SESSION["Nombre"] ?? '') . " " . ($_SESSION["Apellido"] ?? ''))
+    : ""; 
+
+$mensajeExito = $_SESSION['mensaje_exito'] ?? "";
+$mensajeError = $_SESSION['mensaje_error'] ?? "";
+
+unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agendar Cita - Óptica Grisol</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Óptica Grisol - Agendar Cita</title>
 
     <?php IncluirCSS(); ?>
 
-    <!-- Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="/OptiGestion/assets/css/cita.css">
 
 </head>
 
 <body class="bg-main">
-
 <?php MostrarMenu(); ?>
 
-<!-- ============================================================================
-     HERO SUPERIOR
-============================================================================ -->
-<section class="cita-hero text-center">
-    <h1 class="fw-bold">
-        <i data-lucide="calendar-check"></i> Agendar una Cita
-    </h1>
-    <p class="cita-hero-subtitle">Programa tu consulta de manera rápida y sencilla</p>
-</section>
+<input type="hidden" id="userRole" value="<?= $rol ?>">
 
 <div class="container py-4">
 
-    <!-- ============================================================================
-         MENSAJES DE ÉXITO / ERROR
-    ========================================================================= -->
-    <?php if(!empty($mensajeExito)): ?>
-        <div class="alert alert-success shadow-sm d-flex align-items-center gap-2">
-            <i data-lucide="check-circle"></i> <?= $mensajeExito ?>
+<div class="app-header text-center header-premium">
+    <div class="header-premium-icon">
+        <i data-lucide="calendar-days"></i>
+    </div>
+
+    <h1 class="header-premium-title">Agendar Cita</h1>
+
+    <p class="header-premium-subtitle">
+        Una experiencia fluida para reservar su próxima cita
+    </p>
+</div>
+
+
+<?php if (!empty($mensajeExito)): ?>
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <i data-lucide="check-circle" class="me-2"></i>
+        <?= htmlspecialchars($mensajeExito) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php endif; ?>
+
+<?php if (!empty($mensajeError)): ?>
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <i data-lucide="alert-triangle" class="me-2"></i>
+        <?= htmlspecialchars($mensajeError) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php endif; ?>
+
+
+<div class="appointment-wizard shadow-sm">
+
+    <input type="hidden" id="pacienteNombre" value="<?= htmlspecialchars(trim($nombrePaciente)) ?>">
+
+ 
+    <div class="step-indicator">
+        <div class="step active" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-label">Seleccionar Doctor</div>
         </div>
-    <?php endif; ?>
-
-    <?php if(!empty($mensajeError)): ?>
-        <div class="alert alert-danger shadow-sm d-flex align-items-center gap-2">
-            <i data-lucide="alert-triangle"></i> <?= $mensajeError ?>
+        <div class="step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-label">Fecha y Hora</div>
         </div>
-    <?php endif; ?>
-
-
-    <!-- ============================================================================
-         CONTENEDOR PRINCIPAL DEL WIZARD
-    ========================================================================= -->
-    <div class="cita-wizard-wrapper shadow-lg">
-
-        <!-- Hidden para JS -->
-        <input type="hidden" id="pacienteNombre" value="<?= $nombrePaciente ?>">
-
-        <!-- ============================================================================
-             BARRA DE PROGRESO
-        ========================================================================= -->
-        <div class="cita-wizard-progress text-center">
-            <div class="cita-progress-step active" data-step="1">
-                <div class="cita-step-circle">1</div>
-                <span>Doctor</span>
-            </div>
-
-            <div class="cita-progress-line"></div>
-
-            <div class="cita-progress-step" data-step="2">
-                <div class="cita-step-circle">2</div>
-                <span>Fecha & Hora</span>
-            </div>
-
-            <div class="cita-progress-line"></div>
-
-            <div class="cita-progress-step" data-step="3">
-                <div class="cita-step-circle">3</div>
-                <span>Confirmar</span>
-            </div>
+        <div class="step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-label">Confirmar</div>
         </div>
+    </div>
 
+  
+    <div class="wizard-step active" id="step1">
+        <h4 class="mb-4" style="color: var(--verde-primario);">
+            <i data-lucide="stethoscope" class="me-2"></i>Selecciona un Doctor
+        </h4>
 
-        <!-- ============================================================================
-             PASO 1 — SELECCIONAR DOCTOR
-        ========================================================================= -->
-        <div class="cita-step-content active" id="step1">
+        <p class="text-muted mb-4">Seleccione su profesional de preferencia para la consulta</p>
 
-            <h3 class="cita-section-title">
-                <i data-lucide="stethoscope"></i> Selecciona tu doctor
-            </h3>
+        <?php if (empty($doctores)): ?>
+            <div class="alert alert-warning d-flex align-items-center gap-2">
+                <i data-lucide="info"></i>
+                No hay doctores disponibles.
+            </div>
+        <?php else: ?>
 
-            <?php if (empty($doctores)): ?>
-                <div class="alert alert-warning d-flex align-items-center gap-2">
-                    <i data-lucide="info"></i> No hay doctores disponibles.
-                </div>
-            <?php else: ?>
+            <div class="doctor-selection-grid" id="doctoresGrid">
+                <?php foreach ($doctores as $doctor): ?>
+                    <div class="doctor-card" data-doctor-id="<?= $doctor['EmpleadoId']; ?>">
+                        <div class="doctor-avatar">
+                            <i data-lucide="stethoscope"></i>
+                        </div>
+                        <h5 class="fw-bold">
+                            <?= htmlspecialchars($doctor['Nombre'] . ' ' . $doctor['Apellido']); ?>
+                        </h5>
 
-            <div class="cita-doctor-grid">
-            <?php foreach ($doctores as $doctor): ?>
-                <div class="cita-doctor-card shadow-sm" data-doctor-id="<?= $doctor['EmpleadoId']; ?>">
+                        <div class="doctor-specialty">Doctor Especialista</div>
 
-                    <div class="cita-doctor-avatar">
-                        <i data-lucide="user"></i>
+                        <p class="text-muted small mb-2">
+                            <i data-lucide="mail" class="me-1"></i>
+                            <?= htmlspecialchars($doctor['CorreoElectronico']); ?>
+                        </p>
+
+                        <p class="doctor-availability text-success mb-0">
+                            <i data-lucide="calendar-check" class="me-1"></i>Disponibilidad en tiempo real
+                        </p>
                     </div>
-
-                    <h4 class="cita-doctor-name text-center">
-                        <?= $doctor['Nombre'] . " " . $doctor['Apellido']; ?>
-                    </h4>
-
-                    <p class="cita-doctor-role text-muted">Doctor Especialista</p>
-
-                    <p class="cita-doctor-email">
-                        <i data-lucide="mail"></i> <?= $doctor['CorreoElectronico']; ?>
-                    </p>
-
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             </div>
-            <?php endif; ?>
 
-            <div class="mt-4 text-end">
-                <button class="btn cita-btn-next" onclick="wizard.nextStep(2)">
-                    Continuar <i data-lucide="arrow-right"></i>
-                </button>
+        <?php endif; ?>
+
+        <div class="wizard-navigation">
+            <div></div>
+            <button class="btn btn-primary btn-wizard" onclick="wizard.nextStep(2)">
+                Siguiente <i data-lucide="arrow-right" class="ms-2"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="wizard-step" id="step2">
+
+        <h4 class="mb-4" style="color: var(--verde-primario);">
+            <i data-lucide="calendar" class="me-2"></i>Selecciona Fecha y Hora
+        </h4>
+        <div class="date-time-selection">
+
+            <div class="calendar-sidebar">
+                <h6 class="fw-bold mb-3">Selecciona una fecha</h6>
+
+                <input type="text" id="datePicker" class="form-control form-control-lg" placeholder="Elige una fecha">
+
+                <div class="mt-4">
+                    <h6 class="fw-bold mb-3">Doctor seleccionado</h6>
+                    <div id="selectedDoctorInfo"></div>
+                </div>
+            </div>
+
+            <div>
+                <h6 class="fw-bold mb-3">Horarios disponibles</h6>
+
+                <div id="availabilityStatus" class="availability-status" style="display:none;"></div>
+
+                <div class="time-slots-container" id="timeSlotsContainer"></div>
             </div>
         </div>
 
+        <div class="wizard-navigation">
+            <button class="btn btn-outline-secondary btn-wizard" onclick="wizard.previousStep(1)">
+                <i data-lucide="arrow-left" class="me-2"></i>Anterior
+            </button>
 
-        <!-- ============================================================================
-             PASO 2 — FECHA Y HORAS
-        ========================================================================= -->
-        <div class="cita-step-content" id="step2">
-
-            <h3 class="cita-section-title">
-                <i data-lucide="calendar"></i> Selecciona Fecha y Hora
-            </h3>
-
-            <div class="cita-date-hour-grid">
-
-                <!-- PANEL IZQUIERDO -->
-                <div class="cita-panel-box shadow-sm">
-
-                    <label class="cita-panel-label">
-                        <i data-lucide="calendar-days"></i> Fecha
-                    </label>
-
-                    <input type="text" id="datePicker" class="form-control form-control-lg highlight-input">
-                    
-                    <div id="selectedDoctorInfo" class="mt-4"></div>
-
-                </div>
-
-                <!-- PANEL DERECHO -->
-                <div class="cita-panel-box shadow-sm">
-
-                    <label class="cita-panel-label">
-                        <i data-lucide="clock"></i> Horarios disponibles
-                    </label>
-
-                    <div id="availabilityStatus" class="availability-message"></div>
-
-                    <div id="timeSlotsContainer" class="cita-time-grid"></div>
-
-                </div>
-
-            </div>
-
-            <div class="cita-nav d-flex justify-content-between mt-4">
-                <button class="btn btn-outline-secondary" onclick="wizard.previousStep(1)">
-                    <i data-lucide="arrow-left"></i> Volver
-                </button>
-
-                <button class="btn cita-btn-next" onclick="wizard.nextStep(3)">
-                    Continuar <i data-lucide="arrow-right"></i>
-                </button>
-            </div>
-
+            <button class="btn btn-primary btn-wizard" onclick="wizard.nextStep(3)">
+                Siguiente <i data-lucide="arrow-right" class="ms-2"></i>
+            </button>
         </div>
+    </div>
+
+ 
+<div class="wizard-step" id="step3">
+    <h4 class="mb-4" style="color: var(--verde-primario);">
+        <i data-lucide="clipboard-check" class="me-2"></i>Confirmar Cita
+    </h4>
+
+    <div class="appointment-summary-card">
+        <h5 class="fw-bold mb-3">Resumen de su cita</h5>
+        <div id="appointmentSummary"></div>
+    </div>
+
+    <?php $rol = $_SESSION['RolID'] ?? null; ?>
+
+    <form id="confirmAppointmentForm" method="POST">
+        <input type="hidden" name="action" value="agendar_cita">
+        <input type="hidden" name="doctor_id" id="formDoctorId">
+        <input type="hidden" name="fecha_hora" id="formFechaHora">
 
 
-        <!-- ============================================================================
-             PASO 3 — CONFIRMACIÓN
-        ========================================================================= -->
-        <div class="cita-step-content" id="step3">
+<?php if (isset($_SESSION['RolID']) && $_SESSION['RolID'] !== 'Paciente'): ?>
+    <div class="external-form mt-4">
 
-            <h3 class="cita-section-title">
-                <i data-lucide="file-text"></i> Confirmación de la cita
-            </h3>
+        <div class="row g-3">
 
-            <div class="cita-summary-box shadow-sm">
-                <h5 class="fw-bold">Resumen de la cita</h5>
-                <div id="appointmentSummary" class="mt-3"></div>
+            <!-- CÉDULA PRIMERO -->
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Cédula *</label>
+                <input type="text" class="form-control" id="extCedula" name="cedula" oninput="consultarCedulaAPI()">
             </div>
 
-            <form id="confirmAppointmentForm" method="POST">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Nombre *</label>
+                <input type="text" class="form-control" id="extNombre" name="nombre">
+            </div>
 
-                <input type="hidden" name="action" value="agendar_cita">
-                <input type="hidden" name="doctor_id" id="formDoctorId">
-                <input type="hidden" name="fecha_hora" id="formFechaHora">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Apellido *</label>
+                <input type="text" class="form-control" id="extApellido" name="apellido">
+            </div>
 
-                <label class="form-label fw-bold mt-4">Motivo de la consulta *</label>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Teléfono *</label>
+                <input type="text" class="form-control" id="extTelefono" name="telefono">
+            </div>
 
-                <textarea class="form-control cita-motivo-input"
-                          id="motivo" name="motivo" rows="4"
-                          placeholder="Describe el motivo de tu consulta..."></textarea>
-
-                <div class="cita-nav d-flex justify-content-between mt-4">
-                    <button type="button" class="btn btn-back-custom"
-                            onclick="wizard.previousStep(2)">
-                <i class="bi bi-arrow-left"></i></i> Volver
-                    </button>
-    
-                    <button type="button" id="btnConfirmarCita"
-                            class="btn cita-btn-submit">
-                        <i data-lucide="check-circle"></i> Confirmar Cita
-                    </button>
-                </div>
-
-            </form>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Correo *</label>
+                <input type="email" class="form-control" id="extCorreo" name="correo">
+            </div>
 
         </div>
 
     </div>
+<?php endif; ?>
+
+        
+        <div class="mb-4">
+            <label for="motivo" class="form-label fw-bold">Motivo de la consulta *</label>
+            <textarea class="form-control" id="motivo" name="motivo" rows="4"
+                      placeholder="Describa brevemente el motivo de su consulta..." required></textarea>
+        </div>
+
+        <div class="wizard-navigation">
+            <button type="button" class="btn btn-outline-secondary btn-wizard" onclick="wizard.previousStep(2)">
+                <i data-lucide="arrow-left" class="me-2"></i>Anterior
+            </button>
+            <button type="button" class="btn btn-success btn-wizard" id="btnConfirmarCita">
+                <i data-lucide="calendar-check" class="me-2"></i>Confirmar Cita
+            </button>
+        </div>
+    </form>
 </div>
 
-
-<!-- ============================================================================
-     MODAL DE CONFIRMACIÓN
-============================================================================ -->
+<!-- Modal Confirmación -->
 <div class="modal fade" id="confirmModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content p-3 shadow-lg">
-
-            <div class="modal-header border-0">
-                <h5 class="modal-title d-flex align-items-center gap-2">
-                    <i data-lucide="calendar-check"></i> Confirmar Cita
+        <div class="modal-content modal-confirm">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i data-lucide="calendar-check" class="me-2"></i>Confirmar Cita
                 </h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
-            <div class="modal-body text-center">
-                <p class="lead mb-3">Confirma que los datos de tu cita sean correctos.</p>
+            <div class="modal-body">
 
-                <div id="modalAppointmentDetails"
-                     class="cita-summary-modal"></div>
+                <div class="modal-icon">
+                    <i data-lucide="calendar-plus"></i>
+                </div>
+
+                <h5 class="mb-3">¿Confirmar agendamiento de cita?</h5>
+
+                <p class="confirmation-text">
+                    Verifique que toda la información sea correcta.
+                </p>
+
+                <div class="appointment-details" id="modalAppointmentDetails"></div>
+
             </div>
 
-            <div class="modal-footer border-0 d-flex justify-content-center gap-3">
-                <button class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
-                    <i data-lucide="edit"></i> Revisar
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel btn-modal" data-bs-dismiss="modal">
+                    Revisar Datos
                 </button>
-                <button class="btn cita-btn-submit px-4" id="modalConfirmButton">
-                    <i data-lucide="check-circle"></i> Confirmar
+
+                <button type="button" class="btn btn-confirm btn-modal" id="modalConfirmButton">
+                    Sí, Confirmar Cita
                 </button>
             </div>
-
         </div>
     </div>
 </div>
-<!-- ===========================================================
-     MODAL DE ERROR — VERSIÓN QUE NO PUEDE SER IGNORADA
-=========================================================== -->
+
+<!-- Modal Error -->
 <div class="modal fade custom-error-modal" id="errorModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content custom-error-modal-content">
 
             <div class="custom-error-header">
                 <h5 class="m-0">
-                    <i data-lucide="alert-octagon"></i> Aviso Importante
+                    <i data-lucide="alert-triangle"></i> Aviso Importante
                 </h5>
                 <button class="btn-close custom-close-btn" data-bs-dismiss="modal"></button>
             </div>
@@ -283,25 +308,25 @@ $nombrePaciente = $_SESSION["Nombre"] . " " . $_SESSION["Apellido"];
 
             <div class="custom-error-footer">
                 <button class="btn custom-error-btn" data-bs-dismiss="modal">
-                    <i data-lucide="x-circle"></i> Entendido
+                    Entendido
                 </button>
             </div>
 
         </div>
     </div>
 </div>
-
-
-<!-- ============================================================================
-     SCRIPTS
-============================================================================ -->
-<script> lucide.createIcons(); </script>
-
+</div>
+</div>
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script src="/OptiGestion/assets/js/cita.js"></script>
+
+<script>
+    lucide.createIcons();
+</script>
 
 </body>
 </html>

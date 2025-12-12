@@ -144,7 +144,7 @@ function IncluirCSS() {
     
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/glightbox/css/glightbox.min.css">
     <link rel="stylesheet" href="/OptiGestion/assets/vendor/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=10.2">
+    <link rel="stylesheet" href="/OptiGestion/assets/css/styles.css?v=10.5">
     <link rel="icon" type="image/x-icon" href="/OptiGestion/assets/favicon.ico">
     ';
 }

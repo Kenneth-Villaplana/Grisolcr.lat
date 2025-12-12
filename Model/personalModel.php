@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../Model/baseDatos.php';
+include_once __DIR__ . '/baseDatos.php';
 
 function ObtenerPersonalPorId($idUsuario){
     try{
