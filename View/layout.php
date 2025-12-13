@@ -32,7 +32,7 @@ function MostrarMenu() {
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownCitas">
                 <li><a class="dropdown-item" href="/view/agendarCita.php">Agendar Cita</a></li>
                 <li><a class="dropdown-item" href="/view/editarcita.php">Mis Citas</a></li>
-                <li><a class="dropdown-item" href="/view/misRecetas.php">Historial Médico</a></li>
+                <li><a class="dropdown-item" href="/View/misRecetas.php">Historial Médico</a></li>
             </ul>
         </li>';
     } else if ($rol === 'Empleado') {
