@@ -122,47 +122,12 @@ if(isset($_POST["btnIniciarSesion"])) {
             $_SESSION["RolID"] = $usuario["RolUsuario"];
             $_SESSION['EmpleadoRol'] = $usuario['RolEmpleado'] ?? null;
 
-            // ✅ ARREGLO: Si el usuario es Paciente, garantizar PacienteId en sesión (para misRecetas.php)
-            if (isset($_SESSION["RolID"]) && $_SESSION["RolID"] === "Paciente") {
-
-                // Si el modelo ya lo trae, úsalo directamente
-                if (!empty($usuario["PacienteId"])) {
-                    $_SESSION["PacienteId"] = $usuario["PacienteId"];
-                } else {
-                    // Si no viene del modelo, se obtiene una vez por cédula
-                    include_once __DIR__ . '/../Model/baseDatos.php';
-                    $conn = AbrirBD();
-
-                    $stmt = $conn->prepare("CALL ObtenerPacienteIdPorCedula(?)");
-                    $stmt->bind_param("s", $_SESSION["Cedula"]);
-                    $stmt->execute();
-
-                    $result = $stmt->get_result()->fetch_assoc();
-
-                    // Limpiar resultados pendientes del CALL
-                    while ($conn->more_results() && $conn->next_result()) {
-                        ;
-                    }
-
-                    if ($result && isset($result["PacienteId"])) {
-                        $_SESSION["PacienteId"] = $result["PacienteId"];
-                    }
-
-                    $stmt->close();
-                    CerrarBD($conn);
-                }
-            }
-
             header('Location: /index.php');
             exit();
         } else {
             $_SESSION["txtMensaje"] = "Correo electrónico o contraseña incorrectos.";
         }
     }
-}
-
-
-// ✅ ARREGLO DE LLAVES: este bloque NO debe estar dentro de btnIniciarSesion
 //cambiar contrasenna
 if (isset($_POST["btnCambiarContrasenna"])) {
 
@@ -189,6 +154,7 @@ if (isset($_POST["btnCambiarContrasenna"])) {
         header("Location: /View/restablecerContrasenna.php?token=".$token);
         exit;
     }
+}
 }
 
 ?>
