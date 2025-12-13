@@ -71,17 +71,20 @@ $productos = ObtenerProductos();
                     <?php foreach ($productos as $p): ?>
 
                         <?php 
-                     
                         $img = (!empty($p['Imagen'])) ? $p['Imagen'] : 'no-image.jpg';
+
+                        // ✅ AJUSTE SIN REMOVER NADA:
+                        // Usar ruta absoluta desde la raíz del sitio (compatible con Azure)
+                        $imgSrc = '/assets/img/' . rawurlencode($img);
                         ?>
 
                         <div class="col-md-4 producto-item" data-precio="<?= $p['Precio'] ?>">
 
                             <div class="product-card shadow-sm">
                                 <div class="product-img-wrapper">
-                                   <img src="<?= $baseUrl ?>/assets/img/<?= $img ?>" 
+                                   <img src="<?= $imgSrc ?>" 
                                         class="product-image"
-                                        alt="<?= $p['Nombre'] ?>">
+                                        alt="<?= htmlspecialchars($p['Nombre']) ?>">
                                 </div>
 
                                 <h5 class="product-title mt-3"><?= $p['Nombre'] ?></h5>
