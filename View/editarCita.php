@@ -34,7 +34,7 @@ $isEmpleado = ($rolName === 'Empleado');
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="/OptiGestion/assets/css/cita.css">
+    <link rel="stylesheet" href="/assets/css/cita.css">
 </head>
 
 <body class="bg-main">
@@ -432,7 +432,7 @@ $isEmpleado = ($rolName === 'Empleado');
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/OptiGestion/assets/js/gestionCita.js"></script>
+<script src="/assets/js/gestionCita.js"></script>
 
 <script>
     lucide.createIcons();

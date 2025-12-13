@@ -10,7 +10,7 @@ let montoAbonoInput;
 
 let facturarEmpresaCheckbox, datosEmpresaDiv, empresaNombreInput, empresaIdentificacionInput;
 
-const CONTROLLER_PATH = "/OptiGestion/Controller/puntoVentaController.php";
+const CONTROLLER_PATH = "/Controller/puntoVentaController.php";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -321,7 +321,7 @@ async function buscarCliente() {
 function registrarClientePOS() {
     const ced = cedulaInput.value.trim();
     if (!ced) return alert("Debe ingresar una cédula válida.");
-    window.location.href = `/OptiGestion/View/registrarClientePOS.php?cedula=${ced}`;
+    window.location.href = `/View/registrarClientePOS.php?cedula=${ced}`;
 }
 
 

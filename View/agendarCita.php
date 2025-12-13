@@ -28,7 +28,7 @@ unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link rel="stylesheet" href="/OptiGestion/assets/css/cita.css">
+    <link rel="stylesheet" href="/assets/css/cita.css">
 
 </head>
 
@@ -322,7 +322,7 @@ unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<script src="/OptiGestion/assets/js/cita.js"></script>
+<script src="/assets/js/cita.js"></script>
 
 <script>
     lucide.createIcons();
