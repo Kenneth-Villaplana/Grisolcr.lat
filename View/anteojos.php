@@ -1,9 +1,14 @@
-<?php 
-include('layout.php');
-include_once __DIR__ . '/../Model/productoModel.php';
-$baseUrl = "http://{$_SERVER['HTTP_HOST']}/Grisolcr.lat";
-$productos = ObtenerProductos(); 
+<?php
+require_once __DIR__ . '/layout.php';
+require_once __DIR__ . '/../Model/productoModel.php';
+
+$baseUrl = getenv('BASE_URL') 
+    ?: ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http')
+       . '://' . $_SERVER['HTTP_HOST'] . '/Grisolcr.lat';
+
+$productos = ObtenerProductos();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
