@@ -1,4 +1,4 @@
-const PACIENTE_CONTROLLER = "/OptiGestion/Controller/pacienteController.php";
+const PACIENTE_CONTROLLER = "/Controller/pacienteController.php";
 
 
 async function buscarPaciente() {
