@@ -48,7 +48,7 @@ include('view/layout.php');
             </p>
 
             <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start gap-3">
-              <a href="/View/RegistrarPaciente.php" class="btn-primary-modern">
+              <a href="<?php echo htmlspecialchars($agendarUrl); ?>" class="btn-primary-modern">
                 Agendar cita
               </a>
               <a href="#servicios" class="btn-secondary-modern">
