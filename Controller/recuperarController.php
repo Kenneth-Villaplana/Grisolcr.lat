@@ -3,12 +3,11 @@ include_once __DIR__ . '/../Model/recuperarModel.php';
 
 session_start();
 
-// SIEMPRE ENTRARÁ AL CONTROLADOR SI HAY POST
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    echo "ENTRÓ AL CONTROLLER<br>"; // prueba
-    print_r($_POST);                // prueba
-    // exit;  // <- quítalo cuando confirmemos que funciona
+    echo "ENTRÓ AL CONTROLLER<br>"; 
+    print_r($_POST);                
 
     $correo = $_POST["Email"] ?? '';
 
@@ -30,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $token = bin2hex(random_bytes(32));
     GuardarTokenRecuperacion($correo, $token);
 
-    $enlace = "http://localhost:8081/OptiGestion/View/restablecerContrasenna.php?token=$token";
+    $enlace = "/View/restablecerContrasenna.php?token=$token";
 
     // Datos del correo
     $correo_emisor = "linethleivacr@gmail.com";
