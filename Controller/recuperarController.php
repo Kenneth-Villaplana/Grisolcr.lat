@@ -32,8 +32,9 @@ GuardarTokenRecuperacion($correo, $token);
 $enlace = "https://grisolcr.lat/View/restablecerContrasenna.php?token=" . urlencode($token);
 
 // Datos del correo (RECOMENDADO: mover a variables de entorno)
-$correo_emisor = "linethleivacr@gmail.com";
-$app_password  = "fqnn wxyr laui xspz";
+$correo_emisor = getenv("MAIL_FROM");
+$app_password  = getenv("MAIL_APP_PASSWORD");
+
 
 $asunto = "Recuperación de Contraseña Optica Grisol";
 
