@@ -6,41 +6,71 @@ require __DIR__ . '/PHPMailer/Exception.php';
 require __DIR__ . '/PHPMailer/PHPMailer.php';
 require __DIR__ . '/PHPMailer/SMTP.php';
 
+
 function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
 {
     $mail = new PHPMailer(true);
 
-    // Normalizar valores (clave para evitar Invalid address)
-    $emisor  = trim((string)$emisor);
-    $password = (string)$password;
+    // 1) Tomar credenciales desde Azure Application Settings si no vienen por parámetro
+    $emisorEnv   = trim((string)getenv("MAIL_FROM"));
+    $passEnv     = (string)getenv("MAIL_APP_PASSWORD");
+
+    $emisor  = trim((string)($emisor ?: $emisorEnv));
+    $password = (string)($password ?: $passEnv);
+
     $destino = trim((string)$destino);
+    $asunto  = (string)$asunto;
 
-    // Validaciones mínimas
+    // 2) Validaciones básicas para evitar "Invalid address (From)"
     if (!filter_var($emisor, FILTER_VALIDATE_EMAIL)) {
-        return "Mailer Error: Invalid From address ($emisor)";
+        return "Mailer Error: Invalid address: (From): $emisor";
     }
-
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
-        return "Mailer Error: Invalid To address ($destino)";
+        return "Mailer Error: Invalid address: (To): $destino";
+    }
+    if (empty($password)) {
+        return "Mailer Error: SMTP password is empty (MAIL_APP_PASSWORD)";
     }
 
-    if (empty($password)) {
-        return "Mailer Error: SMTP password is empty";
+    // 3) Modo TEST/DEBUG (se ve en Azure Log Stream)
+    $isTest = (string)getenv("APP_MAIL_TEST") === "1";
+    if ($isTest) {
+        $mail->SMTPDebug = 2; // 0=off, 2=client+server
+        $mail->Debugoutput = function ($str, $level) {
+            error_log("SMTP[$level]: $str");
+        };
+        error_log("MAIL TEST: From={$emisor} To={$destino} Subject={$asunto}");
     }
 
     try {
-        $mail->CharSet = 'UTF-8';
+        $mail->CharSet  = 'UTF-8';
         $mail->Encoding = 'base64';
 
+        // 4) SMTP Gmail (Azure-friendly)
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = $emisor;
+        $mail->Username   = $emisor;    // Debe ser el mismo Gmail de la App Password
         $mail->Password   = $password;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
 
-        
+        // Recomendado en Azure: SMTPS 465 (más estable que STARTTLS 587)
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
+
+        // 5) Forzar IPv4 (MUY importante en Azure para evitar entregas “fantasma”)
+        $mail->SMTPOptions = [
+            'socket' => [
+                'bindto' => '0.0.0.0:0'
+            ],
+            // Si algún entorno rompe por certificados, descomenta SOLO para prueba:
+            // 'ssl' => [
+            //     'verify_peer'       => false,
+            //     'verify_peer_name'  => false,
+            //     'allow_self_signed' => true,
+            // ],
+        ];
+
+        // 6) Mensaje
         $mail->setFrom($emisor, 'Óptica Grisol');
         $mail->addAddress($destino);
 
@@ -49,9 +79,18 @@ function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
         $mail->Body    = $mensajeHTML;
 
         $mail->send();
+
+        if ($isTest) {
+            error_log("MAIL TEST: PHPMailer->send() OK");
+        }
+
         return true;
 
     } catch (Exception $e) {
+        // ErrorInfo suele ser más útil que $e->getMessage()
+        if ($isTest) {
+            error_log("MAIL TEST ERROR: " . $mail->ErrorInfo);
+        }
         return "Mailer Error: {$mail->ErrorInfo}";
     }
 }
