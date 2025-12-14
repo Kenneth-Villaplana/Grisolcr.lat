@@ -69,7 +69,8 @@ $mensaje = "
 </div>
 ";
 
-require __DIR__ . "/../assets/vendor/php-email-form/sendEmail.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/vendor/php-email-form/sendEmail.php";
+
 
 $resultado = sendEmail($correo_emisor, $app_password, $correo, $asunto, $mensaje);
 
