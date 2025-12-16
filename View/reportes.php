@@ -204,7 +204,7 @@ include('layout.php');
 let chTop, chTopMoney, chMesUnits, chMesMoney;
 
 async function loadDashboardVentas() {
-    const respuesta = await fetch('/Controller/dashboardVentasData.php', { cache: 'no-store' });
+    const respuesta = await fetch('/Controller/dashbaordVentasData.php', { cache: 'no-store' });
     const data = await respuesta.json();
 
     if (!data.ok) {
