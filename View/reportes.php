@@ -38,14 +38,14 @@ include('layout.php');
         }
     </style>
 </head>
-
+<!-- 
 <body>
 <?php MostrarMenu();?>
 
 <main class="container py-5">
     <h2 class="text-center mb-5">Reportes</h2>
 
-    <!-- Filtros (por ahora visuales, listos para conectar a futuro) -->
+    Filtros (por ahora visuales, listos para conectar a futuro)
     <form class="row g-3 mb-4">
         <div class="col-md-4">
             <label for="tipoReporte" class="form-label">Tipos de Reporte</label>
@@ -68,7 +68,7 @@ include('layout.php');
         </div>
     </form>
 
-    <!-- TARJETAS DE REPORTES PDF (legacy, como ya las tenías) -->
+    TARJETAS DE REPORTES PDF (legacy, como ya las tenías) 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
 
         <div class="col">
@@ -132,7 +132,7 @@ include('layout.php');
         </div>
 
     </div>
-
+-->
     <!-- DASHBOARD INTERACTIVO (nuevo) -->
     <section class="mb-4">
         <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
