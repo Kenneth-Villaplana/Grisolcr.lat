@@ -38,13 +38,13 @@ include('layout.php');
         }
     </style>
 </head>
- 
+
 <body>
 <?php MostrarMenu();?>
-<!--
+
 <main class="container py-5">
     <h2 class="text-center mb-5">Reportes</h2>
-
+<!-- 
     Filtros (por ahora visuales, listos para conectar a futuro)
     <form class="row g-3 mb-4">
         <div class="col-md-4">
