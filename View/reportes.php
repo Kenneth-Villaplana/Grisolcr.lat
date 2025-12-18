@@ -38,10 +38,10 @@ include('layout.php');
         }
     </style>
 </head>
-<!-- 
+ 
 <body>
 <?php MostrarMenu();?>
-
+<!--
 <main class="container py-5">
     <h2 class="text-center mb-5">Reportes</h2>
 
