@@ -19,15 +19,15 @@ include_once __DIR__ . '/../Controller/loginController.php';
 <section class="login-modern-wrapper">
     <div class="login-modern-container">
 
-    <?php
+        <!-- Panel Izquierdo -->
+        <div class="login-modern-left">
+		  <?php
             if(isset($_SESSION["txtMensaje"])){
                 echo '<div class="alert alert-danger text-center py-2">' . $_SESSION["txtMensaje"] . '</div>';
                 unset($_SESSION["txtMensaje"]);
             }
             ?>
 
-        <!-- Panel Izquierdo -->
-        <div class="login-modern-left">
             <h1 class="login-title text-center">Bienvenido</h1>
             <p class="login-subtitle text-center">Acceda a su cuenta para continuar.</p>
 
