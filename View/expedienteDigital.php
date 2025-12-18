@@ -120,9 +120,16 @@ include('layout.php');
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label">Último control visual</label>
-                                <input type="date" name="UltimoControl" class="form-control input-modern">
+                            <label class="form-label">
+                                Último control visual <span class="text-danger">*</span>
+                            </label>
+                            <input type="date"
+                                name="UltimoControl"
+                                class="form-control input-modern campo-obligatorio">
+                            <div class="invalid-feedback">
+                                El último control visual es obligatorio.
                             </div>
+                        </div>
 
                             <div class="col-12">
                                 <label class="form-label">Antecedentes generales</label>
@@ -404,14 +411,25 @@ document.getElementById('formExpediente').addEventListener('submit', function (e
     const obligatorios = document.querySelectorAll('.campo-obligatorio');
     let primeroInvalido = null;
 
-    obligatorios.forEach(campo => {
-        if (campo.value.trim() === '') {
-            campo.classList.add('is-invalid');
-            if (!primeroInvalido) primeroInvalido = campo;
-        } else {
-            campo.classList.remove('is-invalid');
+   obligatorios.forEach(campo => {
+    if (campo.value.trim() === '') {
+        campo.classList.add('is-invalid');
+
+        const feedback = campo.nextElementSibling;
+        if (feedback && feedback.classList.contains('invalid-feedback')) {
+            feedback.style.display = 'block';
         }
-    });
+
+        if (!primeroInvalido) primeroInvalido = campo;
+    } else {
+        campo.classList.remove('is-invalid');
+
+        const feedback = campo.nextElementSibling;
+        if (feedback && feedback.classList.contains('invalid-feedback')) {
+            feedback.style.display = 'none';
+        }
+    }
+});
 document.querySelectorAll('.campo-decimal').forEach(campo => {
     const valor = campo.value.replace(',', '.');
     if (valor !== '' && isNaN(valor)) {
