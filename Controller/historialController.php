@@ -118,17 +118,16 @@ try {
     $stmt->close();
 
     // Examen Final OD
-    $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?)");
     $ojo = 'Derecho';
     $stmt->bind_param(
-        "isddsdssddd",
+        "isddsddsdd",
         $nuevoId,
         $ojo,
         $esferaOD,
         $cilindroOD,
         $ejeOD,
-        $dpOD,      
-        $dpOD,     
+        $dpOD,           
         $prismaOD,
         $baseOD,
         $avOD,
@@ -138,16 +137,15 @@ try {
     $stmt->close();
 
     // Examen Final OI
-    $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?)");
     $ojo = 'Izquierdo';
     $stmt->bind_param(
-        "isddsdssddd",
+        "isddsddsdd",
         $nuevoId,
         $ojo,
         $esferaOI,
         $cilindroOI,
         $ejeOI,
-        $dpOI,
         $dpOI,
         $prismaOI,
         $baseOI,
