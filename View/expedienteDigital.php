@@ -37,7 +37,7 @@ include('layout.php');
         </div>
     <?php endif; ?>
 
-   >
+ 
     <section class="expediente-section-card">
         <h5 class="section-title d-flex align-items-center gap-2">
             <i data-lucide="id-card"></i>
@@ -383,17 +383,17 @@ window.addEventListener('DOMContentLoaded', () => {
         id: 'PacienteIdHidden'
     };
 
-    if (document.querySelector(input[name="${campos.cedula}"]))
-        document.querySelector(input[name="${campos.cedula}"]).value = paciente.cedula ?? '';
+    if (document.querySelector(`input[name="${campos.cedula}"]`))
+        document.querySelector(`input[name="${campos.cedula}"]`).value = paciente.cedula ?? '';
 
-    if (document.querySelector(input[name="${campos.nombre}"]))
-        document.querySelector(input[name="${campos.nombre}"]).value = paciente.nombre ?? '';
+    if (document.querySelector(`input[name="${campos.nombre}"]`))
+        document.querySelector(`input[name="${campos.nombre}"]`).value = paciente.nombre ?? '';
 
-    if (document.querySelector(input[name="${campos.apellido}"]))
-        document.querySelector(input[name="${campos.apellido}"]).value = paciente.apellido ?? '';
+    if (document.querySelector(`input[name="${campos.apellido}"]`))
+        document.querySelector(`input[name="${campos.apellido}"]`).value = paciente.apellido ?? '';
 
-    if (document.querySelector(input[name="${campos.apellidoDos}"]))
-        document.querySelector(input[name="${campos.apellidoDos}"]).value = paciente.apellidoDos ?? '';
+    if (document.querySelector(`input[name="${campos.apellidoDos}"]`))
+        document.querySelector(`input[name="${campos.apellidoDos}"]`).value = paciente.apellidoDos ?? '';
 
     const hidden = document.getElementById(campos.id);
     if (hidden) hidden.value = paciente.PacienteId ?? '';
