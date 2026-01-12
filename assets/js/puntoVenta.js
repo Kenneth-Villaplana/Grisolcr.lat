@@ -10,7 +10,7 @@ let montoAbonoInput;
 
 let facturarEmpresaCheckbox, datosEmpresaDiv, empresaNombreInput, empresaIdentificacionInput;
 
-const CONTROLLER_PATH = "/Controller/puntoVentaController.php";
+const CONTROLLER_PATH = "/OptiGestion/Controller/puntoVentaController.php";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     datosEmpresaDiv         = document.getElementById("datosEmpresa");
     empresaNombreInput      = document.getElementById("empresaNombre");
     empresaIdentificacionInput = document.getElementById("empresaIdentificacion");
-
+    validarEstadoCaja();
     cargarProductos();
 
     if (btnFinalizar) btnFinalizar.addEventListener("click", finalizarVenta);
@@ -378,8 +378,47 @@ async function consultarEmpresaPorCedula(ced) {
         console.error("Error API empresa:", e);
     }
 }
+async function validarEstadoCaja() {
+    try {
+        const res = await fetch(CONTROLLER_PATH, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "estadoCaja" })
+        });
 
+        const data = await res.json();
 
+        const btn = document.getElementById("btnFinalizar");
+        const alerta = document.getElementById("alertaCajaCerrada");
+
+        if (data.cerrada) {
+
+            if (btn) {
+                btn.disabled = true;
+                btn.classList.add("disabled");
+                btn.title = "Caja cerrada";
+            }
+
+            if (alerta) {
+                alerta.classList.remove("d-none");
+            }
+
+        } else {
+            if (btn) {
+                btn.disabled = false;
+                btn.classList.remove("disabled");
+                btn.title = "";
+            }
+
+            if (alerta) {
+                alerta.classList.add("d-none");
+            }
+        }
+
+    } catch (e) {
+        console.error("Error validando estado de caja", e);
+    }
+}
 
 
 async function finalizarVenta() {
@@ -406,9 +445,9 @@ async function finalizarVenta() {
         return;
     }
 
-    // ==========================================================
-    // 📌 VALIDACIÓN DE TELÉFONO (mínimo 8 dígitos)
-    // ==========================================================
+
+    //  VALIDACIÓN DE TELÉFONO (mínimo 8 dígitos)
+
     const telefono = document.getElementById("telefonoCliente")?.value || "";
     const soloNumeros = telefono.replace(/\D/g, "");
 
@@ -417,7 +456,7 @@ async function finalizarVenta() {
         mostrarAlertaPOS("El número de teléfono debe tener mínimo 8 dígitos.");
         return;
     }
-    // ==========================================================
+ 
 
 
     const facturarEmpresa = facturarEmpresaCheckbox.checked;
@@ -461,6 +500,13 @@ async function finalizarVenta() {
 
     const result = await res.json();
 
+if (result.error === "CAJA_CERRADA") {
+    const modal = new bootstrap.Modal(
+        document.getElementById("modalCajaCerrada")
+    );
+    modal.show();
+    return;
+}
     mostrarFacturaTicket(result.factura);
 
     window.cart = [];
@@ -602,14 +648,18 @@ ${
         setTimeout(() => modal.hide(), 300);
     };
 }
-    document.getElementById("toggleDarkMode").addEventListener("click", () => {
-    document.body.classList.toggle("modo-oscuro");
+   document.addEventListener("DOMContentLoaded", () => {
 
-    localStorage.setItem("darkModePOS", 
-        document.body.classList.contains("modo-oscuro") ? "1" : "0"
-    );
+    const btnFinalizar = document.getElementById("btnFinalizar");
+
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener("click", finalizarVenta);
+    } else {
+        console.warn("btnFinalizar no existe en el DOM");
+    }
+
+    validarEstadoCaja();
 });
-
 // Mantener modo oscuro cuando recarga
 if (localStorage.getItem("darkModePOS") === "1") {
     document.body.classList.add("modo-oscuro");

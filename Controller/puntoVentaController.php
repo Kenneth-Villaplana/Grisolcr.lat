@@ -2,7 +2,7 @@
 include_once __DIR__ . '/../Model/puntoVentaModel.php';
 include_once __DIR__ . '/../Model/facturaModel.php';
 include_once __DIR__ . '/../Model/baseDatos.php';
-
+include_once __DIR__ . '/../Model/cierreCajaModel.php';
 
 class PuntoVentaController {
 
@@ -60,6 +60,11 @@ public function generarVenta(
 ) {
     try {
 
+        $cierreModel = new CierreCajaModel($this->conn);
+
+        if ($cierreModel->cajaCerradaHoy()) {
+            return ["error" => "CAJA_CERRADA"];
+        }
         $pacienteId      = intval($pacienteId) ?: 0;
         $clienteNombre   = trim($clienteNombre);
         $empresaNombre   = trim($empresaNombre);
@@ -186,7 +191,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case "obtenerCliente":
             echo json_encode($controller->ObtenerClientePorCedula($input["cedula"]), JSON_UNESCAPED_UNICODE);
             break;
+    case "estadoCaja":
+    $conn = AbrirBD();
+    $cierreModel = new CierreCajaModel($conn);
 
+    echo json_encode([
+        "cerrada" => $cierreModel->cajaCerradaHoy()
+    ], JSON_UNESCAPED_UNICODE);
+
+    CerrarBD($conn);
+    break;
         case "generarVenta":
         $factura = $controller->generarVenta(
             $input["clienteId"] ?? 0,
@@ -201,11 +215,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $input["cedulaIngresada"] ?? '',
             $input["telefono"] ?? ""
 );
-            echo json_encode([
-                "success" => (bool)$factura,
-                "factura" => $factura
-            ], JSON_UNESCAPED_UNICODE);
+              if (isset($factura["error"]) && $factura["error"] === "CAJA_CERRADA") {
+        echo json_encode([
+            "success" => false,
+            "error"   => "CAJA_CERRADA"
+        ]);
+        break;
+        
+    }
 
-            break;
+    echo json_encode([
+        "success" => true,
+        "factura" => $factura
+    ], JSON_UNESCAPED_UNICODE);
+
+    break;
     }
 }
