@@ -80,5 +80,5 @@ if ($resultado === true) {
     $_SESSION["txtMensaje"] = "Error enviando correo: $resultado";
 }
 
-header("Location: /View/recuperarCuenta.php");
+header("Location: ../View/recuperarCuenta.php");
 exit;

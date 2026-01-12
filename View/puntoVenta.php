@@ -21,7 +21,11 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 
 <main class="container py-5 pv-wrapper ">
 
-
+  <div class=" text-end mt-3">
+            <a href="cierreCaja.php" class="btn  btn-back-custom">
+                Cierre de Caja
+            </a>
+        </div>
 
     
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 pv-header">
@@ -139,7 +143,10 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                             <option value="transferencia">Transferencia</option>
                         </select>
                     </div>
-
+                <div id="alertaCajaCerrada" class="alert alert-warning d-none">
+                    <i class="bi bi-lock-fill me-2"></i>
+                    La caja del día está cerrada. No se pueden registrar ventas.
+                </div>
                     <div id="pv-error-msg" class="pv-error-msg" style="display:none;"></div>
                     <div class="d-grid mt-3">
                         <button class="btn btn-outline-success w-100" id="btnFinalizar">
@@ -167,6 +174,26 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
             </div>
         </div>
     </div>
+
+<div class="modal fade" id="modalCajaCerrada" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">
+          <i class="bi bi-lock-fill"></i> Caja cerrada
+        </h5>
+      </div>
+      <div class="modal-body text-center fs-5">
+        Caja cerrada, no se pueden realizar más ventas.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" data-bs-dismiss="modal">
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="modalAlertaPOS" tabindex="-1">
   <div class="modal-dialog modal-sm modal-dialog-centered">
