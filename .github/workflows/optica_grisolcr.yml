@@ -57,4 +57,4 @@ jobs:
           app-name: 'GrisolCR'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_06B44C6FBD324B4AA707307087564C3E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_28E6709D622340F6BD2A556E58A02D8F }}
