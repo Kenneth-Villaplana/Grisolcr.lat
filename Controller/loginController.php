@@ -122,7 +122,7 @@ if(isset($_POST["btnIniciarSesion"])) {
             $_SESSION["RolID"] = $usuario["RolUsuario"];
             $_SESSION['EmpleadoRol'] = $usuario['RolEmpleado'] ?? null;
 
-            header('Location: /OptiGestion/index.php');
+            header('Location: /index.php');
             exit();
         } else {
             $_SESSION["txtMensaje"] = "Correo electrónico o contraseña incorrectos.";
