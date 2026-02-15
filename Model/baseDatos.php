@@ -5,7 +5,7 @@ function AbrirBD()
 {
     $conn = mysqli_connect(
     "grisolcr-server.mysql.database.azure.com",
-    "hvehxcvtoq@grisolcr-server",
+    "hvehxcvtoq",
     "Y$4JjJZJIxHieE2G",
     "optigestion",
     3306
