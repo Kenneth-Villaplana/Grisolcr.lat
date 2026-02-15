@@ -4,5 +4,5 @@ if(session_status() == PHP_SESSION_NONE){
 }
 $_SESSION = array();
 session_destroy();
-header('Location: /OptiGestion/View/iniciarSesion.php');
+header('Location: /View/iniciarSesion.php');
 exit();
