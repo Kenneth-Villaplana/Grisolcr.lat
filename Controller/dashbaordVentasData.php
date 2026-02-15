@@ -6,7 +6,7 @@ try {
     $cn = AbrirBD(); // usa aquí tu función real de conexión
 
     // TOP 10 productos más vendidos (usa SP, ver más abajo)
-    $rTop = mysqli_query($cn, "CALL sp_top_productos()");
+    $rTop = mysqli_query($cn, "CALL ObtenerTopProductos()");
     if (!$rTop) {
         throw new Exception('Error en sp_top_productos: ' . mysqli_error($cn));
     }
@@ -23,7 +23,7 @@ try {
     mysqli_next_result($cn);
 
     // Ventas mensuales (unidades + total) – también usando SP
-    $rMeses = mysqli_query($cn, "CALL sp_ventas_mensuales()");
+    $rMeses = mysqli_query($cn, "CALL ObtenerVentasMensuales()");
     if (!$rMeses) {
         throw new Exception('Error en sp_ventas_mensuales: ' . mysqli_error($cn));
     }
