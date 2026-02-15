@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-$agendarUrl = "/View/RegistrarPaciente.php";
+$agendarUrl = "/../View/RegistrarPaciente.php";
 
 // Paciente logueado
 if (isset($_SESSION["UsuarioID"]) && empty($_SESSION["EmpleadoRol"])) {
-    $agendarUrl = "/view/agendarCita.php";
+    $agendarUrl = "/../view/agendarCita.php";
 }
 
 include('view/layout.php');
