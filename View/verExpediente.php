@@ -1,6 +1,6 @@
 <?php
 include('layout.php');
-include('../Model/baseDatos.php');
+include('/Model/baseDatos.php');
 
 $expedienteId = $_GET['ExpedienteId'] ?? null;
 if (!$expedienteId)

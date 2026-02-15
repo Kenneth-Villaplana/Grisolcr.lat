@@ -6,9 +6,9 @@ try {
     $cn = AbrirBD(); // usa aquí tu función real de conexión
 
     // TOP 10 productos más vendidos (usa SP, ver más abajo)
-    $rTop = mysqli_query($cn, "CALL sp_top_productos_vendidos()");
+    $rTop = mysqli_query($cn, "CALL sp_top_productos()");
     if (!$rTop) {
-        throw new Exception('Error en sp_top_productos_vendidos: ' . mysqli_error($cn));
+        throw new Exception('Error en sp_top_productos: ' . mysqli_error($cn));
     }
 
     $top = [];
