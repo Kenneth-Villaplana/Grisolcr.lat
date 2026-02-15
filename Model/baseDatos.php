@@ -3,8 +3,13 @@
 // Abre una conexion a la base de datos
 function AbrirBD()
 {
-    $conn = mysqli_connect("grisolcr-server.mysql.database.azure.com:3306", "hvehxcvtoq", "Y$4JjJZJIxHieE2G
-", "optigestion");
+    $conn = mysqli_connect(
+    "grisolcr-server.mysql.database.azure.com",
+    "hvehxcvtoq@grisolcr-server",
+    "Y$4JjJZJIxHieE2G",
+    "optigestion",
+    3306
+);
 
     if (!$conn) {
         die("Error de conexión: " . mysqli_connect_error());
