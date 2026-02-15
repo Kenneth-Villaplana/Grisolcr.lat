@@ -15,7 +15,7 @@ if (!isset($_SESSION["PacienteId"])) {
         $conn = AbrirBD();
 
        
-        $stmt = $conn->prepare("CALL ObtenerPacienteIdPorCedula(?)");
+        $stmt = $conn->prepare("CALL ObtenerClientePorCedula(?)");
         $stmt->bind_param("s", $_SESSION["Cedula"]);
         $stmt->execute();
 
