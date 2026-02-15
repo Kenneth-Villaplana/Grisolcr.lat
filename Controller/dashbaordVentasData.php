@@ -25,7 +25,7 @@ try {
     // Ventas mensuales (unidades + total) – también usando SP
     $rMeses = mysqli_query($cn, "CALL ObtenerVentasMensuales()");
     if (!$rMeses) {
-        throw new Exception('Error en sp_ventas_mensuales: ' . mysqli_error($cn));
+        throw new Exception('Error en sp_ventas_mensuales: ' . mysqli_error(mysql: $cn));
     }
 
     $meses = [];

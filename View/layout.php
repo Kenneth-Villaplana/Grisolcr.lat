@@ -30,7 +30,7 @@ function MostrarMenu() {
                 Citas
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="/view/appointmentForm.php">Agendar Cita</a></li>
+                <li><a class="dropdown-item" href="/view/agendarCita.php">Agendar Cita</a></li>
                 <li><a class="dropdown-item" href="/view/editarcita.php">Mis Citas</a></li>
                 <li><a class="dropdown-item" href="/view/misRecetas.php">Historial Médico</a></li>
             </ul>
