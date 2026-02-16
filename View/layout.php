@@ -23,10 +23,13 @@ function MostrarMenu() {
 
     if (!$rol) {
         echo '<li class="nav-item ms-lg-3"><a class="nav-link" href="/view/iniciarSesion.php">Iniciar Sesión</a></li>';
-    } else if ($rol === 'Paciente') {
+    }
+
+  
+    else if ($rol === 'Paciente') {
         echo '
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCitas" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Citas
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -35,8 +38,12 @@ function MostrarMenu() {
                 <li><a class="dropdown-item" href="/view/misRecetas.php">Historial Médico</a></li>
             </ul>
         </li>';
-    } else if ($rol === 'Empleado') {
+    }
 
+    //  Empleados
+    else if ($rol === 'Empleado') {
+
+        //  Administrador 
         if ($EmpleadoRol == 1) {
             echo '
             <li class="nav-item dropdown">
@@ -49,22 +56,38 @@ function MostrarMenu() {
             </li>';
         }
 
+        // Administración (según rol)
         echo '
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Administración
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu dropdown-menu-end">';
+
+        //  Doctor 
+        if ($EmpleadoRol == 3) {
+            echo '
+                <li><a class="dropdown-item" href="/view/historialExpedientes.php">Historial de Expedientes</a></li>
+                <li><a class="dropdown-item" href="/view/editarcita.php">Manipular Citas</a></li>';
+        }
+
+        //  Cajero y  Asistente 
+        if ($EmpleadoRol == 4 || $EmpleadoRol == 2 || $EmpleadoRol == 1 ) {
+            echo '
                 <li><a class="dropdown-item" href="/view/reportes.php">Reportes</a></li>
                 <li><a class="dropdown-item" href="/view/inventario.php">Inventario</a></li>
                 <li><a class="dropdown-item" href="/view/facturacion.php">Facturación</a></li>
                 <li><a class="dropdown-item" href="/view/historialCierreCaja.php">Historial Cierre de Caja</a></li>
                 <li><a class="dropdown-item" href="/view/historialExpedientes.php">Historial de Expedientes</a></li>
-                <li><a class="dropdown-item" href="/view/editarcita.php">Manipular Citas</a></li>
+                <li><a class="dropdown-item" href="/view/editarcita.php">Manipular Citas</a></li>';
+        }
+
+        echo '
             </ul>
         </li>';
     }
 
+    // para cualquier usuario logueado
     if ($rol) {
         echo '
         <li class="nav-item dropdown ms-lg-3">
@@ -98,15 +121,12 @@ function MostrarFooter() {
 
 function IncluirCSS() {
     echo '
-
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet"> 
-
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/assets/vendor/glightbox/css/glightbox.min.css">
     <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css">
-
     <link rel="stylesheet" href="/assets/css/styles.css?v=9">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     ';
@@ -119,10 +139,8 @@ function IncluirScripts() {
     <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script src="/assets/js/registro.js"></script>
     <script src="/assets/js/scripts.js"></script>
     ';
