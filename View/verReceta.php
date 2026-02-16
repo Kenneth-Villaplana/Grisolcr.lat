@@ -1,6 +1,6 @@
 <?php
 include('layout.php');
-include_once('/../Controller/recetaController.php');
+require_once __DIR__ .'../Controller/recetaController.php';
 
 $expedienteId = $_GET["IdExpediente"] ?? null;
 

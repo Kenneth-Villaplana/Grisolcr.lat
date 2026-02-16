@@ -1,7 +1,7 @@
 <?php 
 include('layout.php');
-include_once __DIR__ . '/../Controller/FacturacionController.php';
-include_once __DIR__ . '/../Controller/puntoVentaController.php';
+require_once __DIR__ . '/../Controller/FacturacionController.php';
+require_once __DIR__ .'/../Controller/puntoVentaController.php';
 
 $controller = new PuntoVentaController();
 ?>
