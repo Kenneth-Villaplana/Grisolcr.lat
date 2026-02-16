@@ -891,7 +891,125 @@ a.btn-inv-ghost:hover {
   }
 }
 
+/* 
+   HISTORIAL CIERRE DE CAJA
+*/
 
+.cierre-main-wrapper {
+    flex: 1 0 auto;
+    background: #f3f4f6;
+    padding: 2.5rem 0 3.5rem;
+}
+
+.cierre-card-wrapper {
+    position: relative;
+}
+
+.cierre-card-inner {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 22px 24px 24px;
+    box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+    border: 1px solid rgba(148,163,184,0.30);
+    overflow: hidden;
+}
+
+.cierre-card-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(16,185,129,0.16), transparent 60%);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.cierre-chip-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(15,23,42,0.04);
+    color: #4b5563;
+    font-size: 0.8rem;
+}
+
+/* Tabla */
+
+.cierre-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #111827;
+}
+
+.cierre-table thead tr {
+    background: #f9fafb;
+}
+
+.cierre-table thead th {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+}
+
+.cierre-table tbody tr {
+    transition: all 0.18s ease;
+}
+
+.cierre-table tbody tr:nth-child(even) {
+    background: #fdfdfd;
+}
+
+.cierre-table tbody tr:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+}
+
+.cierre-table tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Pills monetarios */
+
+.monto-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.monto-total {
+    background: rgba(59,130,246,0.10);
+    color: #2563eb;
+}
+
+.monto-positivo {
+    background: rgba(22,163,74,0.10);
+    color: #16a34a;
+}
+
+.monto-negativo {
+    background: rgba(239,68,68,0.10);
+    color: #dc2626;
+}
+
+.cajero-name {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+
+/*fin*/
 
 /*Botones */
 .btn.btn-custom {

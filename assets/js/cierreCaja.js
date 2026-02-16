@@ -1,4 +1,4 @@
-const CC_PATH = "/OptiGestion/Controller/cierreCajaController.php";
+const CC_PATH = "../Controller/cierreCajaController.php";
 
 /**
  * Helper para convertir texto a número
@@ -161,6 +161,8 @@ async function cargarHistorialCierres() {
 
         const data = await res.json();
         const tbody = document.getElementById("tablaCierres");
+        const contador = document.getElementById("cantidadCierres");
+
         if (!tbody) return;
 
         if (!data.length) {
@@ -170,31 +172,63 @@ async function cargarHistorialCierres() {
                         No hay cierres registrados
                     </td>
                 </tr>`;
+            if (contador) contador.textContent = 0;
             return;
         }
 
         tbody.innerHTML = "";
+        if (contador) contador.textContent = data.length;
 
         data.forEach(c => {
+            const diffClass =
+                parseFloat(c.Diferencia) === 0
+                    ? "monto-total"
+                    : parseFloat(c.Diferencia) > 0
+                        ? "monto-positivo"
+                        : "monto-negativo";
+
             tbody.innerHTML += `
                 <tr>
                     <td>${c.Fecha}</td>
-                    <td>${c.Cajero}</td>
-                    <td>${c.Facturas}</td>
-                    <td>₡${c.TotalCobrado}</td>
-                    <td>₡${c.Efectivo}</td>
-                    <td>₡${c.Tarjeta}</td>
-                    <td>₡${c.Sinpe}</td>
-                    <td>₡${c.Transferencia}</td>
-                    <td>₡${c.EfectivoContado}</td>
-                    <td class="${c.Diferencia != 0 ? 'text-danger fw-bold' : ''}">
-                        ₡${c.Diferencia}
+
+                    <td>
+                        <span class="cajero-name">
+                            ${c.Cajero}
+                        </span>
                     </td>
+
+                    <td>${c.Facturas}</td>
+
+                    <td>
+                        <span class="monto-pill monto-total">
+                            ₡${c.TotalCobrado}
+                        </span>
+                    </td>
+
+                    <td><span class="monto-pill monto-total">₡${c.Efectivo}</span></td>
+                    <td><span class="monto-pill monto-total">₡${c.Tarjeta}</span></td>
+                    <td><span class="monto-pill monto-total">₡${c.Sinpe}</span></td>
+                    <td><span class="monto-pill monto-total">₡${c.Transferencia}</span></td>
+
+                    <td>
+                        <span class="monto-pill monto-total">
+                            ₡${c.EfectivoContado}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="monto-pill ${diffClass}">
+                            ₡${c.Diferencia}
+                        </span>
+                    </td>
+
                     <td>${c.HoraCierre}</td>
-                </tr>`;
+                </tr>
+            `;
         });
 
     } catch (e) {
         console.error("Error cargando historial de cierres", e);
     }
 }
+

@@ -1,5 +1,5 @@
 
-const CONTROLLER_PATH = "/OptiGestion/Controller/FacturacionController.php";
+const CC_PATH = "../Controller/FacturacionController.php";
 
 document.addEventListener("DOMContentLoaded", () => {
 
