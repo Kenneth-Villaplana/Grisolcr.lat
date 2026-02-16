@@ -10,7 +10,7 @@ let montoAbonoInput;
 
 let facturarEmpresaCheckbox, datosEmpresaDiv, empresaNombreInput, empresaIdentificacionInput;
 
-const CONTROLLER_PATH = "/OptiGestion/Controller/puntoVentaController.php";
+const CONTROLLER_PATH = "../Controller/puntoVentaController.php";
 
 
 document.addEventListener("DOMContentLoaded", () => {
