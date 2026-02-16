@@ -1,6 +1,6 @@
 <?php
-include_once 'baseDatos.php';
-include_once 'facturaModel.php';
+include_once __DIR__ . '/baseDatos.php';
+include_once __DIR__ . '/facturaModel.php';
 
 
 class PuntoVentaModel {

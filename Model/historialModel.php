@@ -1,5 +1,5 @@
 <?php
-include_once('../Model/baseDatos.php');
+include_once __DIR__ . '/baseDatos.php';
 
 class HistorialModel {
 
