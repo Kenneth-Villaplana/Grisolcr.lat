@@ -12,57 +12,58 @@ include('layout.php');
 
 <body>
 <?php MostrarMenu(); ?>
+<main class="cierre-main-wrapper">
+    <div class="container-xl px-4">
 
-<main class="container py-5 pv-wrapper">
-
-  <div class="mb-1 text-end mt-3">
-    <a href="puntoVenta.php" class="btn btn-back-custom">
-      ← Volver a Punto de Venta
-    </a>
-  </div>
-
-  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 pv-header">
-    <div>
-      <h2 class="mb-1 pv-title">Cierre de Caja</h2>
-      <p class="mb-0 text-muted small">Resumen del día y registro del cierre.</p>
-    </div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col-12">
-      <div class="card shadow-sm">
-        <div class="card-header fw-bold">
-          Historial de cierres de caja
+        <div class="text-end mb-4">
+            <a href="puntoVenta.php" class="btn btn-staff-outline rounded-pill px-4">
+                ← Volver a Punto de Venta
+            </a>
         </div>
 
-        <div class="table-responsive">
-          <table class="table table-sm table-striped table-hover align-middle mb-0">
-            <thead class="table-light">
-              <tr>
-                <th>Fecha</th>
-                <th>Cajero</th>
-                <th>Facturas</th>
-                <th>Total cobrado</th>
-                <th>Efectivo</th>
-                <th>Tarjeta</th>
-                <th>SINPE</th>
-                <th>Transferencia</th>
-                <th>Efectivo contado</th>
-                <th>Diferencia</th>
-                <th>Hora cierre</th>
-              </tr>
-            </thead>
+        <div class="cierre-card-wrapper">
+            <div class="cierre-card-inner">
 
-            <tbody id="tablaCierres">
-              <!-- JS inserta aquí -->
-            </tbody>
-          </table>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-semibold mb-0">Historial de cierres de caja</h5>
+                        <span class="cierre-chip-count">
+                            <i class="bi bi-cash-stack"></i>
+                            <span id="cantidadCierres">0</span> cierres registrados
+                        </span>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table cierre-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Cajero</th>
+                                <th>Facturas</th>
+                                <th>Total</th>
+                                <th>Efectivo</th>
+                                <th>Tarjeta</th>
+                                <th>SINPE</th>
+                                <th>Transferencia</th>
+                                <th>Efectivo contado</th>
+                                <th>Diferencia</th>
+                                <th>Hora cierre</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tablaCierres">
+                            <!-- JS inserta filas aquí -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
+    </div>
 </main>
+
 
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
