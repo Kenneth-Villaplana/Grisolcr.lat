@@ -1,5 +1,5 @@
 <?php
-include_once("../Controller/recetaController.php");
+include_once("/../Controller/recetaController.php");
 
 $expedienteId = $_GET["IdExpediente"] ?? null;
 

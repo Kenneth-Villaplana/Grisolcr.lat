@@ -1,6 +1,6 @@
 <?php
 include('layout.php');
-include_once('/Controller/recetaController.php');
+include_once('/../Controller/recetaController.php');
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
