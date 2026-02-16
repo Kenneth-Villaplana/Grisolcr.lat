@@ -1,5 +1,5 @@
 
-const CC_PATH = "../Controller/FacturacionController.php";
+const CC_PATH = "../Controller/facturacionController.php";
 
 document.addEventListener("DOMContentLoaded", () => {
 
