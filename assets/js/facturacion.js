@@ -1,5 +1,5 @@
-
-const CC_PATH = "../Controller/facturacionController.php";
+// ⚠️ Si lo defines desde PHP, elimina esta línea
+const CONTROLLER_PATH = "/Controller/facturacionController.php";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnBuscar").addEventListener("click", buscarFacturas);
     document.getElementById("btnLimpiar").addEventListener("click", limpiarFiltros);
 
- 
     document.getElementById("codigoInput").addEventListener("keyup", (e) => {
         if (e.key === "Enter") buscarFacturas();
     });
@@ -19,10 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
 async function cargarFacturas(filtro = {}) {
 
     const body = document.getElementById("facturas-body");
+
     body.innerHTML = `
         <tr>
             <td colspan="9" class="text-center text-muted py-4">
@@ -72,7 +71,7 @@ function agregarFilaFactura(f) {
         pendiente > 0
             ? `<button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1"
                     onclick="abrirAbono(${f.FacturaId}, ${pendiente})">
-                <i class=""></i> Abonar
+                Abonar
            </button>`
             : "";
 
@@ -119,6 +118,7 @@ function buscarFacturas() {
 
 
 function limpiarFiltros() {
+
     document.getElementById("codigoInput").value = "";
     document.getElementById("cedulaInput").value = "";
 
@@ -172,7 +172,6 @@ function abrirAbono(facturaId, saldo) {
 
     document.getElementById("abonoFacturaId").value = facturaId;
     document.getElementById("abonoSaldo").value = saldo;
-
     document.getElementById("abonoMonto").value = "";
 
     new bootstrap.Modal(document.getElementById("modalAbono")).show();
@@ -189,6 +188,7 @@ async function guardarAbono() {
         alert("Ingrese un monto válido.");
         return;
     }
+
     if (monto > saldo) {
         alert("El abono no puede ser mayor al saldo.");
         return;
@@ -207,12 +207,8 @@ async function guardarAbono() {
     const result = await res.json();
 
     if (result.success) {
-
-       
         document.querySelector("#modalAbono .btn-close").click();
-
         mostrarReciboAbono(facturaId, monto);
-
         cargarFacturas();
     }
 }
@@ -237,25 +233,22 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
         <tr>
             <td>${d.Nombre}</td>
             <td style="text-align:center;">${d.Cantidad}</td>
-             <td style="text-align:center;">${d.Descuento}%</td>
+            <td style="text-align:center;">${d.Descuento}%</td>
             <td style="text-align:right;">₡${Number(d.Total).toLocaleString()}</td>
         </tr>
     `).join("");
 
     const html = `
         <div id="ticketAbono" style="font-family: monospace; padding: 5px; font-size:13px;">
-
             <h4 style="text-align:center; margin:0; font-weight:bold;">Óptica Grisol</h4>
             <div style="text-align:center;">Recibo de Abono</div>
             <hr>
-
             <strong>Factura #:</strong> ${f.Id}<br>
             <strong>Fecha:</strong> ${f.Fecha}<br>
             <strong>Cliente:</strong> ${f.Cliente || "-"}<br>
             <strong>Telefono:</strong> ${f.Telefono || "-"}<br>
             <hr>
-
-                <table style="width:100%; font-size:12px; border-collapse: collapse;">
+            <table style="width:100%; font-size:12px; border-collapse: collapse;">
                 <thead>
                     <tr>
                         <th style="text-align:left;">Producto</th>
@@ -268,13 +261,11 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
                     ${ticketDetalle}
                 </tbody>
             </table>
-
             <hr>
             <strong>Total factura:</strong> ₡${Number(f.Total).toLocaleString()}<br>
             <strong>Abono actual:</strong> ₡${Number(montoAbonado).toLocaleString()}<br>
             <strong>Total abonado:</strong> ₡${Number(f.Abonado).toLocaleString()}<br>
             <strong>Pendiente:</strong> ₡${Number(f.Pendiente).toLocaleString()}<br>
-
             <p style="text-align:center;">¡Gracias por su pago!</p>
         </div>
     `;
@@ -286,6 +277,7 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
 
 
 function imprimirReciboAbono() {
+
     const contenido = document.getElementById("ticketAbono").outerHTML;
     const ventana = window.open("", "_blank", "width=300,height=600");
 
