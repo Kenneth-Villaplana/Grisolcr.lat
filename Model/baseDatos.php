@@ -1,7 +1,6 @@
 <?php
 
-// Abre una conexion a la base de datos
-
+// Abre una conexión a la base de datos
 function AbrirBD(): mysqli
 {
     $host = "localhost";
@@ -10,35 +9,29 @@ function AbrirBD(): mysqli
     $db   = "optigestion";
     $port = 3306;
 
-    $conn = mysqli_init();
+    $conn = new mysqli($host, $user, $pass, $db, $port);
 
-    mysqli_real_connect(
-        $conn,
-        $host,
-        $user,
-        $pass,
-        $db,
-        $port,
-        NULL,
-        MYSQLI_CLIENT_SSL
-    );
-
-
-    if (!$conn) {
-        die("Error de conexión: " . mysqli_connect_error());
+    if ($conn->connect_error) {
+        die("Error de conexión a MySQL: " . $conn->connect_error);
     }
 
-    mysqli_query($conn, "SET time_zone = '-06:00'");
+    // Configuración de charset
+    $conn->set_charset("utf8mb4");
+
+    // Zona horaria
+    $conn->query("SET time_zone = '-06:00'");
     date_default_timezone_set('America/Costa_Rica');
 
     return $conn;
 }
 
-// Cierra la conexion a la base de datos.
+
+// Cierra la conexión a la base de datos
 function CerrarBD($enlace)
 {
-    mysqli_close($enlace);
+    if ($enlace instanceof mysqli) {
+        $enlace->close();
+    }
 }
-
 
 ?>
