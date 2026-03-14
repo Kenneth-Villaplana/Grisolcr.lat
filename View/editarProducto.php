@@ -1,6 +1,6 @@
 <?php 
 include('layout.php'); 
-require_once __DIR__ .'/../Controller/productoController.php'; 
+require_once __DIR__ . '/Controller/productoController.php'; 
 ?>
 
 <!DOCTYPE html>

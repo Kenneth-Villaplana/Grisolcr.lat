@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('layout.php');
-require_once __DIR__ . '/../Controller/citaController.php';
+require_once __DIR__ . '/Controller/citaController.php';
 
 
 procesarAccionesCita();

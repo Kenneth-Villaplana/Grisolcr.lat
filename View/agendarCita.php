@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../Controller/citaController.php';
+require_once __DIR__ . '/Controller/citaController.php';
 include('layout.php');
 
 $rol = $_SESSION['RolID'] ?? null;  
