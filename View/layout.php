@@ -18,11 +18,11 @@ function MostrarMenu() {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="/index.php">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/view/about.php">Sobre Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/view/anteojos.php">Anteojos</a></li>';
+                    <li class="nav-item"><a class="nav-link" href="/View/about.php">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/View/anteojos.php">Anteojos</a></li>';
 
     if (!$rol) {
-        echo '<li class="nav-item ms-lg-3"><a class="nav-link" href="/view/iniciarSesion.php">Iniciar Sesión</a></li>';
+        echo '<li class="nav-item ms-lg-3"><a class="nav-link" href="/View/iniciarSesion.php">Iniciar Sesión</a></li>';
     }
 
   
@@ -33,9 +33,9 @@ function MostrarMenu() {
                 Citas
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="/view/agendarCita.php">Agendar Cita</a></li>
-                <li><a class="dropdown-item" href="/view/editarcita.php">Mis Citas</a></li>
-                <li><a class="dropdown-item" href="/view/misRecetas.php">Historial Médico</a></li>
+                <li><a class="dropdown-item" href="/View/agendarCita.php">Agendar Cita</a></li>
+                <li><a class="dropdown-item" href="/View/editarCita.php">Mis Citas</a></li>
+                <li><a class="dropdown-item" href="/View/misRecetas.php">Historial Médico</a></li>
             </ul>
         </li>';
     }
@@ -51,7 +51,7 @@ function MostrarMenu() {
                     Personal
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="/view/personal.php">Ver Personal</a></li>
+                    <li><a class="dropdown-item" href="/View/personal.php">Ver Personal</a></li>
                 </ul>
             </li>';
         }
@@ -67,19 +67,19 @@ function MostrarMenu() {
         //  Doctor 
         if ($EmpleadoRol == 3) {
             echo '
-                <li><a class="dropdown-item" href="/view/historialExpedientes.php">Historial de Expedientes</a></li>
-                <li><a class="dropdown-item" href="/view/editarcita.php">Manipular Citas</a></li>';
+                <li><a class="dropdown-item" href="/View/historialExpedientes.php">Historial de Expedientes</a></li>
+                <li><a class="dropdown-item" href="/View/editarCita.php">Manipular Citas</a></li>';
         }
 
         //  Cajero y  Asistente 
         if ($EmpleadoRol == 4 || $EmpleadoRol == 2 || $EmpleadoRol == 1 ) {
             echo '
-                <li><a class="dropdown-item" href="/view/reportes.php">Reportes</a></li>
-                <li><a class="dropdown-item" href="/view/inventario.php">Inventario</a></li>
-                <li><a class="dropdown-item" href="/view/facturacion.php">Facturación</a></li>
-                <li><a class="dropdown-item" href="/view/historialCierreCaja.php">Historial Cierre de Caja</a></li>
-                <li><a class="dropdown-item" href="/view/historialExpedientes.php">Historial de Expedientes</a></li>
-                <li><a class="dropdown-item" href="/view/editarcita.php">Manipular Citas</a></li>';
+                <li><a class="dropdown-item" href="/View/reportes.php">Reportes</a></li>
+                <li><a class="dropdown-item" href="/View/inventario.php">Inventario</a></li>
+                <li><a class="dropdown-item" href="/View/facturacion.php">Facturación</a></li>
+                <li><a class="dropdown-item" href="/View/historialCierreCaja.php">Historial Cierre de Caja</a></li>
+                <li><a class="dropdown-item" href="/View/historialExpedientes.php">Historial de Expedientes</a></li>
+                <li><a class="dropdown-item" href="/View/editarCita.php">Manipular Citas</a></li>';
         }
 
         echo '
@@ -95,7 +95,7 @@ function MostrarMenu() {
                 Perfil
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="/view/editarPerfil.php">Editar Perfil</a></li>
+                <li><a class="dropdown-item" href="/View/editarPerfil.php">Editar Perfil</a></li>
                 <li><a class="dropdown-item" href="/logout.php">Cerrar Sesión</a></li>
             </ul>
         </li>';
