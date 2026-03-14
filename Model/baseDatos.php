@@ -4,9 +4,9 @@
 
 function AbrirBD(): mysqli
 {
-    $host = "grisolcr-server.mysql.database.azure.com";
-    $user = "hvehxcvtoq";
-    $pass = "Y$4JjJZJIxHieE2G";
+    $host = "localhost";
+    $user = "admin";
+    $pass = "AdminOptica2026!";
     $db   = "optigestion";
     $port = 3306;
 
