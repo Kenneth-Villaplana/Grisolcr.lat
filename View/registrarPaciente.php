@@ -11,7 +11,7 @@ include_once __DIR__ . '/Controller/loginController.php';
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Óptica Grisol</title>
-     <script src="../js/registro.js"></script>
+     <script src="assets/js/registro.js"></script>
     <?php IncluirCSS();?>
 </head>
 <body>
