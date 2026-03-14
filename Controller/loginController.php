@@ -1,22 +1,28 @@
 <?php
 
 include_once __DIR__ . '/../Model/loginModel.php';
-//include_once __DIR__ . '/../Model/usuarioModel.php';
-
 
 if(session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+/* =============================
+   CERRAR SESIÓN
+============================= */
+
 if(isset($_GET["cerrarSesion"])) {
+
     $_SESSION = array();
     session_destroy();
-    header('Location: /OptiGestion/View/iniciarSesion.php');
+
+    header('Location: /View/iniciarSesion.php');
     exit();
 }
 
+/* =============================
+   REGISTRO PACIENTE
+============================= */
 
-// Registro de paciente
 if(isset($_POST["btnRegistrarPaciente"])) {
 
     $cedula = $_POST["Cedula"];
@@ -30,11 +36,19 @@ if(isset($_POST["btnRegistrarPaciente"])) {
     $direccion = $_POST["Direccion"];
     $fechaNacimiento = $_POST["FechaNacimiento"];  
 
-    if($contrasenna != $confirmarContrasenna) {
+    /* VALIDACIÓN CONTRASEÑA */
+
+    if(strlen($contrasenna) < 8){
+
+        $_SESSION["txtMensaje"] = "La contraseña debe tener mínimo 8 caracteres.";
+
+    } 
+    elseif($contrasenna != $confirmarContrasenna) {
 
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
 
-    } else {
+    } 
+    else {
 
         $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
@@ -50,28 +64,30 @@ if(isset($_POST["btnRegistrarPaciente"])) {
             $fechaNacimiento
         );
 
-        
         if($resultadoReg['resultado'] == 1) {
 
             $_SESSION["txtMensaje"] = "Paciente registrado con éxito";
             $_SESSION["registroExitoso"] = true;
 
-            //cuando viene desde pos → redirige al Punto de Venta 
             if (isset($_POST["origen"]) && $_POST["origen"] === "POS") {
-                header("Location: /OptiGestion/View/puntoVenta.php?cedula=" . urlencode($cedula));
+                header("Location: /View/puntoVenta.php?cedula=" . urlencode($cedula));
                 exit;
             }
 
         } 
-        
         else {
+
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Error en el registro.";
         }
     }
 }
 
-// Registro de empleado
+/* =============================
+   REGISTRO EMPLEADO
+============================= */
+
 if(isset($_POST["btnRegistrarPersonal"])) {
+
     $cedula = $_POST["Cedula"];
     $nombre = $_POST["Nombre"];
     $apellido = $_POST["Apellido"];
@@ -83,34 +99,67 @@ if(isset($_POST["btnRegistrarPersonal"])) {
     $direccion = $_POST["Direccion"];
     $rolId = $_POST["RolId"]; 
     $fechaNacimiento = $_POST["FechaNacimiento"]; 
- 
-    if($contrasenna != $confirmarContrasenna) {
-        $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
-    } else {
-         $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
-        $resultadoReg = RegistrarPersonalModel( $cedula, $nombre, $apellido, $apellidoDos, $correoElectronico, $hash, $telefono, $direccion, $rolId,$fechaNacimiento);
-       
-         if($resultadoReg['resultado'] == 1) {
+    if(strlen($contrasenna) < 8){
+
+        $_SESSION["txtMensaje"] = "La contraseña debe tener mínimo 8 caracteres.";
+
+    }
+    elseif($contrasenna != $confirmarContrasenna) {
+
+        $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
+
+    }
+    else {
+
+        $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
+
+        $resultadoReg = RegistrarPersonalModel(
+            $cedula,
+            $nombre,
+            $apellido,
+            $apellidoDos,
+            $correoElectronico,
+            $hash,
+            $telefono,
+            $direccion,
+            $rolId,
+            $fechaNacimiento
+        );
+
+        if($resultadoReg['resultado'] == 1) {
+
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'];
             $_SESSION["registroExitoso"] = true;
-        } else {
+
+        } 
+        else {
+
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Error en el registro.";
         }
     }
 }
 
+/* =============================
+   LOGIN
+============================= */
 
-// para el inicio de sesión
 if(isset($_POST["btnIniciarSesion"])) {
+
     $correo = $_POST["CorreoElectronico"] ?? '';
     $contrasenna = $_POST["Contrasenna"] ?? '';
 
     if(empty($correo) || empty($contrasenna)) {
+
         $_SESSION["txtMensaje"] = "Debe ingresar correo y contraseña.";
-    } else {
+
+    } 
+    else {
+
         $usuario = IniciarSesionModel($correo);
+
         if($usuario && password_verify($contrasenna, $usuario["Contrasenna"])) {
+
             $_SESSION["UsuarioID"] = $usuario["IdUsuario"];
             $_SESSION["Cedula"] = $usuario["Cedula"];
             $_SESSION["Nombre"] = $usuario["Nombre"];
@@ -124,37 +173,54 @@ if(isset($_POST["btnIniciarSesion"])) {
 
             header('Location: /index.php');
             exit();
-        } else {
+
+        } 
+        else {
+
             $_SESSION["txtMensaje"] = "Correo electrónico o contraseña incorrectos.";
         }
     }
-//cambiar contrasenna
+}
+
+/* =============================
+   CAMBIAR CONTRASEÑA
+============================= */
+
 if (isset($_POST["btnCambiarContrasenna"])) {
 
     $token = $_POST["Token"] ?? '';
     $nueva = $_POST["NuevaContrasenna"] ?? '';
     $confirmar = $_POST["ConfirmarContrasenna"] ?? '';
 
-    if ($nueva != $confirmar) {
-        $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
-        header("Location: /OptiGestion/View/restablecerContrasenna.php?token=".$token);
+    if(strlen($nueva) < 8){
+
+        $_SESSION["txtMensaje"] = "La contraseña debe tener mínimo 8 caracteres.";
+        header("Location: /View/restablecerContrasenna.php?token=".$token);
         exit;
     }
 
-    include_once __DIR__ . '/../Model/loginModel.php';
+    if ($nueva != $confirmar) {
+
+        $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
+        header("Location: /View/restablecerContrasenna.php?token=".$token);
+        exit;
+    }
 
     $resultado = CambiarContrasennaModel($token, $nueva);
 
     if ($resultado['resultado'] == 1) {
-        $_SESSION["txtMensaje"] = "Contraseña actualizada correctamente. Ahora puede iniciar sesión.";
-        header("Location: /OptiGestion/View/iniciarSesion.php");
+
+        $_SESSION["txtMensaje"] = "Contraseña actualizada correctamente.";
+        header("Location: /View/iniciarSesion.php");
         exit;
-    } else {
+
+    } 
+    else {
+
         $_SESSION["txtMensaje"] = $resultado['mensaje'];
-        header("Location: /OptiGestion/View/restablecerContrasenna.php?token=".$token);
+        header("Location: /View/restablecerContrasenna.php?token=".$token);
         exit;
     }
-}
 }
 
 ?>
