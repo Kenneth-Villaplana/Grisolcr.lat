@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$agendarUrl = "/View/RegistrarPaciente.php";
+$agendarUrl = "/View/registrarPaciente.php";
 
 // Paciente logueado
 if (isset($_SESSION["UsuarioID"]) && empty($_SESSION["EmpleadoRol"])) {
