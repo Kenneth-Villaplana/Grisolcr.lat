@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-require_once '../Model/pacienteModel.php';
-include_once '../Model/baseDatos.php';
+require_once __DIR__ . '/../Model/pacienteModel.php';
+require_once __DIR__ . '/../Model/baseDatos.php';
 
 header('Content-Type: application/json');
 
