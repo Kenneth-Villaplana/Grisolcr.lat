@@ -8,10 +8,10 @@ $agendarUrl = "/View/registrarPaciente.php";
 
 // Paciente logueado
 if (isset($_SESSION["UsuarioID"]) && empty($_SESSION["EmpleadoRol"])) {
-    $agendarUrl = "/View/agendarCita.php";
+    $agendarUrl = "/../View/agendarCita.php";
 }
 
-require_once __DIR__ . '/View/layout.php';
+require_once __DIR__ . '/../View/layout.php';
 
 ?>
 
