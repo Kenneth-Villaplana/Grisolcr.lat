@@ -1,12 +1,17 @@
 <?php
-session_start();
-require_once __DIR__ . '/Controller/citaController.php';
-include('layout.php');
 
-$rol = $_SESSION['RolID'] ?? null;  
-$nombrePaciente = ($rol === 'Paciente') 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../Controller/citaController.php';
+require_once __DIR__ . '/layout.php';
+
+$rol = $_SESSION['RolID'] ?? null;
+
+$nombrePaciente = ($rol === 'Paciente')
     ? (($_SESSION["Nombre"] ?? '') . " " . ($_SESSION["Apellido"] ?? ''))
-    : ""; 
+    : "";
 
 $mensajeExito = $_SESSION['mensaje_exito'] ?? "";
 $mensajeError = $_SESSION['mensaje_error'] ?? "";
