@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/layout.php';
-require_once __DIR__ . '/Model/productoModel.php';
+require_once __DIR__ . '/../Model/productoModel.php';
 
 $baseUrl = getenv('BASE_URL') 
     ?: ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http')
