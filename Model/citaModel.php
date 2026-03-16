@@ -3,32 +3,35 @@ include_once __DIR__ . '/baseDatos.php';
 
 class CitaModel {
 
-
-
-   public function obtenerDoctores()
-{
-    $conn = AbrirBD();
-
-    $stmt = $conn->prepare("CALL sp_ObtenerDoctores()");
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $doctores = [];
-
-    if ($result) {
-        while ($row = $result->fetch_assoc()) {
-            $doctores[] = $row;
-        }
+    private function limpiarResultados($conn)
+    {
+        while ($conn->more_results() && $conn->next_result()) {;}
     }
 
+    public function obtenerDoctores()
+    {
+        $conn = AbrirBD();
 
-    $stmt->close();
-    while ($conn->more_results() && $conn->next_result()) {;}
+        $stmt = $conn->prepare("CALL sp_ObtenerDoctores()");
+        $stmt->execute();
 
-    CerrarBD($conn);
+        $result = $stmt->get_result();
 
-    return $doctores;
-}
+        $doctores = [];
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $doctores[] = $row;
+            }
+        }
+
+        $stmt->close();
+        $this->limpiarResultados($conn);
+        CerrarBD($conn);
+
+        return $doctores;
+    }
+
     public function obtenerPacienteId($usuarioId)
     {
         $conn = AbrirBD();
@@ -37,11 +40,14 @@ class CitaModel {
         $stmt->bind_param("i", $usuarioId);
         $stmt->execute();
 
-        $result = $stmt->get_result()->fetch_assoc();
+        $result = $stmt->get_result();
+        $row = $result ? $result->fetch_assoc() : null;
+
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
-        return $result["PacienteId"];
+        return $row["PacienteId"] ?? null;
     }
 
     public function obtenerHorasOcupadas($doctorId, $fecha)
@@ -55,32 +61,21 @@ class CitaModel {
         $result = $stmt->get_result();
 
         $horas = [];
-        while ($row = $result->fetch_assoc()) {
-            $horas[] = $row['Hora'];
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $horas[] = $row['Hora'];
+            }
         }
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
         return $horas;
     }
 
     public function insertarCitaExterna(
-    $fecha,
-    $duracion,
-    $motivo,
-    $estado,
-    $doctorId,
-    $nombreExt,
-    $apellidoExt,
-    $telefonoExt,
-    $correoExt
-) {
-    $conn = AbrirBD();
-
-    $stmt = $conn->prepare("CALL sp_InsertarCitaExterna(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param(
-        "sississss",
         $fecha,
         $duracion,
         $motivo,
@@ -90,51 +85,75 @@ class CitaModel {
         $apellidoExt,
         $telefonoExt,
         $correoExt
-    );
+    ) {
 
-    $stmt->execute();
+        $conn = AbrirBD();
 
-    $result = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-    CerrarBD($conn);
+        $stmt = $conn->prepare("CALL sp_InsertarCitaExterna(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param(
+            "sississss",
+            $fecha,
+            $duracion,
+            $motivo,
+            $estado,
+            $doctorId,
+            $nombreExt,
+            $apellidoExt,
+            $telefonoExt,
+            $correoExt
+        );
 
-    return $result["NuevaCitaId"];
-}
+        $stmt->execute();
 
+        $result = $stmt->get_result();
+        $row = $result ? $result->fetch_assoc() : null;
 
-public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacienteId, $doctorId)
-{
-    $conn = AbrirBD();
+        $stmt->close();
+        $this->limpiarResultados($conn);
+        CerrarBD($conn);
 
-    $stmt = $conn->prepare("CALL sp_InsertarCitaPaciente(?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sissii", $fecha, $duracion, $motivo, $estado, $pacienteId, $doctorId);
-    $stmt->execute();
+        return $row["NuevaCitaId"] ?? null;
+    }
 
-    $result = $stmt->get_result()->fetch_assoc();
+    public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacienteId, $doctorId)
+    {
+        $conn = AbrirBD();
 
-    $stmt->close();
-    CerrarBD($conn);
+        $stmt = $conn->prepare("CALL sp_InsertarCitaPaciente(?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sissii", $fecha, $duracion, $motivo, $estado, $pacienteId, $doctorId);
 
-    return $result["NuevaCitaId"];
-}
+        $stmt->execute();
 
+        $result = $stmt->get_result();
+        $row = $result ? $result->fetch_assoc() : null;
 
+        $stmt->close();
+        $this->limpiarResultados($conn);
+        CerrarBD($conn);
+
+        return $row["NuevaCitaId"] ?? null;
+    }
 
     public function obtenerCitasPaciente($usuarioId)
     {
         $conn = AbrirBD();
-        $citas = [];
 
         $stmt = $conn->prepare("CALL sp_obtener_citas_paciente(?)");
         $stmt->bind_param("i", $usuarioId);
         $stmt->execute();
 
         $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc()) {
-            $citas[] = $row;
+
+        $citas = [];
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $citas[] = $row;
+            }
         }
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
         return $citas;
@@ -143,17 +162,22 @@ public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacie
     public function obtenerTodasLasCitas()
     {
         $conn = AbrirBD();
-        $citas = [];
 
         $stmt = $conn->prepare("CALL sp_obtener_citas_todas()");
         $stmt->execute();
 
         $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc()) {
-            $citas[] = $row;
+
+        $citas = [];
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $citas[] = $row;
+            }
         }
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
         return $citas;
@@ -168,9 +192,10 @@ public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacie
         $stmt->execute();
 
         $result = $stmt->get_result();
-        $cita = $result->fetch_assoc();
+        $cita = $result ? $result->fetch_assoc() : null;
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
         return $cita;
@@ -185,9 +210,10 @@ public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacie
         $stmt->execute();
 
         $result = $stmt->get_result();
-        $cita = $result->fetch_assoc();
+        $cita = $result ? $result->fetch_assoc() : null;
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
         return $cita;
@@ -202,6 +228,7 @@ public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacie
         $ok = $stmt->execute();
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
         return $ok;
@@ -216,6 +243,7 @@ public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacie
         $ok = $stmt->execute();
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
         return $ok;
@@ -227,11 +255,12 @@ public function insertarCitaPaciente($fecha, $duracion, $motivo, $estado, $pacie
 
         $stmt = $conn->prepare("CALL sp_FinalizarCita(?)");
         $stmt->bind_param("i", $citaId);
-        $success = $stmt->execute();
+        $ok = $stmt->execute();
 
         $stmt->close();
+        $this->limpiarResultados($conn);
         CerrarBD($conn);
 
-        return $success;
+        return $ok;
     }
 }
