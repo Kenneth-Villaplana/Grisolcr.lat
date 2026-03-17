@@ -88,6 +88,7 @@ class PuntoVentaController {
             $cedulaIngresada = trim((string)$cedulaIngresada);
             $facturaElectronica = intval($facturaElectronica);
             $montoAbono = floatval($montoAbono);
+            $facturarEmpresa = intval($facturarEmpresa);
 
             if (!is_array($productos) || count($productos) === 0) {
                 return ["error" => "SIN_PRODUCTOS"];
@@ -178,36 +179,62 @@ class PuntoVentaController {
 
             $stmt->bind_param("isd", $facturaId, $productosJson, $saldoPendiente);
             $stmt->execute();
-            $stmt->close();
 
+            if ($stmt->errno) {
+                throw new Exception($stmt->error);
+            }
+
+            $stmt->close();
             $this->limpiarResultados();
 
             $this->conn->commit();
 
             $fechaActual = date("Y-m-d H:i:s");
 
+            $encabezado = [
+                "FacturaId" => $facturaId,
+                "Id" => $facturaId,
+                "Fecha" => $fechaActual,
+                "Cliente" => $clienteNombre,
+                "NombreCliente" => $clienteNombre,
+                "Telefono" => $telefono,
+                "Empresa" => $empresaNombre,
+                "EmpresaNombre" => $empresaNombre,
+                "IdentificacionEmpresa" => $empresaIdentificacion,
+                "MetodoPago" => $metodoPago,
+                "Pago" => $metodoPago,
+                "Subtotal" => number_format($subtotal, 2, ".", ""),
+                "Descuento" => number_format($descuentoTotal, 2, ".", ""),
+                "IVA" => number_format($iva, 2, ".", ""),
+                "Total" => number_format($total, 2, ".", ""),
+                "Abono" => number_format($montoAbono, 2, ".", ""),
+                "Abonado" => number_format($montoAbono, 2, ".", ""),
+                "SaldoPendiente" => number_format($saldoPendiente, 2, ".", ""),
+                "Pendiente" => number_format($saldoPendiente, 2, ".", ""),
+                "Saldo_Pendiente" => number_format($saldoPendiente, 2, ".", "")
+            ];
+
             return [
                 "FacturaId" => $facturaId,
-                "encabezado" => [
-                    "Id" => $facturaId,
-                    "Fecha" => $fechaActual,
-                    "Cliente" => $clienteNombre,
-                    "Telefono" => $telefono,
-                    "Empresa" => $empresaNombre,
-                    "IdentificacionEmpresa" => $empresaIdentificacion,
-                    "MetodoPago" => $metodoPago,
-                    "Subtotal" => number_format($subtotal, 2, ".", ""),
-                    "Descuento" => number_format($descuentoTotal, 2, ".", ""),
-                    "IVA" => number_format($iva, 2, ".", ""),
-                    "Total" => number_format($total, 2, ".", ""),
-                    "Abono" => number_format($montoAbono, 2, ".", ""),
-                    "SaldoPendiente" => number_format($saldoPendiente, 2, ".", "")
-                ],
+                "Id" => $facturaId,
+                "Fecha" => $fechaActual,
+                "Cliente" => $clienteNombre,
+                "Pago" => $metodoPago,
+                "Subtotal" => number_format($subtotal, 2, ".", ""),
+                "Descuento" => number_format($descuentoTotal, 2, ".", ""),
+                "IVA" => number_format($iva, 2, ".", ""),
+                "Total" => number_format($total, 2, ".", ""),
+                "Abono" => number_format($montoAbono, 2, ".", ""),
+                "Pendiente" => number_format($saldoPendiente, 2, ".", ""),
+                "encabezado" => $encabezado,
                 "detalle" => $detalleFactura
             ];
 
         } catch (\Throwable $e) {
-            $this->conn->rollback();
+            if ($this->conn && $this->conn->errno !== null) {
+                $this->conn->rollback();
+            }
+
             error_log("Error generarVenta: " . $e->getMessage());
 
             return [
