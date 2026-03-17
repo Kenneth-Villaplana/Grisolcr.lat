@@ -56,7 +56,7 @@ include_once __DIR__ . '/../Controller/loginController.php';
 
                 <div class="text-center mt-4">
                     <span class="register-text">¿No tienes cuenta?</span>
-                    <a href="RegistrarPaciente.php" class="register-modern-link">Registrarse</a>
+                    <a href="registrarPaciente.php" class="register-modern-link">Registrarse</a>
                 </div>
 
             </form>
