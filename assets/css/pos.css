@@ -68,3 +68,68 @@
     padding: 6px 12px;
     font-weight: 600;
 }
+/* ================= BOTÓN AGREGAR ================= */
+
+.btn-agregar {
+    background: linear-gradient(135deg, #0d6efd, #0056d2);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-agregar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ================= PRODUCTOS ================= */
+
+.producto-card {
+    border-radius: 15px;
+    transition: all 0.2s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ================= CARRITO ================= */
+
+.cart-item-modern {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+/* DELETE BUTTON */
+
+.btn-delete {
+    background: #f8d7da;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 8px;
+}
+
+.btn-delete:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* TOTAL */
+
+.item-total {
+    font-weight: bold;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* PRECIO */
+
+.precio-producto {
+    font-weight: bold;
+    color: #0d6efd;
+}
