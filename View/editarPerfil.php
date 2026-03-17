@@ -1,10 +1,15 @@
 <?php
-include('layout.php');
-require_once __DIR__ . '/../Controller/usuarioController.php';
+session_start();
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+// DEBUG TEMPORAL
+if (!isset($_SESSION['IdUsuario'])) {
+    echo "NO HAY SESIÓN<br>";
+    var_dump($_SESSION);
+    exit;
 }
+
+include('layout.php'); 
+require_once __DIR__ . '/../Controller/usuarioController.php';
 ?>
 
 <!DOCTYPE html>
