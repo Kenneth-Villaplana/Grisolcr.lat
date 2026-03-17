@@ -16612,3 +16612,114 @@ textarea {
 .dark-mode #cart-items .fw-bold.text-end {
     color: #ffffff !important;
 }
+/* CONTENEDOR GENERAL */
+.login-modern-wrapper{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+/* CONTENEDOR LOGIN */
+.login-modern-container{
+    width:100%;
+    max-width:1100px;
+    display:flex;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+/* PANEL IZQUIERDO */
+.login-modern-left{
+    flex:1;
+    padding:40px;
+    background:white;
+}
+
+/* PANEL DERECHO */
+.login-modern-right{
+    flex:1;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+
+/* INPUT MODERN */
+.input-group-modern{
+    display:flex;
+    align-items:center;
+    width:100%;
+}
+
+.modern-input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+/* BOTON LOGIN */
+.btn-modern-login{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:none;
+}
+
+/* ========================== */
+/* RESPONSIVE TABLET */
+/* ========================== */
+
+@media (max-width:992px){
+
+.login-modern-container{
+    flex-direction:column;
+}
+
+.login-modern-right{
+    display:none;
+}
+
+.login-modern-left{
+    width:100%;
+}
+
+}
+
+/* ========================== */
+/* RESPONSIVE IPHONE */
+/* ========================== */
+
+@media (max-width:600px){
+
+.login-modern-wrapper{
+    padding:15px;
+}
+
+.login-modern-container{
+    border-radius:10px;
+}
+
+.login-modern-left{
+    padding:25px;
+}
+
+.login-title{
+    font-size:26px;
+}
+
+.login-subtitle{
+    font-size:14px;
+}
+
+.modern-input{
+    font-size:16px;
+}
+
+.btn-modern-login{
+    font-size:16px;
+}
+
+}
