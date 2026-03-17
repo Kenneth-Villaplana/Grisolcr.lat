@@ -16,11 +16,15 @@ class FacturacionController {
         while ($this->conn->more_results() && $this->conn->next_result()) {;}
     }
 
+    /* ===============================
+       OBTENER FACTURAS
+    =============================== */
+
     public function obtenerFacturas($numero = null, $cedula = null) {
 
         try {
 
-            $num = ($numero === null || $numero === '') ? null : $numero;
+            $num = ($numero === null || $numero === '') ? null : (int)$numero;
             $ced = ($cedula === null || $cedula === '') ? null : $cedula;
 
             $this->limpiarResultados();
@@ -31,7 +35,7 @@ class FacturacionController {
                 throw new Exception($this->conn->error);
             }
 
-            $stmt->bind_param("ss", $num, $ced);
+            $stmt->bind_param("is", $num, $ced);
             $stmt->execute();
 
             $res = $stmt->get_result();
@@ -101,6 +105,9 @@ class FacturacionController {
         }
     }
 
+    /* ===============================
+       REGISTRAR ABONO
+    =============================== */
 
     public function registrarAbono($facturaId, $monto) {
 
@@ -119,11 +126,14 @@ class FacturacionController {
 
             $stmt->bind_param("id", $facturaId, $monto);
             $stmt->execute();
+
             $stmt->close();
 
             $this->limpiarResultados();
 
-            return ["success" => true];
+            return [
+                "success" => true
+            ];
 
         } catch (\Throwable $e) {
 
@@ -136,6 +146,9 @@ class FacturacionController {
         }
     }
 
+    /* ===============================
+       OBTENER FACTURA COMPLETA
+    =============================== */
 
     public function obtenerFacturaCompleta($facturaId) {
 
@@ -184,7 +197,6 @@ class FacturacionController {
         }
     }
 
-
     public function __destruct() {
 
         if ($this->conn) {
@@ -194,11 +206,12 @@ class FacturacionController {
 }
 
 
-/* API */
+/* ===============================
+   API
+=============================== */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    ob_clean();
     header('Content-Type: application/json; charset=utf-8');
 
     $input = json_decode(file_get_contents("php://input"), true);
@@ -243,6 +256,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ),
                 JSON_UNESCAPED_UNICODE
             );
+
+        break;
+
+        default:
+
+            echo json_encode([
+                "error" => "Acción no válida"
+            ]);
 
         break;
     }
