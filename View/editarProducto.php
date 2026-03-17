@@ -6,7 +6,7 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 
-/* validar ID */
+/* VALIDAR ID */
 
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     die("Producto inválido");
@@ -14,21 +14,22 @@ if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
 
 $productoId = intval($_GET['id']);
 
-/* obtener producto */
+/* OBTENER PRODUCTO */
 
 $productos = ObtenerProductos($productoId);
-$producto = $productos[0] ?? null;
 
-if(!$producto){
+if(empty($productos)){
     die("Producto no encontrado");
 }
+
+$producto = $productos[0];
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Óptica Grisol - Editar Producto</title>
 <?php IncluirCSS(); ?>
 </head>
@@ -64,18 +65,22 @@ if(!$producto){
 
 <div class="p-4">
 
-<form method="POST" action="../Controller/productoController.php" 
-name="editarProductoForm" 
-id="formEditarProducto" 
+<form method="POST"
+action="../Controller/productoController.php"
+name="editarProductoForm"
+id="formEditarProducto"
 class="row g-3 justify-content-center">
 
 <input type="hidden" name="btnEditarProducto" value="1">
 
 <div class="col-12 col-md-8">
 
-<h6 class="edit-section-title text-center mb-3">Información</h6>
+<h6 class="edit-section-title text-center mb-3">
+Información
+</h6>
 
 <label class="form-label">Producto ID</label>
+
 <input type="text"
 id="ProductoId"
 name="ProductoId"
@@ -84,6 +89,7 @@ value="<?php echo htmlspecialchars($producto['ProductoId']); ?>"
 readonly>
 
 <label class="form-label">Nombre</label>
+
 <input type="text"
 id="Nombre"
 name="Nombre"
@@ -92,6 +98,7 @@ value="<?php echo htmlspecialchars($producto['Nombre']); ?>"
 required>
 
 <label class="form-label">Descripción</label>
+
 <textarea name="Descripcion"
 id="Descripcion"
 class="form-control mb-3 auto-grow"
@@ -99,6 +106,7 @@ rows="1"
 required><?php echo htmlspecialchars($producto['Descripcion']); ?></textarea>
 
 <label class="form-label">Precio</label>
+
 <input type="number"
 name="Precio"
 id="Precio"
@@ -107,6 +115,7 @@ value="<?php echo htmlspecialchars($producto['Precio']); ?>"
 required>
 
 <label class="form-label">Cantidad</label>
+
 <input type="number"
 name="Cantidad"
 id="Cantidad"
@@ -117,11 +126,15 @@ required>
 </div>
 
 <div class="col-12 text-center mt-2">
+
 <button type="button"
 class="btn-save-modern px-5"
 id="btnAbrirModalEditar">
+
 Guardar Cambios
+
 </button>
+
 </div>
 
 </form>
@@ -138,24 +151,47 @@ Guardar Cambios
 
 <!-- MODAL CONFIRMAR -->
 
-<div class="modal fade" id="modalConfirmarEdicion" tabindex="-1">
+<div class="modal fade"
+id="modalConfirmarEdicion"
+tabindex="-1">
+
 <div class="modal-dialog modal-dialog-centered">
 <div class="modal-content">
 
 <div class="modal-header">
-<h5 class="modal-title">Confirmar cambios</h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+<h5 class="modal-title">
+Confirmar cambios
+</h5>
+
+<button type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
 </div>
 
 <div class="modal-body">
+
 ¿Desea guardar los cambios realizados en este producto?
+
 </div>
 
 <div class="modal-footer">
-<button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-<button class="btn btn-outline-primary" id="btnConfirmarCambios">
-Sí, guardar
+
+<button class="btn btn-outline-secondary"
+data-bs-dismiss="modal">
+
+Cancelar
+
 </button>
+
+<button class="btn btn-outline-primary"
+id="btnConfirmarCambios">
+
+Sí, guardar
+
+</button>
+
 </div>
 
 </div>
