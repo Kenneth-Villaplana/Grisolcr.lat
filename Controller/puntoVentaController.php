@@ -16,165 +16,218 @@ class PuntoVentaController {
         $this->facturaModel = new FacturaModel($this->conn);
     }
 
- 
+    private function limpiarResultados() {
+        while ($this->conn->more_results() && $this->conn->next_result()) {;}
+    }
+
     public function getProductos() {
         try {
             return $this->puntoVentaModel->obtenerProductos();
         } catch (\Throwable $e) {
-            return ['error' => 'Error al obtener productos: '.$e->getMessage()];
+            return ['error' => 'Error al obtener productos: ' . $e->getMessage()];
         }
     }
 
-public function obtenerClientePorCedula($cedula) {
-    try {
-        $stmt = $this->conn->prepare("CALL ObtenerClientePorCedula(?)");
-        $stmt->bind_param("s", $cedula);
-        $stmt->execute();
+    public function obtenerClientePorCedula($cedula) {
+        try {
+            $this->limpiarResultados();
 
-        $res = $stmt->get_result();
-        $data = $res->fetch_assoc();
+            $stmt = $this->conn->prepare("CALL ObtenerClientePorCedula(?)");
 
-        $stmt->close();
-        $this->conn->next_result();   
+            if (!$stmt) {
+                throw new Exception($this->conn->error);
+            }
 
-        return $data ?: [];
+            $stmt->bind_param("s", $cedula);
+            $stmt->execute();
 
-    } catch (\Throwable $e) {
-        error_log("Error obtenerClientePorCedula: " . $e->getMessage());
-        return [];
-    }
-}
-    
-public function generarVenta(
-    $pacienteId,
-    $clienteNombre,
-    $metodoPago,
-    $productos,
-    $facturarEmpresa,
-    $empresaNombre,
-    $empresaIdentificacion,
-    $facturaElectronica,
-    $montoAbono,
-    $cedulaIngresada,
-    $telefono
-) {
-    try {
+            $res = $stmt->get_result();
+            $data = $res ? $res->fetch_assoc() : null;
 
-        $cierreModel = new CierreCajaModel($this->conn);
+            if ($res) {
+                $res->free();
+            }
 
-        if ($cierreModel->cajaCerradaHoy()) {
-            return ["error" => "CAJA_CERRADA"];
+            $stmt->close();
+            $this->limpiarResultados();
+
+            return $data ?: [];
+
+        } catch (\Throwable $e) {
+            error_log("Error obtenerClientePorCedula: " . $e->getMessage());
+            return [];
         }
-        $pacienteId      = intval($pacienteId) ?: 0;
-        $clienteNombre   = trim($clienteNombre);
-        $empresaNombre   = trim($empresaNombre);
-        $empresaIdentificacion = trim($empresaIdentificacion);
-        $telefono        = trim($telefono);
-        $metodoPago      = trim($metodoPago);
-        $cedulaIngresada = trim($cedulaIngresada);
+    }
 
-       
-        $stmt = $this->conn->prepare(
-            "CALL GenerarFacturaFlexible(?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        );
+    public function generarVenta(
+        $pacienteId,
+        $clienteNombre,
+        $metodoPago,
+        $productos,
+        $facturarEmpresa,
+        $empresaNombre,
+        $empresaIdentificacion,
+        $facturaElectronica,
+        $montoAbono,
+        $cedulaIngresada,
+        $telefono
+    ) {
+        try {
+            $cierreModel = new CierreCajaModel($this->conn);
 
-        $stmt->bind_param(
-            "isssssids",
-            $pacienteId,             
-            $clienteNombre, 
-            $cedulaIngresada,         
-            $metodoPago,             
-            $empresaNombre,          
-            $empresaIdentificacion,  
-            $facturaElectronica,     
-            $montoAbono,            
-            $telefono                
-        );
+            if ($cierreModel->cajaCerradaHoy()) {
+                return ["error" => "CAJA_CERRADA"];
+            }
 
-        $stmt->execute();
-        $res = $stmt->get_result();
-        $row = $res ? $res->fetch_assoc() : null;
-        $facturaId = $row["FacturaId"] ?? null;
+            $pacienteId = intval($pacienteId) ?: 0;
+            $clienteNombre = trim((string)$clienteNombre);
+            $empresaNombre = trim((string)$empresaNombre);
+            $empresaIdentificacion = trim((string)$empresaIdentificacion);
+            $telefono = trim((string)$telefono);
+            $metodoPago = trim((string)$metodoPago);
+            $cedulaIngresada = trim((string)$cedulaIngresada);
+            $facturaElectronica = intval($facturaElectronica);
+            $montoAbono = floatval($montoAbono);
 
-        $stmt->close();
-        $this->conn->next_result();
+            if (!is_array($productos) || count($productos) === 0) {
+                return ["error" => "SIN_PRODUCTOS"];
+            }
 
-        if (!$facturaId) return false;
+            $this->conn->begin_transaction();
 
-        $subtotal = 0;
-        $descuentoTotal = 0;
-        $detalleFactura = [];
+            $this->limpiarResultados();
 
-        foreach ($productos as $p) {
+            $stmt = $this->conn->prepare(
+                "CALL GenerarFacturaFlexible(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            );
 
-            $totalProducto  = $p["precioUnitario"] * $p["cantidad"];
-            $descuentoLinea = $totalProducto * ($p["descuento"] / 100);
+            if (!$stmt) {
+                throw new Exception($this->conn->error);
+            }
 
-            $subtotal       += $totalProducto;
-            $descuentoTotal += $descuentoLinea;
+            $stmt->bind_param(
+                "isssssids",
+                $pacienteId,
+                $clienteNombre,
+                $cedulaIngresada,
+                $metodoPago,
+                $empresaNombre,
+                $empresaIdentificacion,
+                $facturaElectronica,
+                $montoAbono,
+                $telefono
+            );
 
-            $detalleFactura[] = [
-                "Nombre"         => $p["descripcion"],
-                "Cantidad"       => $p["cantidad"],
-                "PrecioUnitario" => $p["precioUnitario"],
-                "Descuento"      => $p["descuento"],
-                "Total"          => number_format($totalProducto - $descuentoLinea, 2, ".", "")
+            $stmt->execute();
+
+            $res = $stmt->get_result();
+            $row = $res ? $res->fetch_assoc() : null;
+
+            if ($res) {
+                $res->free();
+            }
+
+            $facturaId = $row["FacturaId"] ?? null;
+
+            $stmt->close();
+            $this->limpiarResultados();
+
+            if (!$facturaId) {
+                throw new Exception("No se obtuvo FacturaId al generar el encabezado.");
+            }
+
+            $subtotal = 0;
+            $descuentoTotal = 0;
+            $detalleFactura = [];
+
+            foreach ($productos as $p) {
+                $precioUnitario = floatval($p["precioUnitario"] ?? 0);
+                $cantidad = intval($p["cantidad"] ?? 0);
+                $descuento = floatval($p["descuento"] ?? 0);
+                $descripcion = trim((string)($p["descripcion"] ?? ''));
+
+                $totalProducto = $precioUnitario * $cantidad;
+                $descuentoLinea = $totalProducto * ($descuento / 100);
+
+                $subtotal += $totalProducto;
+                $descuentoTotal += $descuentoLinea;
+
+                $detalleFactura[] = [
+                    "Nombre" => $descripcion,
+                    "Cantidad" => $cantidad,
+                    "PrecioUnitario" => number_format($precioUnitario, 2, ".", ""),
+                    "Descuento" => $descuento,
+                    "Total" => number_format($totalProducto - $descuentoLinea, 2, ".", "")
+                ];
+            }
+
+            $base = $subtotal - $descuentoTotal;
+            $iva = $base * 0.13;
+            $total = $base + $iva;
+            $saldoPendiente = ($montoAbono > 0) ? ($total - $montoAbono) : 0;
+
+            $productosJson = json_encode($productos, JSON_UNESCAPED_UNICODE);
+
+            $this->limpiarResultados();
+
+            $stmt = $this->conn->prepare("CALL GenerarDetalleFactura(?, ?, ?)");
+
+            if (!$stmt) {
+                throw new Exception($this->conn->error);
+            }
+
+            $stmt->bind_param("isd", $facturaId, $productosJson, $saldoPendiente);
+            $stmt->execute();
+            $stmt->close();
+
+            $this->limpiarResultados();
+
+            $this->conn->commit();
+
+            $fechaActual = date("Y-m-d H:i:s");
+
+            return [
+                "FacturaId" => $facturaId,
+                "encabezado" => [
+                    "Id" => $facturaId,
+                    "Fecha" => $fechaActual,
+                    "Cliente" => $clienteNombre,
+                    "Telefono" => $telefono,
+                    "Empresa" => $empresaNombre,
+                    "IdentificacionEmpresa" => $empresaIdentificacion,
+                    "MetodoPago" => $metodoPago,
+                    "Subtotal" => number_format($subtotal, 2, ".", ""),
+                    "Descuento" => number_format($descuentoTotal, 2, ".", ""),
+                    "IVA" => number_format($iva, 2, ".", ""),
+                    "Total" => number_format($total, 2, ".", ""),
+                    "Abono" => number_format($montoAbono, 2, ".", ""),
+                    "SaldoPendiente" => number_format($saldoPendiente, 2, ".", "")
+                ],
+                "detalle" => $detalleFactura
+            ];
+
+        } catch (\Throwable $e) {
+            $this->conn->rollback();
+            error_log("Error generarVenta: " . $e->getMessage());
+
+            return [
+                "error" => "GENERAR_VENTA_ERROR",
+                "message" => $e->getMessage()
             ];
         }
-
-        $base = $subtotal - $descuentoTotal;
-        $iva  = $base * 0.13;
-        $total = $base + $iva;
-
-        $saldoPendiente = ($montoAbono > 0) ? ($total - $montoAbono) : 0;
-
-        $productosJson = json_encode($productos, JSON_UNESCAPED_UNICODE);
-
-        $stmt = $this->conn->prepare("CALL GenerarDetalleFactura(?, ?, ?)");
-        $stmt->bind_param("isd", $facturaId, $productosJson, $saldoPendiente);
-        $stmt->execute();
-        $stmt->close();
-        $this->conn->next_result();
-
-        $fechaActual = date("Y-m-d H:i:s");
-
-        return [
-            "FacturaId" => $facturaId,
-            "encabezado" => [
-                "Id"                    => $facturaId,
-                "Fecha"                 => $fechaActual,
-                "Cliente"               => $clienteNombre,
-                "Telefono"              => $telefono,
-                "Empresa"               => $empresaNombre,
-                "IdentificacionEmpresa" => $empresaIdentificacion,
-                "MetodoPago"            => $metodoPago,
-                "Subtotal"              => number_format($subtotal, 2, ".", ""),
-                "Descuento"             => number_format($descuentoTotal, 2, ".", ""),
-                "IVA"                   => number_format($iva, 2, ".", ""),
-                "Total"                 => number_format($total, 2, ".", ""),
-                "Abono"                 => number_format($montoAbono, 2, ".", ""),
-                "SaldoPendiente"        => number_format($saldoPendiente, 2, ".", "")
-            ],
-            "detalle" => $detalleFactura
-        ];
-
-    } catch (\Throwable $e) {
-        error_log("Error generarVenta: " . $e->getMessage());
-        return false;
     }
-}
 
     public function __destruct() {
-        CerrarBD($this->conn);
+        if ($this->conn) {
+            CerrarBD($this->conn);
+        }
     }
 }
 
-
-// acciones del POS
+/* acciones del POS */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    ob_clean();
     header('Content-Type: application/json; charset=utf-8');
 
     $input = json_decode(file_get_contents("php://input"), true);
@@ -189,46 +242,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case "obtenerCliente":
-            echo json_encode($controller->ObtenerClientePorCedula($input["cedula"]), JSON_UNESCAPED_UNICODE);
+            echo json_encode(
+                $controller->obtenerClientePorCedula($input["cedula"] ?? ""),
+                JSON_UNESCAPED_UNICODE
+            );
             break;
-    case "estadoCaja":
-    $conn = AbrirBD();
-    $cierreModel = new CierreCajaModel($conn);
 
-    echo json_encode([
-        "cerrada" => $cierreModel->cajaCerradaHoy()
-    ], JSON_UNESCAPED_UNICODE);
+        case "estadoCaja":
+            $conn = AbrirBD();
+            $cierreModel = new CierreCajaModel($conn);
 
-    CerrarBD($conn);
-    break;
+            echo json_encode([
+                "cerrada" => $cierreModel->cajaCerradaHoy()
+            ], JSON_UNESCAPED_UNICODE);
+
+            CerrarBD($conn);
+            break;
+
         case "generarVenta":
-        $factura = $controller->generarVenta(
-            $input["clienteId"] ?? 0,
-            $input["clienteNombre"] ?? "",
-            $input["metodoPago"],
-            $input["productos"],
-            $input["facturarEmpresa"] ?? 0,
-            $input["empresaNombre"] ?? "",
-            $input["empresaIdentificacion"] ?? "",
-            $input["facturaElectronica"] ?? 0,
-            $input["montoAbono"] ?? 0,
-            $input["cedulaIngresada"] ?? '',
-            $input["telefono"] ?? ""
-);
-              if (isset($factura["error"]) && $factura["error"] === "CAJA_CERRADA") {
-        echo json_encode([
-            "success" => false,
-            "error"   => "CAJA_CERRADA"
-        ]);
-        break;
-        
+            $factura = $controller->generarVenta(
+                $input["clienteId"] ?? 0,
+                $input["clienteNombre"] ?? "",
+                $input["metodoPago"] ?? "",
+                $input["productos"] ?? [],
+                $input["facturarEmpresa"] ?? 0,
+                $input["empresaNombre"] ?? "",
+                $input["empresaIdentificacion"] ?? "",
+                $input["facturaElectronica"] ?? 0,
+                $input["montoAbono"] ?? 0,
+                $input["cedulaIngresada"] ?? '',
+                $input["telefono"] ?? ""
+            );
+
+            if (isset($factura["error"])) {
+                echo json_encode([
+                    "success" => false,
+                    "error" => $factura["error"],
+                    "message" => $factura["message"] ?? null
+                ], JSON_UNESCAPED_UNICODE);
+                break;
+            }
+
+            echo json_encode([
+                "success" => true,
+                "factura" => $factura
+            ], JSON_UNESCAPED_UNICODE);
+            break;
+
+        default:
+            echo json_encode([
+                "success" => false,
+                "error" => "ACCION_INVALIDA"
+            ], JSON_UNESCAPED_UNICODE);
+            break;
     }
 
-    echo json_encode([
-        "success" => true,
-        "factura" => $factura
-    ], JSON_UNESCAPED_UNICODE);
-
-    break;
-    }
+    exit;
 }
