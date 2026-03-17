@@ -1,7 +1,7 @@
 <?php
 include_once __DIR__ . '/../Model/baseDatos.php';
 
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
 class FacturacionController {
@@ -16,76 +16,81 @@ class FacturacionController {
         while ($this->conn->more_results() && $this->conn->next_result()) {;}
     }
 
-    /* ===============================
-       OBTENER FACTURAS
-    =============================== */
+    private function esc($valor) {
+        return $this->conn->real_escape_string($valor);
+    }
 
     public function obtenerFacturas($numero = null, $cedula = null) {
-
         try {
-
             $num = ($numero === null || $numero === '') ? null : (int)$numero;
-            $ced = ($cedula === null || $cedula === '') ? null : $cedula;
+            $ced = ($cedula === null || $cedula === '') ? null : trim((string)$cedula);
 
             $this->limpiarResultados();
 
-            $stmt = $this->conn->prepare("CALL ObtenerFacturas(?, ?)");
-
-            if(!$stmt){
-                throw new Exception($this->conn->error);
+            if ($num === null && $ced === null) {
+                $sql = "CALL ObtenerFacturas(NULL, NULL)";
+            } elseif ($num !== null && $ced === null) {
+                $sql = "CALL ObtenerFacturas($num, NULL)";
+            } elseif ($num === null && $ced !== null) {
+                $cedEsc = $this->esc($ced);
+                $sql = "CALL ObtenerFacturas(NULL, '$cedEsc')";
+            } else {
+                $cedEsc = $this->esc($ced);
+                $sql = "CALL ObtenerFacturas($num, '$cedEsc')";
             }
 
-            $stmt->bind_param("is", $num, $ced);
-            $stmt->execute();
+            $res = $this->conn->query($sql);
 
-            $res = $stmt->get_result();
+            if (!$res) {
+                throw new Exception("Error al ejecutar ObtenerFacturas: " . $this->conn->error);
+            }
+
             $facturas = $res->fetch_all(MYSQLI_ASSOC);
-
             $res->free();
-            $stmt->close();
 
             $this->limpiarResultados();
 
             $resultadoFinal = [];
 
             foreach ($facturas as $f) {
+                $idFactura = (int)($f["FacturaId"] ?? 0);
 
-                $idFactura = (int)$f["FacturaId"];
+                if ($idFactura <= 0) {
+                    continue;
+                }
 
-                /* PRODUCTOS */
+                $this->limpiarResultados();
 
                 $stmt2 = $this->conn->prepare("CALL ObtenerProductosFactura(?)");
-
-                if(!$stmt2){
-                    throw new Exception($this->conn->error);
+                if (!$stmt2) {
+                    throw new Exception("Error prepare ObtenerProductosFactura: " . $this->conn->error);
                 }
 
                 $stmt2->bind_param("i", $idFactura);
                 $stmt2->execute();
-
                 $res2 = $stmt2->get_result();
-                $prod = $res2->fetch_assoc();
+                $prod = $res2 ? $res2->fetch_assoc() : null;
 
-                $res2->free();
+                if ($res2) {
+                    $res2->free();
+                }
                 $stmt2->close();
 
                 $this->limpiarResultados();
 
-                /* DETALLE */
-
                 $stmt3 = $this->conn->prepare("CALL ObtenerDetalleFactura(?)");
-
-                if(!$stmt3){
-                    throw new Exception($this->conn->error);
+                if (!$stmt3) {
+                    throw new Exception("Error prepare ObtenerDetalleFactura: " . $this->conn->error);
                 }
 
                 $stmt3->bind_param("i", $idFactura);
                 $stmt3->execute();
-
                 $res3 = $stmt3->get_result();
-                $detalle = $res3->fetch_all(MYSQLI_ASSOC);
+                $detalle = $res3 ? $res3->fetch_all(MYSQLI_ASSOC) : [];
 
-                $res3->free();
+                if ($res3) {
+                    $res3->free();
+                }
                 $stmt3->close();
 
                 $this->limpiarResultados();
@@ -99,46 +104,36 @@ class FacturacionController {
             return $resultadoFinal;
 
         } catch (\Throwable $e) {
-
             error_log("ERR obtenerFacturas: " . $e->getMessage());
-            return [];
+            return [
+                "__error" => true,
+                "__message" => $e->getMessage()
+            ];
         }
     }
 
-    /* ===============================
-       REGISTRAR ABONO
-    =============================== */
-
     public function registrarAbono($facturaId, $monto) {
-
         try {
-
             $facturaId = (int)$facturaId;
             $monto = (float)$monto;
 
             $this->limpiarResultados();
 
             $stmt = $this->conn->prepare("CALL RegistrarAbono(?, ?)");
-
-            if(!$stmt){
+            if (!$stmt) {
                 throw new Exception($this->conn->error);
             }
 
             $stmt->bind_param("id", $facturaId, $monto);
             $stmt->execute();
-
             $stmt->close();
 
             $this->limpiarResultados();
 
-            return [
-                "success" => true
-            ];
+            return ["success" => true];
 
         } catch (\Throwable $e) {
-
             error_log("ERR registrarAbono: " . $e->getMessage());
-
             return [
                 "success" => false,
                 "error" => $e->getMessage()
@@ -146,43 +141,35 @@ class FacturacionController {
         }
     }
 
-    /* ===============================
-       OBTENER FACTURA COMPLETA
-    =============================== */
-
     public function obtenerFacturaCompleta($facturaId) {
-
         try {
-
             $facturaId = (int)$facturaId;
 
             $this->limpiarResultados();
 
             $stmt = $this->conn->prepare("CALL ObtenerFacturaCompleta(?)");
-
-            if(!$stmt){
+            if (!$stmt) {
                 throw new Exception($this->conn->error);
             }
 
             $stmt->bind_param("i", $facturaId);
             $stmt->execute();
 
-            /* ENCABEZADO */
-
             $res1 = $stmt->get_result();
-            $enc = $res1->fetch_assoc();
-            $res1->free();
+            $enc = $res1 ? $res1->fetch_assoc() : null;
+            if ($res1) {
+                $res1->free();
+            }
 
             $stmt->next_result();
 
-            /* DETALLE */
-
             $res2 = $stmt->get_result();
-            $detalle = $res2->fetch_all(MYSQLI_ASSOC);
-            $res2->free();
+            $detalle = $res2 ? $res2->fetch_all(MYSQLI_ASSOC) : [];
+            if ($res2) {
+                $res2->free();
+            }
 
             $stmt->close();
-
             $this->limpiarResultados();
 
             return [
@@ -191,39 +178,43 @@ class FacturacionController {
             ];
 
         } catch (\Throwable $e) {
-
             error_log("ERR obtenerFacturaCompleta: " . $e->getMessage());
-            return null;
+            return [
+                "__error" => true,
+                "__message" => $e->getMessage()
+            ];
         }
     }
 
     public function __destruct() {
-
         if ($this->conn) {
             CerrarBD($this->conn);
         }
     }
 }
 
+header('Content-Type: application/json; charset=utf-8');
 
-/* ===============================
-   API
-=============================== */
+$controller = new FacturacionController();
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo json_encode([
+        "ok" => true,
+        "message" => "FacturacionController activo"
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    header('Content-Type: application/json; charset=utf-8');
-
     $input = json_decode(file_get_contents("php://input"), true);
-    if (!$input) $input = $_POST;
+    if (!$input) {
+        $input = $_POST;
+    }
 
-    $controller = new FacturacionController();
     $action = $input["action"] ?? '';
 
     switch ($action) {
-
         case "obtenerFacturas":
-
             echo json_encode(
                 $controller->obtenerFacturas(
                     $input["numero"] ?? null,
@@ -231,12 +222,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ),
                 JSON_UNESCAPED_UNICODE
             );
-
-        break;
-
+            break;
 
         case "registrarAbono":
-
             echo json_encode(
                 $controller->registrarAbono(
                     $input["facturaId"] ?? 0,
@@ -244,29 +232,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ),
                 JSON_UNESCAPED_UNICODE
             );
-
-        break;
-
+            break;
 
         case "obtenerFacturaCompleta":
-
             echo json_encode(
                 $controller->obtenerFacturaCompleta(
                     $input["facturaId"] ?? 0
                 ),
                 JSON_UNESCAPED_UNICODE
             );
-
-        break;
+            break;
 
         default:
-
             echo json_encode([
-                "error" => "Acción no válida"
-            ]);
-
-        break;
+                "error" => true,
+                "message" => "Acción no válida"
+            ], JSON_UNESCAPED_UNICODE);
+            break;
     }
 
     exit;
 }
+
+echo json_encode([
+    "error" => true,
+    "message" => "Método no permitido"
+], JSON_UNESCAPED_UNICODE);
