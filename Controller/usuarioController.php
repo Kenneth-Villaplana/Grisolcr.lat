@@ -1,17 +1,18 @@
 <?php
 
+// 🔥 Mostrar errores (solo desarrollo)
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// 🔐 Sesión
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// 📦 Models
 require_once __DIR__ . '/../Model/UsuarioModel.php';
-require_once __DIR__ . '/../Model/baseDatos.php';
 
-/*
-|--------------------------------------------------------------------------
-| VALIDAR SESIÓN
-|--------------------------------------------------------------------------
-*/
+// 🔒 Validar sesión
 $idUsuario = $_SESSION['IdUsuario'] ?? $_SESSION['UsuarioID'] ?? 0;
 $idUsuario = (int)$idUsuario;
 
