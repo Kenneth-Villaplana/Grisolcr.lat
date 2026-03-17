@@ -1,56 +1,47 @@
 <?php
 
-// 🔥 Iniciar sesión SIEMPRE
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 🔥 Models
-include_once __DIR__ . '/../Model/LoginModel.php';
 include_once __DIR__ . '/../Model/UsuarioModel.php';
-
+include_once __DIR__ . '/../Model/baseDatos.php';
 
 /*
 |--------------------------------------------------------------------------
-| VALIDACIÓN DE SESIÓN
+| VALIDAR SESIÓN
 |--------------------------------------------------------------------------
 */
 $idUsuario = $_SESSION['IdUsuario'] ?? $_SESSION['UsuarioID'] ?? 0;
 $idUsuario = (int)$idUsuario;
 
 if ($idUsuario <= 0) {
-    error_log("Sesión inválida en usuarioController");
     header('Location: /View/iniciarSesion.php');
     exit();
 }
-
 
 /*
 |--------------------------------------------------------------------------
 | ACTUALIZAR PERFIL
 |--------------------------------------------------------------------------
 */
-if (isset($_POST["btnEditarPerfil"])) {
-
+if (isset($_POST['btnEditarPerfil'])) {
     try {
+        $idUsuarioPost = isset($_POST['IdUsuario']) ? (int)$_POST['IdUsuario'] : 0;
 
-        // 🔒 Seguridad: validar que no manipulen el ID
-        $idUsuarioPost = $_POST["IdUsuario"] ?? 0;
-
-        if ((int)$idUsuarioPost !== $idUsuario) {
-            throw new Exception("Intento de manipulación de usuario");
+        if ($idUsuarioPost !== $idUsuario) {
+            throw new Exception('Intento de manipulación de usuario');
         }
 
-        $cedula = $_POST["Cedula"] ?? '';
-        $nombre = $_POST["Nombre"] ?? '';
-        $apellido = $_POST["Apellido"] ?? '';
-        $apellidoDos = $_POST["ApellidoDos"] ?? '';
-        $correoElectronico = $_POST["CorreoElectronico"] ?? '';
-        $telefono = $_POST["Telefono"] ?? '';
-        $direccion = $_POST["Direccion"] ?? '';
-        $fechaNacimiento = $_POST["FechaNacimiento"] ?? null;
+        $cedula            = trim($_POST['Cedula'] ?? '');
+        $nombre            = trim($_POST['Nombre'] ?? '');
+        $apellido          = trim($_POST['Apellido'] ?? '');
+        $apellidoDos       = trim($_POST['ApellidoDos'] ?? '');
+        $correoElectronico = trim($_POST['CorreoElectronico'] ?? '');
+        $telefono          = trim($_POST['Telefono'] ?? '');
+        $direccion         = trim($_POST['Direccion'] ?? '');
+        $fechaNacimiento   = $_POST['FechaNacimiento'] ?? null;
 
-        // Normalizar fecha
         if ($fechaNacimiento === '') {
             $fechaNacimiento = null;
         }
@@ -67,58 +58,79 @@ if (isset($_POST["btnEditarPerfil"])) {
             $fechaNacimiento
         );
 
-        $_SESSION["txtMensaje"] = $resultadoEdit['mensaje'] ?? "Operación realizada";
+        $_SESSION['txtMensaje'] = $resultadoEdit['mensaje'] ?? 'Operación realizada';
 
         if (($resultadoEdit['resultado'] ?? 0) == 1) {
-            $_SESSION["CambioExitoso"] = true;
+            $_SESSION['CambioExitoso'] = true;
         }
-
     } catch (Throwable $e) {
-
-        error_log("EditarPerfil ERROR: " . $e->getMessage());
-        $_SESSION["txtMensaje"] = "Error al actualizar el perfil";
+        error_log('EditarPerfil ERROR: ' . $e->getMessage());
+        $_SESSION['txtMensaje'] = 'Error al actualizar el perfil';
     }
 
-    header("Location: editarPerfil.php");
+    header('Location: /View/editarPerfil.php');
     exit();
 }
-
 
 /*
 |--------------------------------------------------------------------------
 | OBTENER PERFIL
 |--------------------------------------------------------------------------
+| 1) Intenta con el Model
+| 2) Si falla o viene vacío, usa query directa como respaldo
+|--------------------------------------------------------------------------
 */
+$usuario = [];
+
 try {
-
     $usuario = ObtenerPerfil($idUsuario);
+} catch (Throwable $e) {
+    error_log('ObtenerPerfil Model ERROR: ' . $e->getMessage());
+    $usuario = [];
+}
 
-    if (empty($usuario)) {
-
-        error_log("Perfil vacío para ID: " . $idUsuario);
-
-        // Validar si el usuario aún existe en DB
-        require_once __DIR__ . '/../Model/baseDatos.php';
+if (empty($usuario)) {
+    try {
         $conn = AbrirBD();
 
-        $check = $conn->prepare("SELECT IdUsuario FROM usuario WHERE IdUsuario = ?");
-        $check->bind_param("i", $idUsuario);
-        $check->execute();
-        $res = $check->get_result();
+        $sql = "SELECT 
+                    u.IdUsuario,
+                    u.Cedula,
+                    u.Nombre,
+                    u.Apellido,
+                    u.ApellidoDos,
+                    u.CorreoElectronico,
+                    u.Telefono,
+                    u.Direccion,
+                    p.FechaNacimiento
+                FROM usuario u
+                LEFT JOIN paciente p ON u.IdUsuario = p.usuarioId
+                WHERE u.IdUsuario = ?";
 
-        if ($res->num_rows === 0) {
-            // 💣 sesión inválida → logout
-            session_destroy();
-            header("Location: /View/iniciarSesion.php");
-            exit();
+        $stmt = $conn->prepare($sql);
+
+        if (!$stmt) {
+            throw new Exception('Error en prepare fallback: ' . $conn->error);
         }
 
-        // Usuario existe pero SP falló
-        die("Error al cargar el perfil");
+        $stmt->bind_param('i', $idUsuario);
+
+        if (!$stmt->execute()) {
+            throw new Exception('Error en execute fallback: ' . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        $usuario = $result ? ($result->fetch_assoc() ?: []) : [];
+
+        $stmt->close();
+        CerrarBD($conn);
+    } catch (Throwable $e) {
+        error_log('Fallback perfil ERROR: ' . $e->getMessage());
+        $usuario = [];
     }
+}
 
-} catch (Throwable $e) {
-
-    error_log("ERROR PERFIL: " . $e->getMessage());
-    die("Error al cargar el perfil");
+if (empty($usuario)) {
+    error_log('Perfil no cargó ni por model ni por fallback. ID: ' . $idUsuario);
+    die('Error al cargar el perfil');
 }
