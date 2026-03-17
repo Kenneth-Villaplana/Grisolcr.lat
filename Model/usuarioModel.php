@@ -27,12 +27,21 @@ function ObtenerPerfil($idUsuario)
         }
 
         $sentencia->bind_param("i", $idUsuario);
-        $sentencia->execute();
+
+        if (!$sentencia->execute()) {
+            throw new Exception("Error en execute: " . $sentencia->error);
+        }
 
         $resultado = $sentencia->get_result();
-        $usuario = $resultado ? $resultado->fetch_assoc() : null;
 
-        limpiarResultados($enlace); // 🔥 CRÍTICO PARA SP
+        $usuario = null;
+
+        if ($resultado && $resultado->num_rows > 0) {
+            $usuario = $resultado->fetch_assoc();
+        }
+
+        // 🔥 CRÍTICO PARA STORED PROCEDURES
+        while ($enlace->more_results() && $enlace->next_result()) {;}
 
         $sentencia->close();
         CerrarBD($enlace);
@@ -40,7 +49,9 @@ function ObtenerPerfil($idUsuario)
         return $usuario ?: [];
 
     } catch (Throwable $ex) {
+
         error_log("ObtenerPerfil ERROR: " . $ex->getMessage());
+
         return [];
     }
 }
