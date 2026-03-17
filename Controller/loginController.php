@@ -1,8 +1,8 @@
 <?php
 
-include_once __DIR__ . '/Model/loginModel.php';
+include_once __DIR__ . '/../Model/loginModel.php';
 
-if(session_status() == PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -10,9 +10,9 @@ if(session_status() == PHP_SESSION_NONE) {
    CERRAR SESIÓN
 ============================= */
 
-if(isset($_GET["cerrarSesion"])) {
+if (isset($_GET["cerrarSesion"])) {
 
-    $_SESSION = array();
+    $_SESSION = [];
     session_destroy();
 
     header('Location: /View/iniciarSesion.php');
@@ -23,32 +23,28 @@ if(isset($_GET["cerrarSesion"])) {
    REGISTRO PACIENTE
 ============================= */
 
-if(isset($_POST["btnRegistrarPaciente"])) {
+if (isset($_POST["btnRegistrarPaciente"])) {
 
-    $cedula = $_POST["Cedula"];
-    $nombre = $_POST["Nombre"];
-    $apellido = $_POST["Apellido"];
-    $apellidoDos = $_POST["ApellidoDos"];
-    $correoElectronico = $_POST["CorreoElectronico"];
-    $contrasenna = $_POST["Contrasenna"];
-    $confirmarContrasenna = $_POST["ConfirmarContrasenna"];
-    $telefono = $_POST["Telefono"];
-    $direccion = $_POST["Direccion"];
-    $fechaNacimiento = $_POST["FechaNacimiento"];  
+    $cedula = $_POST["Cedula"] ?? '';
+    $nombre = $_POST["Nombre"] ?? '';
+    $apellido = $_POST["Apellido"] ?? '';
+    $apellidoDos = $_POST["ApellidoDos"] ?? '';
+    $correoElectronico = $_POST["CorreoElectronico"] ?? '';
+    $contrasenna = $_POST["Contrasenna"] ?? '';
+    $confirmarContrasenna = $_POST["ConfirmarContrasenna"] ?? '';
+    $telefono = $_POST["Telefono"] ?? '';
+    $direccion = $_POST["Direccion"] ?? '';
+    $fechaNacimiento = $_POST["FechaNacimiento"] ?? null;
 
-    /* VALIDACIÓN CONTRASEÑA */
-
-    if(strlen($contrasenna) < 8){
+    if (strlen($contrasenna) < 8) {
 
         $_SESSION["txtMensaje"] = "La contraseña debe tener mínimo 8 caracteres.";
 
-    } 
-    elseif($contrasenna != $confirmarContrasenna) {
+    } elseif ($contrasenna != $confirmarContrasenna) {
 
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
 
-    } 
-    else {
+    } else {
 
         $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
@@ -64,7 +60,7 @@ if(isset($_POST["btnRegistrarPaciente"])) {
             $fechaNacimiento
         );
 
-        if($resultadoReg['resultado'] == 1) {
+        if (($resultadoReg['resultado'] ?? 0) == 1) {
 
             $_SESSION["txtMensaje"] = "Paciente registrado con éxito";
             $_SESSION["registroExitoso"] = true;
@@ -74,8 +70,7 @@ if(isset($_POST["btnRegistrarPaciente"])) {
                 exit;
             }
 
-        } 
-        else {
+        } else {
 
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Error en el registro.";
         }
@@ -86,31 +81,29 @@ if(isset($_POST["btnRegistrarPaciente"])) {
    REGISTRO EMPLEADO
 ============================= */
 
-if(isset($_POST["btnRegistrarPersonal"])) {
+if (isset($_POST["btnRegistrarPersonal"])) {
 
-    $cedula = $_POST["Cedula"];
-    $nombre = $_POST["Nombre"];
-    $apellido = $_POST["Apellido"];
-    $apellidoDos = $_POST["ApellidoDos"];
-    $correoElectronico = $_POST["CorreoElectronico"];
-    $contrasenna = $_POST["Contrasenna"];
-    $confirmarContrasenna = $_POST["ConfirmarContrasenna"];
-    $telefono = $_POST["Telefono"];
-    $direccion = $_POST["Direccion"];
-    $rolId = $_POST["RolId"]; 
-    $fechaNacimiento = $_POST["FechaNacimiento"]; 
+    $cedula = $_POST["Cedula"] ?? '';
+    $nombre = $_POST["Nombre"] ?? '';
+    $apellido = $_POST["Apellido"] ?? '';
+    $apellidoDos = $_POST["ApellidoDos"] ?? '';
+    $correoElectronico = $_POST["CorreoElectronico"] ?? '';
+    $contrasenna = $_POST["Contrasenna"] ?? '';
+    $confirmarContrasenna = $_POST["ConfirmarContrasenna"] ?? '';
+    $telefono = $_POST["Telefono"] ?? '';
+    $direccion = $_POST["Direccion"] ?? '';
+    $rolId = $_POST["RolId"] ?? null;
+    $fechaNacimiento = $_POST["FechaNacimiento"] ?? null;
 
-    if(strlen($contrasenna) < 8){
+    if (strlen($contrasenna) < 8) {
 
         $_SESSION["txtMensaje"] = "La contraseña debe tener mínimo 8 caracteres.";
 
-    }
-    elseif($contrasenna != $confirmarContrasenna) {
+    } elseif ($contrasenna != $confirmarContrasenna) {
 
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
 
-    }
-    else {
+    } else {
 
         $hash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
@@ -127,13 +120,12 @@ if(isset($_POST["btnRegistrarPersonal"])) {
             $fechaNacimiento
         );
 
-        if($resultadoReg['resultado'] == 1) {
+        if (($resultadoReg['resultado'] ?? 0) == 1) {
 
-            $_SESSION["txtMensaje"] = $resultadoReg['mensaje'];
+            $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Registro exitoso";
             $_SESSION["registroExitoso"] = true;
 
-        } 
-        else {
+        } else {
 
             $_SESSION["txtMensaje"] = $resultadoReg['mensaje'] ?? "Error en el registro.";
         }
@@ -141,26 +133,28 @@ if(isset($_POST["btnRegistrarPersonal"])) {
 }
 
 /* =============================
-   LOGIN
+   LOGIN (FIX PRINCIPAL AQUÍ)
 ============================= */
 
-if(isset($_POST["btnIniciarSesion"])) {
+if (isset($_POST["btnIniciarSesion"])) {
 
     $correo = $_POST["CorreoElectronico"] ?? '';
     $contrasenna = $_POST["Contrasenna"] ?? '';
 
-    if(empty($correo) || empty($contrasenna)) {
+    if (empty($correo) || empty($contrasenna)) {
 
         $_SESSION["txtMensaje"] = "Debe ingresar correo y contraseña.";
 
-    } 
-    else {
+    } else {
 
         $usuario = IniciarSesionModel($correo);
 
-        if($usuario && password_verify($contrasenna, $usuario["Contrasenna"])) {
+        if ($usuario && password_verify($contrasenna, $usuario["Contrasenna"])) {
 
-            $_SESSION["UsuarioID"] = $usuario["IdUsuario"];
+            // 🔥 FIX PRINCIPAL
+            $_SESSION["IdUsuario"] = $usuario["IdUsuario"];
+            $_SESSION["UsuarioID"] = $usuario["IdUsuario"]; // compatibilidad
+
             $_SESSION["Cedula"] = $usuario["Cedula"];
             $_SESSION["Nombre"] = $usuario["Nombre"];
             $_SESSION["Apellido"] = $usuario["Apellido"];
@@ -169,13 +163,12 @@ if(isset($_POST["btnIniciarSesion"])) {
             $_SESSION["Telefono"] = $usuario["Telefono"];
             $_SESSION["Direccion"] = $usuario["Direccion"];
             $_SESSION["RolID"] = $usuario["RolUsuario"];
-            $_SESSION['EmpleadoRol'] = $usuario['RolEmpleado'] ?? null;
+            $_SESSION["EmpleadoRol"] = $usuario["RolEmpleado"] ?? null;
 
             header('Location: /index.php');
             exit();
 
-        } 
-        else {
+        } else {
 
             $_SESSION["txtMensaje"] = "Correo electrónico o contraseña incorrectos.";
         }
@@ -192,35 +185,33 @@ if (isset($_POST["btnCambiarContrasenna"])) {
     $nueva = $_POST["NuevaContrasenna"] ?? '';
     $confirmar = $_POST["ConfirmarContrasenna"] ?? '';
 
-    if(strlen($nueva) < 8){
+    if (strlen($nueva) < 8) {
 
         $_SESSION["txtMensaje"] = "La contraseña debe tener mínimo 8 caracteres.";
-        header("Location: /View/restablecerContrasenna.php?token=".$token);
+        header("Location: /View/restablecerContrasenna.php?token=" . $token);
         exit;
     }
 
     if ($nueva != $confirmar) {
 
         $_SESSION["txtMensaje"] = "Las contraseñas no coinciden.";
-        header("Location: /View/restablecerContrasenna.php?token=".$token);
+        header("Location: /View/restablecerContrasenna.php?token=" . $token);
         exit;
     }
 
     $resultado = CambiarContrasennaModel($token, $nueva);
 
-    if ($resultado['resultado'] == 1) {
+    if (($resultado['resultado'] ?? 0) == 1) {
 
         $_SESSION["txtMensaje"] = "Contraseña actualizada correctamente.";
         header("Location: /View/iniciarSesion.php");
         exit;
 
-    } 
-    else {
+    } else {
 
-        $_SESSION["txtMensaje"] = $resultado['mensaje'];
-        header("Location: /View/restablecerContrasenna.php?token=".$token);
+        $_SESSION["txtMensaje"] = $resultado['mensaje'] ?? "Error al cambiar contraseña.";
+        header("Location: /View/restablecerContrasenna.php?token=" . $token);
         exit;
     }
 }
-
 ?>
