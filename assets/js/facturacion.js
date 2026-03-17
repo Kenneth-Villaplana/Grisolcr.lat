@@ -1,5 +1,5 @@
 // ⚠️ Si lo defines desde PHP, elimina esta línea
-const CONTROLLER_PATH = "/Controller/facturacionController.php";
+const CONTROLLER_PATH = "/../Controller/facturacionController.php";
 
 document.addEventListener("DOMContentLoaded", () => {
 
