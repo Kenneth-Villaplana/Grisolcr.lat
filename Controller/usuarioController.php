@@ -14,7 +14,13 @@ include_once __DIR__ . '/../Model/UsuarioModel.php';
 | VALIDACIÓN DE SESIÓN (ROBUSTA)
 |--------------------------------------------------------------------------
 */
-$idUsuario = isset($_SESSION['IdUsuario']) ? (int)$_SESSION['IdUsuario'] : 0;
+$idUsuario = $_SESSION['IdUsuario'] ?? $_SESSION['UsuarioID'] ?? 0;
+$idUsuario = (int)$idUsuario;
+
+if ($idUsuario <= 0) {
+    header('Location: /View/iniciarSesion.php');
+    exit();
+}
 
 if ($idUsuario <= 0) {
     error_log("Sesión inválida en usuarioController");
