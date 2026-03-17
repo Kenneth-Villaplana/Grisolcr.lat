@@ -1,6 +1,6 @@
 <?php
  include('layout.php'); 
- require_once __DIR__ . '/Controller/personalController.php';
+ require_once __DIR__ . '/../Controller/personalController.php';
 ?>
 
 <!DOCTYPE html>
