@@ -178,7 +178,7 @@ $isEmpleado = ($rolName === 'Empleado');
 
                         <?php if ($puedeModificar): ?>
                         <div class="cita-actions border-top pt-3 mt-3">
-                            <?php if ($isPaciente): ?>
+                            <?php if ($isPaciente || $isEmpleado): ?>
                                 <button class="btn btn-reagendar btn-sm"
                                         data-bs-toggle="modal"
                                         data-bs-target="#reagendarModal"
