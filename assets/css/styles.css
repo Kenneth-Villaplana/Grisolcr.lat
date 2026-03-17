@@ -16795,3 +16795,55 @@ textarea {
 }
 
 }
+/* ===== MOBILE FIX LOGIN ===== */
+
+@media (max-width: 768px){
+
+.login-modern-wrapper{
+    padding:10px;
+}
+
+.login-modern-container{
+    display:block;
+    width:100%;
+    max-width:100%;
+}
+
+.login-modern-right{
+    display:none;
+}
+
+.login-modern-left{
+    width:100%;
+    padding:25px 20px !important;
+    box-sizing:border-box;
+}
+
+.login-title{
+    font-size:26px;
+}
+
+.login-subtitle{
+    font-size:15px;
+}
+
+/* inputs full width */
+
+.input-group-modern{
+    width:100%;
+}
+
+.modern-input{
+    width:100%;
+    font-size:16px;
+}
+
+/* boton full width */
+
+.btn-modern-login{
+    width:100%;
+    padding:14px;
+    font-size:16px;
+}
+
+}
