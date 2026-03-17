@@ -57,7 +57,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
 
             <div class="col-md-8">
                 <label class="form-label fw-semibold">Cédula del Paciente:</label>
-                <input type="text" id="cedula" class="form-control inventario-input" placeholder="Ej. 801230456">
+                <input type="text" id="cedula" class="form-control inventario-input" placeholder="Ej. 0-0000-0000">
             </div>
 
             <div class="col-md-8 d-flex justify-content-center gap-3">
