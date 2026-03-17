@@ -1,51 +1,22 @@
 <?php
 
-// 🔥 SIEMPRE iniciar sesión primero
+// 🔥 Iniciar sesión SIEMPRE
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-echo "<pre>";
-echo "SESSION:\n";
-print_r($_SESSION);
 
-$idUsuario = $_SESSION['IdUsuario'] ?? $_SESSION['UsuarioID'] ?? null;
-
-echo "\nID USUARIO:\n";
-var_dump($idUsuario);
-
-echo "\nTEST DIRECTO DB:\n";
-
-require_once __DIR__ . '/../Model/baseDatos.php';
-
-$conn = AbrirBD();
-
-$stmt = $conn->prepare("SELECT * FROM usuario WHERE IdUsuario = ?");
-$stmt->bind_param("i", $idUsuario);
-$stmt->execute();
-
-$res = $stmt->get_result();
-print_r($res->fetch_assoc());
-
+// 🔥 Models
 include_once __DIR__ . '/../Model/LoginModel.php';
 include_once __DIR__ . '/../Model/UsuarioModel.php';
-exit;
-
-
-
 
 
 /*
 |--------------------------------------------------------------------------
-| VALIDACIÓN DE SESIÓN (ROBUSTA)
+| VALIDACIÓN DE SESIÓN
 |--------------------------------------------------------------------------
 */
 $idUsuario = $_SESSION['IdUsuario'] ?? $_SESSION['UsuarioID'] ?? 0;
 $idUsuario = (int)$idUsuario;
-
-if ($idUsuario <= 0) {
-    header('Location: /View/iniciarSesion.php');
-    exit();
-}
 
 if ($idUsuario <= 0) {
     error_log("Sesión inválida en usuarioController");
@@ -63,10 +34,9 @@ if (isset($_POST["btnEditarPerfil"])) {
 
     try {
 
-        // 🔥 NUNCA confiar en POST para el ID
-        $idUsuarioPost = $_POST["IdUsuario"] ?? null;
+        // 🔒 Seguridad: validar que no manipulen el ID
+        $idUsuarioPost = $_POST["IdUsuario"] ?? 0;
 
-        // Validación de seguridad
         if ((int)$idUsuarioPost !== $idUsuario) {
             throw new Exception("Intento de manipulación de usuario");
         }
@@ -85,7 +55,6 @@ if (isset($_POST["btnEditarPerfil"])) {
             $fechaNacimiento = null;
         }
 
-        // Llamada al modelo
         $resultadoEdit = EditarPerfil(
             $idUsuario,
             $cedula,
@@ -107,7 +76,7 @@ if (isset($_POST["btnEditarPerfil"])) {
     } catch (Throwable $e) {
 
         error_log("EditarPerfil ERROR: " . $e->getMessage());
-        $_SESSION["txtMensaje"] = "Error: " . $e->getMessage();
+        $_SESSION["txtMensaje"] = "Error al actualizar el perfil";
     }
 
     header("Location: editarPerfil.php");
@@ -117,29 +86,18 @@ if (isset($_POST["btnEditarPerfil"])) {
 
 /*
 |--------------------------------------------------------------------------
-| OBTENER PERFIL PARA LA VISTA
+| OBTENER PERFIL
 |--------------------------------------------------------------------------
 */
 try {
 
     $usuario = ObtenerPerfil($idUsuario);
 
-    // 🔥 DEBUG PROFESIONAL
-    if ($usuario === null) {
-        error_log("SP devolvió NULL - ID: " . $idUsuario);
-        die("Error crítico al obtener perfil");
-    }
-
-    if (!is_array($usuario)) {
-        error_log("SP devolvió formato inválido - ID: " . $idUsuario);
-        die("Error interno de datos");
-    }
-
     if (empty($usuario)) {
-        error_log("SP devolvió array vacío - ID: " . $idUsuario);
 
-        // 🔥 VALIDACIÓN EXTRA (CLAVE)
-        // Verificar si el usuario existe en tabla base
+        error_log("Perfil vacío para ID: " . $idUsuario);
+
+        // Validar si el usuario aún existe en DB
         require_once __DIR__ . '/../Model/baseDatos.php';
         $conn = AbrirBD();
 
@@ -149,20 +107,18 @@ try {
         $res = $check->get_result();
 
         if ($res->num_rows === 0) {
-            // 💣 usuario no existe → sesión corrupta
+            // 💣 sesión inválida → logout
             session_destroy();
             header("Location: /View/iniciarSesion.php");
             exit();
         }
 
-        // Si existe pero SP no devolvió → problema de JOIN
-        die("Perfil existe pero no se pudo cargar (JOIN issue)");
+        // Usuario existe pero SP falló
+        die("Error al cargar el perfil");
     }
 
 } catch (Throwable $e) {
 
     error_log("ERROR PERFIL: " . $e->getMessage());
     die("Error al cargar el perfil");
-}"Error al cargar el perfil";
-
-?>
+}
