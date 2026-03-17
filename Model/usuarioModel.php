@@ -21,37 +21,32 @@ function ObtenerPerfil($idUsuario)
     try {
         $enlace = AbrirBD();
 
-        $sentencia = $enlace->prepare("CALL ObtenerPerfilUsuario(?)");
-        if (!$sentencia) {
-            throw new Exception("Error en prepare: " . $enlace->error);
+        $usuario = [];
+
+        // 🔥 IMPORTANTE: usar multi_query para SP
+        $query = "CALL ObtenerPerfilUsuario(" . intval($idUsuario) . ")";
+
+        if ($enlace->multi_query($query)) {
+
+            do {
+                if ($result = $enlace->store_result()) {
+
+                    if ($result->num_rows > 0) {
+                        $usuario = $result->fetch_assoc();
+                    }
+
+                    $result->free();
+                }
+            } while ($enlace->more_results() && $enlace->next_result());
         }
 
-        $sentencia->bind_param("i", $idUsuario);
-
-        if (!$sentencia->execute()) {
-            throw new Exception("Error en execute: " . $sentencia->error);
-        }
-
-        $resultado = $sentencia->get_result();
-
-        $usuario = null;
-
-        if ($resultado && $resultado->num_rows > 0) {
-            $usuario = $resultado->fetch_assoc();
-        }
-
-        // 🔥 CRÍTICO PARA STORED PROCEDURES
-        while ($enlace->more_results() && $enlace->next_result()) {;}
-
-        $sentencia->close();
         CerrarBD($enlace);
 
-        return $usuario ?: [];
+        return $usuario;
 
     } catch (Throwable $ex) {
 
         error_log("ObtenerPerfil ERROR: " . $ex->getMessage());
-
         return [];
     }
 }
