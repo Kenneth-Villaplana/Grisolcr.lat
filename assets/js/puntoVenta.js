@@ -512,63 +512,122 @@ function mostrarFacturaTicket(factura) {
         return;
     }
 
-    const encabezado = factura.encabezado || {};
-    const detalle = factura.detalle || [];
+    const enc = factura.encabezado;
+    const det = factura.detalle;
 
-    const facturaId = encabezado.Id || encabezado.FacturaId || "-";
-
-    const fecha = encabezado.Fecha || "-";
-
-    const subtotal = parseFloat(encabezado.Subtotal || 0);
-    const descuento = parseFloat(encabezado.Descuento || 0);
-    const iva = parseFloat(encabezado.IVA || 0);
-    const total = parseFloat(encabezado.Total || 0);
-
-    const abono = parseFloat(encabezado.Abono || 0);
-    const pendiente = parseFloat(encabezado.SaldoPendiente || 0);
-
-    const modalBody = document.getElementById("modalFacturaBody");
-
-    modalBody.innerHTML = `
-
-        <div id="ticketFactura">
-
-            <h5 class="text-center">Óptica Grisol</h5>
-
-            Factura: ${facturaId}<br>
-            Fecha: ${fecha}
-
-            <hr>
-
-            ${detalle.map(d => `
-                ${d.Nombre} x${d.Cantidad}
-                ₡${parseFloat(d.Total).toFixed(2)}<br>
-            `).join("")}
-
-            <hr>
-
-            Subtotal: ₡${subtotal.toFixed(2)}<br>
-            Descuento: ₡${descuento.toFixed(2)}<br>
-            IVA: ₡${iva.toFixed(2)}<br>
-
-            <hr>
-
-            Total: ₡${total.toFixed(2)}<br>
-
-            ${
-                pendiente > 0
-                    ? `Abono: ₡${abono}<br>
-                       Pendiente: ₡${pendiente}`
-                    : ""
-            }
-
-        </div>
+    const qrData = `
+Factura:${enc.Id}
+Cliente:${enc.Cliente || ""}
+Total:${enc.Total}
+Fecha:${enc.Fecha}
     `;
 
-    new bootstrap.Modal(
-        document.getElementById("modalFactura")
-    ).show();
+    const html = `
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: monospace;
+                padding: 10px;
+                width: 260px;
+            }
 
+            .logo {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .logo img {
+                width: 80px;
+            }
+
+            h5 {
+                text-align: center;
+                margin: 0;
+            }
+
+            hr {
+                margin: 5px 0;
+            }
+
+            .item {
+                display: flex;
+                justify-content: space-between;
+                font-size: 12px;
+            }
+
+            .total {
+                font-weight: bold;
+                text-align: center;
+                margin-top: 10px;
+                font-size: 14px;
+            }
+
+            .qr {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="logo">
+            <img src="/img/logo-grisol.png" />
+        </div>
+
+        <h5>Óptica Grisol</h5>
+        <div style="text-align:center;">Venta al detalle</div>
+
+        <hr>
+
+        Factura: ${enc.Id}<br>
+        Fecha: ${enc.Fecha}<br>
+        Pago: ${enc.MetodoPago}<br>
+
+        ${enc.Cliente ? `Cliente: ${enc.Cliente}<br>` : ""}
+        ${enc.Empresa ? `Empresa: ${enc.Empresa}<br>` : ""}
+
+        <hr>
+
+        ${det.map(d => `
+            <div class="item">
+                <span>${d.Nombre} x${d.Cantidad}</span>
+                <span>₡${parseFloat(d.Total).toFixed(2)}</span>
+            </div>
+        `).join("")}
+
+        <hr>
+
+        Subtotal: ₡${enc.Subtotal}<br>
+        Descuento: ₡${enc.Descuento}<br>
+        IVA: ₡${enc.IVA}<br>
+
+        <div class="total">
+            TOTAL: ₡${enc.Total}
+        </div>
+
+        <div class="qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}">
+        </div>
+
+        <div style="text-align:center; font-size:11px;">
+            ¡Gracias por su compra!
+        </div>
+
+    </body>
+    </html>
+    `;
+
+    const w = window.open("", "_blank", "width=300,height=600");
+
+    w.document.write(html);
+    w.document.close();
+
+    setTimeout(() => {
+        w.print();
+    }, 500);
 }
 
 
