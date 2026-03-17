@@ -383,6 +383,8 @@ function mostrarAlertaPOS(mensaje) {
 
 function mostrarFacturaTicket(factura) {
 
+    console.log("FACTURA COMPLETA:", factura);
+    
     const encabezado = factura?.encabezado || factura || {};
     const detalle = factura?.detalle || [];
 
