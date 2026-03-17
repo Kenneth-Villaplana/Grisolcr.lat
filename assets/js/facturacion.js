@@ -1,35 +1,24 @@
 const CONTROLLER_PATH = "/Controller/facturacionController.php";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const btnBuscar = document.getElementById("btnBuscar");
-    const btnLimpiar = document.getElementById("btnLimpiar");
-    const codigoInput = document.getElementById("codigoInput");
-    const cedulaInput = document.getElementById("cedulaInput");
 
     cargarFacturas();
 
-    if (btnBuscar) {
-        btnBuscar.addEventListener("click", buscarFacturas);
-    }
+    document.getElementById("btnBuscar")?.addEventListener("click", buscarFacturas);
+    document.getElementById("btnLimpiar")?.addEventListener("click", limpiarFiltros);
 
-    if (btnLimpiar) {
-        btnLimpiar.addEventListener("click", limpiarFiltros);
-    }
+    document.getElementById("codigoInput")?.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") buscarFacturas();
+    });
 
-    if (codigoInput) {
-        codigoInput.addEventListener("keyup", (e) => {
-            if (e.key === "Enter") buscarFacturas();
-        });
-    }
+    document.getElementById("cedulaInput")?.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") buscarFacturas();
+    });
 
-    if (cedulaInput) {
-        cedulaInput.addEventListener("keyup", (e) => {
-            if (e.key === "Enter") buscarFacturas();
-        });
-    }
 });
 
 async function cargarFacturas(filtro = {}) {
+
     const body = document.getElementById("facturas-body");
     if (!body) return;
 
@@ -42,6 +31,7 @@ async function cargarFacturas(filtro = {}) {
     `;
 
     try {
+
         const res = await fetch(CONTROLLER_PATH, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -51,25 +41,12 @@ async function cargarFacturas(filtro = {}) {
             })
         });
 
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
-
-        const text = await res.text();
-
-        let facturas = [];
-        try {
-            facturas = JSON.parse(text);
-        } catch (e) {
-            console.error("Respuesta no válida del controller:", text);
-            throw new Error("El controller no devolvió JSON válido.");
-        }
-
-        console.log("Facturas recibidas:", facturas);
+        const facturas = await res.json();
 
         body.innerHTML = "";
 
         if (!Array.isArray(facturas) || facturas.length === 0) {
+
             body.innerHTML = `
                 <tr>
                     <td colspan="10" class="text-center text-muted py-4">
@@ -77,18 +54,20 @@ async function cargarFacturas(filtro = {}) {
                     </td>
                 </tr>
             `;
+
             return;
         }
 
         facturas.forEach(f => agregarFilaFactura(f));
 
     } catch (error) {
-        console.error("Error al cargar facturas:", error);
+
+        console.error(error);
 
         body.innerHTML = `
             <tr>
                 <td colspan="10" class="text-center text-danger py-4">
-                    Error al cargar las facturas.
+                    Error al cargar facturas
                 </td>
             </tr>
         `;
@@ -96,11 +75,11 @@ async function cargarFacturas(filtro = {}) {
 }
 
 function agregarFilaFactura(f) {
-    const body = document.getElementById("facturas-body");
-    if (!body) return;
 
-    const total = Number(f.Total ?? 0);
-    const pendiente = Number(f.Saldo_Pendiente ?? 0);
+    const body = document.getElementById("facturas-body");
+
+    const total = Number(f.Total || 0);
+    const pendiente = Number(f.Saldo_Pendiente || f.Pendiente || 0);
 
     const estadoHTML =
         pendiente > 0
@@ -109,30 +88,29 @@ function agregarFilaFactura(f) {
 
     const botonAbono =
         pendiente > 0
-            ? `<button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1"
-                    onclick="abrirAbono(${Number(f.FacturaId)}, ${pendiente})">
+            ? `<button class="btn btn-outline-primary btn-sm"
+                    onclick="abrirAbono(${f.FacturaId}, ${pendiente})">
                     Abonar
                </button>`
             : "";
 
     const fila = `
         <tr>
-            <td>${f.FacturaId ?? "-"}</td>
-            <td>${f.Fecha ?? "-"}</td>
-            <td>${f.Cedula ?? "-"}</td>
-            <td>${f.NombreCliente ?? "-"}</td>
-            <td>${f.Telefono ?? "-"}</td>
-            <td>${f.Productos ?? "-"}</td>
+            <td>${f.FacturaId || "-"}</td>
+            <td>${f.Fecha || "-"}</td>
+            <td>${f.Cedula || "-"}</td>
+            <td>${f.NombreCliente || f.Cliente || "-"}</td>
+            <td>${f.Telefono || "-"}</td>
+            <td>${f.Productos || "-"}</td>
             <td class="text-end fw-semibold">₡${total.toLocaleString()}</td>
             <td class="text-end">₡${pendiente.toLocaleString()}</td>
             <td class="text-center">${estadoHTML}</td>
             <td class="text-center">
-                <div class="d-flex justify-content-center align-items-center gap-2">
-                    <button class="btn btn-outline-primary btn-sm" onclick="verFactura(${Number(f.FacturaId)})">
-                        Ver
-                    </button>
-                    ${botonAbono}
-                </div>
+                <button class="btn btn-outline-primary btn-sm"
+                    onclick="verFactura(${f.FacturaId})">
+                    Ver
+                </button>
+                ${botonAbono}
             </td>
         </tr>
     `;
@@ -141,243 +119,136 @@ function agregarFilaFactura(f) {
 }
 
 function buscarFacturas() {
-    const num = document.getElementById("codigoInput")?.value.trim() || null;
-    const ced = document.getElementById("cedulaInput")?.value.trim() || null;
+
+    const numero = document.getElementById("codigoInput")?.value || null;
+    const cedula = document.getElementById("cedulaInput")?.value || null;
 
     cargarFacturas({
-        numero: num,
-        cedula: ced
+        numero,
+        cedula
     });
 }
 
 function limpiarFiltros() {
-    const codigoInput = document.getElementById("codigoInput");
-    const cedulaInput = document.getElementById("cedulaInput");
 
-    if (codigoInput) codigoInput.value = "";
-    if (cedulaInput) cedulaInput.value = "";
+    document.getElementById("codigoInput").value = "";
+    document.getElementById("cedulaInput").value = "";
 
-    cargarFacturas({
-        numero: null,
-        cedula: null
-    });
+    cargarFacturas();
 }
 
 async function verFactura(id) {
-    try {
-        const res = await fetch(CONTROLLER_PATH, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                action: "obtenerFacturaCompleta",
-                facturaId: id
-            })
-        });
 
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    const res = await fetch(CONTROLLER_PATH, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "obtenerFacturaCompleta",
+            facturaId: id
+        })
+    });
 
-        const data = await res.json();
-        console.log("Factura completa:", data);
+    const data = await res.json();
 
-        if (!data || !data.encabezado) {
-            throw new Error("No se encontró la factura.");
-        }
+    const enc = data.encabezado;
+    const detalle = data.detalle || [];
 
-        const enc = data.encabezado;
-        const detalle = Array.isArray(data.detalle) ? data.detalle : [];
+    const modalBody = document.getElementById("facturaContenido");
 
-        const modalBody = document.getElementById("facturaContenido");
-        if (!modalBody) return;
+    modalBody.innerHTML = `
+        <h4>Factura #${enc.Id}</h4>
+        <p><strong>Fecha:</strong> ${enc.Fecha}</p>
+        <p><strong>Cliente:</strong> ${enc.Cliente}</p>
+        <p><strong>Telefono:</strong> ${enc.Telefono}</p>
 
-        modalBody.innerHTML = `
-            <h4>Factura #${enc.FacturaId ?? enc.Id ?? "-"}</h4>
-            <p><strong>Fecha:</strong> ${enc.Fecha ?? "-"}</p>
-            <p><strong>Cliente:</strong> ${enc.Cliente ?? enc.NombreCliente ?? "-"}</p>
-            <p><strong>Telefono:</strong> ${enc.Telefono ?? "-"}</p>
+        <hr>
 
-            <hr>
+        <p><strong>Total:</strong> ₡${Number(enc.Total).toLocaleString()}</p>
+        <p><strong>Abonado:</strong> ₡${Number(enc.Abonado || 0).toLocaleString()}</p>
+        <p><strong>Pendiente:</strong> ₡${Number(enc.Pendiente || 0).toLocaleString()}</p>
 
-            <p><strong>Total original:</strong> ₡${Number(enc.Total ?? 0).toLocaleString()}</p>
-            <p><strong>Abonado:</strong> ₡${Number(enc.Abonado ?? 0).toLocaleString()}</p>
-            <p><strong>Saldo pendiente:</strong> ₡${Number(enc.Pendiente ?? enc.Saldo_Pendiente ?? 0).toLocaleString()}</p>
+        <hr>
 
-            <hr>
-            <h5>Productos</h5>
-            <ul>
-                ${detalle.map(d => `
-                    <li>${d.Cantidad ?? 0}x ${d.Nombre ?? "-"} — ₡${Number(d.Total ?? 0).toLocaleString()}</li>
-                `).join("")}
-            </ul>
-        `;
+        <h5>Productos</h5>
+        <ul>
+            ${detalle.map(d =>
+                `<li>${d.Cantidad}x ${d.Nombre} — ₡${Number(d.Total).toLocaleString()}</li>`
+            ).join("")}
+        </ul>
+    `;
 
-        new bootstrap.Modal(document.getElementById("modalFactura")).show();
-
-    } catch (error) {
-        console.error("Error al obtener factura completa:", error);
-        alert("No se pudo cargar la factura.");
-    }
+    new bootstrap.Modal(document.getElementById("modalFactura")).show();
 }
 
 function abrirAbono(facturaId, saldo) {
-    const abonoFacturaId = document.getElementById("abonoFacturaId");
-    const abonoSaldo = document.getElementById("abonoSaldo");
-    const abonoMonto = document.getElementById("abonoMonto");
 
-    if (abonoFacturaId) abonoFacturaId.value = facturaId;
-    if (abonoSaldo) abonoSaldo.value = saldo;
-    if (abonoMonto) abonoMonto.value = "";
+    document.getElementById("abonoFacturaId").value = facturaId;
+    document.getElementById("abonoSaldo").value = saldo;
+    document.getElementById("abonoMonto").value = "";
 
     new bootstrap.Modal(document.getElementById("modalAbono")).show();
 }
 
 async function guardarAbono() {
-    try {
-        const facturaId = document.getElementById("abonoFacturaId")?.value;
-        const saldo = parseFloat(document.getElementById("abonoSaldo")?.value || 0);
-        const monto = parseFloat(document.getElementById("abonoMonto")?.value || 0);
 
-        if (!monto || monto <= 0) {
-            alert("Ingrese un monto válido.");
-            return;
-        }
+    const facturaId = document.getElementById("abonoFacturaId").value;
+    const monto = parseFloat(document.getElementById("abonoMonto").value);
 
-        if (monto > saldo) {
-            alert("El abono no puede ser mayor al saldo.");
-            return;
-        }
+    const res = await fetch(CONTROLLER_PATH, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "registrarAbono",
+            facturaId,
+            monto
+        })
+    });
 
-        const res = await fetch(CONTROLLER_PATH, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                action: "registrarAbono",
-                facturaId,
-                monto
-            })
-        });
+    const result = await res.json();
 
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    if (result.success) {
 
-        const result = await res.json();
-        console.log("Resultado abono:", result);
+        document.querySelector("#modalAbono .btn-close").click();
 
-        if (result.success) {
-            document.querySelector("#modalAbono .btn-close")?.click();
-            await mostrarReciboAbono(facturaId, monto);
-            await cargarFacturas();
-        } else {
-            alert(result.error || "No se pudo registrar el abono.");
-        }
+        await mostrarReciboAbono(facturaId, monto);
 
-    } catch (error) {
-        console.error("Error al registrar abono:", error);
-        alert("Ocurrió un error al registrar el abono.");
+        cargarFacturas();
     }
 }
 
-async function mostrarReciboAbono(facturaId, montoAbonado) {
-    try {
-        const res = await fetch(CONTROLLER_PATH, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                action: "obtenerFacturaCompleta",
-                facturaId
-            })
-        });
+async function mostrarReciboAbono(facturaId, monto) {
 
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status}`);
-        }
+    const res = await fetch(CONTROLLER_PATH, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "obtenerFacturaCompleta",
+            facturaId
+        })
+    });
 
-        const data = await res.json();
-        const f = data.encabezado;
-        const detalle = Array.isArray(data.detalle) ? data.detalle : [];
+    const data = await res.json();
+    const f = data.encabezado;
 
-        if (!f) {
-            throw new Error("No se pudo obtener la factura para el recibo.");
-        }
+    const html = `
+        <div id="ticketAbono" style="font-family: monospace;">
+            <h4 style="text-align:center;">Óptica Grisol</h4>
+            <div style="text-align:center;">Recibo de Abono</div>
+            <hr>
 
-        let ticketDetalle = detalle.map(d => `
-            <tr>
-                <td>${d.Nombre ?? "-"}</td>
-                <td style="text-align:center;">${d.Cantidad ?? 0}</td>
-                <td style="text-align:center;">${d.Descuento ?? 0}%</td>
-                <td style="text-align:right;">₡${Number(d.Total ?? 0).toLocaleString()}</td>
-            </tr>
-        `).join("");
+            Factura: ${f.Id}<br>
+            Fecha: ${f.Fecha}<br>
+            Cliente: ${f.Cliente}<br>
 
-        const html = `
-            <div id="ticketAbono" style="font-family: monospace; padding: 5px; font-size:13px;">
-                <h4 style="text-align:center; margin:0; font-weight:bold;">Óptica Grisol</h4>
-                <div style="text-align:center;">Recibo de Abono</div>
-                <hr>
-                <strong>Factura #:</strong> ${f.FacturaId ?? f.Id ?? "-"}<br>
-                <strong>Fecha:</strong> ${f.Fecha ?? "-"}<br>
-                <strong>Cliente:</strong> ${f.Cliente ?? f.NombreCliente ?? "-"}<br>
-                <strong>Telefono:</strong> ${f.Telefono ?? "-"}<br>
-                <hr>
-                <table style="width:100%; font-size:12px; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th style="text-align:left;">Producto</th>
-                            <th>Cant</th>
-                            <th>Desc</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${ticketDetalle}
-                    </tbody>
-                </table>
-                <hr>
-                <strong>Total factura:</strong> ₡${Number(f.Total ?? 0).toLocaleString()}<br>
-                <strong>Abono actual:</strong> ₡${Number(montoAbonado ?? 0).toLocaleString()}<br>
-                <strong>Total abonado:</strong> ₡${Number(f.Abonado ?? 0).toLocaleString()}<br>
-                <strong>Pendiente:</strong> ₡${Number(f.Pendiente ?? f.Saldo_Pendiente ?? 0).toLocaleString()}<br>
-                <p style="text-align:center;">¡Gracias por su pago!</p>
-            </div>
-        `;
+            <hr>
 
-        document.getElementById("reciboAbonoBody").innerHTML = html;
-        new bootstrap.Modal(document.getElementById("modalReciboAbono")).show();
+            Total: ₡${Number(f.Total).toLocaleString()}<br>
+            Abono: ₡${Number(monto).toLocaleString()}<br>
+            Pendiente: ₡${Number(f.Pendiente).toLocaleString()}
+        </div>
+    `;
 
-    } catch (error) {
-        console.error("Error al mostrar recibo de abono:", error);
-        alert("No se pudo generar el recibo.");
-    }
-}
+    document.getElementById("reciboAbonoBody").innerHTML = html;
 
-function imprimirReciboAbono() {
-    const ticket = document.getElementById("ticketAbono");
-    if (!ticket) return;
-
-    const contenido = ticket.outerHTML;
-    const ventana = window.open("", "_blank", "width=300,height=600");
-
-    ventana.document.write(`
-        <html>
-            <head>
-                <style>
-                    body {
-                        font-family: monospace;
-                        margin: 0;
-                        padding: 10px;
-                        font-size: 13px;
-                    }
-                    table { width:100%; border-collapse: collapse; }
-                    td, th { padding: 2px 0; }
-                </style>
-            </head>
-            <body>${contenido}</body>
-        </html>
-    `);
-
-    ventana.document.close();
-    ventana.focus();
-    ventana.print();
+    new bootstrap.Modal(document.getElementById("modalReciboAbono")).show();
 }
