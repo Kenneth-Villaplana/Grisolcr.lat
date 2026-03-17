@@ -113,7 +113,6 @@ function cargarProductos() {
         });
 
 }
-
 function renderProductos() {
 
     productosContainer.innerHTML = "";
@@ -125,31 +124,36 @@ function renderProductos() {
         .forEach(producto => {
 
             const card = document.createElement("div");
-            card.className = "col-md-4 mb-3";
+            card.className = "col-md-4 mb-4";
 
             card.innerHTML = `
-                <div class="card h-100 shadow-sm">
+                <div class="card producto-card h-100 shadow-sm border-0">
+
                     <div class="card-body d-flex flex-column">
-                        <strong>${producto.nombre}</strong>
-                        <p class="fw-bold text-primary mt-2">
+
+                        <h6 class="fw-bold text-dark">
+                            ${producto.nombre}
+                        </h6>
+
+                        <p class="precio-producto">
                             ₡${producto.precio.toLocaleString()}
                         </p>
 
                         <button
-                            class="btn btn-primary-custom"
+                            class="btn btn-agregar mt-auto"
                             onclick="agregarAlCarrito(${producto.id})"
                         >
-                            Agregar
+                            + Agregar
                         </button>
 
                     </div>
+
                 </div>
             `;
 
             productosContainer.appendChild(card);
 
         });
-
 }
 
 
@@ -227,7 +231,6 @@ function calcularTotales() {
 function renderCarrito() {
 
     const container = document.getElementById("cart-items");
-
     container.innerHTML = "";
 
     if (cart.length === 0) {
@@ -250,36 +253,39 @@ function renderCarrito() {
 
         div.innerHTML = `
 
-        <div class="cart-item-modern shadow-sm p-3 rounded">
+        <div class="cart-item-modern shadow-sm">
 
-            <div class="item-header">
+            <div class="d-flex justify-content-between align-items-center mb-2">
 
-                <strong>${item.nombre}</strong>
+                <strong class="item-title">${item.nombre}</strong>
 
-                <button onclick="eliminarProducto(${item.id})">
-                    🗑
+                <button class="btn-delete"
+                    onclick="eliminarProducto(${item.id})">
+                    <i class="bi bi-trash"></i>
                 </button>
 
             </div>
 
-            <div class="item-controls">
+            <div class="d-flex gap-2 align-items-center">
 
-                <input
-                    type="number"
-                    min="1"
-                    value="${item.cantidad}"
-                    onchange="actualizarCantidad(${item.id},this.value)"
-                >
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text">Cant</span>
+                    <input type="number" min="1"
+                        value="${item.cantidad}"
+                        class="form-control"
+                        onchange="actualizarCantidad(${item.id},this.value)">
+                </div>
 
-                <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value="${item.descuento}"
-                    onchange="actualizarDescuento(${item.id},this.value)"
-                >
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text">Desc</span>
+                    <input type="number" min="0" max="100"
+                        value="${item.descuento}"
+                        class="form-control"
+                        onchange="actualizarDescuento(${item.id},this.value)">
+                    <span class="input-group-text">%</span>
+                </div>
 
-                <div>
+                <div class="item-total">
                     ₡${totalProducto.toFixed(2)}
                 </div>
 
@@ -294,7 +300,6 @@ function renderCarrito() {
 
     calcularTotales();
 }
-
 
 /* =====================================================
    CLIENTES
