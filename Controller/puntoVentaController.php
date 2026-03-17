@@ -20,16 +20,28 @@ class PuntoVentaController {
         while ($this->conn->more_results() && $this->conn->next_result()) {;}
     }
 
+    /* =====================================================
+       PRODUCTOS
+    ===================================================== */
+
     public function getProductos() {
         try {
             return $this->puntoVentaModel->obtenerProductos();
         } catch (\Throwable $e) {
-            return ['error' => 'Error al obtener productos: ' . $e->getMessage()];
+            return [
+                'error' => 'Error al obtener productos: ' . $e->getMessage()
+            ];
         }
     }
 
+    /* =====================================================
+       CLIENTE POR CEDULA
+    ===================================================== */
+
     public function obtenerClientePorCedula($cedula) {
+
         try {
+
             $this->limpiarResultados();
 
             $stmt = $this->conn->prepare("CALL ObtenerClientePorCedula(?)");
@@ -44,9 +56,7 @@ class PuntoVentaController {
             $res = $stmt->get_result();
             $data = $res ? $res->fetch_assoc() : null;
 
-            if ($res) {
-                $res->free();
-            }
+            if ($res) $res->free();
 
             $stmt->close();
             $this->limpiarResultados();
@@ -54,10 +64,16 @@ class PuntoVentaController {
             return $data ?: [];
 
         } catch (\Throwable $e) {
+
             error_log("Error obtenerClientePorCedula: " . $e->getMessage());
+
             return [];
         }
     }
+
+    /* =====================================================
+       GENERAR VENTA
+    ===================================================== */
 
     public function generarVenta(
         $pacienteId,
@@ -72,12 +88,21 @@ class PuntoVentaController {
         $cedulaIngresada,
         $telefono
     ) {
+
+        $transaccionActiva = false;
+
         try {
+
             $cierreModel = new CierreCajaModel($this->conn);
 
             if ($cierreModel->cajaCerradaHoy()) {
-                return ["error" => "CAJA_CERRADA"];
+                return [
+                    "error" => "CAJA_CERRADA",
+                    "message" => "La caja está cerrada."
+                ];
             }
+
+            /* ---------- LIMPIEZA DE VARIABLES ---------- */
 
             $pacienteId = intval($pacienteId) ?: 0;
             $clienteNombre = trim((string)$clienteNombre);
@@ -91,10 +116,18 @@ class PuntoVentaController {
             $facturarEmpresa = intval($facturarEmpresa);
 
             if (!is_array($productos) || count($productos) === 0) {
-                return ["error" => "SIN_PRODUCTOS"];
+                return [
+                    "error" => "SIN_PRODUCTOS",
+                    "message" => "No se enviaron productos."
+                ];
             }
 
+            /* ---------- TRANSACCION ---------- */
+
             $this->conn->begin_transaction();
+            $transaccionActiva = true;
+
+            /* ---------- CREAR FACTURA ---------- */
 
             $this->limpiarResultados();
 
@@ -103,7 +136,7 @@ class PuntoVentaController {
             );
 
             if (!$stmt) {
-                throw new Exception($this->conn->error);
+                throw new Exception("Error preparando SP GenerarFacturaFlexible: " . $this->conn->error);
             }
 
             $stmt->bind_param(
@@ -124,9 +157,7 @@ class PuntoVentaController {
             $res = $stmt->get_result();
             $row = $res ? $res->fetch_assoc() : null;
 
-            if ($res) {
-                $res->free();
-            }
+            if ($res) $res->free();
 
             $facturaId = $row["FacturaId"] ?? null;
 
@@ -134,14 +165,17 @@ class PuntoVentaController {
             $this->limpiarResultados();
 
             if (!$facturaId) {
-                throw new Exception("No se obtuvo FacturaId al generar el encabezado.");
+                throw new Exception("No se pudo obtener FacturaId.");
             }
+
+            /* ---------- CALCULAR TOTALES ---------- */
 
             $subtotal = 0;
             $descuentoTotal = 0;
             $detalleFactura = [];
 
             foreach ($productos as $p) {
+
                 $precioUnitario = floatval($p["precioUnitario"] ?? 0);
                 $cantidad = intval($p["cantidad"] ?? 0);
                 $descuento = floatval($p["descuento"] ?? 0);
@@ -156,9 +190,9 @@ class PuntoVentaController {
                 $detalleFactura[] = [
                     "Nombre" => $descripcion,
                     "Cantidad" => $cantidad,
-                    "PrecioUnitario" => number_format($precioUnitario, 2, ".", ""),
+                    "PrecioUnitario" => number_format($precioUnitario,2,".",""),
                     "Descuento" => $descuento,
-                    "Total" => number_format($totalProducto - $descuentoLinea, 2, ".", "")
+                    "Total" => number_format($totalProducto - $descuentoLinea,2,".","")
                 ];
             }
 
@@ -167,79 +201,96 @@ class PuntoVentaController {
             $total = $base + $iva;
             $saldoPendiente = ($montoAbono > 0) ? ($total - $montoAbono) : 0;
 
+            /* ---------- DETALLE FACTURA ---------- */
+
             $productosJson = json_encode($productos, JSON_UNESCAPED_UNICODE);
 
             $this->limpiarResultados();
 
-            $stmt = $this->conn->prepare("CALL GenerarDetalleFactura(?, ?, ?)");
+            $stmt = $this->conn->prepare(
+                "CALL GenerarDetalleFactura(?, ?, ?)"
+            );
 
             if (!$stmt) {
-                throw new Exception($this->conn->error);
+                throw new Exception("Error preparando SP GenerarDetalleFactura");
             }
 
             $stmt->bind_param("isd", $facturaId, $productosJson, $saldoPendiente);
+
             $stmt->execute();
 
             if ($stmt->errno) {
-                throw new Exception($stmt->error);
+                throw new Exception("Error en detalle factura: " . $stmt->error);
             }
 
             $stmt->close();
             $this->limpiarResultados();
 
+            /* ---------- COMMIT ---------- */
+
             $this->conn->commit();
+            $transaccionActiva = false;
 
             $fechaActual = date("Y-m-d H:i:s");
 
+            /* ---------- ENCABEZADO ---------- */
+
             $encabezado = [
-                "FacturaId" => $facturaId,
-                "Id" => $facturaId,
-                "Fecha" => $fechaActual,
-                "Cliente" => $clienteNombre,
-                "NombreCliente" => $clienteNombre,
-                "Telefono" => $telefono,
-                "Empresa" => $empresaNombre,
-                "EmpresaNombre" => $empresaNombre,
-                "IdentificacionEmpresa" => $empresaIdentificacion,
-                "MetodoPago" => $metodoPago,
-                "Pago" => $metodoPago,
-                "Subtotal" => number_format($subtotal, 2, ".", ""),
-                "Descuento" => number_format($descuentoTotal, 2, ".", ""),
-                "IVA" => number_format($iva, 2, ".", ""),
-                "Total" => number_format($total, 2, ".", ""),
-                "Abono" => number_format($montoAbono, 2, ".", ""),
-                "Abonado" => number_format($montoAbono, 2, ".", ""),
-                "SaldoPendiente" => number_format($saldoPendiente, 2, ".", ""),
-                "Pendiente" => number_format($saldoPendiente, 2, ".", ""),
-                "Saldo_Pendiente" => number_format($saldoPendiente, 2, ".", "")
+
+                "FacturaId"=>$facturaId,
+                "Id"=>$facturaId,
+                "Fecha"=>$fechaActual,
+
+                "Cliente"=>$clienteNombre,
+                "NombreCliente"=>$clienteNombre,
+
+                "Telefono"=>$telefono,
+
+                "Empresa"=>$empresaNombre,
+                "EmpresaNombre"=>$empresaNombre,
+                "EmpresaIdentificacion"=>$empresaIdentificacion,
+                "IdentificacionEmpresa"=>$empresaIdentificacion,
+
+                "MetodoPago"=>$metodoPago,
+                "Pago"=>$metodoPago,
+
+                "Subtotal"=>number_format($subtotal,2,".",""),
+                "Descuento"=>number_format($descuentoTotal,2,".",""),
+                "IVA"=>number_format($iva,2,".",""),
+                "Total"=>number_format($total,2,".",""),
+
+                "Abono"=>number_format($montoAbono,2,".",""),
+                "SaldoPendiente"=>number_format($saldoPendiente,2,".","")
             ];
 
             return [
-                "FacturaId" => $facturaId,
-                "Id" => $facturaId,
-                "Fecha" => $fechaActual,
-                "Cliente" => $clienteNombre,
-                "Pago" => $metodoPago,
-                "Subtotal" => number_format($subtotal, 2, ".", ""),
-                "Descuento" => number_format($descuentoTotal, 2, ".", ""),
-                "IVA" => number_format($iva, 2, ".", ""),
-                "Total" => number_format($total, 2, ".", ""),
-                "Abono" => number_format($montoAbono, 2, ".", ""),
-                "Pendiente" => number_format($saldoPendiente, 2, ".", ""),
-                "encabezado" => $encabezado,
-                "detalle" => $detalleFactura
+
+                "FacturaId"=>$facturaId,
+                "Id"=>$facturaId,
+                "Fecha"=>$fechaActual,
+
+                "Subtotal"=>$encabezado["Subtotal"],
+                "Descuento"=>$encabezado["Descuento"],
+                "IVA"=>$encabezado["IVA"],
+                "Total"=>$encabezado["Total"],
+                "Abono"=>$encabezado["Abono"],
+                "Pendiente"=>$encabezado["SaldoPendiente"],
+
+                "encabezado"=>$encabezado,
+                "detalle"=>$detalleFactura
             ];
 
         } catch (\Throwable $e) {
-            if ($this->conn && $this->conn->errno !== null) {
+
+            if ($transaccionActiva) {
                 $this->conn->rollback();
             }
 
             error_log("Error generarVenta: " . $e->getMessage());
 
             return [
-                "error" => "GENERAR_VENTA_ERROR",
-                "message" => $e->getMessage()
+                "error"=>"GENERAR_VENTA_ERROR",
+                "message"=>$e->getMessage()
             ];
         }
     }
@@ -251,7 +302,10 @@ class PuntoVentaController {
     }
 }
 
-/* acciones del POS */
+
+/* =====================================================
+   API DEL POS
+===================================================== */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -265,28 +319,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($input["action"] ?? '') {
 
         case "obtenerProductos":
-            echo json_encode($controller->getProductos(), JSON_UNESCAPED_UNICODE);
-            break;
+
+            echo json_encode(
+                $controller->getProductos(),
+                JSON_UNESCAPED_UNICODE
+            );
+
+        break;
 
         case "obtenerCliente":
+
             echo json_encode(
                 $controller->obtenerClientePorCedula($input["cedula"] ?? ""),
                 JSON_UNESCAPED_UNICODE
             );
-            break;
+
+        break;
 
         case "estadoCaja":
+
             $conn = AbrirBD();
             $cierreModel = new CierreCajaModel($conn);
 
             echo json_encode([
-                "cerrada" => $cierreModel->cajaCerradaHoy()
+                "cerrada"=>$cierreModel->cajaCerradaHoy()
             ], JSON_UNESCAPED_UNICODE);
 
             CerrarBD($conn);
-            break;
+
+        break;
 
         case "generarVenta":
+
             $factura = $controller->generarVenta(
                 $input["clienteId"] ?? 0,
                 $input["clienteNombre"] ?? "",
@@ -302,26 +366,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
 
             if (isset($factura["error"])) {
+
                 echo json_encode([
-                    "success" => false,
-                    "error" => $factura["error"],
-                    "message" => $factura["message"] ?? null
+                    "success"=>false,
+                    "error"=>$factura["error"],
+                    "message"=>$factura["message"] ?? null,
+                    "factura"=>null
                 ], JSON_UNESCAPED_UNICODE);
+
                 break;
             }
 
             echo json_encode([
-                "success" => true,
-                "factura" => $factura
+                "success"=>true,
+                "error"=>null,
+                "message"=>null,
+                "factura"=>$factura
             ], JSON_UNESCAPED_UNICODE);
-            break;
+
+        break;
 
         default:
+
             echo json_encode([
-                "success" => false,
-                "error" => "ACCION_INVALIDA"
+                "success"=>false,
+                "error"=>"ACCION_INVALIDA",
+                "message"=>"Acción no válida.",
+                "factura"=>null
             ], JSON_UNESCAPED_UNICODE);
-            break;
+
+        break;
     }
 
     exit;
