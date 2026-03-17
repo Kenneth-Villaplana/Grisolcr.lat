@@ -1,0 +1,70 @@
+/* =====================================
+   POS UI OVERRIDE (Óptica Grisol)
+===================================== */
+
+/* CONTENEDOR POS */
+.pos-container {
+    padding: 10px;
+}
+
+/* PRODUCTOS */
+.pos-product-card {
+    border-radius: 16px;
+    transition: 0.2s ease;
+}
+
+.pos-product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* BOTÓN AGREGAR */
+.pos-btn-add {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    padding: 8px;
+}
+
+.pos-btn-add:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13,110,253,0.3);
+}
+
+/* CARRITO */
+.pos-cart-item {
+    border-radius: 14px;
+    border: 1px solid #eee;
+    background: #fff;
+    padding: 10px;
+}
+
+/* INPUTS */
+.pos-input {
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* TOTAL */
+.pos-total {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+/* BOTÓN FINALIZAR */
+.pos-btn-finalizar {
+    border-radius: 30px;
+    font-weight: bold;
+    padding: 12px;
+}
+
+/* HEADER ACCIONES */
+.pos-action-btn {
+    background: #ffc107;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-weight: 600;
+}
