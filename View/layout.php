@@ -129,6 +129,7 @@ function IncluirCSS() {
     <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/assets/css/styles.css?v=9">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+     <link rel="stylesheet" href="/css/pos.css">
     ';
 }
 
