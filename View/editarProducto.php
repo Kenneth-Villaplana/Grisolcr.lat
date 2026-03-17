@@ -16,13 +16,11 @@ $productoId = intval($_GET['id']);
 
 /* OBTENER PRODUCTO */
 
-$productos = ObtenerProductos($productoId);
+$producto = ObtenerProductoPorId($productoId);
 
-if(empty($productos)){
+if(!$producto){
     die("Producto no encontrado");
 }
-
-$producto = $productos[0];
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +97,8 @@ required>
 
 <label class="form-label">Descripción</label>
 
-<textarea name="Descripcion"
+<textarea
+name="Descripcion"
 id="Descripcion"
 class="form-control mb-3 auto-grow"
 rows="1"
@@ -107,7 +106,8 @@ required><?php echo htmlspecialchars($producto['Descripcion']); ?></textarea>
 
 <label class="form-label">Precio</label>
 
-<input type="number"
+<input
+type="number"
 name="Precio"
 id="Precio"
 class="form-control mb-3"
@@ -116,7 +116,8 @@ required>
 
 <label class="form-label">Cantidad</label>
 
-<input type="number"
+<input
+type="number"
 name="Cantidad"
 id="Cantidad"
 class="form-control mb-3"
@@ -127,7 +128,8 @@ required>
 
 <div class="col-12 text-center mt-2">
 
-<button type="button"
+<button
+type="button"
 class="btn-save-modern px-5"
 id="btnAbrirModalEditar">
 
@@ -149,6 +151,7 @@ Guardar Cambios
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
 
+
 <!-- MODAL CONFIRMAR -->
 
 <div class="modal fade"
@@ -156,6 +159,7 @@ id="modalConfirmarEdicion"
 tabindex="-1">
 
 <div class="modal-dialog modal-dialog-centered">
+
 <div class="modal-content">
 
 <div class="modal-header">
@@ -171,21 +175,21 @@ data-bs-dismiss="modal"></button>
 </div>
 
 <div class="modal-body">
-
 ¿Desea guardar los cambios realizados en este producto?
-
 </div>
 
 <div class="modal-footer">
 
-<button class="btn btn-outline-secondary"
+<button
+class="btn btn-outline-secondary"
 data-bs-dismiss="modal">
 
 Cancelar
 
 </button>
 
-<button class="btn btn-outline-primary"
+<button
+class="btn btn-outline-primary"
 id="btnConfirmarCambios">
 
 Sí, guardar

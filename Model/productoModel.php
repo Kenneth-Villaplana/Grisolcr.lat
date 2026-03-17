@@ -1,173 +1,223 @@
 <?php
 include_once __DIR__ . '/../Model/baseDatos.php';
 
+
+/* ========================= */
+/* AGREGAR PRODUCTO */
+/* ========================= */
+
 function AgregarProductoModel($nombre, $descripcion, $precio, $cantidad)
 {
     try {
+
         $enlace = AbrirBD();
+
         $sentencia = $enlace->prepare("CALL AgregarProducto(?, ?, ?, ?)");
-        if(!$sentencia) {
+
+        if(!$sentencia){
             throw new Exception($enlace->error);
         }
 
         $sentencia->bind_param("ssii", $nombre, $descripcion, $precio, $cantidad);
+
         $sentencia->execute();
+
         $sentencia->close();
+
+        while ($enlace->more_results() && $enlace->next_result()) {;}
+
         CerrarBD($enlace);
 
-        return ['resultado' => 1, 'mensaje' => 'Producto agregado con éxito'];
+        return [
+            'resultado' => 1,
+            'mensaje' => 'Producto agregado con éxito'
+        ];
 
-    } catch(Exception $ex) {
-        return ['resultado' => 0, 'mensaje' => 'Error en el servidor: '.$ex->getMessage()];
+    } catch(Exception $ex){
+
+        return [
+            'resultado' => 0,
+            'mensaje' => 'Error en el servidor: '.$ex->getMessage()
+        ];
     }
 }
+
+
+/* ========================= */
+/* OBTENER PRODUCTOS */
+/* ========================= */
 
 function ObtenerProductos($ProductoId = null)
 {
     try {
+
         $enlace = AbrirBD();
 
-        if ($ProductoId) {
+        if ($ProductoId !== null) {
+
             $sentencia = $enlace->prepare("CALL FiltroPorId(?)");
+
+            if(!$sentencia){
+                throw new Exception($enlace->error);
+            }
+
             $sentencia->bind_param("i", $ProductoId);
+
         } else {
+
             $sentencia = $enlace->prepare("CALL MostrarProductos()");
+
+            if(!$sentencia){
+                throw new Exception($enlace->error);
+            }
         }
 
         $sentencia->execute();
+
         $resultado = $sentencia->get_result();
 
-    
-        error_log("=== DEBUG ObtenerProductos START ===");
-        
-        if ($resultado->num_rows > 0) {
-            $fields = $resultado->fetch_fields();
-            $fieldNames = [];
-            foreach ($fields as $field) {
-                $fieldNames[] = $field->name;
-            }
-            error_log("Database columns returned: " . implode(', ', $fieldNames));
-            $resultado->data_seek(0); 
-        } else {
-            error_log("No rows returned from database");
-        }
-
         $productos = [];
-        $rowCount = 0;
-        
-        while ($row = $resultado->fetch_assoc()) {
-            $rowCount++;
-            
-           
-            error_log("--- Row {$rowCount} ---");
-            error_log("Row keys: " . implode(', ', array_keys($row)));
-            error_log("Row data: " . print_r($row, true));
-            
-          
-            $cantidadKey = null;
-            $cantidadValue = 0;
-            
-            if (isset($row['Cantidad'])) {
-                $cantidadKey = 'Cantidad';
-                $cantidadValue = (int)$row['Cantidad'];
-                error_log("Found 'Cantidad' key with value: {$cantidadValue}");
-            } elseif (isset($row['cantidad'])) {
-                $cantidadKey = 'cantidad';
-                $cantidadValue = (int)$row['cantidad'];
-                error_log("Found 'cantidad' key with value: {$cantidadValue}");
-            } elseif (isset($row['CANTIDAD'])) {
-                $cantidadKey = 'CANTIDAD';
-                $cantidadValue = (int)$row['CANTIDAD'];
-                error_log("Found 'CANTIDAD' key with value: {$cantidadValue}");
-            } else {
-                error_log("No cantidad key found in row. Available keys: " . implode(', ', array_keys($row)));
-                
-                foreach ($row as $key => $value) {
-                    if (stripos($key, 'cant') !== false || stripos($key, 'stock') !== false || stripos($key, 'quantity') !== false) {
-                        $cantidadKey = $key;
-                        $cantidadValue = (int)$value;
-                        error_log("Found potential quantity key '{$key}' with value: {$cantidadValue}");
-                        break;
-                    }
-                }
-            }
-            
-         
-            $row['Cantidad'] = $cantidadValue;
 
-           
-            if ($cantidadValue < 20) {
+        while ($row = $resultado->fetch_assoc()) {
+
+            $cantidad = isset($row['Cantidad']) ? (int)$row['Cantidad'] : 0;
+
+            /* color barra inventario */
+
+            if ($cantidad < 20) {
                 $colorBarra = 'bg-danger';
-            } elseif ($cantidadValue <= 50) {
+            } elseif ($cantidad <= 50) {
                 $colorBarra = 'bg-warning';
             } else {
                 $colorBarra = 'bg-success';
             }
 
-            $anchoBarra = ($cantidadValue > 100) ? 100 : $cantidadValue;
+            $anchoBarra = ($cantidad > 100) ? 100 : $cantidad;
 
             $row['ColorBarra'] = $colorBarra;
             $row['AnchoBarra'] = $anchoBarra;
-            
-         
-            error_log("Final row structure keys: " . implode(', ', array_keys($row)));
-            
+
             $productos[] = $row;
         }
-        
-        error_log("Total rows processed: {$rowCount}");
-        error_log("=== DEBUG ObtenerProductos END ===");
 
         $sentencia->close();
+
+        /* limpiar resultados pendientes */
+
+        while ($enlace->more_results() && $enlace->next_result()) {;}
+
         CerrarBD($enlace);
-        
-    
-        error_log("Returning " . count($productos) . " products");
-        if (!empty($productos)) {
-            error_log("First product keys: " . implode(', ', array_keys($productos[0])));
-        }
-        
+
         return $productos;
 
     } catch (Exception $ex) {
-        error_log("Error en ObtenerProductos: " . $ex->getMessage());
-        error_log("Stack trace: " . $ex->getTraceAsString());
+
+        error_log("Error en ObtenerProductos: ".$ex->getMessage());
+
         return [];
     }
 }
 
-function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad)
+
+/* ========================= */
+/* OBTENER PRODUCTO POR ID */
+/* ========================= */
+
+function ObtenerProductoPorId($productoId)
 {
     try {
+
         $enlace = AbrirBD();
-        $sentencia = $enlace->prepare("CALL EditarProducto(?, ?, ?, ?, ?)");
-        if(!$sentencia) {
+
+        $sentencia = $enlace->prepare("CALL FiltroPorId(?)");
+
+        if(!$sentencia){
             throw new Exception($enlace->error);
         }
 
-        $sentencia->bind_param("issii", 
-             $productoId,
-             $nombre, 
-             $descripcion,
-             $precio, 
-             $cantidad
+        $sentencia->bind_param("i", $productoId);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->get_result();
+
+        $producto = $resultado->fetch_assoc();
+
+        $sentencia->close();
+
+        while ($enlace->more_results() && $enlace->next_result()) {;}
+
+        CerrarBD($enlace);
+
+        return $producto;
+
+    } catch (Exception $ex) {
+
+        error_log("Error ObtenerProductoPorId: ".$ex->getMessage());
+
+        return null;
+    }
+}
+
+
+/* ========================= */
+/* EDITAR PRODUCTO */
+/* ========================= */
+
+function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad)
+{
+    try {
+
+        $enlace = AbrirBD();
+
+        $sentencia = $enlace->prepare("CALL EditarProducto(?, ?, ?, ?, ?)");
+
+        if(!$sentencia){
+            throw new Exception($enlace->error);
+        }
+
+        $sentencia->bind_param(
+            "issii",
+            $productoId,
+            $nombre,
+            $descripcion,
+            $precio,
+            $cantidad
         );
 
         $sentencia->execute();
+
         $sentencia->close();
+
+        while ($enlace->more_results() && $enlace->next_result()) {;}
+
         CerrarBD($enlace);
 
-        return ['resultado' => 1, 'mensaje' => 'Cambio realizado con exito'];
+        return [
+            'resultado' => 1,
+            'mensaje' => 'Cambio realizado con éxito'
+        ];
 
-    } catch(Exception $ex) {
-        return ['resultado' => 0, 'mensaje' => 'Error en el servidor: '.$ex->getMessage()];
+    } catch(Exception $ex){
+
+        return [
+            'resultado' => 0,
+            'mensaje' => 'Error en el servidor: '.$ex->getMessage()
+        ];
     }
 }
+
+
+/* ========================= */
+/* ELIMINAR PRODUCTO */
+/* ========================= */
 
 function EliminarProductoModel($productoId)
 {
     try {
+
         $enlace = AbrirBD();
+
         $sentencia = $enlace->prepare("CALL EliminarProducto(?)");
 
         if (!$sentencia) {
@@ -175,6 +225,7 @@ function EliminarProductoModel($productoId)
         }
 
         $sentencia->bind_param("i", $productoId);
+
         $sentencia->execute();
 
         if ($sentencia->errno) {
@@ -187,9 +238,18 @@ function EliminarProductoModel($productoId)
 
         CerrarBD($enlace);
 
-        return ['resultado' => 1, 'mensaje' => 'Producto eliminado con éxito'];
+        return [
+            'resultado' => 1,
+            'mensaje' => 'Producto eliminado con éxito'
+        ];
+
     } catch (Exception $ex) {
-        return ['resultado' => 0, 'mensaje' => 'Error: ' . $ex->getMessage()];
+
+        return [
+            'resultado' => 0,
+            'mensaje' => 'Error: ' . $ex->getMessage()
+        ];
     }
 }
+
 ?>
