@@ -2,9 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-?>
 
-include('layout.php'); 
+include('layout.php');
 require_once __DIR__ . '/../Controller/usuarioController.php';
 ?>
 
