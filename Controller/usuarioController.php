@@ -4,9 +4,34 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+echo "<pre>";
+echo "SESSION:\n";
+print_r($_SESSION);
+
+$idUsuario = $_SESSION['IdUsuario'] ?? $_SESSION['UsuarioID'] ?? null;
+
+echo "\nID USUARIO:\n";
+var_dump($idUsuario);
+
+echo "\nTEST DIRECTO DB:\n";
+
+require_once __DIR__ . '/../Model/baseDatos.php';
+
+$conn = AbrirBD();
+
+$stmt = $conn->prepare("SELECT * FROM usuario WHERE IdUsuario = ?");
+$stmt->bind_param("i", $idUsuario);
+$stmt->execute();
+
+$res = $stmt->get_result();
+print_r($res->fetch_assoc());
 
 include_once __DIR__ . '/../Model/LoginModel.php';
 include_once __DIR__ . '/../Model/UsuarioModel.php';
+exit;
+
+
+
 
 
 /*
