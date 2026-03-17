@@ -27,12 +27,15 @@ if ($idUsuario <= 0) {
 */
 if (isset($_POST['btnEditarPerfil'])) {
     try {
+
+        // 🔒 Seguridad: validar ID contra sesión
         $idUsuarioPost = isset($_POST['IdUsuario']) ? (int)$_POST['IdUsuario'] : 0;
 
         if ($idUsuarioPost !== $idUsuario) {
             throw new Exception('Intento de manipulación de usuario');
         }
 
+        // 🧼 Sanitización
         $cedula            = trim($_POST['Cedula'] ?? '');
         $nombre            = trim($_POST['Nombre'] ?? '');
         $apellido          = trim($_POST['Apellido'] ?? '');
@@ -42,10 +45,23 @@ if (isset($_POST['btnEditarPerfil'])) {
         $direccion         = trim($_POST['Direccion'] ?? '');
         $fechaNacimiento   = $_POST['FechaNacimiento'] ?? null;
 
-        if ($fechaNacimiento === '') {
+        // ⚠️ Validaciones mínimas
+        if (empty($nombre) || empty($apellido) || empty($correoElectronico)) {
+            throw new Exception('Campos obligatorios incompletos');
+        }
+
+        if (!filter_var($correoElectronico, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Correo electrónico inválido');
+        }
+
+        // 🔥 FIX CRÍTICO → FORMATO DE FECHA
+        if (!empty($fechaNacimiento)) {
+            $fechaNacimiento = date('Y-m-d', strtotime($fechaNacimiento));
+        } else {
             $fechaNacimiento = null;
         }
 
+        // 🚀 Ejecutar modelo
         $resultadoEdit = EditarPerfil(
             $idUsuario,
             $cedula,
@@ -58,14 +74,23 @@ if (isset($_POST['btnEditarPerfil'])) {
             $fechaNacimiento
         );
 
+        // 🔍 Mostrar mensaje REAL del modelo
         $_SESSION['txtMensaje'] = $resultadoEdit['mensaje'] ?? 'Operación realizada';
 
         if (($resultadoEdit['resultado'] ?? 0) == 1) {
             $_SESSION['CambioExitoso'] = true;
+        } else {
+            // 🔥 IMPORTANTE: log del error real
+            error_log('SP EditarPerfil FALLÓ: ' . json_encode($resultadoEdit));
         }
+
     } catch (Throwable $e) {
+
+        // 🧠 Log técnico
         error_log('EditarPerfil ERROR: ' . $e->getMessage());
-        $_SESSION['txtMensaje'] = 'Error al actualizar el perfil';
+
+        // 👀 Mensaje para UI (puedes cambiarlo si quieres)
+        $_SESSION['txtMensaje'] = $e->getMessage();
     }
 
     header('Location: /View/editarPerfil.php');
