@@ -99,15 +99,45 @@ try {
 
     $usuario = ObtenerPerfil($idUsuario);
 
-    // 🔥 VALIDACIÓN CORRECTA
+    // 🔥 DEBUG PROFESIONAL
+    if ($usuario === null) {
+        error_log("SP devolvió NULL - ID: " . $idUsuario);
+        die("Error crítico al obtener perfil");
+    }
+
+    if (!is_array($usuario)) {
+        error_log("SP devolvió formato inválido - ID: " . $idUsuario);
+        die("Error interno de datos");
+    }
+
     if (empty($usuario)) {
-        error_log("Perfil vacío para ID: " . $idUsuario);
-        die("Error al cargar el perfil");
+        error_log("SP devolvió array vacío - ID: " . $idUsuario);
+
+        // 🔥 VALIDACIÓN EXTRA (CLAVE)
+        // Verificar si el usuario existe en tabla base
+        require_once __DIR__ . '/../Model/baseDatos.php';
+        $conn = AbrirBD();
+
+        $check = $conn->prepare("SELECT IdUsuario FROM usuario WHERE IdUsuario = ?");
+        $check->bind_param("i", $idUsuario);
+        $check->execute();
+        $res = $check->get_result();
+
+        if ($res->num_rows === 0) {
+            // 💣 usuario no existe → sesión corrupta
+            session_destroy();
+            header("Location: /View/iniciarSesion.php");
+            exit();
+        }
+
+        // Si existe pero SP no devolvió → problema de JOIN
+        die("Perfil existe pero no se pudo cargar (JOIN issue)");
     }
 
 } catch (Throwable $e) {
 
-    error_log("ObtenerPerfil ERROR: " . $e->getMessage());
+    error_log("ERROR PERFIL: " . $e->getMessage());
     die("Error al cargar el perfil");
-}
+}"Error al cargar el perfil";
+
 ?>
