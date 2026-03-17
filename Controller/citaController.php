@@ -11,7 +11,7 @@ $model = new CitaModel();
 
 /*
 |--------------------------------------------------------------------------
-| OBTENER HORAS OCUPADAS (AJAX)
+| AJAX - HORAS OCUPADAS
 |--------------------------------------------------------------------------
 */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'get_busy_slots') {
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'get_b
     header("Content-Type: application/json");
 
     $doctorId = intval($_POST['doctor_id'] ?? 0);
-    $fecha = $_POST['date'] ?? null;
+    $fecha    = $_POST['date'] ?? null;
 
     if (!$doctorId || !$fecha) {
         echo json_encode([
@@ -65,12 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agend
     $fechaHora = $_POST['fecha_hora'] ?? null;
     $motivo    = trim($_POST['motivo'] ?? '');
 
-    $rol        = $_SESSION['RolID'] ?? null;
-    $usuarioId  = $_SESSION['UsuarioID'] ?? null;
+    $rolNombre = $_SESSION['RolID'] ?? null;
+    $usuarioId = $_SESSION['UsuarioID'] ?? null;
 
     if (!$usuarioId) {
 
-        $_SESSION['mensaje_error'] = "Debe iniciar sesión para agendar citas.";
+        $_SESSION['mensaje_error'] = "Debe iniciar sesión.";
         header("Location: /View/iniciarSesion.php");
         exit;
     }
@@ -82,16 +82,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agend
         }
 
         /*
-        |--------------------------------------------------------------------------
+        |--------------------------------------------------
         | PACIENTE
-        |--------------------------------------------------------------------------
+        |--------------------------------------------------
         */
-        if ($rol === 'Paciente') {
+        if ($rolNombre === 'Paciente') {
 
             $pacienteId = $model->obtenerPacienteId($usuarioId);
 
             if (!$pacienteId) {
-                throw new Exception("No se encontró el paciente.");
+                throw new Exception("Paciente no encontrado.");
             }
 
             $nuevaCita = $model->insertarCitaPaciente(
@@ -103,19 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agend
                 $doctorId
             );
 
-            $_SESSION['mensaje_exito'] = "Cita agendada exitosamente (#$nuevaCita)";
-
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
         }
 
 
         /*
-        |--------------------------------------------------------------------------
+        |--------------------------------------------------
         | EMPLEADO
-        |--------------------------------------------------------------------------
+        |--------------------------------------------------
         */
-        if ($rol === 'Empleado') {
+        else {
 
             $cedula   = trim($_POST['cedula'] ?? '');
             $nombre   = trim($_POST['nombre'] ?? '');
@@ -155,21 +151,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agend
                 );
             }
 
-            $_SESSION['mensaje_exito'] = "Cita agendada exitosamente (#$nuevaCita)";
-
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
         }
 
-        throw new Exception("No tienes permisos para agendar citas.");
+        $_SESSION['mensaje_exito'] = "Cita agendada exitosamente (#$nuevaCita)";
 
     } catch (Exception $e) {
 
         $_SESSION['mensaje_error'] = "Error al agendar cita: " . $e->getMessage();
-
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
     }
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 
@@ -190,15 +182,97 @@ try {
 
 /*
 |--------------------------------------------------------------------------
-| FUNCIONES DE GESTIÓN
+| CANCELAR / REAGENDAR / FINALIZAR
 |--------------------------------------------------------------------------
 */
-function puedeGestionarCitas($rolId)
+function procesarAccionesCita()
 {
-    return $rolId != 4;
+
+    global $model;
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        return;
+    }
+
+    $usuarioId = $_SESSION['UsuarioID'] ?? null;
+    $rolNombre = $_SESSION['RolID'] ?? null;
+    $rolId     = $_SESSION['Id_rol'] ?? null;
+
+    if (!$usuarioId) {
+        return;
+    }
+
+    try {
+
+        /*
+        |--------------------------------------------------
+        | CANCELAR
+        |--------------------------------------------------
+        */
+        if (($_POST['action'] ?? '') === 'cancelar_cita') {
+
+            $citaId = intval($_POST['cita_id']);
+
+            if (!$model->cancelarCitaDb($citaId)) {
+                throw new Exception("Error al cancelar la cita.");
+            }
+
+            $_SESSION['mensaje_exito'] = "Cita cancelada correctamente.";
+        }
+
+
+        /*
+        |--------------------------------------------------
+        | REAGENDAR
+        |--------------------------------------------------
+        */
+        if (($_POST['action'] ?? '') === 'reagendar_cita') {
+
+            $citaId = intval($_POST['cita_id']);
+            $fecha  = $_POST['nueva_fecha'];
+            $hora   = $_POST['nueva_hora'];
+
+            $fechaHora = $fecha . " " . $hora . ":00";
+
+            if (!$model->reagendarCitaDb($citaId, $fechaHora)) {
+                throw new Exception("Error al reagendar la cita.");
+            }
+
+            $_SESSION['mensaje_exito'] = "Cita reagendada correctamente.";
+        }
+
+
+        /*
+        |--------------------------------------------------
+        | FINALIZAR
+        |--------------------------------------------------
+        */
+        if (($_POST['action'] ?? '') === 'finalizar_cita') {
+
+            $citaId = intval($_POST['cita_id']);
+
+            if (!$model->finalizarCitaDb($citaId)) {
+                throw new Exception("Error al finalizar la cita.");
+            }
+
+            $_SESSION['mensaje_exito'] = "Cita finalizada correctamente.";
+        }
+
+    } catch (Exception $e) {
+
+        $_SESSION['mensaje_error'] = $e->getMessage();
+    }
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 
+/*
+|--------------------------------------------------------------------------
+| OBTENER CITAS SEGÚN ROL
+|--------------------------------------------------------------------------
+*/
 function obtenerCitasSegunRol()
 {
 
@@ -210,18 +284,33 @@ function obtenerCitasSegunRol()
     }
 
     $usuarioId = $_SESSION['UsuarioID'];
-    $rolId = $_SESSION['Id_rol'] ?? null;
+    $rolNombre = $_SESSION['RolID'] ?? null;
+    $rolId     = $_SESSION['Id_rol'] ?? null;
 
+    
     if ($rolId == 4) {
         return [];
     }
 
-    if (($_SESSION['RolID'] ?? '') === 'Paciente') {
+    try {
 
-        return $model->obtenerCitasPaciente($usuarioId);
+        if ($rolNombre === 'Paciente') {
 
-    } else {
+            $citas = $model->obtenerCitasPaciente($usuarioId);
 
-        return $model->obtenerTodasLasCitas();
+        } else {
+
+            $citas = $model->obtenerTodasLasCitas();
+        }
+
+        if (!is_array($citas)) {
+            $citas = [];
+        }
+
+        return $citas;
+
+    } catch (Exception $e) {
+
+        return [];
     }
 }
