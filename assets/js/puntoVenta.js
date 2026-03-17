@@ -1,20 +1,39 @@
-// Variables globales
+/* =====================================================
+   VARIABLES GLOBALES
+===================================================== */
+
 window.cart = window.cart || [];
 let cart = window.cart;
 window.productos = window.productos || [];
 
-// Variables DOM
-let productosContainer, cartSubtotal, cartDiscount, cartTax, cartTotal;
-let btnFinalizar, metodoPagoSelect, cedulaInput, nombreClienteSpan, searchInput;
-let montoAbonoInput;
+let productosContainer,
+    cartSubtotal,
+    cartDiscount,
+    cartTax,
+    cartTotal,
+    btnFinalizar,
+    metodoPagoSelect,
+    cedulaInput,
+    nombreClienteSpan,
+    searchInput,
+    montoAbonoInput;
 
-let facturarEmpresaCheckbox, datosEmpresaDiv, empresaNombreInput, empresaIdentificacionInput;
+let facturarEmpresaCheckbox,
+    datosEmpresaDiv,
+    empresaNombreInput,
+    empresaIdentificacionInput;
 
 const CONTROLLER_PATH = "../Controller/puntoVentaController.php";
+
+
+/* =====================================================
+   INIT
+===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     productosContainer = document.getElementById("productos-container");
+
     cartSubtotal = document.getElementById("cart-subtotal");
     cartDiscount = document.getElementById("cart-discount");
     cartTax = document.getElementById("cart-tax");
@@ -22,10 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btnFinalizar = document.getElementById("btnFinalizar");
     metodoPagoSelect = document.getElementById("metodoPago");
+
     cedulaInput = document.getElementById("cedulaCliente");
     nombreClienteSpan = document.getElementById("nombreCliente");
-    searchInput = document.getElementById("searchInput");
 
+    searchInput = document.getElementById("searchInput");
     montoAbonoInput = document.getElementById("montoAbono");
 
     facturarEmpresaCheckbox = document.getElementById("facturarEmpresa");
@@ -39,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnFinalizar) btnFinalizar.addEventListener("click", finalizarVenta);
 
     if (cedulaInput) {
+
         cedulaInput.addEventListener("input", () => {
             const ced = cedulaInput.value.trim();
             if (ced.length >= 6) buscarCliente();
@@ -51,40 +72,25 @@ document.addEventListener("DOMContentLoaded", () => {
         cedulaInput.addEventListener("blur", buscarCliente);
     }
 
-    if (searchInput) searchInput.addEventListener("input", renderProductos);
+    if (searchInput)
+        searchInput.addEventListener("input", renderProductos);
 
     if (facturarEmpresaCheckbox) {
-        facturarEmpresaCheckbox.addEventListener("change", manejarToggleFacturarEmpresa);
+
+        facturarEmpresaCheckbox.addEventListener(
+            "change",
+            manejarToggleFacturarEmpresa
+        );
+
         manejarToggleFacturarEmpresa();
     }
 
-    if (empresaIdentificacionInput) {
-        empresaIdentificacionInput.addEventListener("input", () => {
-            const ced = empresaIdentificacionInput.value.trim();
-            if (ced.length >= 9) consultarEmpresaPorCedula(ced);
-            if (ced.length === 0) empresaNombreInput.value = "";
-        });
-    }
-
-    const telefonoInput = document.getElementById("telefonoCliente");
-    const telefonoError = document.getElementById("telefonoError");
-
-    if (telefonoInput) {
-        telefonoInput.addEventListener("input", () => {
-
-            const valor = telefonoInput.value.replace(/\D/g, "");
-            telefonoInput.value = valor;
-
-            if (valor.length > 0 && valor.length < 8) {
-                telefonoError.classList.remove("d-none");
-            } else {
-                telefonoError.classList.add("d-none");
-            }
-
-        });
-    }
-
 });
+
+
+/* =====================================================
+   PRODUCTOS
+===================================================== */
 
 function cargarProductos() {
 
@@ -104,7 +110,6 @@ function cargarProductos() {
             }));
 
             renderProductos();
-
         });
 
 }
@@ -126,11 +131,17 @@ function renderProductos() {
                 <div class="card h-100 shadow-sm">
                     <div class="card-body d-flex flex-column">
                         <strong>${producto.nombre}</strong>
-                        <p class="fw-bold text-primary mt-2">₡${producto.precio.toLocaleString()}</p>
-                        <button class="btn btn-primary-custom mt-auto w-100"
-                            onclick="agregarAlCarrito(${producto.id})">
+                        <p class="fw-bold text-primary mt-2">
+                            ₡${producto.precio.toLocaleString()}
+                        </p>
+
+                        <button
+                            class="btn btn-primary-custom mt-auto"
+                            onclick="agregarAlCarrito(${producto.id})"
+                        >
                             Agregar
                         </button>
+
                     </div>
                 </div>
             `;
@@ -141,34 +152,41 @@ function renderProductos() {
 
 }
 
+
+/* =====================================================
+   CARRITO
+===================================================== */
+
 function agregarAlCarrito(productId) {
 
     const producto = window.productos.find(p => p.id === productId);
+
     const existente = cart.find(i => i.id === productId);
 
-    if (existente) existente.cantidad++;
-    else cart.push({ ...producto, cantidad: 1, descuento: 0 });
+    if (existente)
+        existente.cantidad++;
+    else
+        cart.push({ ...producto, cantidad: 1, descuento: 0 });
 
     renderCarrito();
-
 }
 
 function actualizarCantidad(id, cantidad) {
 
     const item = cart.find(i => i.id === id);
+
     item.cantidad = parseInt(cantidad) || 1;
 
     renderCarrito();
-
 }
 
 function actualizarDescuento(id, descuento) {
 
     const item = cart.find(i => i.id === id);
+
     item.descuento = parseFloat(descuento) || 0;
 
     renderCarrito();
-
 }
 
 function eliminarProducto(id) {
@@ -177,80 +195,97 @@ function eliminarProducto(id) {
     window.cart = cart;
 
     renderCarrito();
-
 }
+
 
 function calcularTotales() {
 
     let subtotal = 0;
-    let totalDescuento = 0;
+    let descuento = 0;
 
     cart.forEach(item => {
 
         const totalProducto = item.precio * item.cantidad;
 
         subtotal += totalProducto;
-        totalDescuento += totalProducto * (item.descuento / 100);
+
+        descuento += totalProducto * (item.descuento / 100);
 
     });
 
-    const iva = (subtotal - totalDescuento) * 0.13;
-    const total = subtotal - totalDescuento + iva;
+    const iva = (subtotal - descuento) * 0.13;
+
+    const total = subtotal - descuento + iva;
 
     cartSubtotal.textContent = subtotal.toFixed(2);
-    cartDiscount.textContent = totalDescuento.toFixed(2);
+    cartDiscount.textContent = descuento.toFixed(2);
     cartTax.textContent = iva.toFixed(2);
     cartTotal.textContent = total.toFixed(2);
-
 }
+
 
 function renderCarrito() {
 
     const container = document.getElementById("cart-items");
+
     container.innerHTML = "";
 
     if (cart.length === 0) {
 
-        container.innerHTML = `<p class="text-muted">No hay productos agregados.</p>`;
+        container.innerHTML =
+            `<p class="text-muted">No hay productos agregados.</p>`;
+
         calcularTotales();
         return;
-
     }
 
     cart.forEach(item => {
 
-        const totalProducto = item.precio * item.cantidad * (1 - item.descuento / 100);
+        const totalProducto =
+            item.precio *
+            item.cantidad *
+            (1 - item.descuento / 100);
 
         const div = document.createElement("div");
 
         div.innerHTML = `
-            <div class="cart-item-modern shadow-sm p-3 rounded">
 
-                <div class="item-header">
+        <div class="cart-item-modern shadow-sm p-3 rounded">
 
-                    <strong>${item.nombre}</strong>
+            <div class="item-header">
 
-                    <button onclick="eliminarProducto(${item.id})">
-                        🗑
-                    </button>
+                <strong>${item.nombre}</strong>
 
-                </div>
+                <button onclick="eliminarProducto(${item.id})">
+                    🗑
+                </button>
 
-                <div class="item-controls">
+            </div>
 
-                    <input type="number" min="1"
-                        value="${item.cantidad}"
-                        onchange="actualizarCantidad(${item.id},this.value)">
+            <div class="item-controls">
 
-                    <input type="number" min="0" max="100"
-                        value="${item.descuento}"
-                        onchange="actualizarDescuento(${item.id},this.value)">
+                <input
+                    type="number"
+                    min="1"
+                    value="${item.cantidad}"
+                    onchange="actualizarCantidad(${item.id},this.value)"
+                >
 
-                    <div>₡${totalProducto.toFixed(2)}</div>
+                <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value="${item.descuento}"
+                    onchange="actualizarDescuento(${item.id},this.value)"
+                >
 
+                <div>
+                    ₡${totalProducto.toFixed(2)}
                 </div>
 
             </div>
+
+        </div>
         `;
 
         container.appendChild(div);
@@ -258,8 +293,89 @@ function renderCarrito() {
     });
 
     calcularTotales();
+}
+
+
+/* =====================================================
+   CLIENTES
+===================================================== */
+
+async function buscarCliente() {
+
+    const ced = cedulaInput.value.trim();
+
+    if (ced.length < 6) {
+
+        nombreClienteSpan.textContent =
+            "Nombre del cliente aparecerá aquí";
+
+        nombreClienteSpan.dataset.id = "";
+        nombreClienteSpan.dataset.nombre = "";
+
+        return;
+    }
+
+    try {
+
+        const res = await fetch(CONTROLLER_PATH, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "obtenerCliente",
+                cedula: ced
+            })
+        });
+
+        const data = await res.json();
+
+        if (data?.PacienteId) {
+
+            nombreClienteSpan.textContent = data.NombreCompleto;
+            nombreClienteSpan.dataset.id = data.PacienteId;
+            nombreClienteSpan.dataset.nombre = data.NombreCompleto;
+
+            return;
+        }
+
+    } catch (e) {
+
+        console.error("Error buscando cliente", e);
+
+    }
 
 }
+
+
+/* =====================================================
+   EMPRESAS
+===================================================== */
+
+function manejarToggleFacturarEmpresa() {
+
+    const activo = facturarEmpresaCheckbox.checked;
+
+    if (activo) {
+
+        datosEmpresaDiv.style.display = "block";
+
+        cedulaInput.value = "";
+        cedulaInput.disabled = true;
+
+        nombreClienteSpan.textContent = "Cliente no registrado";
+
+    } else {
+
+        datosEmpresaDiv.style.display = "none";
+
+        cedulaInput.disabled = false;
+    }
+
+}
+
+
+/* =====================================================
+   CAJA
+===================================================== */
 
 async function validarEstadoCaja() {
 
@@ -273,20 +389,13 @@ async function validarEstadoCaja() {
 
         const data = await res.json();
 
-        const alerta = document.getElementById("alertaCajaCerrada");
-
         if (data.cerrada) {
 
             btnFinalizar.disabled = true;
 
-            if (alerta) alerta.classList.remove("d-none");
-
         } else {
 
             btnFinalizar.disabled = false;
-
-            if (alerta) alerta.classList.add("d-none");
-
         }
 
     } catch (e) {
@@ -297,41 +406,42 @@ async function validarEstadoCaja() {
 
 }
 
+
+/* =====================================================
+   VENTA
+===================================================== */
+
 async function finalizarVenta() {
 
     if (cart.length === 0) {
+
         mostrarAlertaPOS("Debe agregar productos.");
         return;
     }
 
     const total = parseFloat(cartTotal.textContent);
-    const montoAbono = parseFloat(montoAbonoInput?.value || 0);
+
+    const montoAbono =
+        parseFloat(montoAbonoInput?.value || 0);
 
     if (montoAbono > total) {
+
         mostrarAlertaPOS("El abono no puede ser mayor al total.");
         return;
     }
-
-    const telefono = document.getElementById("telefonoCliente")?.value || "";
-    const facturarEmpresa = facturarEmpresaCheckbox.checked;
 
     const payload = {
 
         action: "generarVenta",
 
-        clienteId: facturarEmpresa ? 0 : (nombreClienteSpan.dataset.id || 0),
-        clienteNombre: facturarEmpresa ? "" : nombreClienteSpan.dataset.nombre,
+        clienteId: nombreClienteSpan.dataset.id || 0,
+
+        clienteNombre:
+            nombreClienteSpan.dataset.nombre ||
+            nombreClienteSpan.textContent,
 
         metodoPago: metodoPagoSelect.value,
-        telefono: telefono,
 
-        facturarEmpresa: facturarEmpresa ? 1 : 0,
-        empresaNombre: empresaNombreInput?.value || "",
-        empresaIdentificacion: empresaIdentificacionInput?.value || "",
-
-        cedulaIngresada: facturarEmpresa ? empresaIdentificacionInput.value : cedulaInput.value,
-
-        facturaElectronica: document.getElementById("facturaElectronica")?.checked ? 1 : 0,
         montoAbono: montoAbono,
 
         productos: cart.map(i => ({
@@ -345,12 +455,16 @@ async function finalizarVenta() {
     };
 
     const res = await fetch(CONTROLLER_PATH, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
+
     });
 
     const result = await res.json();
+
+    console.log("FACTURA COMPLETA:", result);
 
     if (result.error === "CAJA_CERRADA") {
 
@@ -359,21 +473,26 @@ async function finalizarVenta() {
         ).show();
 
         return;
-
     }
 
     mostrarFacturaTicket(result.factura);
 
-    window.cart = [];
-    cart = window.cart;
+    cart = [];
+    window.cart = cart;
 
     renderCarrito();
-
 }
+
+
+/* =====================================================
+   ALERTAS
+===================================================== */
 
 function mostrarAlertaPOS(mensaje) {
 
-    document.getElementById("modalAlertaPOSBody").textContent = mensaje;
+    document.getElementById(
+        "modalAlertaPOSBody"
+    ).textContent = mensaje;
 
     new bootstrap.Modal(
         document.getElementById("modalAlertaPOS")
@@ -381,65 +500,69 @@ function mostrarAlertaPOS(mensaje) {
 
 }
 
+
+/* =====================================================
+   TICKET
+===================================================== */
+
 function mostrarFacturaTicket(factura) {
 
-    console.log("FACTURA COMPLETA:", factura);
-    
-    const encabezado = factura?.encabezado || factura || {};
-    const detalle = factura?.detalle || [];
+    if (!factura) {
+        console.error("Factura vacía");
+        return;
+    }
+
+    const encabezado = factura.encabezado || {};
+    const detalle = factura.detalle || [];
 
     const facturaId = encabezado.Id || encabezado.FacturaId || "-";
-    const fecha = encabezado.Fecha || new Date().toLocaleString();
 
-    const total = encabezado.Total || 0;
-    const subtotal = encabezado.Subtotal || 0;
-    const descuento = encabezado.Descuento || 0;
-    const iva = encabezado.IVA || 0;
+    const fecha = encabezado.Fecha || "-";
 
-    const abono = encabezado.Abono || encabezado.Abonado || 0;
-    const pendiente = encabezado.SaldoPendiente || encabezado.Pendiente || 0;
+    const subtotal = parseFloat(encabezado.Subtotal || 0);
+    const descuento = parseFloat(encabezado.Descuento || 0);
+    const iva = parseFloat(encabezado.IVA || 0);
+    const total = parseFloat(encabezado.Total || 0);
+
+    const abono = parseFloat(encabezado.Abono || 0);
+    const pendiente = parseFloat(encabezado.SaldoPendiente || 0);
 
     const modalBody = document.getElementById("modalFacturaBody");
 
     modalBody.innerHTML = `
-    <div id="ticketFactura">
 
-        <h5 style="text-align:center;">Óptica Grisol</h5>
+        <div id="ticketFactura">
 
-        <strong>Factura:</strong> ${facturaId}<br>
-        <strong>Fecha:</strong> ${fecha}<br>
+            <h5 class="text-center">Óptica Grisol</h5>
 
-        <hr>
+            Factura: ${facturaId}<br>
+            Fecha: ${fecha}
 
-        <table style="width:100%">
+            <hr>
 
             ${detalle.map(d => `
-                <tr>
-                    <td>${d.Nombre}</td>
-                    <td>${d.Cantidad}</td>
-                    <td>${d.Descuento}%</td>
-                    <td>₡${parseFloat(d.Total).toFixed(2)}</td>
-                </tr>
+                ${d.Nombre} x${d.Cantidad}
+                ₡${parseFloat(d.Total).toFixed(2)}<br>
             `).join("")}
 
-        </table>
+            <hr>
 
-        <hr>
+            Subtotal: ₡${subtotal.toFixed(2)}<br>
+            Descuento: ₡${descuento.toFixed(2)}<br>
+            IVA: ₡${iva.toFixed(2)}<br>
 
-        Subtotal: ₡${subtotal}<br>
-        Descuento: ₡${descuento}<br>
-        IVA: ₡${iva}<br>
+            <hr>
 
-        <hr>
+            Total: ₡${total.toFixed(2)}<br>
 
-        Total: ₡${total}<br>
+            ${
+                pendiente > 0
+                    ? `Abono: ₡${abono}<br>
+                       Pendiente: ₡${pendiente}`
+                    : ""
+            }
 
-        ${pendiente > 0 ? `
-            Abono: ₡${abono}<br>
-            Pendiente: ₡${pendiente}
-        ` : ""}
-
-    </div>
+        </div>
     `;
 
     new bootstrap.Modal(
@@ -447,6 +570,11 @@ function mostrarFacturaTicket(factura) {
     ).show();
 
 }
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
 
 if (localStorage.getItem("darkModePOS") === "1") {
     document.body.classList.add("modo-oscuro");
