@@ -3,6 +3,16 @@
 include_once __DIR__ . '/../Model/loginModel.php';
 
 if (session_status() === PHP_SESSION_NONE) {
+
+    // 🔥 CONFIG COOKIE (IMPORTANTE EN VPS / DO)
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => false, // true si usas https
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+
     session_start();
 }
 
@@ -133,7 +143,7 @@ if (isset($_POST["btnRegistrarPersonal"])) {
 }
 
 /* =============================
-   LOGIN (FIX PRINCIPAL AQUÍ)
+   LOGIN
 ============================= */
 
 if (isset($_POST["btnIniciarSesion"])) {
@@ -151,7 +161,7 @@ if (isset($_POST["btnIniciarSesion"])) {
 
         if ($usuario && password_verify($contrasenna, $usuario["Contrasenna"])) {
 
-            // 🔥 FIX PRINCIPAL
+            // 🔥 SESSION UNIFICADA
             $_SESSION["IdUsuario"] = $usuario["IdUsuario"];
             $_SESSION["UsuarioID"] = $usuario["IdUsuario"]; // compatibilidad
 
@@ -164,6 +174,9 @@ if (isset($_POST["btnIniciarSesion"])) {
             $_SESSION["Direccion"] = $usuario["Direccion"];
             $_SESSION["RolID"] = $usuario["RolUsuario"];
             $_SESSION["EmpleadoRol"] = $usuario["RolEmpleado"] ?? null;
+
+            // 🔥 REGENERAR SESIÓN (SEGURIDAD + BUG FIX)
+            session_regenerate_id(true);
 
             header('Location: /index.php');
             exit();
