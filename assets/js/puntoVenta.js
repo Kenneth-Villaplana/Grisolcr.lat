@@ -12,27 +12,27 @@ let facturarEmpresaCheckbox, datosEmpresaDiv, empresaNombreInput, empresaIdentif
 
 const CONTROLLER_PATH = "../Controller/puntoVentaController.php";
 
-
 document.addEventListener("DOMContentLoaded", () => {
 
     productosContainer = document.getElementById("productos-container");
-    cartSubtotal       = document.getElementById("cart-subtotal");
-    cartDiscount       = document.getElementById("cart-discount");
-    cartTax            = document.getElementById("cart-tax");
-    cartTotal          = document.getElementById("cart-total");
+    cartSubtotal = document.getElementById("cart-subtotal");
+    cartDiscount = document.getElementById("cart-discount");
+    cartTax = document.getElementById("cart-tax");
+    cartTotal = document.getElementById("cart-total");
 
-    btnFinalizar       = document.getElementById("btnFinalizar");
-    metodoPagoSelect   = document.getElementById("metodoPago");
-    cedulaInput        = document.getElementById("cedulaCliente");
-    nombreClienteSpan  = document.getElementById("nombreCliente");
-    searchInput        = document.getElementById("searchInput");
+    btnFinalizar = document.getElementById("btnFinalizar");
+    metodoPagoSelect = document.getElementById("metodoPago");
+    cedulaInput = document.getElementById("cedulaCliente");
+    nombreClienteSpan = document.getElementById("nombreCliente");
+    searchInput = document.getElementById("searchInput");
 
-    montoAbonoInput    = document.getElementById("montoAbono");
+    montoAbonoInput = document.getElementById("montoAbono");
 
     facturarEmpresaCheckbox = document.getElementById("facturarEmpresa");
-    datosEmpresaDiv         = document.getElementById("datosEmpresa");
-    empresaNombreInput      = document.getElementById("empresaNombre");
+    datosEmpresaDiv = document.getElementById("datosEmpresa");
+    empresaNombreInput = document.getElementById("empresaNombre");
     empresaIdentificacionInput = document.getElementById("empresaIdentificacion");
+
     validarEstadoCaja();
     cargarProductos();
 
@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         manejarToggleFacturarEmpresa();
     }
 
-    // API para empresas
     if (empresaIdentificacionInput) {
         empresaIdentificacionInput.addEventListener("input", () => {
             const ced = empresaIdentificacionInput.value.trim();
@@ -66,29 +65,29 @@ document.addEventListener("DOMContentLoaded", () => {
             if (ced.length === 0) empresaNombreInput.value = "";
         });
     }
-    
-    
-const telefonoInput = document.getElementById("telefonoCliente");
-const telefonoError = document.getElementById("telefonoError");
 
-if (telefonoInput) {
-    telefonoInput.addEventListener("input", () => {
-        const valor = telefonoInput.value.replace(/\D/g, ""); // solo números
-        telefonoInput.value = valor;
+    const telefonoInput = document.getElementById("telefonoCliente");
+    const telefonoError = document.getElementById("telefonoError");
 
-        if (valor.length > 0 && valor.length < 8) {
-            telefonoError.classList.remove("d-none");
-        } else {
-            telefonoError.classList.add("d-none");
-        }
-    });
-}
+    if (telefonoInput) {
+        telefonoInput.addEventListener("input", () => {
 
-      
+            const valor = telefonoInput.value.replace(/\D/g, "");
+            telefonoInput.value = valor;
+
+            if (valor.length > 0 && valor.length < 8) {
+                telefonoError.classList.remove("d-none");
+            } else {
+                telefonoError.classList.add("d-none");
+            }
+
+        });
+    }
+
 });
 
-
 function cargarProductos() {
+
     fetch(CONTROLLER_PATH, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,6 +95,7 @@ function cargarProductos() {
     })
         .then(res => res.json())
         .then(data => {
+
             window.productos = data.map(p => ({
                 id: parseInt(p.ProductoId),
                 nombre: p.Nombre,
@@ -104,11 +104,13 @@ function cargarProductos() {
             }));
 
             renderProductos();
+
         });
+
 }
 
-
 function renderProductos() {
+
     productosContainer.innerHTML = "";
 
     const filtro = (searchInput?.value || "").toLowerCase();
@@ -116,25 +118,31 @@ function renderProductos() {
     window.productos
         .filter(p => p.nombre.toLowerCase().includes(filtro))
         .forEach(producto => {
+
             const card = document.createElement("div");
             card.className = "col-md-4 mb-3";
 
             card.innerHTML = `
                 <div class="card h-100 shadow-sm">
                     <div class="card-body d-flex flex-column">
-                        <strong class="card-title text-dark">${producto.nombre}</strong>
-                        <p class="card-text fw-bold text-primary mt-2">₡${producto.precio.toLocaleString()}</p>
-                        <button class="btn btn-primary-custom w-100 mt-auto" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
+                        <strong>${producto.nombre}</strong>
+                        <p class="fw-bold text-primary mt-2">₡${producto.precio.toLocaleString()}</p>
+                        <button class="btn btn-primary-custom mt-auto w-100"
+                            onclick="agregarAlCarrito(${producto.id})">
+                            Agregar
+                        </button>
                     </div>
                 </div>
             `;
 
             productosContainer.appendChild(card);
+
         });
+
 }
 
-
 function agregarAlCarrito(productId) {
+
     const producto = window.productos.find(p => p.id === productId);
     const existente = cart.find(i => i.id === productId);
 
@@ -142,244 +150,121 @@ function agregarAlCarrito(productId) {
     else cart.push({ ...producto, cantidad: 1, descuento: 0 });
 
     renderCarrito();
+
 }
 
 function actualizarCantidad(id, cantidad) {
+
     const item = cart.find(i => i.id === id);
     item.cantidad = parseInt(cantidad) || 1;
+
     renderCarrito();
+
 }
 
 function actualizarDescuento(id, descuento) {
+
     const item = cart.find(i => i.id === id);
     item.descuento = parseFloat(descuento) || 0;
+
     renderCarrito();
+
 }
 
 function eliminarProducto(id) {
+
     cart = cart.filter(i => i.id !== id);
     window.cart = cart;
+
     renderCarrito();
+
 }
 
 function calcularTotales() {
+
     let subtotal = 0;
     let totalDescuento = 0;
 
     cart.forEach(item => {
+
         const totalProducto = item.precio * item.cantidad;
+
         subtotal += totalProducto;
         totalDescuento += totalProducto * (item.descuento / 100);
+
     });
 
-    const iva   = (subtotal - totalDescuento) * 0.13;
+    const iva = (subtotal - totalDescuento) * 0.13;
     const total = subtotal - totalDescuento + iva;
 
     cartSubtotal.textContent = subtotal.toFixed(2);
     cartDiscount.textContent = totalDescuento.toFixed(2);
-    cartTax.textContent      = iva.toFixed(2);
-    cartTotal.textContent    = total.toFixed(2);
+    cartTax.textContent = iva.toFixed(2);
+    cartTotal.textContent = total.toFixed(2);
+
 }
 
-
 function renderCarrito() {
+
     const container = document.getElementById("cart-items");
     container.innerHTML = "";
 
     if (cart.length === 0) {
+
         container.innerHTML = `<p class="text-muted">No hay productos agregados.</p>`;
         calcularTotales();
         return;
+
     }
 
     cart.forEach(item => {
+
         const totalProducto = item.precio * item.cantidad * (1 - item.descuento / 100);
 
         const div = document.createElement("div");
-        div.className = "";
 
         div.innerHTML = `
             <div class="cart-item-modern shadow-sm p-3 rounded">
 
-    <div class="item-header">
-        <strong class="item-title">${item.nombre}</strong>
+                <div class="item-header">
 
-        <button class="delete-btn" onclick="eliminarProducto(${item.id})">
-            <i class="bi bi-trash"></i>
-        </button>
-    </div>
+                    <strong>${item.nombre}</strong>
 
-    <div class="item-controls">
-        
-        <div class="input-group input-group-sm" style="width:100px;">
-            <span class="input-group-text">Cant.</span>
-            <input type="number" min="1" value="${item.cantidad}" 
-                   class="form-control"
-                   onchange="actualizarCantidad(${item.id}, this.value)">
-        </div>
+                    <button onclick="eliminarProducto(${item.id})">
+                        🗑
+                    </button>
 
-        <div class="input-group input-group-sm input-descuento">
-            <span class="input-group-text">Desc.</span>
-            <input type="number" min="0" max="100" value="${item.descuento}" 
-                   class="form-control"
-                   onchange="actualizarDescuento(${item.id}, this.value)">
-            <span class="input-group-text">%</span>
-        </div>
+                </div>
 
-        <div class="item-total">₡${totalProducto.toFixed(2)}</div>
-    </div>
+                <div class="item-controls">
 
-</div>`;
+                    <input type="number" min="1"
+                        value="${item.cantidad}"
+                        onchange="actualizarCantidad(${item.id},this.value)">
+
+                    <input type="number" min="0" max="100"
+                        value="${item.descuento}"
+                        onchange="actualizarDescuento(${item.id},this.value)">
+
+                    <div>₡${totalProducto.toFixed(2)}</div>
+
+                </div>
+
+            </div>
+        `;
 
         container.appendChild(div);
+
     });
 
     calcularTotales();
+
 }
 
-
-
-
-async function buscarCliente() {
-    const ced = cedulaInput.value.trim();
-
-    if (ced.length < 6) {
-        nombreClienteSpan.textContent = "Nombre del cliente aparecerá aquí";
-        nombreClienteSpan.dataset.id = "";
-        nombreClienteSpan.dataset.nombre = "";
-
-        // ocultar teléfono
-        document.getElementById("telefonoClienteDiv").style.display = "none";
-
-        return;
-    }
-
-    const res = await fetch(CONTROLLER_PATH, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "obtenerCliente", cedula: ced })
-    });
-
-    const data = await res.json();
-
-
-    /** si existe en bd **/
-    if (data?.PacienteId) {
-        nombreClienteSpan.textContent = data.NombreCompleto;
-        nombreClienteSpan.dataset.id = data.PacienteId;
-        nombreClienteSpan.dataset.nombre = data.NombreCompleto;
-        nombreClienteSpan.dataset.telefono = data.Telefono || "";
-
-        // mostrar teléfono
-        const telDiv = document.getElementById("telefonoClienteDiv");
-        const telInput = document.getElementById("telefonoCliente");
-
-        telDiv.style.display = "block";
-        telInput.value = data.Telefono || "";
-
-        return;
-    }
-
-    /** Si no esta registrado busca en Api**/
-    let nombreAPI = "";
-
-    try {
-        const apiRes = await fetch(`https://apis.gometa.org/cedulas/${encodeURIComponent(ced)}`);
-        const apiData = await apiRes.json();
-
-        if (apiData?.results?.length > 0) {
-            const p = apiData.results[0];
-
-            nombreAPI = `${p.firstname || ""} ${p.lastname1 || ""} ${p.lastname2 || ""}`.trim();
-            if (!nombreAPI && p.fullname) nombreAPI = p.fullname;
-            if (!nombreAPI && p.nombre)   nombreAPI = p.nombre;
-        }
-
-    } catch (error) {
-        console.error("Error consultando API:", error);
-    }
-
-    nombreClienteSpan.innerHTML = `
-        <span class="fw-semibold text-primary">${nombreAPI || "Cliente no encontrado"}</span><br>
-        <button class="btn btn-sm btn-outline-primary mt-2" onclick="registrarClientePOS()">
-            Registrar cliente
-        </button>
-    `;
-
-    nombreClienteSpan.dataset.id = "";
-    nombreClienteSpan.dataset.nombre = nombreAPI;
-
-    // permitir digitar teléfono manual
-    const telDiv = document.getElementById("telefonoClienteDiv");
-    const telInput = document.getElementById("telefonoCliente");
-
-    telDiv.style.display = "block";
-    telInput.value = "";
-}
-
-
-function registrarClientePOS() {
-    const ced = cedulaInput.value.trim();
-    if (!ced) return alert("Debe ingresar una cédula válida.");
-    window.location.href = `/View/registrarClientePOS.php?cedula=${ced}`;
-}
-
-
-
-function manejarToggleFacturarEmpresa() {
-    const activo = facturarEmpresaCheckbox.checked;
-    const filaCedulaCliente = document.getElementById("cedulaCliente")?.closest(".mb-3");
-
-    if (activo) {
-        datosEmpresaDiv.style.display = "block";
-
-        cedulaInput.value = "";
-        cedulaInput.disabled = true;
-
-        nombreClienteSpan.textContent = "Cliente no registrado";
-        nombreClienteSpan.dataset.id = "";
-        nombreClienteSpan.dataset.nombre = "";
-
-        document.getElementById("telefonoClienteDiv").style.display = "none";
-
-        if (filaCedulaCliente) filaCedulaCliente.style.display = "none";
-
-    } else {
-        datosEmpresaDiv.style.display = "none";
-
-        empresaNombreInput.value = "";
-        empresaIdentificacionInput.value = "";
-
-        cedulaInput.disabled = false;
-
-        if (filaCedulaCliente) filaCedulaCliente.style.display = "";
-    }
-}
-
-
-
-
-async function consultarEmpresaPorCedula(ced) {
-    try {
-        const res = await fetch(`https://apis.gometa.org/cedulas/${encodeURIComponent(ced)}`);
-        const data = await res.json();
-
-        if (!data?.results || data.results.length === 0) return;
-
-        const p = data.results[0];
-
-        let nombre = `${p.firstname || ""} ${p.lastname1 || ""} ${p.lastname2 || ""}`.trim();
-        if (!nombre && p.fullname) nombre = p.fullname;
-        if (!nombre && p.nombre)   nombre = p.nombre;
-
-        empresaNombreInput.value = nombre;
-
-    } catch (e) {
-        console.error("Error API empresa:", e);
-    }
-}
 async function validarEstadoCaja() {
+
     try {
+
         const res = await fetch(CONTROLLER_PATH, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -388,38 +273,29 @@ async function validarEstadoCaja() {
 
         const data = await res.json();
 
-        const btn = document.getElementById("btnFinalizar");
         const alerta = document.getElementById("alertaCajaCerrada");
 
         if (data.cerrada) {
 
-            if (btn) {
-                btn.disabled = true;
-                btn.classList.add("disabled");
-                btn.title = "Caja cerrada";
-            }
+            btnFinalizar.disabled = true;
 
-            if (alerta) {
-                alerta.classList.remove("d-none");
-            }
+            if (alerta) alerta.classList.remove("d-none");
 
         } else {
-            if (btn) {
-                btn.disabled = false;
-                btn.classList.remove("disabled");
-                btn.title = "";
-            }
 
-            if (alerta) {
-                alerta.classList.add("d-none");
-            }
+            btnFinalizar.disabled = false;
+
+            if (alerta) alerta.classList.add("d-none");
+
         }
 
     } catch (e) {
-        console.error("Error validando estado de caja", e);
-    }
-}
 
+        console.error("Error validando caja", e);
+
+    }
+
+}
 
 async function finalizarVenta() {
 
@@ -428,58 +304,33 @@ async function finalizarVenta() {
         return;
     }
 
-    const subtotal = parseFloat(cartSubtotal.textContent);
-    const descuento = parseFloat(cartDiscount.textContent);
-    const iva = parseFloat(cartTax.textContent);
     const total = parseFloat(cartTotal.textContent);
-
     const montoAbono = parseFloat(montoAbonoInput?.value || 0);
 
-    if (montoAbono < 0) {
-        mostrarAlertaPOS("El abono no puede ser negativo.");
-        return;
-    }
-
     if (montoAbono > total) {
-        mostrarAlertaPOS("El abono no puede ser mayor al total de la factura.");
+        mostrarAlertaPOS("El abono no puede ser mayor al total.");
         return;
     }
-
-
-    //  VALIDACIÓN DE TELÉFONO (mínimo 8 dígitos)
 
     const telefono = document.getElementById("telefonoCliente")?.value || "";
-    const soloNumeros = telefono.replace(/\D/g, "");
-
-    if (soloNumeros.length > 0 && soloNumeros.length < 8) {
-        document.getElementById("telefonoError").classList.remove("d-none");
-        mostrarAlertaPOS("El número de teléfono debe tener mínimo 8 dígitos.");
-        return;
-    }
- 
-
-
     const facturarEmpresa = facturarEmpresaCheckbox.checked;
 
     const payload = {
+
         action: "generarVenta",
 
-        clienteId:     facturarEmpresa ? 0 : (nombreClienteSpan.dataset.id || 0),
-        clienteNombre: facturarEmpresa 
-            ? "" 
-            : (nombreClienteSpan.dataset.nombre || nombreClienteSpan.textContent || ""),
+        clienteId: facturarEmpresa ? 0 : (nombreClienteSpan.dataset.id || 0),
+        clienteNombre: facturarEmpresa ? "" : nombreClienteSpan.dataset.nombre,
 
         metodoPago: metodoPagoSelect.value,
-        telefono: telefono,  
+        telefono: telefono,
 
         facturarEmpresa: facturarEmpresa ? 1 : 0,
-        empresaNombre: facturarEmpresa ? empresaNombreInput.value : "",
-        empresaIdentificacion: facturarEmpresa ? empresaIdentificacionInput.value : "",
+        empresaNombre: empresaNombreInput?.value || "",
+        empresaIdentificacion: empresaIdentificacionInput?.value || "",
 
-        cedulaIngresada: facturarEmpresa
-            ? empresaIdentificacionInput.value
-            : cedulaInput.value,    
-    
+        cedulaIngresada: facturarEmpresa ? empresaIdentificacionInput.value : cedulaInput.value,
+
         facturaElectronica: document.getElementById("facturaElectronica")?.checked ? 1 : 0,
         montoAbono: montoAbono,
 
@@ -490,6 +341,7 @@ async function finalizarVenta() {
             precioUnitario: i.precio,
             descuento: i.descuento
         }))
+
     };
 
     const res = await fetch(CONTROLLER_PATH, {
@@ -500,167 +352,100 @@ async function finalizarVenta() {
 
     const result = await res.json();
 
-if (result.error === "CAJA_CERRADA") {
-    const modal = new bootstrap.Modal(
-        document.getElementById("modalCajaCerrada")
-    );
-    modal.show();
-    return;
-}
+    if (result.error === "CAJA_CERRADA") {
+
+        new bootstrap.Modal(
+            document.getElementById("modalCajaCerrada")
+        ).show();
+
+        return;
+
+    }
+
     mostrarFacturaTicket(result.factura);
 
     window.cart = [];
     cart = window.cart;
+
     renderCarrito();
 
-    cedulaInput.value = "";
-    nombreClienteSpan.textContent = "Nombre del cliente aparecerá aquí";
-    nombreClienteSpan.dataset.id = "";
-    nombreClienteSpan.dataset.nombre = "";
-
-    montoAbonoInput.value = "";
-
-    document.getElementById("telefonoClienteDiv").style.display = "none";
 }
-
 
 function mostrarAlertaPOS(mensaje) {
-    const body = document.getElementById("modalAlertaPOSBody");
-    body.textContent = mensaje;
 
-    const modal = new bootstrap.Modal(document.getElementById("modalAlertaPOS"));
-    modal.show();
+    document.getElementById("modalAlertaPOSBody").textContent = mensaje;
+
+    new bootstrap.Modal(
+        document.getElementById("modalAlertaPOS")
+    ).show();
+
 }
-
 
 function mostrarFacturaTicket(factura) {
 
     const encabezado = factura?.encabezado || factura || {};
     const detalle = factura?.detalle || [];
 
+    const facturaId = encabezado.Id || encabezado.FacturaId || "-";
+    const fecha = encabezado.Fecha || new Date().toLocaleString();
+
+    const total = encabezado.Total || 0;
+    const subtotal = encabezado.Subtotal || 0;
+    const descuento = encabezado.Descuento || 0;
+    const iva = encabezado.IVA || 0;
+
+    const abono = encabezado.Abono || encabezado.Abonado || 0;
+    const pendiente = encabezado.SaldoPendiente || encabezado.Pendiente || 0;
+
     const modalBody = document.getElementById("modalFacturaBody");
 
-    const empresaNombreEnc =
-        encabezado.EmpresaNombre || encabezado.Empresa || "";
-
-    const empresaIdentEnc =
-        encabezado.EmpresaIdentificacion || encabezado.IdentificacionEmpresa || "";
-
-    const esEmpresa = !!empresaNombreEnc;
-
     modalBody.innerHTML = `
-        <div id="ticketFactura" style="font-size:14px;">
+    <div id="ticketFactura">
 
-            <h5 class="text-center fw-bold">Óptica Grisol</h5>
-            <small class="text-center d-block">Venta al detalle</small>
-            <hr>
+        <h5 style="text-align:center;">Óptica Grisol</h5>
 
-            <strong>Factura #:</strong> ${encabezado.Id}<br>
-            <strong>Fecha:</strong> ${encabezado.Fecha}<br>
-            <strong>Pago:</strong> ${encabezado.MetodoPago}<br>
+        <strong>Factura:</strong> ${facturaId}<br>
+        <strong>Fecha:</strong> ${fecha}<br>
 
-            ${
-                esEmpresa
-                    ? `
-                        <strong>Empresa:</strong> ${empresaNombreEnc}<br>
-                        <strong>Identificación:</strong> ${empresaIdentEnc}<br>
-                    `
-                    : (
-                        encabezado.Cliente
-                            ? `<strong>Cliente:</strong> ${encabezado.Cliente}<br>
-                               <strong>Teléfono:</strong> ${encabezado.Telefono || ""}<br>`
-                            : ""
-                    )
-            }
+        <hr>
 
-            <hr>
+        <table style="width:100%">
 
-            <table class="ticket-table mt-3">
-                <thead>
-                    <tr>
-                        <th style="width:40%">Producto</th>
-                        <th style="width:15%">Cant</th>
-                        <th style="width:15%">Desc</th>
-                        <th style="width:30%">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${detalle.map(item => `
-                        <tr>
-                            <td>${item.Nombre}</td>
-                            <td>${item.Cantidad}</td>
-                            <td>${item.Descuento}%</td>
-                            <td>₡${parseFloat(item.Total).toFixed(2)}</td>
-                        </tr>
-                    `).join("")}
-                </tbody>
-            </table>
+            ${detalle.map(d => `
+                <tr>
+                    <td>${d.Nombre}</td>
+                    <td>${d.Cantidad}</td>
+                    <td>${d.Descuento}%</td>
+                    <td>₡${parseFloat(d.Total).toFixed(2)}</td>
+                </tr>
+            `).join("")}
 
-            <hr>
-            <strong>Subtotal:</strong> ₡${encabezado.Subtotal}<br>
-            <strong>Descuento:</strong> -₡${encabezado.Descuento}<br>
-            <strong>IVA (13%):</strong> ₡${encabezado.IVA}<br>
-            <hr>
-${
-    (parseFloat(encabezado.SaldoPendiente) > 0)
-        ? `
-            <strong>Total factura:</strong> ₡${encabezado.Total}<br>
-            <strong>Abono realizado:</strong> ₡${encabezado.Abono}<br>
-            <strong>Pendiente:</strong> ₡${encabezado.SaldoPendiente}<br>
-        `
-        : `
-            <h5 class="fw-bold">TOTAL: ₡${encabezado.Total}</h5>
-        `
-}
+        </table>
 
-<hr>
-            <p class="text-center">¡Gracias por su compra!</p>
-        </div>
+        <hr>
 
-        <div class="mt-3 text-end">
-            <button class="btn btn-outline-secondary" id="btnImprimirTicket">Imprimir ticket</button>
-        </div>
+        Subtotal: ₡${subtotal}<br>
+        Descuento: ₡${descuento}<br>
+        IVA: ₡${iva}<br>
+
+        <hr>
+
+        Total: ₡${total}<br>
+
+        ${pendiente > 0 ? `
+            Abono: ₡${abono}<br>
+            Pendiente: ₡${pendiente}
+        ` : ""}
+
+    </div>
     `;
 
-    const modal = new bootstrap.Modal(document.getElementById("modalFactura"));
-    modal.show();
+    new bootstrap.Modal(
+        document.getElementById("modalFactura")
+    ).show();
 
-    document.getElementById("btnImprimirTicket").onclick = () => {
-        const ticketHTML = document.getElementById("ticketFactura").outerHTML;
-        const ventana = window.open("", "_blank", "width=300,height=600");
-
-        ventana.document.write(`
-            <html>
-                <head>
-                    <style>
-                        body { font-family: monospace; margin:0; padding:10px; }
-                        #ticketFactura { width: 200px; }
-                        .ticket-table { width: 100%; font-size: 12px; }
-                        .ticket-table th, .ticket-table td { text-align:left; padding-right:5px; }
-                    </style>
-                </head>
-                <body>${ticketHTML}</body>
-            </html>
-        `);
-
-        ventana.print();
-
-        setTimeout(() => modal.hide(), 300);
-    };
 }
-   document.addEventListener("DOMContentLoaded", () => {
 
-    const btnFinalizar = document.getElementById("btnFinalizar");
-
-    if (btnFinalizar) {
-        btnFinalizar.addEventListener("click", finalizarVenta);
-    } else {
-        console.warn("btnFinalizar no existe en el DOM");
-    }
-
-    validarEstadoCaja();
-});
-// Mantener modo oscuro cuando recarga
 if (localStorage.getItem("darkModePOS") === "1") {
     document.body.classList.add("modo-oscuro");
 }
