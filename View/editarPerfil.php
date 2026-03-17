@@ -1,12 +1,8 @@
 <?php
-session_start();
-
-// DEBUG TEMPORAL
-if (!isset($_SESSION['IdUsuario'])) {
-    echo "NO HAY SESIÓN<br>";
-    var_dump($_SESSION);
-    exit;
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
+?>
 
 include('layout.php'); 
 require_once __DIR__ . '/../Controller/usuarioController.php';
