@@ -21,38 +21,25 @@ function ObtenerPerfil($idUsuario)
     try {
         $enlace = AbrirBD();
 
-        $sql = "SELECT 
-                    u.IdUsuario,
-                    u.Cedula,
-                    u.Nombre,
-                    u.Apellido,
-                    u.ApellidoDos,
-                    u.CorreoElectronico, 
-                    u.Telefono,
-                    u.Direccion,
-                    p.FechaNacimiento
-                FROM usuario u
-                LEFT JOIN paciente p ON u.IdUsuario = p.usuarioId
-                WHERE u.IdUsuario = ?";
-
-        $sentencia = $enlace->prepare($sql);
-
-        if (!$sentencia) {
-            throw new Exception("Error en prepare: " . $enlace->error);
-        }
-
-        $sentencia->bind_param("i", $idUsuario);
-        $sentencia->execute();
-
-        $resultado = $sentencia->get_result();
-
         $usuario = [];
 
-        if ($resultado && $resultado->num_rows > 0) {
-            $usuario = $resultado->fetch_assoc();
+        // 🔥 IMPORTANTE: usar multi_query para SP
+        $query = "CALL ObtenerPerfilUsuario(" . intval($idUsuario) . ")";
+
+        if ($enlace->multi_query($query)) {
+
+            do {
+                if ($result = $enlace->store_result()) {
+
+                    if ($result->num_rows > 0) {
+                        $usuario = $result->fetch_assoc();
+                    }
+
+                    $result->free();
+                }
+            } while ($enlace->more_results() && $enlace->next_result());
         }
 
-        $sentencia->close();
         CerrarBD($enlace);
 
         return $usuario;
