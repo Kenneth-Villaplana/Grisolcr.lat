@@ -1,10 +1,14 @@
 <?php
-include('layout.php'); 
+include('layout.php');
 require_once __DIR__ . '/../Controller/usuarioController.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,7 +21,7 @@ require_once __DIR__ . '/../Controller/usuarioController.php';
 <?php MostrarMenu(); ?>
 
 <main class="editar-section">
-     <div class="container mt-5"> 
+    <div class="container mt-5">
 
         <!-- ALERTA -->
         <?php if(isset($_SESSION["txtMensaje"])): ?>
@@ -30,72 +34,68 @@ require_once __DIR__ . '/../Controller/usuarioController.php';
         <div class="row justify-content-center">
             <div class="col-lg-10">
 
-                <!-- CARD -->
                 <div class="edit-card shadow-modern">
 
-                    <!-- HEADER -->
                     <div class="edit-header text-center">
                         <h4>Perfil</h4>
                         <p>Actualice sus datos personales</p>
                     </div>
 
-                    <!-- FORM -->
                     <form method="POST" class="p-4 row g-4">
 
-                        <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario']; ?>">
+                        <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario'] ?? '' ?>">
 
-                        <!-- COLUMNA IZQUIERDA -->
+                        <!-- IZQUIERDA -->
                         <div class="col-md-6">
                             <h6 class="section-title">Datos personales</h6>
 
-                            <label class="form-label">Cédula</label>
-                            <input type="text" name="Cedula" class="form-control input-modern mb-3"
-                                value="<?= $usuario['Cedula']; ?>" required readonly>
+                            <label>Cédula</label>
+                            <input type="text" name="Cedula" class="form-control mb-3"
+                                value="<?= $usuario['Cedula'] ?? '' ?>" readonly>
 
-                            <label class="form-label">Nombre</label>
-                            <input type="text" name="Nombre" class="form-control input-modern mb-3"
-                                value="<?= $usuario['Nombre']; ?>" required readonly>
+                            <label>Nombre</label>
+                            <input type="text" name="Nombre" class="form-control mb-3"
+                                value="<?= $usuario['Nombre'] ?? '' ?>" readonly>
 
-                            <label class="form-label">Primer Apellido</label>
-                            <input type="text" name="Apellido" class="form-control input-modern mb-3"
-                                value="<?= $usuario['Apellido']; ?>" required readonly>
+                            <label>Primer Apellido</label>
+                            <input type="text" name="Apellido" class="form-control mb-3"
+                                value="<?= $usuario['Apellido'] ?? '' ?>" readonly>
 
-                            <label class="form-label">Segundo Apellido</label>
-                            <input type="text" name="ApellidoDos" class="form-control input-modern mb-3"
-                                value="<?= $usuario['ApellidoDos']; ?>" required readonly>
+                            <label>Segundo Apellido</label>
+                            <input type="text" name="ApellidoDos" class="form-control mb-3"
+                                value="<?= $usuario['ApellidoDos'] ?? '' ?>" readonly>
 
-                            <label class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" name="FechaNacimiento" class="form-control input-modern mb-3"
-                                value="<?= $usuario['FechaNacimiento']; ?>">
+                            <label>Fecha de Nacimiento</label>
+                            <input type="date" name="FechaNacimiento" class="form-control mb-3"
+                                value="<?= $usuario['FechaNacimiento'] ?? '' ?>">
                         </div>
 
-                        <!-- COLUMNA DERECHA -->
+                        <!-- DERECHA -->
                         <div class="col-md-6">
                             <h6 class="section-title">Contacto</h6>
 
-                            <label class="form-label">Número Telefónico</label>
-                            <input type="text" name="Telefono" class="form-control input-modern mb-3"
-                                value="<?= $usuario['Telefono']; ?>" required>
+                            <label>Teléfono</label>
+                            <input type="text" name="Telefono" class="form-control mb-3"
+                                value="<?= $usuario['Telefono'] ?? '' ?>" required>
 
-                            <label class="form-label">Correo Electrónico</label>
-                            <input type="email" name="CorreoElectronico" class="form-control input-modern mb-3"
-                                value="<?= $usuario['CorreoElectronico']; ?>" required>
+                            <label>Correo</label>
+                            <input type="email" name="CorreoElectronico" class="form-control mb-3"
+                                value="<?= $usuario['CorreoElectronico'] ?? '' ?>" required>
 
-                            <label class="form-label">Dirección</label>
-                            <input type="text" name="Direccion" class="form-control input-modern mb-3"
-                                value="<?= $usuario['Direccion']; ?>" required>
+                            <label>Dirección</label>
+                            <input type="text" name="Direccion" class="form-control mb-3"
+                                value="<?= $usuario['Direccion'] ?? '' ?>" required>
                         </div>
 
-                        <!-- BOTÓN -->
-                        <div class="col-12 text-center mt-2">
-                            <button type="submit" id="btnEditarPerfil" name="btnEditarPerfil"
-                                class="btn-save-modern">
-                                <i class="bi bi-pencil-square"></i> Guardar Cambios
+                        <div class="col-12 text-center mt-3">
+                            <button type="submit" name="btnEditarPerfil" class="btn btn-primary">
+                                Guardar Cambios
                             </button>
                         </div>
+
                     </form>
 
-                </div><!-- END CARD -->
+                </div>
 
             </div>
         </div>
