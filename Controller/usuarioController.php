@@ -1,21 +1,24 @@
 <?php
+
+// 🔥 SIEMPRE iniciar sesión primero
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 include_once __DIR__ . '/../Model/LoginModel.php';
 include_once __DIR__ . '/../Model/UsuarioModel.php';
 
 
-
 /*
 |--------------------------------------------------------------------------
-| VALIDACIÓN DE SESIÓN (UNIFICADA)
+| VALIDACIÓN DE SESIÓN (ROBUSTA)
 |--------------------------------------------------------------------------
 */
-$idUsuario = $_SESSION['IdUsuario'] ?? null;
+$idUsuario = isset($_SESSION['IdUsuario']) ? (int)$_SESSION['IdUsuario'] : 0;
 
-if (!$idUsuario) {
-    header('Location: iniciarSesion.php');
+if ($idUsuario <= 0) {
+    error_log("Sesión inválida en usuarioController");
+    header('Location: /View/iniciarSesion.php');
     exit();
 }
 
@@ -29,7 +32,14 @@ if (isset($_POST["btnEditarPerfil"])) {
 
     try {
 
-        $idUsuario = $_POST["IdUsuario"] ?? null;
+        // 🔥 NUNCA confiar en POST para el ID
+        $idUsuarioPost = $_POST["IdUsuario"] ?? null;
+
+        // Validación de seguridad
+        if ((int)$idUsuarioPost !== $idUsuario) {
+            throw new Exception("Intento de manipulación de usuario");
+        }
+
         $cedula = $_POST["Cedula"] ?? '';
         $nombre = $_POST["Nombre"] ?? '';
         $apellido = $_POST["Apellido"] ?? '';
@@ -42,11 +52,6 @@ if (isset($_POST["btnEditarPerfil"])) {
         // Normalizar fecha
         if ($fechaNacimiento === '') {
             $fechaNacimiento = null;
-        }
-
-        // Validación básica
-        if (!$idUsuario) {
-            throw new Exception("ID de usuario inválido");
         }
 
         // Llamada al modelo
@@ -62,19 +67,18 @@ if (isset($_POST["btnEditarPerfil"])) {
             $fechaNacimiento
         );
 
-        // Manejo seguro de respuesta
         $_SESSION["txtMensaje"] = $resultadoEdit['mensaje'] ?? "Operación realizada";
-        
+
         if (($resultadoEdit['resultado'] ?? 0) == 1) {
             $_SESSION["CambioExitoso"] = true;
         }
 
     } catch (Throwable $e) {
 
+        error_log("EditarPerfil ERROR: " . $e->getMessage());
         $_SESSION["txtMensaje"] = "Error: " . $e->getMessage();
     }
 
-    // Redirect limpio (sin id innecesario)
     header("Location: editarPerfil.php");
     exit();
 }
@@ -89,15 +93,15 @@ try {
 
     $usuario = ObtenerPerfil($idUsuario);
 
-    if (!$usuario || !is_array($usuario)) {
-        throw new Exception("Perfil no encontrado");
+    // 🔥 VALIDACIÓN CORRECTA
+    if (empty($usuario)) {
+        error_log("Perfil vacío para ID: " . $idUsuario);
+        die("Error al cargar el perfil");
     }
 
 } catch (Throwable $e) {
 
-    // Puedes loguear aquí si quieres nivel pro
-    error_log($e->getMessage());
-
+    error_log("ObtenerPerfil ERROR: " . $e->getMessage());
     die("Error al cargar el perfil");
 }
 ?>
