@@ -4,8 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once __DIR__ . '/../Model/UsuarioModel.php';
-include_once __DIR__ . '/../Model/baseDatos.php';
+require_once __DIR__ . '/../Model/UsuarioModel.php';
+require_once __DIR__ . '/../Model/baseDatos.php';
 
 /*
 |--------------------------------------------------------------------------
