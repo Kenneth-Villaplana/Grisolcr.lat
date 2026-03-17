@@ -1,10 +1,16 @@
 const CC_PATH = "../Controller/cierreCajaController.php";
 
 /**
- * Helper para convertir texto a número
+ * 🔥 Helper robusto para convertir texto a número (quita ₡, comas, etc.)
  */
-const num = (id) =>
-    parseFloat(document.getElementById(id)?.textContent) || 0;
+const num = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return 0;
+
+    return parseFloat(
+        el.textContent.replace(/[^\d.-]/g, '')
+    ) || 0;
+};
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -34,16 +40,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+/**
+ * 🔥 Helper fetch seguro (evita crash si backend devuelve HTML o error)
+ */
+async function fetchJSON(url, options) {
+    const res = await fetch(url, options);
+    const text = await res.text();
+
+    let data;
+    try {
+        data = JSON.parse(text);
+    } catch {
+        console.error("Respuesta NO JSON:", text);
+        throw new Error("Respuesta inválida del servidor");
+    }
+
+    if (!res.ok) {
+        console.error("HTTP Error:", res.status, data);
+        throw new Error(data?.error || "Error en servidor");
+    }
+
+    return data;
+}
+
+/**
+ * =====================================================
+ * RESUMEN
+ * =====================================================
+ */
 async function cargarResumen() {
     try {
-        const res = await fetch(CC_PATH, {
+        const data = await fetchJSON(CC_PATH, {
             method: "POST",
             credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ action: "resumen" })
         });
 
-        const data = await res.json();
         const r = data.resumen || {};
         const m = data.metodos || {};
 
@@ -65,17 +98,29 @@ async function cargarResumen() {
         document.getElementById("cc-efectivo-esperado").textContent = m.efectivo || "0.00";
 
     } catch (e) {
-        console.error("Error cargando resumen", e);
+        console.error("Error cargando resumen:", e);
+        mostrarAlerta("Error cargando resumen del día.");
     }
 }
 
+/**
+ * =====================================================
+ * DIFERENCIA
+ * =====================================================
+ */
 function calcularDiferencia() {
     const esperado = num("cc-efectivo-esperado");
     const contado = parseFloat(this.value) || 0;
+
     document.getElementById("cc-diferencia").textContent =
         (contado - esperado).toFixed(2);
 }
 
+/**
+ * =====================================================
+ * CONFIRMACIÓN
+ * =====================================================
+ */
 function mostrarConfirmacionCierre() {
 
     if (num("cc-total-facturado") === 0) {
@@ -88,7 +133,13 @@ function mostrarConfirmacionCierre() {
     ).show();
 }
 
+/**
+ * =====================================================
+ * CERRAR CAJA
+ * =====================================================
+ */
 async function cerrarCaja() {
+
     const modalEl = document.getElementById("modalConfirmarCierre");
     const modal = modalEl ? bootstrap.Modal.getInstance(modalEl) : null;
     if (modal) modal.hide();
@@ -100,31 +151,39 @@ async function cerrarCaja() {
 
     const payload = {
         action: "cerrar",
-        fecha: new Date().toISOString().slice(0, 10),
+
+        // 🔥 Fecha local correcta
+        fecha: new Date().toLocaleDateString('sv-SE'),
+
         facturas: parseInt(num("cc-cantidad")),
         subtotal: num("cc-subtotal"),
         descuento: num("cc-descuento"),
         iva: num("cc-iva"),
         totalFacturado: num("cc-total-facturado"),
         totalCobrado: num("cc-total-cobrado"),
+
         efectivo: num("cc-efectivo"),
         tarjeta: num("cc-tarjeta"),
         sinpe: num("cc-sinpe"),
         transferencia: num("cc-transferencia"),
+
         efectivoEsperado: num("cc-efectivo-esperado"),
-        efectivoContado: parseFloat(document.getElementById("cc-efectivo-contado")?.value) || 0,
+        efectivoContado: parseFloat(
+            document.getElementById("cc-efectivo-contado")?.value
+        ) || 0,
+
         diferencia: num("cc-diferencia")
     };
 
+    console.log("📦 Payload cierre:", payload);
+
     try {
-        const res = await fetch(CC_PATH, {
+        const data = await fetchJSON(CC_PATH, {
             method: "POST",
             credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
-
-        const data = await res.json();
 
         if (data.error) {
             mostrarAlerta(data.error);
@@ -135,31 +194,41 @@ async function cerrarCaja() {
         setTimeout(() => location.reload(), 800);
 
     } catch (e) {
-        console.error("Error cerrando caja", e);
+        console.error("Error cerrando caja:", e);
         mostrarAlerta("Error al cerrar la caja.");
     }
 }
 
+/**
+ * =====================================================
+ * ALERTA
+ * =====================================================
+ */
 function mostrarAlerta(msg) {
     const body = document.getElementById("modalAlertaCCBody");
     if (!body) return;
 
     body.textContent = msg;
+
     new bootstrap.Modal(
         document.getElementById("modalAlertaCC")
     ).show();
 }
 
+/**
+ * =====================================================
+ * HISTORIAL
+ * =====================================================
+ */
 async function cargarHistorialCierres() {
     try {
-        const res = await fetch(CC_PATH, {
+        const data = await fetchJSON(CC_PATH, {
             method: "POST",
             credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ action: "historial" })
         });
 
-        const data = await res.json();
         const tbody = document.getElementById("tablaCierres");
         const contador = document.getElementById("cantidadCierres");
 
@@ -180,47 +249,28 @@ async function cargarHistorialCierres() {
         if (contador) contador.textContent = data.length;
 
         data.forEach(c => {
+            const diff = parseFloat(c.Diferencia) || 0;
+
             const diffClass =
-                parseFloat(c.Diferencia) === 0
-                    ? "monto-total"
-                    : parseFloat(c.Diferencia) > 0
-                        ? "monto-positivo"
-                        : "monto-negativo";
+                diff === 0 ? "monto-total" :
+                diff > 0 ? "monto-positivo" :
+                "monto-negativo";
 
             tbody.innerHTML += `
                 <tr>
                     <td>${c.Fecha}</td>
-
-                    <td>
-                        <span class="cajero-name">
-                            ${c.Cajero}
-                        </span>
-                    </td>
-
+                    <td><span class="cajero-name">${c.Cajero}</span></td>
                     <td>${c.Facturas}</td>
 
-                    <td>
-                        <span class="monto-pill monto-total">
-                            ₡${c.TotalCobrado}
-                        </span>
-                    </td>
-
+                    <td><span class="monto-pill monto-total">₡${c.TotalCobrado}</span></td>
                     <td><span class="monto-pill monto-total">₡${c.Efectivo}</span></td>
                     <td><span class="monto-pill monto-total">₡${c.Tarjeta}</span></td>
                     <td><span class="monto-pill monto-total">₡${c.Sinpe}</span></td>
                     <td><span class="monto-pill monto-total">₡${c.Transferencia}</span></td>
 
-                    <td>
-                        <span class="monto-pill monto-total">
-                            ₡${c.EfectivoContado}
-                        </span>
-                    </td>
+                    <td><span class="monto-pill monto-total">₡${c.EfectivoContado}</span></td>
 
-                    <td>
-                        <span class="monto-pill ${diffClass}">
-                            ₡${c.Diferencia}
-                        </span>
-                    </td>
+                    <td><span class="monto-pill ${diffClass}">₡${c.Diferencia}</span></td>
 
                     <td>${c.HoraCierre}</td>
                 </tr>
@@ -228,7 +278,7 @@ async function cargarHistorialCierres() {
         });
 
     } catch (e) {
-        console.error("Error cargando historial de cierres", e);
+        console.error("Error cargando historial:", e);
+        mostrarAlerta("Error cargando historial de cierres.");
     }
 }
-
