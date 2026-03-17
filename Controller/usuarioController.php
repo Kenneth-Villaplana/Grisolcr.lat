@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // 📦 Models
-require_once __DIR__ . '/../Model/UsuarioModel.php';
+require_once __DIR__ . '/../Model/usuarioModel.php';
 
 // 🔒 Validar sesión
 $idUsuario = $_SESSION['IdUsuario'] ?? $_SESSION['UsuarioID'] ?? 0;
