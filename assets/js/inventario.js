@@ -1,12 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // filtro id
     const btnBuscar = document.getElementById('btnBuscar');
     const btnLimpiar = document.getElementById('btnLimpiar');
     const inputCodigo = document.getElementById('codigoInput');
+    const searchInput = document.getElementById('searchInput');
+
+    const productos = document.querySelectorAll('#listaProductos .producto');
+
+    /* ============================= */
+    /* FILTRO EN TIEMPO REAL */
+    /* ============================= */
+
+    function filtrarProductos() {
+
+        const texto = searchInput ? searchInput.value.toLowerCase().trim() : "";
+        const codigo = inputCodigo ? inputCodigo.value.trim() : "";
+
+        productos.forEach(producto => {
+
+            const nombreEl = producto.querySelector('.card-title');
+            const idEl = producto.querySelector('.inv-id');
+
+            if (!nombreEl || !idEl) return;
+
+            const nombre = nombreEl.textContent.toLowerCase();
+            const idProducto = idEl.textContent.replace('ID:', '').trim();
+
+            const coincideNombre = nombre.includes(texto);
+            const coincideId = codigo === "" || idProducto === codigo;
+
+            producto.style.display = (coincideNombre && coincideId) ? "" : "none";
+
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keyup', filtrarProductos);
+    }
+
+    if (inputCodigo) {
+        inputCodigo.addEventListener('keyup', filtrarProductos);
+    }
+
+    /* ============================= */
+    /* BUSCAR POR ID (RECARGA) */
+    /* ============================= */
 
     if (btnBuscar && inputCodigo) {
+
         btnBuscar.addEventListener('click', () => {
+
             const codigo = inputCodigo.value.trim();
 
             if (codigo === '') {
@@ -19,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.pathname.lastIndexOf('/') + 1
                 ) || 'inventario.php';
 
-            window.location.href = `${basePath}?idProducto=${encodeURIComponent(codigo)}`;
+            window.location.href = `${basePath}?id=${encodeURIComponent(codigo)}`;
         });
 
         inputCodigo.addEventListener('keyup', (e) => {
@@ -29,8 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* ============================= */
+    /* LIMPIAR FILTROS */
+    /* ============================= */
+
     if (btnLimpiar) {
+
         btnLimpiar.addEventListener('click', () => {
+
+            if (searchInput) searchInput.value = "";
+            if (inputCodigo) inputCodigo.value = "";
+
+            filtrarProductos();
+
             const basePath =
                 window.location.pathname.substring(
                     window.location.pathname.lastIndexOf('/') + 1
@@ -40,35 +94,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // filtro nombre
-    const searchInput = document.getElementById('searchInput');
+    /* ============================= */
+    /* CONFIRMAR ELIMINAR */
+    /* ============================= */
 
-    if (searchInput) {
-        searchInput.addEventListener('keyup', function () {
-            const filtro = this.value.toLowerCase().trim();
-            const productos = document.querySelectorAll('#listaProductos .producto');
-
-            productos.forEach(producto => {
-                const nombreEl = producto.querySelector('.card-title');
-                if (!nombreEl) return;
-
-                const nombre = nombreEl.textContent.toLowerCase();
-
-                producto.style.display = nombre.includes(filtro) ? '' : 'none';
-            });
-        });
-    }
-
-   
-    //  confirmar eliminar
-   
     const botonesEliminar = document.querySelectorAll('.btn-confirmar-eliminar');
     const textoModal = document.getElementById('textoModalEliminar');
     const enlaceEliminar = document.getElementById('enlaceEliminar');
 
     if (botonesEliminar && textoModal && enlaceEliminar) {
+
         botonesEliminar.forEach(boton => {
+
             boton.addEventListener('click', () => {
+
                 const idProducto = boton.getAttribute('data-id');
                 const nombre = boton.getAttribute('data-nombre');
 
@@ -81,7 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
+    /* ============================= */
+    /* MODAL EDITAR */
+    /* ============================= */
+
     const btnAbrirModalEditar = document.getElementById('btnAbrirModalEditar');
     const btnConfirmarCambios = document.getElementById('btnConfirmarCambios');
     const formEditar = document.getElementById('formEditarProducto');
@@ -89,9 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnAbrirModalEditar && btnConfirmarCambios && formEditar) {
 
         btnAbrirModalEditar.addEventListener('click', () => {
+
             const modal = new bootstrap.Modal(
                 document.getElementById('modalConfirmarEdicion')
             );
+
             modal.show();
         });
 
@@ -99,16 +143,23 @@ document.addEventListener('DOMContentLoaded', () => {
             formEditar.submit();
         });
     }
+
+    /* ============================= */
+    /* AUTO GROW TEXTAREA */
+    /* ============================= */
+
     const textarea = document.querySelector("textarea.auto-grow");
 
     if (textarea) {
-        
+
         textarea.style.height = textarea.scrollHeight + "px";
 
-        
         textarea.addEventListener("input", () => {
+
             textarea.style.height = "auto";
             textarea.style.height = textarea.scrollHeight + "px";
+
         });
     }
+
 });
