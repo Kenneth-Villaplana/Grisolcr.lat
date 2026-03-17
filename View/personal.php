@@ -170,7 +170,7 @@ $listaPersonal = ObtenerPersonal($cedulaFiltro);
                                     </td>
 
                                     <td class="text-center">
-                                        <a href="editarpersonal.php?id=<?php echo $personal['IdUsuario']; ?>"
+                                        <a href="editarPersonal.php?id=<?php echo $personal['IdUsuario']; ?>"
                                            class="btn btn-sm staff-btn-edit">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
