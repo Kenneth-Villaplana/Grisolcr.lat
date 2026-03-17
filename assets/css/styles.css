@@ -16795,39 +16795,41 @@ textarea {
 }
 
 }
-/* ===== MOBILE FIX LOGIN ===== */
+/* ================================= */
+/* LOGIN RESPONSIVE FIX ÓPTICA GRISOL */
+/* ================================= */
 
 @media (max-width: 768px){
 
 .login-modern-wrapper{
-    padding:10px;
+    padding:15px;
 }
+
+/* cambiar layout a columna */
 
 .login-modern-container{
-    display:block;
-    width:100%;
-    max-width:100%;
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:420px !important;
+    margin:auto;
 }
+
+/* eliminar panel derecho */
 
 .login-modern-right{
-    display:none;
+    display:none !important;
 }
+
+/* panel izquierdo ocupa todo */
 
 .login-modern-left{
-    width:100%;
-    padding:25px 20px !important;
-    box-sizing:border-box;
+    width:100% !important;
+    padding:30px 25px !important;
+    text-align:center;
 }
 
-.login-title{
-    font-size:26px;
-}
-
-.login-subtitle{
-    font-size:15px;
-}
-
-/* inputs full width */
+/* inputs */
 
 .input-group-modern{
     width:100%;
@@ -16838,11 +16840,20 @@ textarea {
     font-size:16px;
 }
 
-/* boton full width */
+/* boton */
 
 .btn-modern-login{
     width:100%;
     padding:14px;
+}
+
+/* evitar texto comprimido */
+
+.login-title{
+    font-size:26px;
+}
+
+.login-subtitle{
     font-size:16px;
 }
 
