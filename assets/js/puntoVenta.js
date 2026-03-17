@@ -136,7 +136,7 @@ function renderProductos() {
                         </p>
 
                         <button
-                            class="btn btn-primary-custom mt-auto"
+                            class="btn btn-primary-custom"
                             onclick="agregarAlCarrito(${producto.id})"
                         >
                             Agregar
