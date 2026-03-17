@@ -16612,50 +16612,185 @@ textarea {
 .dark-mode #cart-items .fw-bold.text-end {
     color: #ffffff !important;
 }
-/* ========================= */
-/* RESPONSIVE LOGIN OPTICA */
-/* ========================= */
+/* ============================= */
+/* LOGIN MODERNO - OPTICA GRISOL */
+/* ============================= */
 
-@media (max-width: 768px) {
+.login-modern-wrapper{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#061b3a,#0b2a5c);
+    padding:40px 20px;
+}
+
+/* contenedor principal */
 
 .login-modern-container{
-    flex-direction: column !important;
     width:100%;
+    max-width:1000px;
+    display:flex;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(14px);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(0,0,0,0.45);
 }
 
-/* ocultar panel derecho */
-.login-modern-right{
-    display:none !important;
-}
+/* panel izquierdo */
 
-/* panel login ocupa todo */
 .login-modern-left{
-    width:100% !important;
-    padding:30px 25px !important;
+    flex:1;
+    padding:50px;
+    color:white;
+}
+
+/* panel derecho */
+
+.login-modern-right{
+    flex:1;
+    background:
+    linear-gradient(
+        rgba(10,30,80,0.75),
+        rgba(10,30,80,0.75)
+    ),
+    url("../img/login-optica.jpg");
+
+    background-size:cover;
+    background-position:center;
+}
+
+/* titulos */
+
+.login-title{
+    font-size:34px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.login-subtitle{
+    font-size:16px;
+    opacity:0.85;
+    margin-bottom:35px;
 }
 
 /* inputs */
+
 .input-group-modern{
-    width:100%;
+    display:flex;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    border-radius:10px;
+    padding:10px 15px;
+    margin-bottom:15px;
+}
+
+.input-group-modern i{
+    color:#9ec8ff;
+    margin-right:10px;
+    font-size:18px;
 }
 
 .modern-input{
     width:100%;
-    font-size:16px;
+    border:none;
+    background:transparent;
+    color:white;
+    font-size:15px;
+    outline:none;
+}
+
+.modern-input::placeholder{
+    color:rgba(255,255,255,0.6);
 }
 
 /* boton */
+
 .btn-modern-login{
     width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#2ea6ff,#5b9dff);
+    color:white;
+    font-weight:600;
     font-size:16px;
+    margin-top:10px;
+    transition:all .25s ease;
 }
 
-/* títulos */
+.btn-modern-login:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,120,255,0.4);
+}
+
+/* links */
+
+.forgot-modern-link{
+    font-size:14px;
+    color:#6ec1ff;
+    text-decoration:none;
+}
+
+.forgot-modern-link:hover{
+    text-decoration:underline;
+}
+
+.register-modern-link{
+    color:#6ec1ff;
+    text-decoration:none;
+}
+
+.register-modern-link:hover{
+    text-decoration:underline;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width:900px){
+
+.login-modern-container{
+    flex-direction:column;
+}
+
+.login-modern-right{
+    display:none;
+}
+
+.login-modern-left{
+    padding:35px 30px;
+}
+
 .login-title{
     font-size:28px;
 }
 
-.login-subtitle{
+}
+
+/* iPhone */
+
+@media (max-width:480px){
+
+.login-modern-wrapper{
+    padding:20px 15px;
+}
+
+.login-modern-left{
+    padding:30px 20px;
+}
+
+.input-group-modern{
+    padding:12px 14px;
+}
+
+.modern-input{
+    font-size:16px;
+}
+
+.btn-modern-login{
     font-size:16px;
 }
 
