@@ -54,7 +54,7 @@ if (isset($_POST["btnEditarProducto"])) {
         $_SESSION["CambioExitoso"] = true;
     }
 
-    header("Location: editarProducto.php?id=" . $productoId);
+    header("Location: ../View/editarProducto.php?id=" . $productoId);
     exit;
 }
 
