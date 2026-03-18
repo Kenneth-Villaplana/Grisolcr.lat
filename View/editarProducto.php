@@ -202,7 +202,7 @@ Sí, guardar
 </div>
 </div>
 
-<script src="../assets/js/inventario.js"></script>
+<script src="/assets/js/inventario.js"></script>
 
 </body>
 </html>
