@@ -77,7 +77,7 @@ include('layout.php');
 
 
    
-    <form action="../Controller/HistorialController.php" method="POST" id="formExpediente">
+    <form action="../Controller/historialController.php" method="POST" id="formExpediente">
 
         <input type="hidden" name="PacienteId" id="PacienteIdHidden"
                value="<?= $_GET['PacienteId'] ?? '' ?>">

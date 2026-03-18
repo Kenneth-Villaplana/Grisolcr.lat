@@ -163,7 +163,7 @@ try {
 
     
     CerrarBD($conn);
-    header("Location: ../Controller/historialExpedientePacienteController.php?PacienteId=$pacienteId");
+    header("Location: /Controller/historialExpedientePacienteController.php?PacienteId=$pacienteId");
     exit;
 
 } catch (Exception $e) {
