@@ -1,5 +1,5 @@
 //prueba expediente
-const  CONTROLLER_PATH = "/Controller/pacienteController.php";
+const  CONTROLLER_PATH = "../Controller/pacienteController.php";
 
 
 /* ============================================
