@@ -64,7 +64,7 @@ if(!$producto){
 <div class="p-4">
 
 <form method="POST"
-action="/../Controller/productoController.php"
+action="../Controller/productoController.php"
 name="editarProductoForm"
 id="formEditarProducto"
 class="row g-3 justify-content-center">
