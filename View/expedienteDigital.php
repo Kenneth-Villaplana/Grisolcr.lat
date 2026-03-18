@@ -76,7 +76,7 @@ include('layout.php');
     </section>
 
 
-    
+   
     <form action="../Controller/HistorialController.php" method="POST" id="formExpediente">
 
         <input type="hidden" name="PacienteId" id="PacienteIdHidden"
@@ -325,7 +325,7 @@ include('layout.php');
                                     <td><input type="text" name="Cilindro_OI" class="form-control input-modern"></td>
                                     <td><input type="text" name="Eje_OI" class="form-control input-modern"></td>
                                     <td><input type="text" name="DP_OI" class="form-control input-modern campo-obligatorio campo-decimal">
-</td>
+                               </td>
                                     <td><input type="text" name="Prisma_OI" class="form-control input-modern"></td>
                                     <td><input type="text" name="Base_OI" class="form-control input-modern"></td>
                                     <td><input type="text" name="AV_OI" class="form-control input-modern"></td>

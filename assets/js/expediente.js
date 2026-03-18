@@ -1,4 +1,6 @@
-const PACIENTE_CONTROLLER = "../Controller/pacienteController.php";
+//prueba expediente
+const  CONTROLLER_PATH = "/Controller/pacienteController.php";
+
 
 /* ============================================
    MODAL HELPERS (Bootstrap 5)
