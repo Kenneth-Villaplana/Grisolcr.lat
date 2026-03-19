@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include_once __DIR__ ."/../Controller/recetaController.php";
 
 $expedienteId = $_GET["IdExpediente"] ?? null;
