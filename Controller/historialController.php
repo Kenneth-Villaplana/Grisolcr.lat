@@ -8,16 +8,12 @@ $conn = AbrirBD();
 function limpiarValorOptico($valor) {
     if ($valor === "" || $valor === null) return null;
 
-    // Reemplaza coma por punto por si acaso
     $valor = str_replace(",", ".", $valor);
-
-    // Verifica número válido
     return is_numeric($valor) ? floatval($valor) : null;
 }
 
 try {
     // recibe datos del formulario
-
     $pacienteId = $_POST['PacienteId'] ?? null;
 
     $ocupacion = $_POST['Ocupacion'] ?? null;
@@ -58,7 +54,9 @@ try {
     $altura = $_POST['Altura'] ?? null;
     $diagnostico = $_POST['Diagnostico'] ?? null;
 
-    //Crear expediente
+    
+    // Crear expediente
+   
     $stmt = $conn->prepare("CALL CrearExpedienteCompleto(?,?,?,?,?)");
     $stmt->bind_param("issss", $pacienteId, $ocupacion, $motivoConsulta, $usaLentes, $ultimoControl);
     $stmt->execute();
@@ -66,25 +64,29 @@ try {
     $result = $stmt->get_result();
     $nuevo = $result->fetch_assoc();
     $nuevoId = $nuevo['IdExpediente'] ?? null;
+
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
     if (!$nuevoId) {
         throw new Exception("No se pudo obtener el ID del nuevo expediente.");
     }
 
+    
     // Antecedente
+  
     $stmt = $conn->prepare("CALL InsertarAntecedente(?,?)");
     $stmt->bind_param("is", $nuevoId, $antecedente);
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
+   
     // Lensometría OD
+  
     $stmt = $conn->prepare("CALL InsertarLensometria(?,?,?,?,?,?)");
     $ojo = 'Derecho';
-    $stmt->bind_param(
-        "isddss",
-        $nuevoId,
-        $ojo,
+    $stmt->bind_param("isddss", $nuevoId, $ojo,
         $_POST['lens_esfera_od'],
         $_POST['lens_cil_od'],
         $_POST['lens_eje_od'],
@@ -92,14 +94,14 @@ try {
     );
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
+   
     // Lensometría OI
+   
     $stmt = $conn->prepare("CALL InsertarLensometria(?,?,?,?,?,?)");
     $ojo = 'Izquierdo';
-    $stmt->bind_param(
-        "isddss",
-        $nuevoId,
-        $ojo,
+    $stmt->bind_param("isddss", $nuevoId, $ojo,
         $_POST['lens_esfera_oi'],
         $_POST['lens_cil_oi'],
         $_POST['lens_eje_oi'],
@@ -107,71 +109,71 @@ try {
     );
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
+   
     // Examen externo
+    
     $stmt = $conn->prepare("CALL InsertarExamenExterno(?,?,?,?)");
     $stmt->bind_param("isss", $nuevoId, $orbitaCejas, $parpadosPestanas, $sistemaLagrimal);
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
+  
     // Oftalmoscopía
+   
     $stmt = $conn->prepare("CALL InsertarOftalmoscopia(?,?,?)");
     $stmt->bind_param("iss", $nuevoId, $descripcionOD, $descripcionOI);
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
+
 
     // Examen Final OD
+  
     $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?)");
     $ojo = 'Derecho';
-    $stmt->bind_param(
-        "isddsddsdd",
-        $nuevoId,
-        $ojo,
-        $esferaOD,
-        $cilindroOD,
-        $ejeOD,
-        $dpOD,           
-        $prismaOD,
-        $baseOD,
-        $avOD,
-        $aoOD
+    $stmt->bind_param("isddsddsdd",
+        $nuevoId, $ojo,
+        $esferaOD, $cilindroOD, $ejeOD, $dpOD,
+        $prismaOD, $baseOD, $avOD, $aoOD
     );
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
+  
     // Examen Final OI
+   
     $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?)");
     $ojo = 'Izquierdo';
-    $stmt->bind_param(
-        "isddsddsdd",
-        $nuevoId,
-        $ojo,
-        $esferaOI,
-        $cilindroOI,
-        $ejeOI,
-        $dpOI,
-        $prismaOI,
-        $baseOI,
-        $avOI,
-        $aoOI
+    $stmt->bind_param("isddsddsdd",
+        $nuevoId, $ojo,
+        $esferaOI, $cilindroOI, $ejeOI, $dpOI,
+        $prismaOI, $baseOI, $avOI, $aoOI
     );
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
+   
     // Datos adicionales
+    
     $stmt = $conn->prepare("CALL InsertarDatosAdicionales(?,?,?,?)");
     $stmt->bind_param("isss", $nuevoId, $observaciones, $altura, $diagnostico);
     $stmt->execute();
     $stmt->close();
+    while ($conn->more_results() && $conn->next_result()) {}
 
-    
+  
     CerrarBD($conn);
+
     header("Location: /Controller/historialExpedientePacienteController.php?PacienteId=$pacienteId");
     exit;
 
 } catch (Exception $e) {
-    if (isset($stmt))
-        $stmt->close();
+    // ❌ NO cerrar stmt aquí (ya se cerró antes)
     CerrarBD($conn);
     die("<h3 style='color:red;'>❌ Error al ejecutar SP:</h3> " . $e->getMessage());
 }
