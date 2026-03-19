@@ -1,17 +1,22 @@
 function imprimirReceta() {
-    const contenido = document.getElementById("contenedorReceta").innerHTML;
+    const contenedor = document.getElementById("contenedorReceta");
 
-    const ventana = window.open('', '', 'width=800,height=600');
+    if (!contenedor || contenedor.innerHTML.trim() === "") {
+        alert("No hay contenido para imprimir");
+        return;
+    }
+
+    const ventana = window.open('', '', 'width=900,height=700');
 
     ventana.document.write(`
         <html>
         <head>
-            <title>Imprimir Receta</title>
+            <title>Receta</title>
             <link rel="stylesheet" href="/assets/css/POS.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
         </head>
         <body>
-            ${contenido}
+            ${contenedor.innerHTML}
         </body>
         </html>
     `);
@@ -20,6 +25,5 @@ function imprimirReceta() {
 
     ventana.onload = function () {
         ventana.print();
-        ventana.close();
     };
 }
