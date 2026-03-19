@@ -1,5 +1,5 @@
 //prueba expediente
-const  PACIENTE_CONTROLLER= "../Controller/pacienteController.php";
+const  PACIENTE_CONTROLLER= "/Controller/pacienteController.php";
 
 
 /* ============================================
@@ -107,10 +107,10 @@ async function buscarPaciente() {
 
             sessionStorage.setItem('paciente', JSON.stringify(data));
 
-            btnAgregar.href = '../View/expedienteDigital.php';
+            btnAgregar.href = '/View/expedienteDigital.php';
             btnAgregar.style.display = 'block';
 
-            btnHistorial.href = `../Controller/historialExpedientePacienteController.php?PacienteId=${data.PacienteId}`;
+            btnHistorial.href = `/Controller/historialExpedientePacienteController.php?PacienteId=${data.PacienteId}`;
             btnHistorial.style.display = 'block';
 
             mostrarModal(
