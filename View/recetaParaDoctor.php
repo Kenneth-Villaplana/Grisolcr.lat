@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 include_once __DIR__ ."/../Controller/recetaController.php";
 
 $expedienteId = $_GET["IdExpediente"] ?? null;
@@ -22,7 +20,7 @@ if (!$receta) {
 
     <!-- ENCABEZADO -->
     <div class="header d-flex align-items-start gap-3">
-        <img src="../assets/img/logo.jpg" alt="Logo" height="80">
+        <img src="/assets/img/logo.jpg" alt="Logo" height="80">
 
         <div class="doctor">
             <h3>Dr. LEONARDO SOLANO GRIJALBA</h3>
