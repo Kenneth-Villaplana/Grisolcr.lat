@@ -1,6 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include('layout.php');
-include('/Model/baseDatos.php');
+include('../Model/baseDatos.php');
 
 $expedienteId = $_GET['ExpedienteId'] ?? null;
 if (!$expedienteId)
@@ -14,26 +16,47 @@ $stmt->execute();
 
 /* Cada select devuelve un resultset */
 $exp = [];
-if ($result = $stmt->get_result())
+
+if ($result = $stmt->get_result()) {
     $exp['expediente'] = $result->fetch_assoc();
+    $result->free();
+}
 $stmt->next_result();
-if ($result = $stmt->get_result())
+
+if ($result = $stmt->get_result()) {
     $exp['antecedente'] = $result->fetch_assoc();
+    $result->free();
+}
 $stmt->next_result();
-if ($result = $stmt->get_result())
+
+if ($result = $stmt->get_result()) {
     $exp['lensometria'] = $result->fetch_all(MYSQLI_ASSOC);
+    $result->free();
+}
 $stmt->next_result();
-if ($result = $stmt->get_result())
+
+if ($result = $stmt->get_result()) {
     $exp['examenExterno'] = $result->fetch_assoc();
+    $result->free();
+}
 $stmt->next_result();
-if ($result = $stmt->get_result())
+
+if ($result = $stmt->get_result()) {
     $exp['oftalmoscopia'] = $result->fetch_assoc();
+    $result->free();
+}
 $stmt->next_result();
-if ($result = $stmt->get_result())
+
+if ($result = $stmt->get_result()) {
     $exp['examenFinal'] = $result->fetch_all(MYSQLI_ASSOC);
+    $result->free();
+}
 $stmt->next_result();
-if ($result = $stmt->get_result())
+
+if ($result = $stmt->get_result()) {
     $exp['datosAdicionales'] = $result->fetch_assoc();
+    $result->free();
+}
 
 $stmt->close();
 CerrarBD($conn);
