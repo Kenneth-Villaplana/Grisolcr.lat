@@ -1,5 +1,5 @@
 function cargarReceta(idExpediente) {
-    fetch("recetaParaDoctor.php?IdExpediente=" + idExpediente)
+    fetch("/View/recetaParaDoctor.php?IdExpediente=" + idExpediente)
         .then(response => response.text())
         .then(html => {
             document.getElementById("contenedorReceta").innerHTML = html;
