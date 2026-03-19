@@ -11,7 +11,7 @@ if (empty($historial))
     <meta charset="UTF-8">
     <title>Historial Clínico del Paciente</title>
     <link rel="stylesheet" href="../assets/css/styles.css"> 
-    <link rel="stylesheet" href="../assets/css/POS.css"> 
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
@@ -111,7 +111,7 @@ if (empty($historial))
         </div>
     </div>
 
-<script src="../assets/js/receta.js"></script>
+<script src="/assets/js/receta.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
