@@ -103,7 +103,7 @@ if (empty($historial))
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+                   <button class="btn btn-primary" onclick="imprimirReceta()">Imprimir</button>
                     <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
 
