@@ -1,6 +1,6 @@
 <?php
 include('layout.php');
-require_once __DIR__ . '/../Controller/recetaController.php';
+require_once __DIR__ . '../Controller/recetaController.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -114,7 +114,7 @@ $recetas = RecetaController::listarRecetasPaciente($pacienteId);
                                 <td><?= $r['FechaRegistro'] ?></td>
                                 <td><?= $r['Diagnostico'] ?></td>
                                 <td class="text-center">
-                                    <a href="verReceta.php?IdExpediente=<?= $r['IdExpediente'] ?>" 
+                                    <a href="/View/verReceta.php?IdExpediente=<?= $r['IdExpediente'] ?>" 
                                        class="d-inline-flex align-items-center gap-1">
                                         <i data-lucide="eye"></i>
                                         
