@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+include_once __DIR__ . '/../Model/baseDatos.php';
+$conn = AbrirBD();
 session_start();
 $historial = $_SESSION['historialClinico'] ?? [];
 if (empty($historial))
