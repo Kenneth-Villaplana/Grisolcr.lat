@@ -111,7 +111,7 @@ if (empty($historial))
         </div>
     </div>
 
-<script src="/assets/js/receta.js?v=3"></script>
+<script src="../assets/js/receta.js?v=3"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
