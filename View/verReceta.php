@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include('layout.php');
-require_once __DIR__ .'../Controller/recetaController.php';
+require_once __DIR__ .'/../Controller/recetaController.php';
 
 $expedienteId = $_GET["IdExpediente"] ?? null;
 
