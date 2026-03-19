@@ -1,8 +1,6 @@
 
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-include_once __DIR__ . '/baseDatos.php';
+include_once __DIR__ . '/../Model/baseDatos.php';
 $conn = AbrirBD();
 
 function limpiarValorOptico($valor) {
