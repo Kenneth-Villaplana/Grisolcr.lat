@@ -28,6 +28,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
     $precio = $_POST['Precio'] ?? 0;
     $cantidad = $_POST['Cantidad'] ?? 0;
 
+      //validaciones
+    if ($nombre === '' || $descripcion === '') {
+        header("Location: ../View/agregarProducto.php?error=Datos incompletos");
+        exit;
+    }
+
+    if ($precio <= 0) {
+        header("Location: ../View/agregarProducto.php?error=El precio debe ser mayor a 0");
+        exit;
+    }
+
+    if ($cantidad <= 0) {
+        header("Location: ../View/agregarProducto.php?error=La cantidad debe ser mayor a 0");
+        exit;
+    }
+
     $resultado = AgregarProductoModel($nombre, $descripcion, $precio, $cantidad);
 
     if ($resultado['resultado'] == 1) {
@@ -44,8 +60,34 @@ if (isset($_POST["btnEditarProducto"])) {
     $productoId = $_POST["ProductoId"] ?? null;
     $nombre = $_POST["Nombre"];
     $descripcion = $_POST["Descripcion"];
-    $precio = $_POST["Precio"];
-    $cantidad = $_POST["Cantidad"];
+    $precio = floatval($_POST["Precio"]);
+    $cantidad = intval($_POST["Cantidad"]);
+
+    //validaciones
+
+    if ($productoId <= 0) {
+        $_SESSION["txtMensaje"] = "Producto inválido";
+        header("Location: ../View/inventario.php");
+        exit;
+    }
+
+    if ($nombre === '' || $descripcion === '') {
+        $_SESSION["txtMensaje"] = "Datos incompletos";
+        header("Location: ../View/editarProducto.php?id=" . $productoId);
+        exit;
+    }
+
+    if ($precio <= 0) {
+    $_SESSION["txtMensaje"] = "El precio debe ser mayor a 0";
+    header("Location: ../View/editarProducto.php?id=" . $productoId);
+    exit;
+    }
+
+    if ($cantidad <= 0) {
+        $_SESSION["txtMensaje"] = "La cantidad debe ser mayor a 0";
+        header("Location: ../View/editarProducto.php?id=" . $productoId);
+        exit;
+    }
 
     $resultadoEdit = EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad);
 

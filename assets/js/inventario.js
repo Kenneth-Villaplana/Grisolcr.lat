@@ -132,12 +132,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnAbrirModalEditar.addEventListener('click', () => {
 
-            const modal = new bootstrap.Modal(
-                document.getElementById('modalConfirmarEdicion')
-            );
+    const precio = parseFloat(document.getElementById('Precio').value);
+    const cantidad = parseInt(document.getElementById('Cantidad').value);
 
-            modal.show();
-        });
+    if (isNaN(precio) || precio <= 0) {
+        alert('El precio debe ser mayor a 0');
+        return;
+    }
+
+    if (isNaN(cantidad) || cantidad <= 0) {
+        alert('La cantidad debe ser mayor a 0');
+        return;
+    }
+
+    const modal = new bootstrap.Modal(
+        document.getElementById('modalConfirmarEdicion')
+    );
+
+    modal.show();
+});
 
         btnConfirmarCambios.addEventListener('click', () => {
             formEditar.submit();
