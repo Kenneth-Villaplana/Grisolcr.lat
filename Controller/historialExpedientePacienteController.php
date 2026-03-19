@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include('../Model/baseDatos.php');
 $pacienteId = $_GET['PacienteId'] ?? null;
 if (!$pacienteId) die("Paciente no especificado.");
