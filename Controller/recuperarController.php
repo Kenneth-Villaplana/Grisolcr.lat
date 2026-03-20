@@ -2,6 +2,20 @@
 session_start();
 include_once __DIR__ . '/../Model/recuperarModel.php';
 
+function cargarConfigMail(): array
+{
+    $ruta = __DIR__ . '/../config/mail.json';
+
+    if (!file_exists($ruta)) {
+        return [];
+    }
+
+    $contenido = file_get_contents($ruta);
+    $config = json_decode($contenido, true);
+
+    return is_array($config) ? $config : [];
+}
+
 // Si alguien abre el controller por URL en GET, lo mandamos al formulario
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: ../View/recuperarCuenta.php");
@@ -28,23 +42,10 @@ if (!$usuario) {
 $token = bin2hex(random_bytes(32));
 GuardarTokenRecuperacion($correo, $token);
 
-// Datos del correo desde variables del entorno
-$correo_emisor = getenv("MAIL_FROM");
-$app_password  = getenv("MAIL_APP_PASSWORD");
-$base_url      = getenv("APP_URL") ?: "https://grisolcr.lat";
-$enlace        = $base_url . "/View/restablecerContrasenna.php?token=" . urlencode($token);
-
-if (!$correo_emisor || !filter_var($correo_emisor, FILTER_VALIDATE_EMAIL)) {
-    $_SESSION["txtMensaje"] = "Error interno: el correo emisor no está configurado correctamente.";
-    header("Location: ../View/recuperarCuenta.php");
-    exit;
-}
-
-if (!$app_password) {
-    $_SESSION["txtMensaje"] = "Error interno: la contraseña de aplicación no está configurada.";
-    header("Location: ../View/recuperarCuenta.php");
-    exit;
-}
+// Cargar configuración
+$configMail = cargarConfigMail();
+$base_url = rtrim($configMail['APP_URL'] ?? 'https://grisolcr.lat', '/');
+$enlace = $base_url . "/View/restablecerContrasenna.php?token=" . urlencode($token);
 
 $asunto = "Recuperación de Contraseña Optica Grisol";
 
@@ -66,9 +67,9 @@ $mensaje = "
         </p>
         <div style='text-align:center; margin: 30px 0;'>
             <a href='{$enlace}' 
-            style='background-color: #0D3B66; color: white; padding: 12px 25px; 
-                   text-decoration: none; border-radius: 6px; font-size: 16px;
-                   display: inline-block;'>
+               style='background-color: #0D3B66; color: white; padding: 12px 25px; 
+                      text-decoration: none; border-radius: 6px; font-size: 16px;
+                      display: inline-block;'>
                 Restablecer Contraseña
             </a>
         </div>
@@ -91,7 +92,8 @@ $mensaje = "
 
 require_once __DIR__ . '/../assets/vendor/php-email-form/sendEmail.php';
 
-$resultado = sendEmail($correo_emisor, $app_password, $correo, $asunto, $mensaje);
+// sendEmail leerá el mail.json, por eso aquí pasamos null
+$resultado = sendEmail(null, null, $correo, $asunto, $mensaje);
 
 if ($resultado === true) {
     $_SESSION["txtMensaje"] = "Se ha enviado un enlace de recuperación a su correo.";

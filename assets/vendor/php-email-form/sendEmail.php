@@ -6,73 +6,82 @@ require __DIR__ . '/PHPMailer/Exception.php';
 require __DIR__ . '/PHPMailer/PHPMailer.php';
 require __DIR__ . '/PHPMailer/SMTP.php';
 
+function cargarConfigMailJson(): array
+{
+    $ruta = __DIR__ . '/../../../config/mail.json';
+
+    if (!file_exists($ruta)) {
+        return [];
+    }
+
+    $contenido = file_get_contents($ruta);
+    $config = json_decode($contenido, true);
+
+    return is_array($config) ? $config : [];
+}
 
 function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
 {
     $mail = new PHPMailer(true);
+    $config = cargarConfigMailJson();
 
-    // 1) Tomar credenciales desde Azure Application Settings si no vienen por parámetro
-    $emisorEnv = trim((string) getenv("MAIL_FROM"));
-    $passEnv = (string) getenv("MAIL_APP_PASSWORD");
+    $emisor = trim((string)($emisor ?: ($config['MAIL_FROM'] ?? '')));
+    $password = (string)($password ?: ($config['MAIL_APP_PASSWORD'] ?? ''));
+    $host = trim((string)($config['MAIL_HOST'] ?? 'smtp.gmail.com'));
+    $port = (int)($config['MAIL_PORT'] ?? 587);
+    $encryption = strtolower(trim((string)($config['MAIL_ENCRYPTION'] ?? 'tls')));
+    $timeout = (int)($config['MAIL_TIMEOUT'] ?? 15);
+    $fromName = trim((string)($config['MAIL_FROM_NAME'] ?? 'Óptica Grisol'));
+    $debug = !empty($config['MAIL_DEBUG']);
 
-    $emisor = trim((string) ($emisor ?: $emisorEnv));
-    $password = (string) ($password ?: $passEnv);
+    $destino = trim((string)$destino);
+    $asunto = (string)$asunto;
 
-    $destino = trim((string) $destino);
-    $asunto = (string) $asunto;
-
-    // 2) Validaciones básicas para evitar "Invalid address (From)"
     if (!filter_var($emisor, FILTER_VALIDATE_EMAIL)) {
         return "Mailer Error: Invalid address: (From): $emisor";
     }
+
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
         return "Mailer Error: Invalid address: (To): $destino";
     }
-    if (empty($password)) {
-        return "Mailer Error: SMTP password is empty (MAIL_APP_PASSWORD)";
-    }
 
-    // 3) Modo TEST/DEBUG (se ve en Azure Log Stream)
-    $isTest = (string) getenv("APP_MAIL_TEST") === "1";
-    if ($isTest) {
-        $mail->SMTPDebug = 2; // 0=off, 2=client+server
-        $mail->Debugoutput = function ($str, $level) {
-            error_log("SMTP[$level]: $str");
-        };
-        error_log("MAIL TEST: From={$emisor} To={$destino} Subject={$asunto}");
+    if (empty($password)) {
+        return "Mailer Error: SMTP password is empty";
     }
 
     try {
+        if ($debug) {
+            $mail->SMTPDebug = 2;
+            $mail->Debugoutput = function ($str, $level) {
+                error_log("SMTP[$level]: $str");
+            };
+        }
+
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
-        $mail->Timeout = 15;
 
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = $host;
         $mail->SMTPAuth = true;
         $mail->Username = $emisor;
         $mail->Password = $password;
-
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
-        $mail->Timeout = 15;
+        $mail->Port = $port;
+        $mail->Timeout = $timeout;
         $mail->SMTPKeepAlive = false;
 
-        // 5) Forzar IPv4 (MUY importante en Azure para evitar entregas “fantasma”)
+        if ($encryption === 'ssl' || $encryption === 'smtps') {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        } else {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        }
+
         $mail->SMTPOptions = [
             'socket' => [
                 'bindto' => '0.0.0.0:0'
             ],
-            // Si algún entorno rompe por certificados, descomenta SOLO para prueba:
-            // 'ssl' => [
-            //     'verify_peer'       => false,
-            //     'verify_peer_name'  => false,
-            //     'allow_self_signed' => true,
-            // ],
         ];
 
-        // 6) Mensaje
-        $mail->setFrom($emisor, 'Óptica Grisol');
+        $mail->setFrom($emisor, $fromName);
         $mail->addAddress($destino);
 
         $mail->isHTML(true);
@@ -80,18 +89,9 @@ function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
         $mail->Body = $mensajeHTML;
 
         $mail->send();
-
-        if ($isTest) {
-            error_log("MAIL TEST: PHPMailer->send() OK");
-        }
-
         return true;
 
     } catch (Exception $e) {
-        // ErrorInfo suele ser más útil que $e->getMessage()
-        if ($isTest) {
-            error_log("MAIL TEST ERROR: " . $mail->ErrorInfo);
-        }
         return "Mailer Error: {$mail->ErrorInfo}";
     }
 }
