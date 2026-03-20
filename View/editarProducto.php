@@ -110,6 +110,7 @@ required><?php echo htmlspecialchars($producto['Descripcion']); ?></textarea>
 type="number"
 name="Precio"
 id="Precio"
+min="1"
 class="form-control mb-3"
 value="<?php echo htmlspecialchars($producto['Precio']); ?>"
 required>
@@ -120,6 +121,7 @@ required>
 type="number"
 name="Cantidad"
 id="Cantidad"
+min="1"
 class="form-control mb-3"
 value="<?php echo htmlspecialchars($producto['Cantidad']); ?>"
 required>
