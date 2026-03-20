@@ -7,6 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const productos = document.querySelectorAll('#listaProductos .producto');
 
+    const mensajeDiv = document.getElementById('mensajeError');
+
+    function mostrarError(msg) {
+        if (!mensajeDiv) return;
+        mensajeDiv.textContent = msg;
+        mensajeDiv.classList.remove('d-none');
+    }
+
+    function ocultarError() {
+        if (!mensajeDiv) return;
+        mensajeDiv.classList.add('d-none');
+    }
     /* ============================= */
     /* FILTRO EN TIEMPO REAL */
     /* ============================= */
@@ -53,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const codigo = inputCodigo.value.trim();
 
             if (codigo === '') {
-                alert('Ingrese un ID para buscar.');
+                mostrarError('Ingrese un ID para buscar.');
                 return;
             }
 
@@ -121,6 +133,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================= */
+    /*  EDITAR */
+    /* ============================= */
+
+    const inputPrecio = document.getElementById('Precio');
+    const inputCantidad = document.getElementById('Cantidad');
+
+    function validarCamposTiempoReal() {
+
+        const precio = parseFloat(inputPrecio?.value);
+        const cantidad = parseInt(inputCantidad?.value);
+
+        if (inputPrecio && (isNaN(precio) || precio <= 0)) {
+            mostrarError("El precio debe ser mayor a 0");
+            return false;
+        }
+
+        if (inputCantidad && (isNaN(cantidad) || cantidad <= 0)) {
+            mostrarError("La cantidad debe ser mayor a 0");
+            return false;
+        }
+
+        ocultarError();
+        return true;
+    }
+
+    if (inputPrecio) {
+        inputPrecio.addEventListener('input', validarCamposTiempoReal);
+    }
+
+    if (inputCantidad) {
+        inputCantidad.addEventListener('input', validarCamposTiempoReal);
+    }
+
+    /* ============================= */
     /* MODAL EDITAR */
     /* ============================= */
 
@@ -132,25 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnAbrirModalEditar.addEventListener('click', () => {
 
-    const precio = parseFloat(document.getElementById('Precio').value);
-    const cantidad = parseInt(document.getElementById('Cantidad').value);
+            if (!validarCamposTiempoReal()) return;
 
-    if (isNaN(precio) || precio <= 0) {
-        alert('El precio debe ser mayor a 0');
-        return;
-    }
+            const modal = new bootstrap.Modal(
+                document.getElementById('modalConfirmarEdicion')
+            );
 
-    if (isNaN(cantidad) || cantidad <= 0) {
-        alert('La cantidad debe ser mayor a 0');
-        return;
-    }
-
-    const modal = new bootstrap.Modal(
-        document.getElementById('modalConfirmarEdicion')
-    );
-
-    modal.show();
-});
+            modal.show();
+        });
 
         btnConfirmarCambios.addEventListener('click', () => {
             formEditar.submit();
