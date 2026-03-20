@@ -197,22 +197,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnAbrirModalEditar && btnConfirmarCambios && formEditar) {
 
-        btnAbrirModalEditar.addEventListener('click', () => {
+       btnAbrirModalEditar.addEventListener('click', () => {
 
-  
-        if (inputPrecio && !inputPrecio.checkValidity()) return;
-        if (inputCantidad && !inputCantidad.checkValidity()) return;
+    if (inputPrecio && !inputPrecio.checkValidity()) {
+        inputPrecio.reportValidity(); 
+        return;
+    }
 
-        const modal = new bootstrap.Modal(
-            document.getElementById('modalConfirmarEdicion')
-        );
+    if (inputCantidad && !inputCantidad.checkValidity()) {
+        inputCantidad.reportValidity(); 
+        return;
+    }
 
-        modal.show();
-    });
+    const modal = new bootstrap.Modal(
+        document.getElementById('modalConfirmarEdicion')
+    );
+
+    modal.show();
+});
 
         btnConfirmarCambios.addEventListener('click', () => {
-            formEditar.submit();
-        });
+
+    if (!formEditar.checkValidity()) {
+        formEditar.reportValidity(); 
+        return;
+    }
+
+    formEditar.submit();
+});
     }
 
     /* ============================= */
