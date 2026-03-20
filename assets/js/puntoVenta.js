@@ -57,20 +57,35 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarProductos();
 
     if (btnFinalizar) btnFinalizar.addEventListener("click", finalizarVenta);
+if (cedulaInput) {
 
-    if (cedulaInput) {
+    // ✨ Formatear automáticamente 1-4-4
+    cedulaInput.addEventListener("input", () => {
 
-        cedulaInput.addEventListener("input", () => {
-            const ced = cedulaInput.value.trim();
-            if (ced.length >= 6) buscarCliente();
-        });
+        let valor = cedulaInput.value.replace(/\D/g, ""); // solo números
 
-        cedulaInput.addEventListener("keyup", (e) => {
-            if (e.key === "Enter") buscarCliente();
-        });
+        if (valor.length > 1 && valor.length <= 5) {
+            valor = valor.replace(/^(\d{1})(\d+)/, "$1-$2");
+        } else if (valor.length > 5) {
+            valor = valor.replace(/^(\d{1})(\d{4})(\d+)/, "$1-$2-$3");
+        }
 
-        cedulaInput.addEventListener("blur", buscarCliente);
-    }
+        cedulaInput.value = valor;
+
+        // 🔎 usar valor limpio
+        if (valor.length >= 6) {
+            buscarCliente();
+        }
+    });
+
+    // ⌨️ Enter
+    cedulaInput.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") buscarCliente();
+    });
+
+    // 🔍 blur
+    cedulaInput.addEventListener("blur", buscarCliente);
+}
 
     if (searchInput)
         searchInput.addEventListener("input", renderProductos);
@@ -307,7 +322,7 @@ function renderCarrito() {
 
 async function buscarCliente() {
 
-    const ced = cedulaInput.value.trim();
+   const ced = cedulaInput.value.replace(/\D/g, "");
 
     if (ced.length < 6) {
 
@@ -342,12 +357,38 @@ async function buscarCliente() {
             return;
         }
 
+   try {
+
+            const apiRes = await fetch(`https://apis.gometa.org/cedulas/${ced}`);
+            const apiData = await apiRes.json();
+
+            if (apiData && apiData.results && apiData.results.length > 0) {
+
+                const persona = apiData.results[0];
+
+                const nombreCompleto = `${persona.firstname || ""} ${persona.lastname1 || ""} ${persona.lastname2 || ""}`.trim();
+
+                
+                nombreClienteSpan.textContent = nombreCompleto;
+                nombreClienteSpan.dataset.id = ""; 
+                nombreClienteSpan.dataset.nombre = nombreCompleto;
+
+            } else {
+
+                nombreClienteSpan.textContent = "Cliente no encontrado";
+            }
+
+        } catch (apiError) {
+
+            console.warn("API externa no disponible");
+            nombreClienteSpan.textContent = "Cliente no encontrado";
+        }
+
     } catch (e) {
 
         console.error("Error buscando cliente", e);
-
+        nombreClienteSpan.textContent = "Error al buscar cliente";
     }
-
 }
 
 
@@ -637,7 +678,7 @@ Fecha:${enc.Fecha}
 
 
 /* =====================================================
-   DARK MODE
+   DARK MODE(sin uso)
 ===================================================== */
 
 if (localStorage.getItem("darkModePOS") === "1") {
