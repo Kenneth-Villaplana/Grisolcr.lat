@@ -62,7 +62,7 @@ if(!$producto){
 </div>
 
 <div class="p-4">
-
+<div id="mensajeError" class="alert alert-danger text-center d-none"></div>
 <form method="POST"
 action="../Controller/productoController.php"
 name="editarProductoForm"
