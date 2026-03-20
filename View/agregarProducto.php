@@ -36,7 +36,7 @@ include('layout.php');
 
         <!-- Form -->
         <div class="px-4 py-4">
-
+<div id="mensajeError" class="alert alert-danger text-center d-none"></div>
             <form action="../Controller/productoController.php" method="POST">
 
                 <!-- Nombre -->
