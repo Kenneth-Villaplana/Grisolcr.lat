@@ -23,10 +23,10 @@ if (isset($_GET['eliminarProducto'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])) {
-    $nombre = $_POST['Nombre'] ?? '';
-    $descripcion = $_POST['Descripcion'] ?? '';
-    $precio = $_POST['Precio'] ?? 0;
-    $cantidad = $_POST['Cantidad'] ?? 0;
+   $nombre = trim($_POST['Nombre'] ?? '');
+    $descripcion = trim($_POST['Descripcion'] ?? '');
+    $precio = floatval($_POST['Precio'] ?? 0);
+    $cantidad = intval($_POST['Cantidad'] ?? 0);
 
       //validaciones
     if ($nombre === '' || $descripcion === '') {
@@ -57,11 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
 
 
 if (isset($_POST["btnEditarProducto"])) {
-    $productoId = $_POST["ProductoId"] ?? null;
-    $nombre = $_POST["Nombre"];
-    $descripcion = $_POST["Descripcion"];
-    $precio = floatval($_POST["Precio"]);
-    $cantidad = intval($_POST["Cantidad"]);
+    $productoId = intval($_POST["ProductoId"] ?? 0);
+    $nombre = trim($_POST["Nombre"] ?? '');
+    $descripcion = trim($_POST["Descripcion"] ?? '');
+    $precio = floatval($_POST["Precio"] ?? 0);
+    $cantidad = intval($_POST["Cantidad"] ?? 0);
 
     //validaciones
 
