@@ -199,14 +199,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnAbrirModalEditar.addEventListener('click', () => {
 
-            if (!validarCamposTiempoReal()) return;
+  
+        if (inputPrecio && !inputPrecio.checkValidity()) return;
+        if (inputCantidad && !inputCantidad.checkValidity()) return;
 
-            const modal = new bootstrap.Modal(
-                document.getElementById('modalConfirmarEdicion')
-            );
+        const modal = new bootstrap.Modal(
+            document.getElementById('modalConfirmarEdicion')
+        );
 
-            modal.show();
-        });
+        modal.show();
+    });
 
         btnConfirmarCambios.addEventListener('click', () => {
             formEditar.submit();
