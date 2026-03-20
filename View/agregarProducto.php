@@ -37,7 +37,7 @@ include('layout.php');
         <!-- Form -->
         <div class="px-4 py-4">
 <div id="mensajeError" class="alert alert-danger text-center d-none"></div>
-            <form action="../Controller/productoController.php" method="POST">
+           <form id="formAgregarProducto" action="../Controller/productoController.php" method="POST">
 
                 <!-- Nombre -->
                 <div class="mb-4">
@@ -55,12 +55,12 @@ include('layout.php');
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label for="Precio" class="form-label fw-semibold">Precio</label>
-                        <input type="number" name="Precio" id="Precio" class="form-control input-modern" required>
+                        <input type="number" name="Precio" id="Precio" min="1" class="form-control input-modern" required>
                     </div>
 
                     <div class="col-md-6">
                         <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
-                        <input type="number" name="Cantidad" id="Cantidad" class="form-control input-modern" required>
+                        <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control input-modern" required>
                     </div>
                 </div>
 

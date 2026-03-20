@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const inputPrecio = document.getElementById('Precio');
     const inputCantidad = document.getElementById('Cantidad');
-    const formAgregar = document.querySelector('form[action*="productoController.php"]');
+    const formAgregar = document.getElementById('formAgregarProducto');
 
     function validarCamposTiempoReal() {
 
