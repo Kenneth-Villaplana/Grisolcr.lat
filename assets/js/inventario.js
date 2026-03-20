@@ -139,37 +139,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================= */
-    /*  EDITAR */
+    /*  validar precio y cantidad */
     /* ============================= */
 
     const inputPrecio = document.getElementById('Precio');
     const inputCantidad = document.getElementById('Cantidad');
+    const formAgregar = document.querySelector('form[action*="productoController.php"]');
 
     function validarCamposTiempoReal() {
+
+        let valido = true;
 
         const precio = parseFloat(inputPrecio?.value);
         const cantidad = parseInt(inputCantidad?.value);
 
         if (inputPrecio && (isNaN(precio) || precio <= 0)) {
             mostrarError("El precio debe ser mayor a 0");
-            return false;
+            valido = false;
         }
 
-        if (inputCantidad && (isNaN(cantidad) || cantidad <= 0)) {
+        else if (inputCantidad && (isNaN(cantidad) || cantidad <= 0)) {
             mostrarError("La cantidad debe ser mayor a 0");
-            return false;
+            valido = false;
         }
 
-        ocultarError();
-        return true;
+        else {
+            ocultarError();
+        }
+
+        return valido;
     }
 
     if (inputPrecio) {
-        inputPrecio.addEventListener('input', validarCamposTiempoReal);
+        inputPrecio.addEventListener('input', () => {
+            validarCamposTiempoReal();
+            inputPrecio.classList.toggle('is-invalid', parseFloat(inputPrecio.value) <= 0);
+        });
     }
 
     if (inputCantidad) {
-        inputCantidad.addEventListener('input', validarCamposTiempoReal);
+        inputCantidad.addEventListener('input', () => {
+            validarCamposTiempoReal();
+            inputCantidad.classList.toggle('is-invalid', parseInt(inputCantidad.value) <= 0);
+        });
+    }
+
+    
+    if (formAgregar) {
+        formAgregar.addEventListener('submit', (e) => {
+            if (!validarCamposTiempoReal()) {
+                e.preventDefault();
+            }
+        });
     }
 
     /* ============================= */
