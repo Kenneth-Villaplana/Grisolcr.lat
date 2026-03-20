@@ -354,6 +354,14 @@ async function buscarCliente() {
             nombreClienteSpan.dataset.id = data.PacienteId;
             nombreClienteSpan.dataset.nombre = data.NombreCompleto;
 
+            // Cliente registrado
+            nombreClienteSpan.classList.remove("text-primary");
+            nombreClienteSpan.classList.add("text-muted");
+
+            
+            const btn = document.getElementById("btnRegistrarCliente");
+            if (btn) btn.classList.add("d-none");
+
             return;
         }
 
@@ -372,7 +380,18 @@ async function buscarCliente() {
                 nombreClienteSpan.textContent = nombreCompleto;
                 nombreClienteSpan.dataset.id = ""; 
                 nombreClienteSpan.dataset.nombre = nombreCompleto;
+                
+                nombreClienteSpan.classList.remove("text-muted");
+                nombreClienteSpan.classList.add("text-primary");
 
+               
+                const btn = document.getElementById("btnRegistrarCliente");
+                if (btn) {
+                    btn.classList.remove("d-none");
+
+                    
+                    btn.href = `agregarCliente.php?cedula=${ced}`;
+                }
             } else {
 
                 nombreClienteSpan.textContent = "Cliente no encontrado";
