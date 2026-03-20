@@ -146,46 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputCantidad = document.getElementById('Cantidad');
     const formAgregar = document.getElementById('formAgregarProducto');
 
-    function validarCamposTiempoReal() {
 
-        let valido = true;
-
-        const precio = parseFloat(inputPrecio?.value);
-        const cantidad = parseInt(inputCantidad?.value);
-
-        if (inputPrecio && (isNaN(precio) || precio <= 0)) {
-            mostrarError("El precio debe ser mayor a 0");
-            valido = false;
-        }
-
-        else if (inputCantidad && (isNaN(cantidad) || cantidad <= 0)) {
-            mostrarError("La cantidad debe ser mayor a 0");
-            valido = false;
-        }
-
-        else {
-            ocultarError();
-        }
-
-        return valido;
-    }
-
-    if (inputPrecio) {
-        inputPrecio.addEventListener('input', validarCamposTiempoReal);
-    }
-
-    if (inputCantidad) {
-        inputCantidad.addEventListener('input', validarCamposTiempoReal);
-    }
-
-    
-    if (formAgregar) {
-        formAgregar.addEventListener('submit', (e) => {
-            if (!validarCamposTiempoReal()) {
-                e.preventDefault();
-            }
-        });
-    }
 
     /* ============================= */
     /* MODAL EDITAR */
