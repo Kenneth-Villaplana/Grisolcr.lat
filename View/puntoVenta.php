@@ -233,19 +233,15 @@ window.productos = <?php echo json_encode($productos, JSON_UNESCAPED_UNICODE); ?
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const cedulaGET = "<?= isset($_GET['cedula']) ? $_GET['cedula'] : '' ?>";
+document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("cedulaCliente");
 
-    console.log("GET detectado:", cedulaGET);
+    if (input && input.value.trim() !== "") {
 
-    if (cedulaGET !== "" && input) {
-        input.value = cedulaGET;
-
+        // Esperar a que cargue todo (productos, etc.)
         setTimeout(() => {
             buscarCliente();
-        }, 200);
+        }, 300);
     }
 });
 </script>

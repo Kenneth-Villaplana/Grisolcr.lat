@@ -323,7 +323,7 @@ function renderCarrito() {
 async function buscarCliente() {
 
    const ced = cedulaInput.value.replace(/\D/g, "");
-
+  const btn = document.getElementById("btnRegistrarCliente");
     if (ced.length < 6) {
 
         nombreClienteSpan.textContent =
@@ -331,6 +331,11 @@ async function buscarCliente() {
 
         nombreClienteSpan.dataset.id = "";
         nombreClienteSpan.dataset.nombre = "";
+
+         nombreClienteSpan.classList.remove("text-primary", "text-muted");
+
+        // ocultar botón
+        if (btn) btn.classList.add("d-none");
 
         return;
     }
@@ -350,19 +355,21 @@ async function buscarCliente() {
 
         if (data?.PacienteId) {
 
-            nombreClienteSpan.textContent = data.NombreCompleto;
-            nombreClienteSpan.dataset.id = data.PacienteId;
-            nombreClienteSpan.dataset.nombre = data.NombreCompleto;
+                nombreClienteSpan.textContent = data.NombreCompleto;
+                nombreClienteSpan.dataset.id = data.PacienteId;
+                nombreClienteSpan.dataset.nombre = data.NombreCompleto;
 
-            // Cliente registrado
-            nombreClienteSpan.classList.remove("text-primary");
-            nombreClienteSpan.classList.add("text-muted");
+                
+                nombreClienteSpan.classList.remove("text-primary");
+                nombreClienteSpan.classList.add("text-muted");
 
-            
-            const btn = document.getElementById("btnRegistrarCliente");
-            if (btn) btn.classList.add("d-none");
+                const btn = document.getElementById("btnRegistrarCliente");
+                if (btn) {
+                    btn.classList.add("d-none");
+                    btn.href = "#";
+                }
 
-            return;
+                return;
         }
 
    try {
@@ -381,32 +388,46 @@ async function buscarCliente() {
                 nombreClienteSpan.dataset.id = ""; 
                 nombreClienteSpan.dataset.nombre = nombreCompleto;
                 
-                nombreClienteSpan.classList.remove("text-muted");
+                  nombreClienteSpan.classList.remove("text-primary", "text-muted");
+
+                // estilo no registrado
                 nombreClienteSpan.classList.add("text-primary");
 
-               
-                const btn = document.getElementById("btnRegistrarCliente");
+                // mostrar botón
                 if (btn) {
                     btn.classList.remove("d-none");
-
-                    
-                    btn.href = `agregarCliente.php?cedula=${ced}`;
+                    btn.href = `registrarClientePOS.php?cedula=${ced}`;
                 }
+
             } else {
 
                 nombreClienteSpan.textContent = "Cliente no encontrado";
+
+                nombreClienteSpan.classList.remove("text-primary", "text-muted");
+
+                if (btn) btn.classList.add("d-none");
             }
 
         } catch (apiError) {
 
             console.warn("API externa no disponible");
+
             nombreClienteSpan.textContent = "Cliente no encontrado";
+
+            nombreClienteSpan.classList.remove("text-primary", "text-muted");
+
+            if (btn) btn.classList.add("d-none");
         }
 
     } catch (e) {
 
         console.error("Error buscando cliente", e);
+
         nombreClienteSpan.textContent = "Error al buscar cliente";
+
+        nombreClienteSpan.classList.remove("text-primary", "text-muted");
+
+        if (btn) btn.classList.add("d-none");
     }
 }
 
