@@ -76,11 +76,6 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                         <span id="nombreCliente" class="mt-1 d-block text-muted small">
                             Nombre del cliente aparecerá aquí
                         </span>
-                        <a id="btnRegistrarCliente"
-                        href="#"
-                        class="btn btn-sm btn-outline-primary mt-2 d-none">
-                        Registrar Cliente
-                        </a>
                     </div>
 
                  
@@ -233,15 +228,19 @@ window.productos = <?php echo json_encode($productos, JSON_UNESCAPED_UNICODE); ?
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cedulaGET = "<?= isset($_GET['cedula']) ? $_GET['cedula'] : '' ?>";
     const input = document.getElementById("cedulaCliente");
 
-    if (input && input.value.trim() !== "") {
+    console.log("GET detectado:", cedulaGET);
 
-        // Esperar a que cargue todo (productos, etc.)
+    if (cedulaGET !== "" && input) {
+        input.value = cedulaGET;
+
         setTimeout(() => {
             buscarCliente();
-        }, 300);
+        }, 200);
     }
 });
 </script>

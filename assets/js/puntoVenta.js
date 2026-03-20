@@ -1,114 +1,94 @@
-/* =====================================================
-   VARIABLES GLOBALES
-===================================================== */
-
+// Variables globales
 window.cart = window.cart || [];
 let cart = window.cart;
 window.productos = window.productos || [];
 
-let productosContainer,
-    cartSubtotal,
-    cartDiscount,
-    cartTax,
-    cartTotal,
-    btnFinalizar,
-    metodoPagoSelect,
-    cedulaInput,
-    nombreClienteSpan,
-    searchInput,
-    montoAbonoInput;
+// Variables DOM
+let productosContainer, cartSubtotal, cartDiscount, cartTax, cartTotal;
+let btnFinalizar, metodoPagoSelect, cedulaInput, nombreClienteSpan, searchInput;
+let montoAbonoInput;
 
-let facturarEmpresaCheckbox,
-    datosEmpresaDiv,
-    empresaNombreInput,
-    empresaIdentificacionInput;
+let facturarEmpresaCheckbox, datosEmpresaDiv, empresaNombreInput, empresaIdentificacionInput;
 
 const CONTROLLER_PATH = "../Controller/puntoVentaController.php";
 
 
-/* =====================================================
-   INIT
-===================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
 
     productosContainer = document.getElementById("productos-container");
+    cartSubtotal       = document.getElementById("cart-subtotal");
+    cartDiscount       = document.getElementById("cart-discount");
+    cartTax            = document.getElementById("cart-tax");
+    cartTotal          = document.getElementById("cart-total");
 
-    cartSubtotal = document.getElementById("cart-subtotal");
-    cartDiscount = document.getElementById("cart-discount");
-    cartTax = document.getElementById("cart-tax");
-    cartTotal = document.getElementById("cart-total");
+    btnFinalizar       = document.getElementById("btnFinalizar");
+    metodoPagoSelect   = document.getElementById("metodoPago");
+    cedulaInput        = document.getElementById("cedulaCliente");
+    nombreClienteSpan  = document.getElementById("nombreCliente");
+    searchInput        = document.getElementById("searchInput");
 
-    btnFinalizar = document.getElementById("btnFinalizar");
-    metodoPagoSelect = document.getElementById("metodoPago");
-
-    cedulaInput = document.getElementById("cedulaCliente");
-    nombreClienteSpan = document.getElementById("nombreCliente");
-
-    searchInput = document.getElementById("searchInput");
-    montoAbonoInput = document.getElementById("montoAbono");
+    montoAbonoInput    = document.getElementById("montoAbono");
 
     facturarEmpresaCheckbox = document.getElementById("facturarEmpresa");
-    datosEmpresaDiv = document.getElementById("datosEmpresa");
-    empresaNombreInput = document.getElementById("empresaNombre");
+    datosEmpresaDiv         = document.getElementById("datosEmpresa");
+    empresaNombreInput      = document.getElementById("empresaNombre");
     empresaIdentificacionInput = document.getElementById("empresaIdentificacion");
-
     validarEstadoCaja();
     cargarProductos();
 
     if (btnFinalizar) btnFinalizar.addEventListener("click", finalizarVenta);
-if (cedulaInput) {
 
-    // ✨ Formatear automáticamente 1-4-4
-    cedulaInput.addEventListener("input", () => {
+    if (cedulaInput) {
+        cedulaInput.addEventListener("input", () => {
+            const ced = cedulaInput.value.trim();
+            if (ced.length >= 6) buscarCliente();
+        });
 
-        let valor = cedulaInput.value.replace(/\D/g, ""); // solo números
+        cedulaInput.addEventListener("keyup", (e) => {
+            if (e.key === "Enter") buscarCliente();
+        });
 
-        if (valor.length > 1 && valor.length <= 5) {
-            valor = valor.replace(/^(\d{1})(\d+)/, "$1-$2");
-        } else if (valor.length > 5) {
-            valor = valor.replace(/^(\d{1})(\d{4})(\d+)/, "$1-$2-$3");
-        }
+        cedulaInput.addEventListener("blur", buscarCliente);
+    }
 
-        cedulaInput.value = valor;
-
-        // 🔎 usar valor limpio
-        if (valor.length >= 6) {
-            buscarCliente();
-        }
-    });
-
-    // ⌨️ Enter
-    cedulaInput.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") buscarCliente();
-    });
-
-    // 🔍 blur
-    cedulaInput.addEventListener("blur", buscarCliente);
-}
-
-    if (searchInput)
-        searchInput.addEventListener("input", renderProductos);
+    if (searchInput) searchInput.addEventListener("input", renderProductos);
 
     if (facturarEmpresaCheckbox) {
-
-        facturarEmpresaCheckbox.addEventListener(
-            "change",
-            manejarToggleFacturarEmpresa
-        );
-
+        facturarEmpresaCheckbox.addEventListener("change", manejarToggleFacturarEmpresa);
         manejarToggleFacturarEmpresa();
     }
 
+    // API para empresas
+    if (empresaIdentificacionInput) {
+        empresaIdentificacionInput.addEventListener("input", () => {
+            const ced = empresaIdentificacionInput.value.trim();
+            if (ced.length >= 9) consultarEmpresaPorCedula(ced);
+            if (ced.length === 0) empresaNombreInput.value = "";
+        });
+    }
+    
+    
+const telefonoInput = document.getElementById("telefonoCliente");
+const telefonoError = document.getElementById("telefonoError");
+
+if (telefonoInput) {
+    telefonoInput.addEventListener("input", () => {
+        const valor = telefonoInput.value.replace(/\D/g, ""); // solo números
+        telefonoInput.value = valor;
+
+        if (valor.length > 0 && valor.length < 8) {
+            telefonoError.classList.remove("d-none");
+        } else {
+            telefonoError.classList.add("d-none");
+        }
+    });
+}
+
+      
 });
 
 
-/* =====================================================
-   PRODUCTOS
-===================================================== */
-
 function cargarProductos() {
-
     fetch(CONTROLLER_PATH, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -116,7 +96,6 @@ function cargarProductos() {
     })
         .then(res => res.json())
         .then(data => {
-
             window.productos = data.map(p => ({
                 id: parseInt(p.ProductoId),
                 nombre: p.Nombre,
@@ -126,10 +105,10 @@ function cargarProductos() {
 
             renderProductos();
         });
-
 }
-function renderProductos() {
 
+
+function renderProductos() {
     productosContainer.innerHTML = "";
 
     const filtro = (searchInput?.value || "").toLowerCase();
@@ -137,336 +116,270 @@ function renderProductos() {
     window.productos
         .filter(p => p.nombre.toLowerCase().includes(filtro))
         .forEach(producto => {
-
             const card = document.createElement("div");
-            card.className = "col-md-4 mb-4";
+            card.className = "col-md-4 mb-3";
 
             card.innerHTML = `
-                <div class="card producto-card h-100 shadow-sm border-0">
-
+                <div class="card h-100 shadow-sm">
                     <div class="card-body d-flex flex-column">
-
-                        <h6 class="fw-bold text-dark">
-                            ${producto.nombre}
-                        </h6>
-
-                        <p class="precio-producto">
-                            ₡${producto.precio.toLocaleString()}
-                        </p>
-
-                        <button
-                            class="btn btn-agregar mt-auto"
-                            onclick="agregarAlCarrito(${producto.id})"
-                        >
-                            + Agregar
-                        </button>
-
+                        <strong class="card-title text-dark">${producto.nombre}</strong>
+                        <p class="card-text fw-bold text-primary mt-2">₡${producto.precio.toLocaleString()}</p>
+                        <button class="btn btn-primary-custom w-100 mt-auto" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
                     </div>
-
                 </div>
             `;
 
             productosContainer.appendChild(card);
-
         });
 }
 
 
-/* =====================================================
-   CARRITO
-===================================================== */
-
 function agregarAlCarrito(productId) {
-
     const producto = window.productos.find(p => p.id === productId);
-
     const existente = cart.find(i => i.id === productId);
 
-    if (existente)
-        existente.cantidad++;
-    else
-        cart.push({ ...producto, cantidad: 1, descuento: 0 });
+    if (existente) existente.cantidad++;
+    else cart.push({ ...producto, cantidad: 1, descuento: 0 });
 
     renderCarrito();
 }
 
 function actualizarCantidad(id, cantidad) {
-
     const item = cart.find(i => i.id === id);
-
     item.cantidad = parseInt(cantidad) || 1;
-
     renderCarrito();
 }
 
 function actualizarDescuento(id, descuento) {
-
     const item = cart.find(i => i.id === id);
-
     item.descuento = parseFloat(descuento) || 0;
-
     renderCarrito();
 }
 
 function eliminarProducto(id) {
-
     cart = cart.filter(i => i.id !== id);
     window.cart = cart;
-
     renderCarrito();
 }
 
-
 function calcularTotales() {
-
     let subtotal = 0;
-    let descuento = 0;
+    let totalDescuento = 0;
 
     cart.forEach(item => {
-
         const totalProducto = item.precio * item.cantidad;
-
         subtotal += totalProducto;
-
-        descuento += totalProducto * (item.descuento / 100);
-
+        totalDescuento += totalProducto * (item.descuento / 100);
     });
 
-    const iva = (subtotal - descuento) * 0.13;
-
-    const total = subtotal - descuento + iva;
+    const iva   = (subtotal - totalDescuento) * 0.13;
+    const total = subtotal - totalDescuento + iva;
 
     cartSubtotal.textContent = subtotal.toFixed(2);
-    cartDiscount.textContent = descuento.toFixed(2);
-    cartTax.textContent = iva.toFixed(2);
-    cartTotal.textContent = total.toFixed(2);
+    cartDiscount.textContent = totalDescuento.toFixed(2);
+    cartTax.textContent      = iva.toFixed(2);
+    cartTotal.textContent    = total.toFixed(2);
 }
 
 
 function renderCarrito() {
-
     const container = document.getElementById("cart-items");
     container.innerHTML = "";
 
     if (cart.length === 0) {
-
-        container.innerHTML =
-            `<p class="text-muted">No hay productos agregados.</p>`;
-
+        container.innerHTML = `<p class="text-muted">No hay productos agregados.</p>`;
         calcularTotales();
         return;
     }
 
     cart.forEach(item => {
-
-        const totalProducto =
-            item.precio *
-            item.cantidad *
-            (1 - item.descuento / 100);
+        const totalProducto = item.precio * item.cantidad * (1 - item.descuento / 100);
 
         const div = document.createElement("div");
+        div.className = "";
 
         div.innerHTML = `
+            <div class="cart-item-modern shadow-sm p-3 rounded">
 
-        <div class="cart-item-modern shadow-sm">
+    <div class="item-header">
+        <strong class="item-title">${item.nombre}</strong>
 
-            <div class="d-flex justify-content-between align-items-center mb-2">
+        <button class="delete-btn" onclick="eliminarProducto(${item.id})">
+            <i class="bi bi-trash"></i>
+        </button>
+    </div>
 
-                <strong class="item-title">${item.nombre}</strong>
-
-                <button class="btn-delete"
-                    onclick="eliminarProducto(${item.id})">
-                    <i class="bi bi-trash"></i>
-                </button>
-
-            </div>
-
-            <div class="d-flex gap-2 align-items-center">
-
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text">Cant</span>
-                    <input type="number" min="1"
-                        value="${item.cantidad}"
-                        class="form-control"
-                        onchange="actualizarCantidad(${item.id},this.value)">
-                </div>
-
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text">Desc</span>
-                    <input type="number" min="0" max="100"
-                        value="${item.descuento}"
-                        class="form-control"
-                        onchange="actualizarDescuento(${item.id},this.value)">
-                    <span class="input-group-text">%</span>
-                </div>
-
-                <div class="item-total">
-                    ₡${totalProducto.toFixed(2)}
-                </div>
-
-            </div>
-
+    <div class="item-controls">
+        
+        <div class="input-group input-group-sm" style="width:100px;">
+            <span class="input-group-text">Cant.</span>
+            <input type="number" min="1" value="${item.cantidad}" 
+                   class="form-control"
+                   onchange="actualizarCantidad(${item.id}, this.value)">
         </div>
-        `;
+
+        <div class="input-group input-group-sm input-descuento">
+            <span class="input-group-text">Desc.</span>
+            <input type="number" min="0" max="100" value="${item.descuento}" 
+                   class="form-control"
+                   onchange="actualizarDescuento(${item.id}, this.value)">
+            <span class="input-group-text">%</span>
+        </div>
+
+        <div class="item-total">₡${totalProducto.toFixed(2)}</div>
+    </div>
+
+</div>`;
 
         container.appendChild(div);
-
     });
 
     calcularTotales();
 }
 
-/* =====================================================
-   CLIENTES
-===================================================== */
+
+
 
 async function buscarCliente() {
+    const ced = cedulaInput.value.trim();
 
-   const ced = cedulaInput.value.replace(/\D/g, "");
-  const btn = document.getElementById("btnRegistrarCliente");
     if (ced.length < 6) {
-
-        nombreClienteSpan.textContent =
-            "Nombre del cliente aparecerá aquí";
-
+        nombreClienteSpan.textContent = "Nombre del cliente aparecerá aquí";
         nombreClienteSpan.dataset.id = "";
         nombreClienteSpan.dataset.nombre = "";
 
-         nombreClienteSpan.classList.remove("text-primary", "text-muted");
-
-        // ocultar botón
-        if (btn) btn.classList.add("d-none");
+        // ocultar teléfono
+        document.getElementById("telefonoClienteDiv").style.display = "none";
 
         return;
     }
 
-    try {
+    const res = await fetch(CONTROLLER_PATH, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "obtenerCliente", cedula: ced })
+    });
 
-        const res = await fetch(CONTROLLER_PATH, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                action: "obtenerCliente",
-                cedula: ced
-            })
-        });
+    const data = await res.json();
 
-        const data = await res.json();
 
-        if (data?.PacienteId) {
+    /** si existe en bd **/
+    if (data?.PacienteId) {
+        nombreClienteSpan.textContent = data.NombreCompleto;
+        nombreClienteSpan.dataset.id = data.PacienteId;
+        nombreClienteSpan.dataset.nombre = data.NombreCompleto;
+        nombreClienteSpan.dataset.telefono = data.Telefono || "";
 
-                nombreClienteSpan.textContent = data.NombreCompleto;
-                nombreClienteSpan.dataset.id = data.PacienteId;
-                nombreClienteSpan.dataset.nombre = data.NombreCompleto;
+        // mostrar teléfono
+        const telDiv = document.getElementById("telefonoClienteDiv");
+        const telInput = document.getElementById("telefonoCliente");
 
-                
-                nombreClienteSpan.classList.remove("text-primary");
-                nombreClienteSpan.classList.add("text-muted");
+        telDiv.style.display = "block";
+        telInput.value = data.Telefono || "";
 
-                const btn = document.getElementById("btnRegistrarCliente");
-                if (btn) {
-                    btn.classList.add("d-none");
-                    btn.href = "#";
-                }
-
-                return;
-        }
-
-   try {
-
-            const apiRes = await fetch(`https://apis.gometa.org/cedulas/${ced}`);
-            const apiData = await apiRes.json();
-
-            if (apiData && apiData.results && apiData.results.length > 0) {
-
-                const persona = apiData.results[0];
-
-                const nombreCompleto = `${persona.firstname || ""} ${persona.lastname1 || ""} ${persona.lastname2 || ""}`.trim();
-
-                
-                nombreClienteSpan.textContent = nombreCompleto;
-                nombreClienteSpan.dataset.id = ""; 
-                nombreClienteSpan.dataset.nombre = nombreCompleto;
-                
-                  nombreClienteSpan.classList.remove("text-primary", "text-muted");
-
-                // estilo no registrado
-                nombreClienteSpan.classList.add("text-primary");
-
-                // mostrar botón
-                if (btn) {
-                    btn.classList.remove("d-none");
-                    btn.href = `registrarClientePOS.php?cedula=${ced}`;
-                }
-
-            } else {
-
-                nombreClienteSpan.textContent = "Cliente no encontrado";
-
-                nombreClienteSpan.classList.remove("text-primary", "text-muted");
-
-                if (btn) btn.classList.add("d-none");
-            }
-
-        } catch (apiError) {
-
-            console.warn("API externa no disponible");
-
-            nombreClienteSpan.textContent = "Cliente no encontrado";
-
-            nombreClienteSpan.classList.remove("text-primary", "text-muted");
-
-            if (btn) btn.classList.add("d-none");
-        }
-
-    } catch (e) {
-
-        console.error("Error buscando cliente", e);
-
-        nombreClienteSpan.textContent = "Error al buscar cliente";
-
-        nombreClienteSpan.classList.remove("text-primary", "text-muted");
-
-        if (btn) btn.classList.add("d-none");
+        return;
     }
+
+    /** Si no esta registrado busca en Api**/
+    let nombreAPI = "";
+
+    try {
+        const apiRes = await fetch(`https://apis.gometa.org/cedulas/${encodeURIComponent(ced)}`);
+        const apiData = await apiRes.json();
+
+        if (apiData?.results?.length > 0) {
+            const p = apiData.results[0];
+
+            nombreAPI = `${p.firstname || ""} ${p.lastname1 || ""} ${p.lastname2 || ""}`.trim();
+            if (!nombreAPI && p.fullname) nombreAPI = p.fullname;
+            if (!nombreAPI && p.nombre)   nombreAPI = p.nombre;
+        }
+
+    } catch (error) {
+        console.error("Error consultando API:", error);
+    }
+
+    nombreClienteSpan.innerHTML = `
+        <span class="fw-semibold text-primary">${nombreAPI || "Cliente no encontrado"}</span><br>
+        <button class="btn btn-sm btn-outline-primary mt-2" onclick="registrarClientePOS()">
+            Registrar cliente
+        </button>
+    `;
+
+    nombreClienteSpan.dataset.id = "";
+    nombreClienteSpan.dataset.nombre = nombreAPI;
+
+    // permitir digitar teléfono manual
+    const telDiv = document.getElementById("telefonoClienteDiv");
+    const telInput = document.getElementById("telefonoCliente");
+
+    telDiv.style.display = "block";
+    telInput.value = "";
 }
 
 
-/* =====================================================
-   EMPRESAS
-===================================================== */
+function registrarClientePOS() {
+    const ced = cedulaInput.value.trim();
+    if (!ced) return alert("Debe ingresar una cédula válida.");
+    window.location.href = `/View/registrarClientePOS.php?cedula=${ced}`;
+}
+
+
 
 function manejarToggleFacturarEmpresa() {
-
     const activo = facturarEmpresaCheckbox.checked;
+    const filaCedulaCliente = document.getElementById("cedulaCliente")?.closest(".mb-3");
 
     if (activo) {
-
         datosEmpresaDiv.style.display = "block";
 
         cedulaInput.value = "";
         cedulaInput.disabled = true;
 
         nombreClienteSpan.textContent = "Cliente no registrado";
+        nombreClienteSpan.dataset.id = "";
+        nombreClienteSpan.dataset.nombre = "";
+
+        document.getElementById("telefonoClienteDiv").style.display = "none";
+
+        if (filaCedulaCliente) filaCedulaCliente.style.display = "none";
 
     } else {
-
         datosEmpresaDiv.style.display = "none";
 
-        cedulaInput.disabled = false;
-    }
+        empresaNombreInput.value = "";
+        empresaIdentificacionInput.value = "";
 
+        cedulaInput.disabled = false;
+
+        if (filaCedulaCliente) filaCedulaCliente.style.display = "";
+    }
 }
 
 
-/* =====================================================
-   CAJA
-===================================================== */
 
-async function validarEstadoCaja() {
 
+async function consultarEmpresaPorCedula(ced) {
     try {
+        const res = await fetch(`https://apis.gometa.org/cedulas/${encodeURIComponent(ced)}`);
+        const data = await res.json();
 
+        if (!data?.results || data.results.length === 0) return;
+
+        const p = data.results[0];
+
+        let nombre = `${p.firstname || ""} ${p.lastname1 || ""} ${p.lastname2 || ""}`.trim();
+        if (!nombre && p.fullname) nombre = p.fullname;
+        if (!nombre && p.nombre)   nombre = p.nombre;
+
+        empresaNombreInput.value = nombre;
+
+    } catch (e) {
+        console.error("Error API empresa:", e);
+    }
+}
+async function validarEstadoCaja() {
+    try {
         const res = await fetch(CONTROLLER_PATH, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -475,59 +388,99 @@ async function validarEstadoCaja() {
 
         const data = await res.json();
 
+        const btn = document.getElementById("btnFinalizar");
+        const alerta = document.getElementById("alertaCajaCerrada");
+
         if (data.cerrada) {
 
-            btnFinalizar.disabled = true;
+            if (btn) {
+                btn.disabled = true;
+                btn.classList.add("disabled");
+                btn.title = "Caja cerrada";
+            }
+
+            if (alerta) {
+                alerta.classList.remove("d-none");
+            }
 
         } else {
+            if (btn) {
+                btn.disabled = false;
+                btn.classList.remove("disabled");
+                btn.title = "";
+            }
 
-            btnFinalizar.disabled = false;
+            if (alerta) {
+                alerta.classList.add("d-none");
+            }
         }
 
     } catch (e) {
-
-        console.error("Error validando caja", e);
-
+        console.error("Error validando estado de caja", e);
     }
-
 }
 
-
-/* =====================================================
-   VENTA
-===================================================== */
 
 async function finalizarVenta() {
 
     if (cart.length === 0) {
-
         mostrarAlertaPOS("Debe agregar productos.");
         return;
     }
 
+    const subtotal = parseFloat(cartSubtotal.textContent);
+    const descuento = parseFloat(cartDiscount.textContent);
+    const iva = parseFloat(cartTax.textContent);
     const total = parseFloat(cartTotal.textContent);
 
-    const montoAbono =
-        parseFloat(montoAbonoInput?.value || 0);
+    const montoAbono = parseFloat(montoAbonoInput?.value || 0);
 
-    if (montoAbono > total) {
-
-        mostrarAlertaPOS("El abono no puede ser mayor al total.");
+    if (montoAbono < 0) {
+        mostrarAlertaPOS("El abono no puede ser negativo.");
         return;
     }
 
-    const payload = {
+    if (montoAbono > total) {
+        mostrarAlertaPOS("El abono no puede ser mayor al total de la factura.");
+        return;
+    }
 
+
+    //  VALIDACIÓN DE TELÉFONO (mínimo 8 dígitos)
+
+    const telefono = document.getElementById("telefonoCliente")?.value || "";
+    const soloNumeros = telefono.replace(/\D/g, "");
+
+    if (soloNumeros.length > 0 && soloNumeros.length < 8) {
+        document.getElementById("telefonoError").classList.remove("d-none");
+        mostrarAlertaPOS("El número de teléfono debe tener mínimo 8 dígitos.");
+        return;
+    }
+ 
+
+
+    const facturarEmpresa = facturarEmpresaCheckbox.checked;
+
+    const payload = {
         action: "generarVenta",
 
-        clienteId: nombreClienteSpan.dataset.id || 0,
-
-        clienteNombre:
-            nombreClienteSpan.dataset.nombre ||
-            nombreClienteSpan.textContent,
+        clienteId:     facturarEmpresa ? 0 : (nombreClienteSpan.dataset.id || 0),
+        clienteNombre: facturarEmpresa 
+            ? "" 
+            : (nombreClienteSpan.dataset.nombre || nombreClienteSpan.textContent || ""),
 
         metodoPago: metodoPagoSelect.value,
+        telefono: telefono,  
 
+        facturarEmpresa: facturarEmpresa ? 1 : 0,
+        empresaNombre: facturarEmpresa ? empresaNombreInput.value : "",
+        empresaIdentificacion: facturarEmpresa ? empresaIdentificacionInput.value : "",
+
+        cedulaIngresada: facturarEmpresa
+            ? empresaIdentificacionInput.value
+            : cedulaInput.value,    
+    
+        facturaElectronica: document.getElementById("facturaElectronica")?.checked ? 1 : 0,
         montoAbono: montoAbono,
 
         productos: cart.map(i => ({
@@ -537,190 +490,177 @@ async function finalizarVenta() {
             precioUnitario: i.precio,
             descuento: i.descuento
         }))
-
     };
 
     const res = await fetch(CONTROLLER_PATH, {
-
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-
     });
 
     const result = await res.json();
 
-    console.log("FACTURA COMPLETA:", result);
-
-    if (result.error === "CAJA_CERRADA") {
-
-        new bootstrap.Modal(
-            document.getElementById("modalCajaCerrada")
-        ).show();
-
-        return;
-    }
-
+if (result.error === "CAJA_CERRADA") {
+    const modal = new bootstrap.Modal(
+        document.getElementById("modalCajaCerrada")
+    );
+    modal.show();
+    return;
+}
     mostrarFacturaTicket(result.factura);
 
-    cart = [];
-    window.cart = cart;
-
+    window.cart = [];
+    cart = window.cart;
     renderCarrito();
+
+    cedulaInput.value = "";
+    nombreClienteSpan.textContent = "Nombre del cliente aparecerá aquí";
+    nombreClienteSpan.dataset.id = "";
+    nombreClienteSpan.dataset.nombre = "";
+
+    montoAbonoInput.value = "";
+
+    document.getElementById("telefonoClienteDiv").style.display = "none";
 }
 
-
-/* =====================================================
-   ALERTAS
-===================================================== */
 
 function mostrarAlertaPOS(mensaje) {
+    const body = document.getElementById("modalAlertaPOSBody");
+    body.textContent = mensaje;
 
-    document.getElementById(
-        "modalAlertaPOSBody"
-    ).textContent = mensaje;
-
-    new bootstrap.Modal(
-        document.getElementById("modalAlertaPOS")
-    ).show();
-
+    const modal = new bootstrap.Modal(document.getElementById("modalAlertaPOS"));
+    modal.show();
 }
 
-
-/* =====================================================
-   TICKET
-===================================================== */
 
 function mostrarFacturaTicket(factura) {
 
-    if (!factura) {
-        console.error("Factura vacía");
-        return;
-    }
+    const encabezado = factura?.encabezado || factura || {};
+    const detalle = factura?.detalle || [];
 
-    const enc = factura.encabezado;
-    const det = factura.detalle;
+    const modalBody = document.getElementById("modalFacturaBody");
 
-    const qrData = `
-Factura:${enc.Id}
-Cliente:${enc.Cliente || ""}
-Total:${enc.Total}
-Fecha:${enc.Fecha}
-    `;
+    const empresaNombreEnc =
+        encabezado.EmpresaNombre || encabezado.Empresa || "";
 
-    const html = `
-    <html>
-    <head>
-        <style>
-            body {
-                font-family: monospace;
-                padding: 10px;
-                width: 260px;
+    const empresaIdentEnc =
+        encabezado.EmpresaIdentificacion || encabezado.IdentificacionEmpresa || "";
+
+    const esEmpresa = !!empresaNombreEnc;
+
+    modalBody.innerHTML = `
+        <div id="ticketFactura" style="font-size:14px;">
+
+            <h5 class="text-center fw-bold">Óptica Grisol</h5>
+            <small class="text-center d-block">Venta al detalle</small>
+            <hr>
+
+            <strong>Factura #:</strong> ${encabezado.Id}<br>
+            <strong>Fecha:</strong> ${encabezado.Fecha}<br>
+            <strong>Pago:</strong> ${encabezado.MetodoPago}<br>
+
+            ${
+                esEmpresa
+                    ? `
+                        <strong>Empresa:</strong> ${empresaNombreEnc}<br>
+                        <strong>Identificación:</strong> ${empresaIdentEnc}<br>
+                    `
+                    : (
+                        encabezado.Cliente
+                            ? `<strong>Cliente:</strong> ${encabezado.Cliente}<br>
+                               <strong>Teléfono:</strong> ${encabezado.Telefono || ""}<br>`
+                            : ""
+                    )
             }
 
-            .logo {
-                text-align: center;
-                margin-bottom: 10px;
-            }
+            <hr>
 
-            .logo img {
-                width: 80px;
-            }
+            <table class="ticket-table mt-3">
+                <thead>
+                    <tr>
+                        <th style="width:40%">Producto</th>
+                        <th style="width:15%">Cant</th>
+                        <th style="width:15%">Desc</th>
+                        <th style="width:30%">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${detalle.map(item => `
+                        <tr>
+                            <td>${item.Nombre}</td>
+                            <td>${item.Cantidad}</td>
+                            <td>${item.Descuento}%</td>
+                            <td>₡${parseFloat(item.Total).toFixed(2)}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
 
-            h5 {
-                text-align: center;
-                margin: 0;
-            }
-
-            hr {
-                margin: 5px 0;
-            }
-
-            .item {
-                display: flex;
-                justify-content: space-between;
-                font-size: 12px;
-            }
-
-            .total {
-                font-weight: bold;
-                text-align: center;
-                margin-top: 10px;
-                font-size: 14px;
-            }
-
-            .qr {
-                text-align: center;
-                margin-top: 10px;
-            }
-
-        </style>
-    </head>
-
-    <body>
-
-        <div class="logo">
-            <img src="/img/logo-grisol.png" />
-        </div>
-
-        <h5>Óptica Grisol</h5>
-        <div style="text-align:center;">Venta al detalle</div>
-
-        <hr>
-
-        Factura: ${enc.Id}<br>
-        Fecha: ${enc.Fecha}<br>
-        Pago: ${enc.MetodoPago}<br>
-
-        ${enc.Cliente ? `Cliente: ${enc.Cliente}<br>` : ""}
-        ${enc.Empresa ? `Empresa: ${enc.Empresa}<br>` : ""}
-
-        <hr>
-
-        ${det.map(d => `
-            <div class="item">
-                <span>${d.Nombre} x${d.Cantidad}</span>
-                <span>₡${parseFloat(d.Total).toFixed(2)}</span>
-            </div>
-        `).join("")}
-
-        <hr>
-
-        Subtotal: ₡${enc.Subtotal}<br>
-        Descuento: ₡${enc.Descuento}<br>
-        IVA: ₡${enc.IVA}<br>
-
-        <div class="total">
-            TOTAL: ₡${enc.Total}
-        </div>
-
-        <div class="qr">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}">
-        </div>
-
-        <div style="text-align:center; font-size:11px;">
-            ¡Gracias por su compra!
-        </div>
-
-    </body>
-    </html>
-    `;
-
-    const w = window.open("", "_blank", "width=300,height=600");
-
-    w.document.write(html);
-    w.document.close();
-
-    setTimeout(() => {
-        w.print();
-    }, 500);
+            <hr>
+            <strong>Subtotal:</strong> ₡${encabezado.Subtotal}<br>
+            <strong>Descuento:</strong> -₡${encabezado.Descuento}<br>
+            <strong>IVA (13%):</strong> ₡${encabezado.IVA}<br>
+            <hr>
+${
+    (parseFloat(encabezado.SaldoPendiente) > 0)
+        ? `
+            <strong>Total factura:</strong> ₡${encabezado.Total}<br>
+            <strong>Abono realizado:</strong> ₡${encabezado.Abono}<br>
+            <strong>Pendiente:</strong> ₡${encabezado.SaldoPendiente}<br>
+        `
+        : `
+            <h5 class="fw-bold">TOTAL: ₡${encabezado.Total}</h5>
+        `
 }
 
+<hr>
+            <p class="text-center">¡Gracias por su compra!</p>
+        </div>
 
-/* =====================================================
-   DARK MODE(sin uso)
-===================================================== */
+        <div class="mt-3 text-end">
+            <button class="btn btn-outline-secondary" id="btnImprimirTicket">Imprimir ticket</button>
+        </div>
+    `;
 
+    const modal = new bootstrap.Modal(document.getElementById("modalFactura"));
+    modal.show();
+
+    document.getElementById("btnImprimirTicket").onclick = () => {
+        const ticketHTML = document.getElementById("ticketFactura").outerHTML;
+        const ventana = window.open("", "_blank", "width=300,height=600");
+
+        ventana.document.write(`
+            <html>
+                <head>
+                    <style>
+                        body { font-family: monospace; margin:0; padding:10px; }
+                        #ticketFactura { width: 200px; }
+                        .ticket-table { width: 100%; font-size: 12px; }
+                        .ticket-table th, .ticket-table td { text-align:left; padding-right:5px; }
+                    </style>
+                </head>
+                <body>${ticketHTML}</body>
+            </html>
+        `);
+
+        ventana.print();
+
+        setTimeout(() => modal.hide(), 300);
+    };
+}
+   document.addEventListener("DOMContentLoaded", () => {
+
+    const btnFinalizar = document.getElementById("btnFinalizar");
+
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener("click", finalizarVenta);
+    } else {
+        console.warn("btnFinalizar no existe en el DOM");
+    }
+
+    validarEstadoCaja();
+});
+// Mantener modo oscuro cuando recarga
 if (localStorage.getItem("darkModePOS") === "1") {
     document.body.classList.add("modo-oscuro");
 }
