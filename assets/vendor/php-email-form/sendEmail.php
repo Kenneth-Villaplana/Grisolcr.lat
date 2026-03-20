@@ -12,14 +12,14 @@ function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
     $mail = new PHPMailer(true);
 
     // 1) Tomar credenciales desde Azure Application Settings si no vienen por parámetro
-    $emisorEnv   = trim((string)getenv("MAIL_FROM"));
-    $passEnv     = (string)getenv("MAIL_APP_PASSWORD");
+    $emisorEnv = trim((string) getenv("MAIL_FROM"));
+    $passEnv = (string) getenv("MAIL_APP_PASSWORD");
 
-    $emisor  = trim((string)($emisor ?: $emisorEnv));
-    $password = (string)($password ?: $passEnv);
+    $emisor = trim((string) ($emisor ?: $emisorEnv));
+    $password = (string) ($password ?: $passEnv);
 
-    $destino = trim((string)$destino);
-    $asunto  = (string)$asunto;
+    $destino = trim((string) $destino);
+    $asunto = (string) $asunto;
 
     // 2) Validaciones básicas para evitar "Invalid address (From)"
     if (!filter_var($emisor, FILTER_VALIDATE_EMAIL)) {
@@ -33,7 +33,7 @@ function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
     }
 
     // 3) Modo TEST/DEBUG (se ve en Azure Log Stream)
-    $isTest = (string)getenv("APP_MAIL_TEST") === "1";
+    $isTest = (string) getenv("APP_MAIL_TEST") === "1";
     if ($isTest) {
         $mail->SMTPDebug = 2; // 0=off, 2=client+server
         $mail->Debugoutput = function ($str, $level) {
@@ -43,19 +43,20 @@ function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
     }
 
     try {
-        $mail->CharSet  = 'UTF-8';
+        $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
+        $mail->Timeout = 15;
 
-        // 4) SMTP Gmail (Azure-friendly)
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $emisor;    // Debe ser el mismo Gmail de la App Password
-        $mail->Password   = $password;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = $emisor;
+        $mail->Password = $password;
 
-        // Recomendado en Azure: SMTPS 465 (más estable que STARTTLS 587)
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port       = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+        $mail->Timeout = 15;
+        $mail->SMTPKeepAlive = false;
 
         // 5) Forzar IPv4 (MUY importante en Azure para evitar entregas “fantasma”)
         $mail->SMTPOptions = [
@@ -76,7 +77,7 @@ function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
 
         $mail->isHTML(true);
         $mail->Subject = $asunto;
-        $mail->Body    = $mensajeHTML;
+        $mail->Body = $mensajeHTML;
 
         $mail->send();
 
