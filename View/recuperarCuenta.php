@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 include('layout.php');
 ?>
 <!DOCTYPE html>
@@ -16,7 +17,6 @@ include('layout.php');
 <section class="editar-section d-flex align-items-center justify-content-center py-5 my-5">
     <div class="container">
 
-        
         <div class="row justify-content-center mb-3">
             <div class="col-12 col-lg-8">
                 <?php
@@ -37,7 +37,6 @@ include('layout.php');
                     <small class="text-muted">Ingrese el correo asociado a su cuenta</small>
                 </div>
 
-                
                 <div class="p-4">
                     <form method="POST" action="../Controller/recuperarController.php" class="row g-4">
 
@@ -73,7 +72,6 @@ include('layout.php');
             </div>
         </div>
     </div>
-
 </section>
 
 <?php MostrarFooter(); ?>
