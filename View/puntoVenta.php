@@ -76,6 +76,11 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                         <span id="nombreCliente" class="mt-1 d-block text-muted small">
                             Nombre del cliente aparecerá aquí
                         </span>
+                        <a id="btnRegistrarCliente"
+                        href="#"
+                        class="btn btn-sm btn-outline-primary mt-2 d-none">
+                        Registrar Cliente
+                        </a>
                     </div>
 
                  

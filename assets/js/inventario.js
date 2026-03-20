@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!mensajeDiv) return;
         mensajeDiv.classList.add('d-none');
     }
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+
+    if (error) {
+        mostrarError(error);
+    }
     /* ============================= */
     /* FILTRO EN TIEMPO REAL */
     /* ============================= */
