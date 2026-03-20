@@ -171,17 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (inputPrecio) {
-        inputPrecio.addEventListener('input', () => {
-            validarCamposTiempoReal();
-            inputPrecio.classList.toggle('is-invalid', parseFloat(inputPrecio.value) <= 0);
-        });
+        inputPrecio.addEventListener('input', validarCamposTiempoReal);
     }
 
     if (inputCantidad) {
-        inputCantidad.addEventListener('input', () => {
-            validarCamposTiempoReal();
-            inputCantidad.classList.toggle('is-invalid', parseInt(inputCantidad.value) <= 0);
-        });
+        inputCantidad.addEventListener('input', validarCamposTiempoReal);
     }
 
     
