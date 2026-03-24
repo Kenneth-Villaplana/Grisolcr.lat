@@ -61,10 +61,33 @@ public function generarVenta(
     try {
 
         $cierreModel = new CierreCajaModel($this->conn);
-
-        if ($cierreModel->cajaCerradaHoy()) {
+          if ($cierreModel->cajaCerradaHoy()) {
             return ["error" => "CAJA_CERRADA"];
         }
+
+          foreach ($productos as $p) {
+
+                $stmtStock = $this->conn->prepare("CALL ObtenerStockProducto(?)");
+                $stmtStock->bind_param("i", $p["productoId"]);
+                $stmtStock->execute();
+
+                $resStock = $stmtStock->get_result();
+                $rowStock = $resStock->fetch_assoc();
+
+                $stmtStock->close();
+                $this->conn->next_result(); 
+
+                $stockDisponible = $rowStock["Stock"] ?? 0;
+
+                if ($p["cantidad"] > $stockDisponible) {
+                    return [
+                        "error" => "SIN_STOCK",
+                        "mensaje" => "No hay suficiente cantidad en inventario para: " . $p["nombre"]
+                    ];
+                }
+            }
+
+      
         $pacienteId      = intval($pacienteId) ?: 0;
         $clienteNombre   = trim($clienteNombre);
         $empresaNombre   = trim($empresaNombre);
