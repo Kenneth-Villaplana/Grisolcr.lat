@@ -264,21 +264,26 @@ function manejarMetodoPago() {
 
 function calcularCambio() {
 
-    if (!cartTotal || !montoEfectivoInput || !cambioTexto) return;
+    if (!montoEfectivoInput || !cambioTexto || !cartTotal) return;
 
-    const total = parseFloat(cartTotal.textContent) || 0;
-    const abono = parseFloat(montoAbonoInput?.value || 0);
     const efectivo = parseFloat(montoEfectivoInput.value) || 0;
+    const abono = parseFloat(montoAbonoInput?.value || 0);
+    const total = parseFloat(cartTotal.textContent) || 0;
 
-    const montoAPagar = total - abono;
+    let cambio = 0;
 
-    let cambio = efectivo - montoAPagar;
+    if (abono > 0) {
+        // con abono
+        cambio = efectivo - abono;
+    } else {
+        //sin abono
+        cambio = efectivo - total;
+    }
 
     if (cambio < 0) cambio = 0;
 
     cambioTexto.textContent = "Cambio: ₡" + cambio.toFixed(2);
 }
-
 
 function renderCarrito() {
     const container = document.getElementById("cart-items");
@@ -638,32 +643,43 @@ async function finalizarVenta() {
  
 
 
-    const facturarEmpresa = facturarEmpresaCheckbox.checked;
+const facturarEmpresa = facturarEmpresaCheckbox.checked;
 const metodoPago = metodoPagoSelect.value;
+
 let efectivo = 0;
 let cambio = 0;
-
-     const totalAPagar = total - montoAbono;
 
 if (metodoPago === "efectivo") {
 
     efectivo = parseFloat(montoEfectivoInput?.value || 0);
-
-     const totalAPagar = total - montoAbono;
 
     if (efectivo <= 0) {
         mostrarAlertaPOS("Debe ingresar el efectivo recibido.");
         return;
     }
 
-    if (efectivo < totalAPagar) {
-        mostrarAlertaPOS("El efectivo es insuficiente.");
-        return;
+    // con abono
+    if (montoAbono > 0) {
+
+        if (efectivo < montoAbono) {
+            mostrarAlertaPOS("El efectivo no cubre el abono.");
+            return;
+        }
+
+        cambio = efectivo - montoAbono;
+
+    } 
+    //  sin abono
+    else {
+
+        if (efectivo < total) {
+            mostrarAlertaPOS("El efectivo es insuficiente.");
+            return;
+        }
+
+        cambio = efectivo - total;
     }
-
-    cambio = efectivo - totalAPagar;
 }
-
     const payload = {
         action: "generarVenta",
         efectivo: efectivo,
