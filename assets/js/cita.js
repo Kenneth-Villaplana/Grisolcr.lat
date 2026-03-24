@@ -19,7 +19,7 @@ class AppointmentWizard {
    
     initDatePicker() {
         flatpickr("#datePicker", {
-            locale: "default",
+            locale: "es",
             minDate: "today",
             dateFormat: "Y-m-d",
             disableMobile: true,
