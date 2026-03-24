@@ -167,6 +167,9 @@ $isEmpleado = ($rolName === 'Empleado');
                             <span class="estado-badge estado-<?= strtolower($cita['Estado']) ?>">
                                 <?= ucfirst($cita['Estado']) ?>
                             </span>
+                            <?php if ($citaPasada && $cita['Estado'] === 'pendiente'): ?>
+                                <span class="badge bg-warning text-dark ms-2">Vencida</span>
+                            <?php endif; ?>
                         </div>
 
                         <div class="cita-info-grid">
