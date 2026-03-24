@@ -75,7 +75,9 @@ public function generarVenta(
     $facturaElectronica,
     $montoAbono,
     $cedulaIngresada,
-    $telefono
+    $telefono,
+    $efectivo = 0,
+    $cambio = 0
 ) {
     try {
 
@@ -172,7 +174,10 @@ public function generarVenta(
                 "IVA"                   => number_format($iva, 2, ".", ""),
                 "Total"                 => number_format($total, 2, ".", ""),
                 "Abono"                 => number_format($montoAbono, 2, ".", ""),
-                "SaldoPendiente"        => number_format($saldoPendiente, 2, ".", "")
+                "SaldoPendiente"        => number_format($saldoPendiente, 2, ".", ""),
+                "Efectivo" => number_format($efectivo, 2, ".", ""),
+                "Cambio"   => number_format($cambio, 2, ".", "")
+
             ],
             "detalle" => $detalleFactura
         ];
@@ -227,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         JSON_UNESCAPED_UNICODE
     );
     break;
-    
+
         case "generarVenta":
         $factura = $controller->generarVenta(
             $input["clienteId"] ?? 0,
@@ -240,7 +245,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $input["facturaElectronica"] ?? 0,
             $input["montoAbono"] ?? 0,
             $input["cedulaIngresada"] ?? '',
-            $input["telefono"] ?? ""
+            $input["telefono"] ?? "",
+            $input["efectivo"] ?? 0,
+            $input["cambio"] ?? 0
 );
               if (isset($factura["error"]) && $factura["error"] === "CAJA_CERRADA") {
         echo json_encode([
