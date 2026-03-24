@@ -84,7 +84,43 @@ if (telefonoInput) {
     });
 }
 
-      
+      const bloqueEfectivo = document.getElementById("bloqueEfectivo");
+    const dineroRecibido = document.getElementById("dineroRecibido");
+    const vueltoSpan = document.getElementById("vuelto");
+    const errorEfectivo = document.getElementById("errorEfectivo");
+
+    // Mostrar / ocultar
+    if (metodoPagoSelect) {
+        metodoPagoSelect.addEventListener("change", () => {
+            if (metodoPagoSelect.value === "efectivo") {
+                bloqueEfectivo.style.display = "block";
+            } else {
+                bloqueEfectivo.style.display = "none";
+                dineroRecibido.value = "";
+                vueltoSpan.textContent = "0.00";
+                errorEfectivo.classList.add("d-none");
+            }
+        });
+    }
+
+    // Calcular vuelto
+    if (dineroRecibido) {
+        dineroRecibido.addEventListener("input", () => {
+            const total = parseFloat(cartTotal.textContent) || 0;
+            const recibido = parseFloat(dineroRecibido.value) || 0;
+
+            if (recibido < total) {
+                vueltoSpan.textContent = "0.00";
+                errorEfectivo.classList.remove("d-none");
+            } else {
+                const vuelto = recibido - total;
+                vueltoSpan.textContent = vuelto.toFixed(2);
+                errorEfectivo.classList.add("d-none");
+            }
+        });
+    }
+
+});
 });
 
 
@@ -438,6 +474,17 @@ async function finalizarVenta() {
             return;
         }
     }
+     if (metodoPagoSelect.value === "efectivo") {
+
+        const recibido = parseFloat(document.getElementById("dineroRecibido")?.value || 0);
+        const total = parseFloat(cartTotal.textContent);
+
+        if (recibido < total) {
+            mostrarAlertaPOS("El dinero recibido es menor al total.");
+            return;
+        }
+    }
+
 
     const subtotal = parseFloat(cartSubtotal.textContent);
     const descuento = parseFloat(cartDiscount.textContent);
