@@ -8,6 +8,9 @@ let productosContainer, cartSubtotal, cartDiscount, cartTax, cartTotal;
 let btnFinalizar, metodoPagoSelect, cedulaInput, nombreClienteSpan, searchInput;
 let montoAbonoInput;
 
+let montoEfectivoInput, cambioTexto, bloqueEfectivo;
+
+
 let facturarEmpresaCheckbox, datosEmpresaDiv, empresaNombreInput, empresaIdentificacionInput;
 
 const CONTROLLER_PATH = "../Controller/puntoVentaController.php";
@@ -84,7 +87,19 @@ if (telefonoInput) {
     });
 }
 
-      
+montoEfectivoInput = document.getElementById("montoEfectivo");
+cambioTexto = document.getElementById("cambioTexto");
+bloqueEfectivo = document.getElementById("bloqueEfectivo");
+
+if (metodoPagoSelect) {
+    metodoPagoSelect.addEventListener("change", manejarMetodoPago);
+}
+
+if (montoEfectivoInput) {
+    montoEfectivoInput.addEventListener("input", calcularCambio);
+}
+manejarMetodoPago();
+
 });
 
 async function obtenerStock(productId) {
@@ -221,8 +236,37 @@ function calcularTotales() {
     cartDiscount.textContent = totalDescuento.toFixed(2);
     cartTax.textContent      = iva.toFixed(2);
     cartTotal.textContent    = total.toFixed(2);
+
+    calcularCambio();
 }
 
+function manejarMetodoPago() {
+
+    if (!bloqueEfectivo) return;
+
+    if (metodoPagoSelect.value === "efectivo") {
+        bloqueEfectivo.style.display = "block";
+    } else {
+        bloqueEfectivo.style.display = "none";
+
+        if (montoEfectivoInput) montoEfectivoInput.value = "";
+        if (cambioTexto) cambioTexto.textContent = "Cambio: ₡0.00";
+    }
+}
+
+function calcularCambio() {
+
+    if (!cartTotal || !montoEfectivoInput || !cambioTexto) return;
+
+    const total = parseFloat(cartTotal.textContent) || 0;
+    const efectivo = parseFloat(montoEfectivoInput.value) || 0;
+
+    let cambio = efectivo - total;
+
+    if (cambio < 0) cambio = 0;
+
+    cambioTexto.textContent = "Cambio: ₡" + cambio.toFixed(2);
+}
 
 function renderCarrito() {
     const container = document.getElementById("cart-items");
@@ -576,10 +620,31 @@ async function finalizarVenta() {
 
 
     const facturarEmpresa = facturarEmpresaCheckbox.checked;
+const metodoPago = metodoPagoSelect.value;
+let efectivo = 0;
+let cambio = 0;
+
+if (metodoPago === "efectivo") {
+
+    efectivo = parseFloat(montoEfectivoInput?.value || 0);
+
+    if (efectivo <= 0) {
+        mostrarAlertaPOS("Debe ingresar el efectivo recibido.");
+        return;
+    }
+
+    if (efectivo < total) {
+        mostrarAlertaPOS("El efectivo es insuficiente.");
+        return;
+    }
+
+    cambio = efectivo - total;
+}
 
     const payload = {
         action: "generarVenta",
-
+        efectivo: efectivo,
+        cambio: cambio,
         clienteId:     facturarEmpresa ? 0 : (nombreClienteSpan.dataset.id || 0),
         clienteNombre: facturarEmpresa 
             ? "" 
@@ -669,12 +734,20 @@ function mostrarFacturaTicket(factura) {
 
             <h5 class="text-center fw-bold">Óptica Grisol</h5>
             <small class="text-center d-block">Venta al detalle</small>
+
             <hr>
 
             <strong>Factura #:</strong> ${encabezado.Id}<br>
             <strong>Fecha:</strong> ${encabezado.Fecha}<br>
             <strong>Pago:</strong> ${encabezado.MetodoPago}<br>
-
+            ${
+                        encabezado.MetodoPago === "efectivo"
+                            ? `
+                                <strong>Efectivo:</strong> ₡${encabezado.Efectivo || "0.00"}<br>
+                                <strong>Cambio:</strong> ₡${encabezado.Cambio || "0.00"}<br>
+                            `
+                            : ""
+                    }
             ${
                 esEmpresa
                     ? `
