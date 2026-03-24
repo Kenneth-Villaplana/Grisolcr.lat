@@ -149,11 +149,10 @@ $isEmpleado = ($rolName === 'Empleado');
                                         $nombrePaciente = "";
 
                                         if (!empty($cita['PacienteNombre'])) {
-                                            $nombrePaciente = $cita['PacienteNombre'];
-                                        } elseif (!empty($cita['NombreExterno'])) {
-                                            $nombrePaciente = $cita['NombreExterno'];
-                                        } elseif (!empty($cita['nombre'])) { 
-                                            $nombrePaciente = $cita['nombre'];
+                                            $nombrePaciente = $cita['PacienteNombre'] . ' ' . ($cita['PacienteApellido'] ?? '');
+                                        } 
+                                        elseif (!empty($cita['PacienteNombreExt'])) {
+                                            $nombrePaciente = $cita['PacienteNombreExt'] . ' ' . ($cita['PacienteApellidoExt'] ?? '');
                                         }
                                     ?>
 

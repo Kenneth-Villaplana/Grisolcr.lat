@@ -10,9 +10,7 @@ $model = new CitaModel();
 
 
 /*
-|--------------------------------------------------------------------------
-| AJAX - HORAS OCUPADAS
-|--------------------------------------------------------------------------
+ AJAX - HORAS OCUPADAS
 */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'get_busy_slots') {
 
@@ -51,9 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'get_b
 
 
 /*
-|--------------------------------------------------------------------------
-| AGENDAR CITA
-|--------------------------------------------------------------------------
+AGENDAR CITA
 */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agendar_cita') {
 
@@ -82,9 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agend
         }
 
         /*
-        |--------------------------------------------------
-        | PACIENTE
-        |--------------------------------------------------
+         PACIENTE
         */
         if ($rolNombre === 'Paciente') {
 
@@ -105,11 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agend
 
         }
 
-
         /*
-        |--------------------------------------------------
-        | EMPLEADO
-        |--------------------------------------------------
+        EMPLEADO
         */
         else {
 
@@ -166,9 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'agend
 
 
 /*
-|--------------------------------------------------------------------------
-| OBTENER DOCTORES
-|--------------------------------------------------------------------------
+ OBTENER DOCTORES
 */
 try {
 
@@ -180,11 +169,7 @@ try {
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| CANCELAR / REAGENDAR / FINALIZAR
-|--------------------------------------------------------------------------
-*/
+
 function procesarAccionesCita()
 {
 
@@ -204,11 +189,7 @@ function procesarAccionesCita()
 
     try {
 
-        /*
-        |--------------------------------------------------
-        | CANCELAR
-        |--------------------------------------------------
-        */
+      
         if (($_POST['action'] ?? '') === 'cancelar_cita') {
 
             $citaId = intval($_POST['cita_id']);
@@ -221,11 +202,6 @@ function procesarAccionesCita()
         }
 
 
-        /*
-        |--------------------------------------------------
-        | REAGENDAR
-        |--------------------------------------------------
-        */
         if (($_POST['action'] ?? '') === 'reagendar_cita') {
 
             $citaId = intval($_POST['cita_id']);
@@ -242,11 +218,6 @@ function procesarAccionesCita()
         }
 
 
-        /*
-        |--------------------------------------------------
-        | FINALIZAR
-        |--------------------------------------------------
-        */
         if (($_POST['action'] ?? '') === 'finalizar_cita') {
 
             $citaId = intval($_POST['cita_id']);
@@ -268,11 +239,6 @@ function procesarAccionesCita()
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| OBTENER CITAS SEGÚN ROL
-|--------------------------------------------------------------------------
-*/
 function obtenerCitasSegunRol()
 {
 
