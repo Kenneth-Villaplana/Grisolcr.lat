@@ -162,13 +162,26 @@ async function agregarAlCarrito(productId) {
     const stock = await obtenerStock(productId);
     const cantidadActual = existente ? existente.cantidad : 0;
 
+    
     if (cantidadActual >= stock) {
-        mostrarMensajeStock(productId);
-        return; 
+
+
+        if (existente) {
+            renderCarrito();
+
+            setTimeout(() => {
+                mostrarMensajeStock(productId);
+            }, 50);
+        }
+
+        return;
     }
 
-    if (existente) existente.cantidad++;
-    else cart.push({ ...producto, cantidad: 1, descuento: 0 });
+    if (existente) {
+        existente.cantidad++;
+    } else {
+        cart.push({ ...producto, cantidad: 1, descuento: 0 });
+    }
 
     renderCarrito();
 }
@@ -321,12 +334,19 @@ async function validarCantidadTiempoReal(input) {
 // ================= MENSAJE =================
 function mostrarMensajeStock(productId) {
 
-    document.querySelectorAll(".input-cantidad").forEach(input => {
+    const inputs = document.querySelectorAll(".input-cantidad");
+
+    inputs.forEach(input => {
 
         if (parseInt(input.dataset.id) === productId) {
 
-            const mensaje = input.parentElement.querySelector(".stock-error");
+            const contenedor = input.closest(".input-group");
+            if (!contenedor) return;
 
+            const mensaje = contenedor.querySelector(".stock-error");
+            if (!mensaje) return;
+
+           
             mensaje.classList.remove("d-none");
 
             setTimeout(() => {
