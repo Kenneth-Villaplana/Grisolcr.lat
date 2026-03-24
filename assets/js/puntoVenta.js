@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const telefonoInput = document.getElementById("telefonoCliente");
 const telefonoError = document.getElementById("telefonoError");
 
-if (telefonoInput) {
+if (telefonoInput && telefonoError) {
     telefonoInput.addEventListener("input", () => {
         const valor = telefonoInput.value.replace(/\D/g, ""); // solo números
         telefonoInput.value = valor;
@@ -91,12 +91,17 @@ montoEfectivoInput = document.getElementById("montoEfectivo");
 cambioTexto = document.getElementById("cambioTexto");
 bloqueEfectivo = document.getElementById("bloqueEfectivo");
 
-if (metodoPagoSelect) {
-    metodoPagoSelect.addEventListener("change", manejarMetodoPago);
-}
-
 if (montoEfectivoInput) {
     montoEfectivoInput.addEventListener("input", calcularCambio);
+}
+
+if (montoAbonoInput) {
+    montoAbonoInput.addEventListener("input", calcularCambio);
+}
+
+if (metodoPagoSelect) {
+    metodoPagoSelect.addEventListener("change", manejarMetodoPago);
+    metodoPagoSelect.addEventListener("change", calcularCambio);
 }
 manejarMetodoPago();
 
@@ -259,13 +264,22 @@ function calcularCambio() {
     if (!cartTotal || !montoEfectivoInput || !cambioTexto) return;
 
     const total = parseFloat(cartTotal.textContent) || 0;
+    const abono = parseFloat(montoAbonoInput?.value || 0);
+
+    const totalAPagar = total - abono;
     const efectivo = parseFloat(montoEfectivoInput.value) || 0;
 
-    let cambio = efectivo - total;
+      let cambio = efectivo - totalAPagar;
 
     if (cambio < 0) cambio = 0;
 
     cambioTexto.textContent = "Cambio: ₡" + cambio.toFixed(2);
+
+    if (efectivo < totalAPagar) {
+        cambioTexto.style.color = "red";
+    } else {
+        cambioTexto.style.color = "green";
+    }
 }
 
 function renderCarrito() {
@@ -628,17 +642,19 @@ if (metodoPago === "efectivo") {
 
     efectivo = parseFloat(montoEfectivoInput?.value || 0);
 
+     const totalAPagar = total - montoAbono;
+
     if (efectivo <= 0) {
         mostrarAlertaPOS("Debe ingresar el efectivo recibido.");
         return;
     }
 
-    if (efectivo < total) {
+    if (efectivo < totalAPagar) {
         mostrarAlertaPOS("El efectivo es insuficiente.");
         return;
     }
 
-    cambio = efectivo - total;
+    cambio = efectivo - totalAPagar;
 }
 
     const payload = {
@@ -743,8 +759,7 @@ function mostrarFacturaTicket(factura) {
             ${
                         encabezado.MetodoPago === "efectivo"
                             ? `
-                                <strong>Efectivo:</strong> ₡${encabezado.Efectivo || "0.00"}<br>
-                                <strong>Cambio:</strong> ₡${encabezado.Cambio || "0.00"}<br>
+                                <strong>Recibido:</strong> ₡${encabezado.Efectivo || "0.00"}<br>
                             `
                             : ""
                     }
