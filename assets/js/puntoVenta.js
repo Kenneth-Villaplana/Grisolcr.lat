@@ -240,24 +240,26 @@ function renderCarrito() {
 
                 <div class="item-controls">
                     
-                    <div class="input-group input-group-sm" style="width:100px;">
-                        <span class="input-group-text">Cant.</span>
+                 <div class="input-group input-group-sm" style="width:100px; flex-direction:column; align-items:flex-start;">
+    
+                        <div class="d-flex w-100">
+                            <span class="input-group-text">Cant.</span>
 
-                        <input type="number" 
-                               min="1" 
-                               value="${item.cantidad}" 
-                               class="form-control input-cantidad"
-                               data-id="${item.id}"
-                               oninput="validarCantidadTiempoReal(this)">
+                            <input type="number" 
+                                min="1" 
+                                value="${item.cantidad}" 
+                                class="form-control input-cantidad"
+                                data-id="${item.id}"
+                                oninput="validarCantidadTiempoReal(this)">
+                        </div>
+
+                        <!-- MENSAJE AQUÍ MISMO -->
+                        <small class="text-danger d-none stock-error">
+                            Cantidad maxima de producto
+                        </small>
 
                     </div>
-
-                    <!-- MENSAJE DE STOCK -->
-                    <small class="text-danger d-none stock-error mt-1">
-                        Cantidad maxima de producto
-                    </small>
-
-                    <div class="input-group input-group-sm input-descuento">
+                      <div class="input-group input-group-sm input-descuento">
                         <span class="input-group-text">Desc.</span>
 
                         <input type="number" 
@@ -290,19 +292,27 @@ async function validarCantidadTiempoReal(input) {
     let valor = parseInt(input.value) || 1;
     const stock = await obtenerStock(id);
 
-    const mensaje = input.parentElement.querySelector(".stock-error");
+   const contenedor = input.closest(".input-group");
+    const mensaje = contenedor.querySelector(".stock-error");
 
     if (valor > stock) {
         input.value = stock;
         item.cantidad = stock;
 
-        mensaje.classList.remove("d-none");
+        if (mensaje) {
+            mensaje.classList.remove("d-none");
+        }
 
-        setTimeout(() => mensaje.classList.add("d-none"), 2000);
+        setTimeout(() => {
+            if (mensaje) mensaje.classList.add("d-none");
+        }, 2000);
 
     } else {
         item.cantidad = valor;
-        mensaje.classList.add("d-none");
+
+        if (mensaje) {
+            mensaje.classList.add("d-none");
+        }
     }
 
     calcularTotales();
