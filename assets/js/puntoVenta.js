@@ -100,7 +100,8 @@ function cargarProductos() {
                 id: parseInt(p.ProductoId),
                 nombre: p.Nombre,
                 precio: parseFloat(p.Precio),
-                descripcion: p.Descripcion || ""
+                descripcion: p.Descripcion || "",
+                 stock: parseInt(p.Stock) || 0
             }));
 
             renderProductos();
@@ -427,6 +428,16 @@ async function finalizarVenta() {
         mostrarAlertaPOS("Debe agregar productos.");
         return;
     }
+        for (const item of cart) {
+        const producto = window.productos.find(p => p.id === item.id);
+
+        if (!producto) continue;
+
+        if (item.cantidad > producto.stock) {
+            mostrarAlertaPOS(`No hay suficiente cantidad en inventario para: ${item.nombre}`);
+            return;
+        }
+    }
 
     const subtotal = parseFloat(cartSubtotal.textContent);
     const descuento = parseFloat(cartDiscount.textContent);
@@ -499,6 +510,11 @@ async function finalizarVenta() {
     });
 
     const result = await res.json();
+
+      if (result.error === "SIN_STOCK") {
+        mostrarAlertaPOS(result.mensaje || "No hay suficiente cantidad en inventario");
+        return;
+    }
 
 if (result.error === "CAJA_CERRADA") {
     const modal = new bootstrap.Modal(
