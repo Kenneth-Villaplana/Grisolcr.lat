@@ -121,7 +121,7 @@ if (telefonoInput) {
     }
 
 });
-});
+
 
 
 function cargarProductos() {
