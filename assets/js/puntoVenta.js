@@ -36,6 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
     datosEmpresaDiv         = document.getElementById("datosEmpresa");
     empresaNombreInput      = document.getElementById("empresaNombre");
     empresaIdentificacionInput = document.getElementById("empresaIdentificacion");
+
+    montoEfectivoInput = document.getElementById("montoEfectivo");
+    cambioTexto        = document.getElementById("cambioTexto");
+    bloqueEfectivo     = document.getElementById("bloqueEfectivo");
+
     validarEstadoCaja();
     cargarProductos();
 
@@ -87,24 +92,22 @@ if (telefonoInput && telefonoError) {
     });
 }
 
-montoEfectivoInput = document.getElementById("montoEfectivo");
-cambioTexto = document.getElementById("cambioTexto");
-bloqueEfectivo = document.getElementById("bloqueEfectivo");
+//cambio 
 
-if (montoEfectivoInput) {
-    montoEfectivoInput.addEventListener("input", calcularCambio);
-}
+ if (metodoPagoSelect) {
+        metodoPagoSelect.addEventListener("change", manejarMetodoPago);
+    }
 
-if (montoAbonoInput) {
-    montoAbonoInput.addEventListener("input", calcularCambio);
-}
+    if (montoEfectivoInput) {
+        montoEfectivoInput.addEventListener("input", calcularCambio);
+    }
 
-if (metodoPagoSelect) {
-    metodoPagoSelect.addEventListener("change", manejarMetodoPago);
-    metodoPagoSelect.addEventListener("change", calcularCambio);
-}
-manejarMetodoPago();
+    
+    if (montoAbonoInput) {
+        montoAbonoInput.addEventListener("input", calcularCambio);
+    }
 
+    manejarMetodoPago();
 });
 
 async function obtenerStock(productId) {
@@ -265,22 +268,17 @@ function calcularCambio() {
 
     const total = parseFloat(cartTotal.textContent) || 0;
     const abono = parseFloat(montoAbonoInput?.value || 0);
-
-    const totalAPagar = total - abono;
     const efectivo = parseFloat(montoEfectivoInput.value) || 0;
 
-      let cambio = efectivo - totalAPagar;
+    const montoAPagar = total - abono;
+
+    let cambio = efectivo - montoAPagar;
 
     if (cambio < 0) cambio = 0;
 
     cambioTexto.textContent = "Cambio: ₡" + cambio.toFixed(2);
-
-    if (efectivo < totalAPagar) {
-        cambioTexto.style.color = "red";
-    } else {
-        cambioTexto.style.color = "green";
-    }
 }
+
 
 function renderCarrito() {
     const container = document.getElementById("cart-items");
@@ -596,6 +594,7 @@ async function validarEstadoCaja() {
 
 
 async function finalizarVenta() {
+    try{
 
     if (cart.length === 0) {
         mostrarAlertaPOS("Debe agregar productos.");
@@ -608,6 +607,12 @@ async function finalizarVenta() {
     const total = parseFloat(cartTotal.textContent);
 
     const montoAbono = parseFloat(montoAbonoInput?.value || 0);
+
+
+        if (isNaN(total)) {
+            mostrarAlertaPOS("Error calculando el total.");
+            return;
+        }
 
     if (montoAbono < 0) {
         mostrarAlertaPOS("El abono no puede ser negativo.");
@@ -637,6 +642,8 @@ async function finalizarVenta() {
 const metodoPago = metodoPagoSelect.value;
 let efectivo = 0;
 let cambio = 0;
+
+     const totalAPagar = total - montoAbono;
 
 if (metodoPago === "efectivo") {
 
@@ -718,6 +725,13 @@ if (result.error === "CAJA_CERRADA") {
     montoAbonoInput.value = "";
 
     document.getElementById("telefonoClienteDiv").style.display = "none";
+
+        } catch (error) {
+
+        console.error("Error en finalizarVenta:", error);
+        mostrarAlertaPOS("Ocurrió un error al procesar la venta.");
+
+    }
 }
 
 
