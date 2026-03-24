@@ -143,6 +143,22 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                             <option value="transferencia">Transferencia</option>
                         </select>
                     </div>
+                    <div id="bloqueEfectivo" class="mt-3" style="display:none;">
+                        
+                        <label class="form-label fw-semibold">Dinero recibido</label>
+                        <input type="number" id="dineroRecibido" class="form-control" placeholder="Ej. 10000">
+
+                        <div class="mt-2 d-flex justify-content-between">
+                            <span class="fw-semibold">Vuelto:</span>
+                            <span class="fw-bold text-success">₡<span id="vuelto">0.00</span></span>
+                        </div>
+
+                        <small id="errorEfectivo" class="text-danger d-none">
+                            El monto recibido es menor al total.
+                        </small>
+
+                    </div>
+
                 <div id="alertaCajaCerrada" class="alert alert-warning d-none">
                     <i class="bi bi-lock-fill me-2"></i>
                     La caja del día está cerrada. No se pueden registrar ventas.
