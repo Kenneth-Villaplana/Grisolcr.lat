@@ -113,13 +113,11 @@ if (telefonoInput) {
                 vueltoSpan.textContent = "0.00";
                 errorEfectivo.classList.remove("d-none");
             } else {
-                const vuelto = recibido - total;
-                vueltoSpan.textContent = vuelto.toFixed(2);
+                vueltoSpan.textContent = (recibido - total).toFixed(2);
                 errorEfectivo.classList.add("d-none");
             }
         });
     }
-
 });
 
 
@@ -133,12 +131,12 @@ function cargarProductos() {
         .then(res => res.json())
         .then(data => {
             window.productos = data.map(p => ({
-                id: parseInt(p.ProductoId),
-                nombre: p.Nombre,
-                precio: parseFloat(p.Precio),
-                descripcion: p.Descripcion || "",
-                 stock: parseInt(p.Stock) || 0
-            }));
+    id: parseInt(p.ProductoId),
+    nombre: p.Nombre,
+    precio: parseFloat(p.Precio),
+    descripcion: p.Descripcion || "",
+    stock: parseInt(p.Stock || p.Cantidad || 0) 
+}));
 
             renderProductos();
         });
@@ -170,10 +168,17 @@ function renderProductos() {
         });
 }
 
-
 function agregarAlCarrito(productId) {
     const producto = window.productos.find(p => p.id === productId);
     const existente = cart.find(i => i.id === productId);
+
+    const cantidadActual = existente ? existente.cantidad : 0;
+
+    
+    if (cantidadActual + 1 > producto.stock) {
+        mostrarMensajeStock(`Máximo disponible del producto`);
+        return;
+    }
 
     if (existente) existente.cantidad++;
     else cart.push({ ...producto, cantidad: 1, descuento: 0 });
@@ -183,7 +188,17 @@ function agregarAlCarrito(productId) {
 
 function actualizarCantidad(id, cantidad) {
     const item = cart.find(i => i.id === id);
-    item.cantidad = parseInt(cantidad) || 1;
+    const producto = window.productos.find(p => p.id === id);
+
+    const nuevaCantidad = parseInt(cantidad) || 1;
+
+    if (nuevaCantidad > producto.stock) {
+        mostrarMensajeStock(`Cantidad máxima disponible`);
+        item.cantidad = producto.stock;
+    } else {
+        item.cantidad = nuevaCantidad;
+    }
+
     renderCarrito();
 }
 
@@ -474,8 +489,7 @@ async function finalizarVenta() {
             return;
         }
     }
-     if (metodoPagoSelect.value === "efectivo") {
-
+       if (metodoPagoSelect.value === "efectivo") {
         const recibido = parseFloat(document.getElementById("dineroRecibido")?.value || 0);
         const total = parseFloat(cartTotal.textContent);
 
@@ -588,13 +602,25 @@ if (result.error === "CAJA_CERRADA") {
 
 
 function mostrarAlertaPOS(mensaje) {
-    const body = document.getElementById("modalAlertaPOSBody");
-    body.textContent = mensaje;
-
-    const modal = new bootstrap.Modal(document.getElementById("modalAlertaPOS"));
-    modal.show();
+    document.getElementById("modalAlertaPOSBody").textContent = mensaje;
+    new bootstrap.Modal(document.getElementById("modalAlertaPOS")).show();
 }
 
+function mostrarMensajeStock(mensaje) {
+    let toast = document.getElementById("toastStock");
+
+    if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "toastStock";
+        toast.style = "position:fixed;bottom:20px;right:20px;background:#333;color:#fff;padding:10px;border-radius:8px;";
+        document.body.appendChild(toast);
+    }
+
+    toast.textContent = mensaje;
+    toast.style.opacity = "1";
+
+    setTimeout(() => toast.style.opacity = "0", 2000);
+}
 
 function mostrarFacturaTicket(factura) {
 
