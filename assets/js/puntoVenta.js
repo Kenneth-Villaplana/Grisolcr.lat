@@ -84,42 +84,8 @@ if (telefonoInput) {
     });
 }
 
-      const bloqueEfectivo = document.getElementById("bloqueEfectivo");
-    const dineroRecibido = document.getElementById("dineroRecibido");
-    const vueltoSpan = document.getElementById("vuelto");
-    const errorEfectivo = document.getElementById("errorEfectivo");
-
-    // Mostrar / ocultar
-    if (metodoPagoSelect) {
-        metodoPagoSelect.addEventListener("change", () => {
-            if (metodoPagoSelect.value === "efectivo") {
-                bloqueEfectivo.style.display = "block";
-            } else {
-                bloqueEfectivo.style.display = "none";
-                dineroRecibido.value = "";
-                vueltoSpan.textContent = "0.00";
-                errorEfectivo.classList.add("d-none");
-            }
-        });
-    }
-
-    // Calcular vuelto
-    if (dineroRecibido) {
-        dineroRecibido.addEventListener("input", () => {
-            const total = parseFloat(cartTotal.textContent) || 0;
-            const recibido = parseFloat(dineroRecibido.value) || 0;
-
-            if (recibido < total) {
-                vueltoSpan.textContent = "0.00";
-                errorEfectivo.classList.remove("d-none");
-            } else {
-                vueltoSpan.textContent = (recibido - total).toFixed(2);
-                errorEfectivo.classList.add("d-none");
-            }
-        });
-    }
+      
 });
-
 
 
 function cargarProductos() {
@@ -131,12 +97,11 @@ function cargarProductos() {
         .then(res => res.json())
         .then(data => {
             window.productos = data.map(p => ({
-    id: parseInt(p.ProductoId),
-    nombre: p.Nombre,
-    precio: parseFloat(p.Precio),
-    descripcion: p.Descripcion || "",
-    stock: parseInt(p.Stock || p.Cantidad || 0) 
-}));
+                id: parseInt(p.ProductoId),
+                nombre: p.Nombre,
+                precio: parseFloat(p.Precio),
+                descripcion: p.Descripcion || ""
+            }));
 
             renderProductos();
         });
@@ -168,17 +133,10 @@ function renderProductos() {
         });
 }
 
+
 function agregarAlCarrito(productId) {
     const producto = window.productos.find(p => p.id === productId);
     const existente = cart.find(i => i.id === productId);
-
-    const cantidadActual = existente ? existente.cantidad : 0;
-
-    
-    if (cantidadActual + 1 > producto.stock) {
-        mostrarMensajeStock(`Máximo disponible del producto`);
-        return;
-    }
 
     if (existente) existente.cantidad++;
     else cart.push({ ...producto, cantidad: 1, descuento: 0 });
@@ -188,17 +146,7 @@ function agregarAlCarrito(productId) {
 
 function actualizarCantidad(id, cantidad) {
     const item = cart.find(i => i.id === id);
-    const producto = window.productos.find(p => p.id === id);
-
-    const nuevaCantidad = parseInt(cantidad) || 1;
-
-    if (nuevaCantidad > producto.stock) {
-        mostrarMensajeStock(`Cantidad máxima disponible`);
-        item.cantidad = producto.stock;
-    } else {
-        item.cantidad = nuevaCantidad;
-    }
-
+    item.cantidad = parseInt(cantidad) || 1;
     renderCarrito();
 }
 
@@ -479,26 +427,6 @@ async function finalizarVenta() {
         mostrarAlertaPOS("Debe agregar productos.");
         return;
     }
-        for (const item of cart) {
-        const producto = window.productos.find(p => p.id === item.id);
-
-        if (!producto) continue;
-
-        if (item.cantidad > producto.stock) {
-            mostrarAlertaPOS(`No hay suficiente cantidad en inventario para: ${item.nombre}`);
-            return;
-        }
-    }
-       if (metodoPagoSelect.value === "efectivo") {
-        const recibido = parseFloat(document.getElementById("dineroRecibido")?.value || 0);
-        const total = parseFloat(cartTotal.textContent);
-
-        if (recibido < total) {
-            mostrarAlertaPOS("El dinero recibido es menor al total.");
-            return;
-        }
-    }
-
 
     const subtotal = parseFloat(cartSubtotal.textContent);
     const descuento = parseFloat(cartDiscount.textContent);
@@ -572,11 +500,6 @@ async function finalizarVenta() {
 
     const result = await res.json();
 
-      if (result.error === "SIN_STOCK") {
-        mostrarAlertaPOS(result.mensaje || "No hay suficiente cantidad en inventario");
-        return;
-    }
-
 if (result.error === "CAJA_CERRADA") {
     const modal = new bootstrap.Modal(
         document.getElementById("modalCajaCerrada")
@@ -602,25 +525,13 @@ if (result.error === "CAJA_CERRADA") {
 
 
 function mostrarAlertaPOS(mensaje) {
-    document.getElementById("modalAlertaPOSBody").textContent = mensaje;
-    new bootstrap.Modal(document.getElementById("modalAlertaPOS")).show();
+    const body = document.getElementById("modalAlertaPOSBody");
+    body.textContent = mensaje;
+
+    const modal = new bootstrap.Modal(document.getElementById("modalAlertaPOS"));
+    modal.show();
 }
 
-function mostrarMensajeStock(mensaje) {
-    let toast = document.getElementById("toastStock");
-
-    if (!toast) {
-        toast = document.createElement("div");
-        toast.id = "toastStock";
-        toast.style = "position:fixed;bottom:20px;right:20px;background:#333;color:#fff;padding:10px;border-radius:8px;";
-        document.body.appendChild(toast);
-    }
-
-    toast.textContent = mensaje;
-    toast.style.opacity = "1";
-
-    setTimeout(() => toast.style.opacity = "0", 2000);
-}
 
 function mostrarFacturaTicket(factura) {
 
@@ -752,4 +663,4 @@ ${
 // Mantener modo oscuro cuando recarga
 if (localStorage.getItem("darkModePOS") === "1") {
     document.body.classList.add("modo-oscuro");
-}
+} 
