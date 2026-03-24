@@ -266,9 +266,9 @@ function renderCarrito() {
                                 oninput="validarCantidadTiempoReal(this)">
                         </div>
 
-                        <!-- MENSAJE AQUÍ MISMO -->
-                        <small class="text-danger d-none stock-error">
-                            Cantidad maxima de producto
+                   
+                       <small class="text-danger d-none stock-error" style="margin-left:50px;">
+                            Cantidad maxima
                         </small>
 
                     </div>
