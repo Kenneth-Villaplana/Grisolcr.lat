@@ -143,9 +143,25 @@ $isEmpleado = ($rolName === 'Empleado');
                                 </h5>
                                 <p>
                                     ID #<?= (int)$cita['IdCita'] ?>
-                                    <?php if (!$isPaciente && !empty($cita['PacienteNombre'])): ?>
-                                        | Paciente: <?= htmlspecialchars($cita['PacienteNombre']) ?>
+                                   <?php if (!$isPaciente): ?>
+
+                                    <?php 
+                                        $nombrePaciente = "";
+
+                                        if (!empty($cita['PacienteNombre'])) {
+                                            $nombrePaciente = $cita['PacienteNombre'];
+                                        } elseif (!empty($cita['NombreExterno'])) {
+                                            $nombrePaciente = $cita['NombreExterno'];
+                                        } elseif (!empty($cita['nombre'])) { 
+                                            $nombrePaciente = $cita['nombre'];
+                                        }
+                                    ?>
+
+                                    <?php if (!empty($nombrePaciente)): ?>
+                                        | Paciente: <?= htmlspecialchars($nombrePaciente) ?>
                                     <?php endif; ?>
+
+                                <?php endif; ?>
                                 </p>
                             </div>
 
