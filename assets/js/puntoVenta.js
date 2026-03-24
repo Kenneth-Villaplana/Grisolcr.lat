@@ -267,7 +267,7 @@ function renderCarrito() {
                         </div>
 
                    
-                       <small class="text-danger d-none stock-error" style="margin-left:50px;">
+                       <small class="text-danger d-none stock-error" style="margin-left:10px;">
                             Cantidad maxima
                         </small>
 
