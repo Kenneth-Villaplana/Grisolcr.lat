@@ -44,7 +44,26 @@ public function obtenerClientePorCedula($cedula) {
         return [];
     }
 }
-    
+public function obtenerStockProducto($productoId) {
+    try {
+        $stmt = $this->conn->prepare("CALL ObtenerStockProducto(?)");
+        $stmt->bind_param("i", $productoId);
+        $stmt->execute();
+
+        $res = $stmt->get_result();
+        $data = $res->fetch_assoc();
+
+        $stmt->close();
+        $this->conn->next_result();
+
+        return $data ?: ["Stock" => 0];
+
+    } catch (\Throwable $e) {
+        error_log("Error obtenerStockProducto: " . $e->getMessage());
+        return ["Stock" => 0];
+    }
+}    
+
 public function generarVenta(
     $pacienteId,
     $clienteNombre,
@@ -201,6 +220,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     CerrarBD($conn);
     break;
+
+    case "obtenerStock":
+    echo json_encode(
+        $controller->obtenerStockProducto($input["productoId"]),
+        JSON_UNESCAPED_UNICODE
+    );
+    break;
+    
         case "generarVenta":
         $factura = $controller->generarVenta(
             $input["clienteId"] ?? 0,

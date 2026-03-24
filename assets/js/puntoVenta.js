@@ -2,7 +2,7 @@
 window.cart = window.cart || [];
 let cart = window.cart;
 window.productos = window.productos || [];
-
+let stockCache = {};
 // Variables DOM
 let productosContainer, cartSubtotal, cartDiscount, cartTax, cartTotal;
 let btnFinalizar, metodoPagoSelect, cedulaInput, nombreClienteSpan, searchInput;
@@ -87,6 +87,26 @@ if (telefonoInput) {
       
 });
 
+async function obtenerStock(productId) {
+
+    if (stockCache[productId] !== undefined) {
+        return stockCache[productId];
+    }
+
+    const res = await fetch(CONTROLLER_PATH, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "obtenerStock",
+            productoId: productId
+        })
+    });
+
+    const data = await res.json();
+    stockCache[productId] = parseInt(data.Stock) || 0;
+
+    return stockCache[productId];
+}
 
 function cargarProductos() {
     fetch(CONTROLLER_PATH, {
@@ -134,9 +154,18 @@ function renderProductos() {
 }
 
 
-function agregarAlCarrito(productId) {
+async function agregarAlCarrito(productId) {
+
     const producto = window.productos.find(p => p.id === productId);
     const existente = cart.find(i => i.id === productId);
+
+    const stock = await obtenerStock(productId);
+    const cantidadActual = existente ? existente.cantidad : 0;
+
+    if (cantidadActual >= stock) {
+        mostrarMensajeStock(productId);
+        return; 
+    }
 
     if (existente) existente.cantidad++;
     else cart.push({ ...producto, cantidad: 1, descuento: 0 });
@@ -201,35 +230,51 @@ function renderCarrito() {
         div.innerHTML = `
             <div class="cart-item-modern shadow-sm p-3 rounded">
 
-    <div class="item-header">
-        <strong class="item-title">${item.nombre}</strong>
+                <div class="item-header">
+                    <strong class="item-title">${item.nombre}</strong>
 
-        <button class="delete-btn" onclick="eliminarProducto(${item.id})">
-            <i class="bi bi-trash"></i>
-        </button>
-    </div>
+                    <button class="delete-btn" onclick="eliminarProducto(${item.id})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
 
-    <div class="item-controls">
-        
-        <div class="input-group input-group-sm" style="width:100px;">
-            <span class="input-group-text">Cant.</span>
-            <input type="number" min="1" value="${item.cantidad}" 
-                   class="form-control"
-                   onchange="actualizarCantidad(${item.id}, this.value)">
-        </div>
+                <div class="item-controls">
+                    
+                    <div class="input-group input-group-sm" style="width:100px;">
+                        <span class="input-group-text">Cant.</span>
 
-        <div class="input-group input-group-sm input-descuento">
-            <span class="input-group-text">Desc.</span>
-            <input type="number" min="0" max="100" value="${item.descuento}" 
-                   class="form-control"
-                   onchange="actualizarDescuento(${item.id}, this.value)">
-            <span class="input-group-text">%</span>
-        </div>
+                        <input type="number" 
+                               min="1" 
+                               value="${item.cantidad}" 
+                               class="form-control input-cantidad"
+                               data-id="${item.id}"
+                               oninput="validarCantidadTiempoReal(this)">
 
-        <div class="item-total">₡${totalProducto.toFixed(2)}</div>
-    </div>
+                    </div>
 
-</div>`;
+                    <!-- MENSAJE DE STOCK -->
+                    <small class="text-danger d-none stock-error mt-1">
+                        Cantidad maxima de producto
+                    </small>
+
+                    <div class="input-group input-group-sm input-descuento">
+                        <span class="input-group-text">Desc.</span>
+
+                        <input type="number" 
+                               min="0" 
+                               max="100" 
+                               value="${item.descuento}" 
+                               class="form-control"
+                               onchange="actualizarDescuento(${item.id}, this.value)">
+
+                        <span class="input-group-text">%</span>
+                    </div>
+
+                    <div class="item-total">₡${totalProducto.toFixed(2)}</div>
+                </div>
+
+            </div>
+        `;
 
         container.appendChild(div);
     });
@@ -237,8 +282,49 @@ function renderCarrito() {
     calcularTotales();
 }
 
+async function validarCantidadTiempoReal(input) {
 
+    const id = parseInt(input.dataset.id);
+    const item = cart.find(i => i.id === id);
 
+    let valor = parseInt(input.value) || 1;
+    const stock = await obtenerStock(id);
+
+    const mensaje = input.parentElement.querySelector(".stock-error");
+
+    if (valor > stock) {
+        input.value = stock;
+        item.cantidad = stock;
+
+        mensaje.classList.remove("d-none");
+
+        setTimeout(() => mensaje.classList.add("d-none"), 2000);
+
+    } else {
+        item.cantidad = valor;
+        mensaje.classList.add("d-none");
+    }
+
+    calcularTotales();
+}
+
+// ================= MENSAJE =================
+function mostrarMensajeStock(productId) {
+
+    document.querySelectorAll(".input-cantidad").forEach(input => {
+
+        if (parseInt(input.dataset.id) === productId) {
+
+            const mensaje = input.parentElement.querySelector(".stock-error");
+
+            mensaje.classList.remove("d-none");
+
+            setTimeout(() => {
+                mensaje.classList.add("d-none");
+            }, 2000);
+        }
+    });
+}
 
 async function buscarCliente() {
     const ced = cedulaInput.value.trim();
