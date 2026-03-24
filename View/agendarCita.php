@@ -324,9 +324,12 @@ unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
 </div>
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
+<script>
+    flatpickr.localize(flatpickr.l10ns.es);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 <script src="/assets/js/cita.js"></script>
 
 <script>
