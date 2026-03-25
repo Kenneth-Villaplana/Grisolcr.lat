@@ -3441,6 +3441,49 @@ footer {
     }
 }
 /**/
+/* MENSAJES MODERNOS */
+.mensaje-sistema {
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn .3s ease;
+}
+
+.mensaje-success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.mensaje-error {
+    background: #fef2f2;
+    color: #7f1d1d;
+    border: 1px solid #ef4444;
+}
+
+.mensaje-warning {
+    background: #fffbeb;
+    color: #78350f;
+    border: 1px solid #f59e0b;
+}
+
+.mensaje-info {
+    background: #eff6ff;
+    color: #1e3a8a;
+    border: 1px solid #3b82f6;
+}
+
+.mensaje-sistema a {
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /*agregar expediente*/
         .expediente-header {
