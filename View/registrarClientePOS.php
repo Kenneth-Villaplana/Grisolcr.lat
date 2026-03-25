@@ -136,6 +136,23 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 <?php IncluirScripts(); ?>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const cedField = document.getElementById("Cedula");
+    if (!cedField) return;
+
+    const ced = cedField.value.trim();
+
+    const esperar = setInterval(() => {
+        if (typeof ConsultarNombre === "function") {
+            clearInterval(esperar);
+            if (ced.length >= 9) {
+                setTimeout(() => ConsultarNombre(), 200);
+            }
+        }
+    }, 100);
+});
+</script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     const cedulaInput = document.getElementById('Cedula');
 
