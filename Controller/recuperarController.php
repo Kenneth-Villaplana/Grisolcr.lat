@@ -16,7 +16,7 @@ function cargarConfigMail(): array
     return is_array($config) ? $config : [];
 }
 
-// Si alguien abre el controller por URL en GET, lo mandamos al formulario
+
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: ../View/recuperarCuenta.php");
     exit;
@@ -92,7 +92,7 @@ $mensaje = "
 
 require_once __DIR__ . '/../assets/vendor/php-email-form/sendEmail.php';
 
-// sendEmail leerá el mail.json, por eso aquí pasamos null
+// sendEmail leerá el mail.json, 
 $resultado = sendEmail(null, null, $correo, $asunto, $mensaje);
 
 if ($resultado === true) {
