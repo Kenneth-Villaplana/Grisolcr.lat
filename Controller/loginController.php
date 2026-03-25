@@ -88,7 +88,7 @@ if (isset($_POST["btnRegistrarPaciente"])) {
             }
 
             if ($_POST["origen"] === "EXPEDIENTES") {
-                header("Location: /View/expedientes.php?cedula=" . urlencode($cedula));
+                header("Location: /View/historialExpedientes.php?cedula=" . urlencode($cedula));
                 exit;
             }
             
