@@ -75,10 +75,23 @@ if (isset($_POST["btnRegistrarPaciente"])) {
             $_SESSION["txtMensaje"] = "Paciente registrado con éxito";
             $_SESSION["registroExitoso"] = true;
 
-            if (isset($_POST["origen"]) && $_POST["origen"] === "POS") {
+          
+            //  Redirect dinámico 
+           if (!empty($_POST["redirect"])) {
+                header("Location: " . $_POST["redirect"] . "?cedula=" . urlencode($cedula));
+                exit;
+            }
+
+            if ($_POST["origen"] === "POS") {
                 header("Location: /View/puntoVenta.php?cedula=" . urlencode($cedula));
                 exit;
             }
+
+            if ($_POST["origen"] === "EXPEDIENTES") {
+                header("Location: /View/expedientes.php?cedula=" . urlencode($cedula));
+                exit;
+            }
+            
 
         } else {
 
