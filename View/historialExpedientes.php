@@ -70,6 +70,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
                 </button>
             </div>
 
+            <div id="mensajeSistema" class="col-12 mt-3"></div>
             <div id="resultado" class="col-12 mt-4"></div>
 
             
