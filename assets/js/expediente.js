@@ -72,7 +72,7 @@ async function buscarPaciente() {
             "error",
             `
             <div class="text-center mt-3">
-                <a href="/View/registrarClientePOS.php?cedula=${encodeURIComponent(cedula)}" 
+                <a href="/View/registrarClientePOS.php?cedula=${encodeURIComponent(cedula)}&origen=EXPEDIENTES" 
                 class="btn btn-inv-primary px-4">
                     <i class="bi bi-person-plus"></i> Registrar Paciente
                 </a>

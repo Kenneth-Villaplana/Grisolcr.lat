@@ -2,7 +2,9 @@
 include_once 'layout.php';
 include_once __DIR__ . '/Controller/loginController.php';
 
+$origen = $_GET['origen'] ?? 'POS';
 $cedulaPrefill = $_GET['cedula'] ?? '';
+$redirect = $_GET['redirect'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +25,15 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 <div class="container">
 
     <div class="d-flex justify-content-end mt-5 mb-3">
-        <a href="puntoVenta.php" class="btn btn-back-custom">
+        <?php if ($origen === 'EXPEDIENTES'): ?>
+            <a href="expedientes.php" class="btn btn-back-custom">
                 <i class="bi bi-arrow-left"></i> Volver
-        </a>
+            </a>
+        <?php else: ?>
+            <a href="puntoVenta.php" class="btn btn-back-custom">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        <?php endif; ?>
     </div>
 
     <!-- ===== TARJETA COMPACTA DE REGISTRO ===== -->
@@ -42,19 +50,19 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 
             <form method="POST">
 
-                <input type="hidden" name="origen" value="POS">
+                <input type="hidden" name="origen" value="<?= $origen ?>">
+                <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
 
                 <!-- CÉDULA -->
-                <div class="mb-3">
+                 <div class="mb-3">
                     <label class="form-label fw-semibold">Cédula</label>
                     <input type="text" 
                         class="form-control"
                         id="Cedula"
                         name="Cedula"
                         value="<?= htmlspecialchars($cedulaPrefill) ?>"
-                        onkeyup="ConsultarNombre()"
                         required
-                        readonly >
+                        readonly>
                 </div>
 
                 <div class="row">
@@ -134,7 +142,6 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 </div>
 
 <?php IncluirScripts(); ?>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -143,65 +150,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!cedulaInput) return;
 
-    //cargado automatico
-    const params = new URLSearchParams(window.location.search);
-    const cedulaURL = params.get("cedula");
+//formatear la cedula
+    const formatearCedula = () => {
+        let valor = cedulaInput.value.replace(/\D/g, '');
 
-    if (cedulaURL) {
-        cedulaInput.value = cedulaURL;
+        if (valor.length > 9) valor = valor.substring(0, 9);
 
-        
-        cedulaInput.dispatchEvent(new Event("input"));
+        let f = '';
+        if (valor.length > 0) f = valor.substring(0,1);
+        if (valor.length >= 2) f += '-' + valor.substring(1,5);
+        if (valor.length >= 6) f += '-' + valor.substring(5,9);
 
-        // Focus automático
-        cedulaInput.focus();
-    }
+        cedulaInput.value = f;
+    };
 
-    //formato -
-    cedulaInput.addEventListener("input", function () {
+    formatearCedula();
 
-        let valor = this.value.replace(/\D/g, '');
+    //coonsultar nombre
+    let intentos = 0;
+    const intervalo = setInterval(() => {
 
-        if (valor.length > 9) {
-            valor = valor.substring(0, 9);
-        }
-
-        let formateado = '';
-
-        if (valor.length > 0) {
-            formateado = valor.substring(0, 1);
-        }
-        if (valor.length >= 2) {
-            formateado += '-' + valor.substring(1, 5);
-        }
-        if (valor.length >= 6) {
-            formateado += '-' + valor.substring(5, 9);
-        }
-
-        this.value = formateado;
-    });
-
-   //consultar nombre
-    const intentarConsulta = () => {
         const ced = cedulaInput.value.replace(/\D/g, '');
 
         if (typeof ConsultarNombre === "function" && ced.length >= 9) {
-            setTimeout(() => ConsultarNombre(), 200);
-            return true;
-        }
-        return false;
-    };
 
-    // Intenta varias veces (por si el script carga después)
-    let intentos = 0;
-    const intervalo = setInterval(() => {
-        if (intentarConsulta() || intentos > 10) {
             clearInterval(intervalo);
+
+            setTimeout(() => {
+                ConsultarNombre();
+            }, 200);
         }
+
+        if (intentos > 10) clearInterval(intervalo);
         intentos++;
+
     }, 100);
 
-    //limpia antes de enviar
+  //limpiar
     if (form) {
         form.addEventListener("submit", function () {
             cedulaInput.value = cedulaInput.value.replace(/\D/g, '');
