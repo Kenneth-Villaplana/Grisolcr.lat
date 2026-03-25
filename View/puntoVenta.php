@@ -235,23 +235,23 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 window.productos = <?php echo json_encode($productos, JSON_UNESCAPED_UNICODE); ?>;
 </script>
 
+<?php if (isset($_GET['cedula'])): ?>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    const cedulaGET = "<?= isset($_GET['cedula']) ? $_GET['cedula'] : '' ?>";
-    const input = document.getElementById("cedulaCliente");
+    const cedula = "<?= $_GET['cedula'] ?>";
 
-    console.log("GET detectado:", cedulaGET);
-
-    if (cedulaGET !== "" && input) {
-        input.value = cedulaGET;
-
-        setTimeout(() => {
-            buscarCliente();
-        }, 200);
+    if (cedulaInput) {
+        cedulaInput.value = cedula;
     }
+
+    if (typeof buscarCliente === "function") {
+        setTimeout(() => buscarCliente(), 300);
+    }
+
 });
 </script>
+<?php endif; ?>
 
 <script src="../assets/js/puntoVenta.js?v=<?= time(); ?>"></script>
 

@@ -428,9 +428,11 @@ async function buscarCliente() {
         // ocultar teléfono
         document.getElementById("telefonoClienteDiv").style.display = "none";
 
+        sessionStorage.removeItem("clientePOS");
+
         return;
     }
-
+try{
     const res = await fetch(CONTROLLER_PATH, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -454,6 +456,7 @@ async function buscarCliente() {
         telDiv.style.display = "block";
         telInput.value = data.Telefono || "";
 
+          sessionStorage.setItem("clientePOS", JSON.stringify(data));
         return;
     }
 
@@ -477,11 +480,15 @@ async function buscarCliente() {
     }
 
     nombreClienteSpan.innerHTML = `
-        <span class="fw-semibold text-primary">${nombreAPI || "Cliente no encontrado"}</span><br>
-        <button class="btn btn-sm btn-outline-primary mt-2" onclick="registrarClientePOS()">
-            Registrar cliente
-        </button>
-    `;
+            <span class="fw-semibold text-primary">
+                ${nombreAPI || "Cliente no encontrado"}
+            </span><br>
+
+            <a href="/View/registrarClientePOS.php?cedula=${encodeURIComponent(ced)}&origen=POS"
+               class="btn btn-sm btn-outline-primary mt-2">
+                Registrar cliente
+            </a>
+        `;
 
     nombreClienteSpan.dataset.id = "";
     nombreClienteSpan.dataset.nombre = nombreAPI;
@@ -492,6 +499,16 @@ async function buscarCliente() {
 
     telDiv.style.display = "block";
     telInput.value = "";
+     sessionStorage.removeItem("clientePOS");
+
+    } catch (error) {
+
+        console.error("Error buscando cliente:", error);
+
+        nombreClienteSpan.textContent = "Error al buscar cliente";
+
+        sessionStorage.removeItem("clientePOS");
+    }
 }
 
 
