@@ -157,7 +157,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
 
+    const form = document.querySelector('form');
+    const cedulaInput = document.getElementById('Cedula');
+
+    if (form && cedulaInput) {
+        form.addEventListener('submit', function () {
+
+           
+            cedulaInput.value = cedulaInput.value.replace(/\D/g, '');
+
+        });
+    }
+
+});
+</script>
 
 </body>
 </html>
