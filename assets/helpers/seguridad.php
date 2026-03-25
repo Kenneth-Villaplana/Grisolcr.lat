@@ -4,137 +4,81 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// ===============================
-// MAPEO DE PERMISOS
-// ===============================
+
 function obtenerPermisosVista($vista) {
 
     return [
 
-        // ===============================
-        // PÚBLICO
-        // ===============================
+        // públicas
         'index.php' => ['publico' => true],
         'about.php' => ['publico' => true],
         'anteojos.php' => ['publico' => true],
         'iniciarSesion.php' => ['publico' => true],
 
-        // ===============================
-        // PACIENTE
-        // ===============================
-        'agendarCita.php' => ['roles' => ['Paciente']],
-        'misRecetas.php' => ['roles' => ['Paciente']],
-        'verReceta.php' => ['roles' => ['Paciente']],
+        // requieren login 
+        'agendarCita.php' => ['login' => true],
+        'editarCita.php' => ['login' => true],
+        'misRecetas.php' => ['login' => true],
+        'verReceta.php' => ['login' => true],
 
-        
-        'editarCita.php' => [
-            'roles' => ['Paciente', 'Empleado'],
-            'empleadoRoles' => [1,2,3,4]
-        ],
+        'reportes.php' => ['login' => true],
+        'inventario.php' => ['login' => true],
+        'facturacion.php' => ['login' => true],
+        'historialCierreCaja.php' => ['login' => true],
+        'puntoVenta.php' => ['login' => true],
+        'cierreCaja.php' => ['login' => true],
 
-        // ===============================
-        // EMPLEADOS
-        // ===============================
-        'reportes.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
-        'inventario.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
-        'facturacion.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
-        'historialCierreCaja.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
-        'puntoVenta.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
-        'cierreCaja.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'editarProducto.php' => ['login' => true],
+        'agregarProducto.php' => ['login' => true],
 
-        // ===============================
-        // INVENTARIO (HIJOS)
-        // ===============================
-        'editarProducto.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
-        'agregarProducto.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'registrarClientePOS.php' => ['login' => true],
 
-        // ===============================
-        // FACTURACIÓN / CLIENTES
-        // ===============================
-        'registrarClientePOS.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,3,4]],
+        'historialExpedientes.php' => ['login' => true],
+        'historialExpedientePaciente.php' => ['login' => true],
+        'expedienteDigital.php' => ['login' => true],
+        'verExpediente.php' => ['login' => true],
+        'recetaParaDoctor.php' => ['login' => true],
 
-        // ===============================
-        // DOCTOR
-        // ===============================
-        'historialExpedientes.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,3,4]],
-        'historialExpedientePaciente.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,3,4]],
-        'expedienteDigital.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [3]],
-        'verExpediente.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [3]],
-        'recetaParaDoctor.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [3]],
+        'personal.php' => ['login' => true],
+        'editarPersonal.php' => ['login' => true],
+        'agregarPersonal.php' => ['login' => true],
 
-        // ===============================
-        // ADMIN
-        // ===============================
-        'personal.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1]],
-        'editarPersonal.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1]],
-        'agregarPersonal.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1]],
-
-        // ===============================
-        // PERFIL
-        // ===============================
         'editarPerfil.php' => ['login' => true],
-
     ];
 }
 
-// ===============================
-// VALIDACIÓN DE ACCESO
-// ===============================
+
+// VALIDACIÓN SIMPLE (SIN ROLES)
 function validarAccesoAutomatico() {
 
     $archivoActual = basename($_SERVER['PHP_SELF']);
     $permisos = obtenerPermisosVista($archivoActual);
 
-    // Si no existe en el mapa → bloquear
+    // ❌ No existe → bloquear
     if (!isset($permisos[$archivoActual])) {
         mostrarAccesoDenegado();
     }
 
     $config = $permisos[$archivoActual];
 
-    // Público
+    // Público → dejar pasar
     if (!empty($config['publico'])) {
         return;
     }
 
-    $rol = $_SESSION['RolID'] ?? null;
-    $empleadoRol = $_SESSION['EmpleadoRol'] ?? null;
+    // Requiere login
+    if (!empty($config['login'])) {
 
-    // Solo login requerido
-    if (isset($config['login'])) {
-        if (!$rol) {
+        if (!isset($_SESSION['RolID'])) {
             mostrarAccesoDenegado();
         }
+
         return;
-    }
-
-    // ===============================
-    // VALIDAR ROLES (MULTIROL)
-    // ===============================
-    if (isset($config['roles'])) {
-
-        if (!in_array($rol, $config['roles'])) {
-            mostrarAccesoDenegado();
-        }
-
-    } else {
-        mostrarAccesoDenegado();
-    }
-
-    // ===============================
-    // VALIDAR ROL INTERNO EMPLEADO
-    // ===============================
-    if ($rol === 'Empleado' && isset($config['empleadoRoles'])) {
-
-        if (!in_array($empleadoRol, $config['empleadoRoles'])) {
-            mostrarAccesoDenegado();
-        }
     }
 }
 
-// ===============================
-// UI ACCESO DENEGADO
-// ===============================
+
+// UI 
 function mostrarAccesoDenegado() {
 
     http_response_code(403);
@@ -177,4 +121,7 @@ function mostrarAccesoDenegado() {
 }
 
 
+// 🔥 EJECUTAR
 validarAccesoAutomatico();
+
+?>
