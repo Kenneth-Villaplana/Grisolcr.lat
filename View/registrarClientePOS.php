@@ -1,6 +1,6 @@
 <?php 
 include_once 'layout.php';
-include_once __DIR__ . '/Controller/loginController.php';
+include_once __DIR__ . '/../Controller/loginController.php';
 
 $origen = $_GET['origen'] ?? 'POS';
 $cedulaPrefill = $_GET['cedula'] ?? '';
@@ -26,7 +26,7 @@ $redirect = $_GET['redirect'] ?? '';
 
     <div class="d-flex justify-content-end mt-5 mb-3">
         <?php if ($origen === 'EXPEDIENTES'): ?>
-            <a href="expedientes.php" class="btn btn-back-custom">
+            <a href="historialExpedientes.php" class="btn btn-back-custom">
                 <i class="bi bi-arrow-left"></i> Volver
             </a>
         <?php else: ?>
@@ -51,7 +51,7 @@ $redirect = $_GET['redirect'] ?? '';
             <form method="POST">
 
                 <input type="hidden" name="origen" value="<?= $origen ?>">
-                <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
+                <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect ?: '') ?>">
 
                 <!-- CÉDULA -->
                  <div class="mb-3">
@@ -164,27 +164,33 @@ document.addEventListener("DOMContentLoaded", function () {
         cedulaInput.value = f;
     };
 
-    formatearCedula();
+  formatearCedula();
 
-    //coonsultar nombre
+
+const ejecutarConsulta = () => {
+
+    const ced = cedulaInput.value.replace(/\D/g, '');
+
+    if (ced.length >= 9 && typeof ConsultarNombre === "function") {
+        ConsultarNombre();
+        return true;
+    }
+
+        return false;
+    };
+
+
     let intentos = 0;
+
     const intervalo = setInterval(() => {
 
-        const ced = cedulaInput.value.replace(/\D/g, '');
-
-        if (typeof ConsultarNombre === "function" && ced.length >= 9) {
-
+        if (ejecutarConsulta() || intentos > 15) {
             clearInterval(intervalo);
-
-            setTimeout(() => {
-                ConsultarNombre();
-            }, 200);
         }
 
-        if (intentos > 10) clearInterval(intervalo);
         intentos++;
 
-    }, 100);
+    }, 120);
 
   //limpiar
     if (form) {
