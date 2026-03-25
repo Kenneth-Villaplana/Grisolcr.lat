@@ -3,9 +3,9 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/../Model/baseDatos.php';
 
 try {
-    $cn = AbrirBD(); // usa aquí tu función real de conexión
+    $cn = AbrirBD(); 
 
-    // TOP 10 productos más vendidos (usa SP, ver más abajo)
+    
     $rTop = mysqli_query($cn, "CALL ObtenerTopProductos()");
     if (!$rTop) {
         throw new Exception('Error en sp_top_productos: ' . mysqli_error($cn));
@@ -19,10 +19,10 @@ try {
             'total'    => (float)$row['total_vendido'],
         ];
     }
-    // Consumir posibles resultsets extra de CALL
+
     mysqli_next_result($cn);
 
-    // Ventas mensuales (unidades + total) – también usando SP
+    // Ventas mensuales (unidades + total) 
     $rMeses = mysqli_query($cn, "CALL ObtenerVentasMensuales()");
     if (!$rMeses) {
         throw new Exception('Error en sp_ventas_mensuales: ' . mysqli_error(mysql: $cn));

@@ -1,9 +1,6 @@
 <?php
 include_once __DIR__ . '/../Model/baseDatos.php';
 
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-ini_set('display_errors', 0);
-
 class FacturacionController {
 
     private $conn;
@@ -167,7 +164,7 @@ class FacturacionController {
             $stmt->bind_param("i", $facturaId);
             $stmt->execute();
 
-            /* ENCABEZADO */
+            
 
             $res1 = $stmt->get_result();
             $enc = $res1->fetch_assoc();
