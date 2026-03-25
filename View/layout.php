@@ -111,51 +111,59 @@ function MostrarMenu() {
 
 function MostrarFooter() {
     echo '
-<footer class="bg-dark text-light py-2 mt-auto" style="font-size: 0.85rem;">
+<footer class="bg-dark text-light mt-auto py-3" style="font-size: 0.85rem;">
     <div class="container">
 
-        <div class="row text-center text-md-start align-items-center g-2">
+        <div class="row text-center text-md-start align-items-center gy-2">
 
+            <!-- Ubicación -->
             <div class="col-md-4">
-                <strong class="text-uppercase small">Sucursal</strong><br>
-                <a href="https://maps.app.goo.gl/8xCe7rQRBhBzRZsr7" 
-                   class="text-light text-decoration-none small">
-                   Ver ubicación
-                </a>
+                <div class="d-flex flex-column align-items-center align-items-md-start">
+                    <span class="fw-semibold text-uppercase small mb-1">Ubicación</span>
+                    <a href="https://maps.app.goo.gl/8xCe7rQRBhBzRZsr7" 
+                       class="text-light text-decoration-none">
+                        <i class="bi bi-geo-alt-fill me-1 text-info"></i> Ver en mapa
+                    </a>
+                </div>
             </div>
 
+            <!-- Redes -->
             <div class="col-md-4">
-                <strong class="text-uppercase small">Redes</strong><br>
-                
-                <a href="https://www.instagram.com/opticagrisol?igsh=cm5zMXprZmphczAz" 
-                   class="text-light me-2">
-                    <i class="bi bi-instagram"></i>
-                </a>
+                <div class="text-center">
+                    <span class="fw-semibold text-uppercase small d-block mb-1">Síguenos</span>
 
-                <a href="https://www.facebook.com/share/19kUWTvjNF/?mibextid=wwXIfr" 
-                   class="text-light me-2">
-                    <i class="bi bi-facebook"></i>
-                </a>
+                    <a href="https://www.instagram.com/opticagrisol?igsh=cm5zMXprZmphczAz" 
+                       class="text-light fs-5 me-3">
+                        <i class="bi bi-instagram"></i>
+                    </a>
 
-                <a href="https://wa.me/50612345678" 
-                   class="text-light">
-                    <i class="bi bi-whatsapp"></i>
-                </a>
+                    <a href="https://www.facebook.com/share/19kUWTvjNF/?mibextid=wwXIfr" 
+                       class="text-light fs-5 me-3">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="https://wa.me/50612345678" 
+                       class="text-light fs-5">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
             </div>
 
+            <!-- Contacto -->
             <div class="col-md-4">
-                <strong class="text-uppercase small">Contacto</strong><br>
-                <span class="small">8813-9883</span> · 
-                <span class="small">2592-5460</span><br>
-                <span class="small">opticagrisol@gmail.com</span>
+                <div class="d-flex flex-column align-items-center align-items-md-end">
+                    <span class="fw-semibold text-uppercase small mb-1">Contacto</span>
+                    <span>📞 8813-9883 · 2592-5460</span>
+                    <span>✉️ opticagrisol@gmail.com</span>
+                </div>
             </div>
 
         </div>
 
         <hr class="border-secondary my-2">
 
-        <div class="text-center small">
-            &copy; <script>document.write(new Date().getFullYear());</script> Óptica Grisol
+        <div class="text-center small text-secondary">
+            © '.date("Y").' Óptica Grisol
         </div>
 
     </div>
