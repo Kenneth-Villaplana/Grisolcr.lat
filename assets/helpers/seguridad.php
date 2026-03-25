@@ -4,72 +4,88 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-//mapeo de accesos
-
+// ===============================
+// MAPEO DE PERMISOS
+// ===============================
 function obtenerPermisosVista($vista) {
 
     return [
 
-        //vstas publicas
+        // ===============================
+        // PÚBLICO
+        // ===============================
         'index.php' => ['publico' => true],
         'about.php' => ['publico' => true],
         'anteojos.php' => ['publico' => true],
         'iniciarSesion.php' => ['publico' => true],
 
-       //vistas de pacientes
-        'agendarCita.php' => ['rol' => 'Paciente'],
-        'editarCita.php' => ['rol' => 'Paciente'],
-        'misRecetas.php' => ['rol' => 'Paciente'],
-        'verReceta.php' => ['rol' => 'Paciente'],
+        // ===============================
+        // PACIENTE
+        // ===============================
+        'agendarCita.php' => ['roles' => ['Paciente']],
+        'misRecetas.php' => ['roles' => ['Paciente']],
+        'verReceta.php' => ['roles' => ['Paciente']],
 
         
-        //vistas de empleados
-        'reportes.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
-        'inventario.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
-        'facturacion.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
-        'historialCierreCaja.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
-        'puntoVenta.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
-        'cierreCaja.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
+        'editarCita.php' => [
+            'roles' => ['Paciente', 'Empleado'],
+            'empleadoRoles' => [1,2,3,4]
+        ],
 
-        //hijos de inventario
-        'editarProducto.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
-        'agregarProducto.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4]],
+        // ===============================
+        // EMPLEADOS
+        // ===============================
+        'reportes.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'inventario.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'facturacion.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'historialCierreCaja.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'puntoVenta.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'cierreCaja.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
 
-        //hijo de facturacion y expediente
-        'registrarClientePOS.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1,2,4,3]], // también doctor
+        // ===============================
+        // INVENTARIO (HIJOS)
+        // ===============================
+        'editarProducto.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
+        'agregarProducto.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,4]],
 
-       //vistas de doctor
-        'historialExpedientes.php' => ['rol' => 'Empleado', 'empleadoRoles' => [3,1,2,4]],
-        'historialExpedientePaciente.php' => ['rol' => 'Empleado', 'empleadoRoles' => [3,1,2,4]],
-        'expedienteDigital.php' => ['rol' => 'Empleado', 'empleadoRoles' => [3]],
-        'verExpediente.php' => ['rol' => 'Empleado', 'empleadoRoles' => [3]],
-        'recetaParaDoctor.php' => ['rol' => 'Empleado', 'empleadoRoles' => [3]],
+        // ===============================
+        // FACTURACIÓN / CLIENTES
+        // ===============================
+        'registrarClientePOS.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,3,4]],
 
-       
-        //citas de empleado
-        'editarCita.php' => ['rol' => 'Empleado', 'empleadoRoles' => [3,1,2,4]],
+        // ===============================
+        // DOCTOR
+        // ===============================
+        'historialExpedientes.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,3,4]],
+        'historialExpedientePaciente.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1,2,3,4]],
+        'expedienteDigital.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [3]],
+        'verExpediente.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [3]],
+        'recetaParaDoctor.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [3]],
 
-        //vistas exclusivas de admi
-        'personal.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1]],
-        'editarPersonal.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1]],
-        'agregarPersonal.php' => ['rol' => 'Empleado', 'empleadoRoles' => [1]],
+        // ===============================
+        // ADMIN
+        // ===============================
+        'personal.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1]],
+        'editarPersonal.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1]],
+        'agregarPersonal.php' => ['roles' => ['Empleado'], 'empleadoRoles' => [1]],
 
-        
-        //vista de perfil logeado
+        // ===============================
+        // PERFIL
+        // ===============================
         'editarPerfil.php' => ['login' => true],
 
     ];
 }
 
-//validar acceso automatico
-
+// ===============================
+// VALIDACIÓN DE ACCESO
+// ===============================
 function validarAccesoAutomatico() {
 
     $archivoActual = basename($_SERVER['PHP_SELF']);
-
     $permisos = obtenerPermisosVista($archivoActual);
 
-    // Si no está definido → bloquear
+    // Si no existe en el mapa → bloquear
     if (!isset($permisos[$archivoActual])) {
         mostrarAccesoDenegado();
     }
@@ -77,7 +93,7 @@ function validarAccesoAutomatico() {
     $config = $permisos[$archivoActual];
 
     // Público
-    if (isset($config['publico']) && $config['publico']) {
+    if (!empty($config['publico'])) {
         return;
     }
 
@@ -92,21 +108,33 @@ function validarAccesoAutomatico() {
         return;
     }
 
-    // Validar rol base
-    if (!isset($config['rol']) || $rol !== $config['rol']) {
+    // ===============================
+    // VALIDAR ROLES (MULTIROL)
+    // ===============================
+    if (isset($config['roles'])) {
+
+        if (!in_array($rol, $config['roles'])) {
+            mostrarAccesoDenegado();
+        }
+
+    } else {
         mostrarAccesoDenegado();
     }
 
-    // Validar rol interno empleado
+    // ===============================
+    // VALIDAR ROL INTERNO EMPLEADO
+    // ===============================
     if ($rol === 'Empleado' && isset($config['empleadoRoles'])) {
+
         if (!in_array($empleadoRol, $config['empleadoRoles'])) {
             mostrarAccesoDenegado();
         }
     }
 }
 
-//ui 
-
+// ===============================
+// UI ACCESO DENEGADO
+// ===============================
 function mostrarAccesoDenegado() {
 
     http_response_code(403);
@@ -149,7 +177,4 @@ function mostrarAccesoDenegado() {
 }
 
 
-
 validarAccesoAutomatico();
-
-?>
