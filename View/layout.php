@@ -1,6 +1,4 @@
 <?php
-include_once __DIR__ . '/../assets/helpers/seguridad.php';
-validarAccesoAutomatico();
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
