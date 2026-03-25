@@ -114,12 +114,17 @@ function MostrarFooter() {
 <footer class="bg-dark text-light mt-auto py-3" style="font-size: 0.85rem;">
     <div class="container">
 
-        <div class="row text-center text-md-start align-items-center gy-2">
+        <div class="row text-center align-items-center gy-2">
 
             <!-- Ubicación -->
             <div class="col-md-4">
-                <div class="d-flex flex-column align-items-center align-items-md-start">
-                    <span class="fw-semibold text-uppercase small mb-1">Ubicación</span>
+                <div class="text-center">
+                    <span class="fw-semibold text-uppercase small d-block mb-1">Ubicación</span>
+
+                    <span class="d-block small text-secondary mb-1">
+                        Avenida 1A, Cartago Province, Cartago
+                    </span>
+
                     <a href="https://maps.app.goo.gl/8xCe7rQRBhBzRZsr7" 
                        class="text-light text-decoration-none">
                         <i class="bi bi-geo-alt-fill me-1 text-info"></i> Ver en mapa
@@ -151,10 +156,10 @@ function MostrarFooter() {
 
             <!-- Contacto -->
             <div class="col-md-4">
-                <div class="d-flex flex-column align-items-center align-items-md-end">
-                    <span class="fw-semibold text-uppercase small mb-1">Contacto</span>
-                    <span>📞 8813-9883 · 2592-5460</span>
-                    <span>✉️ opticagrisol@gmail.com</span>
+                <div class="text-center">
+                    <span class="fw-semibold text-uppercase small d-block mb-1">Contacto</span>
+                    <span class="d-block">📞 8813-9883 · 2592-5460</span>
+                    <span class="d-block">✉️ opticagrisol@gmail.com</span>
                 </div>
             </div>
 
