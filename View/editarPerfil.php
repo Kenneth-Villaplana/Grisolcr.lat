@@ -101,49 +101,6 @@ include('layout.php');
 
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const cedulaInput = document.getElementById('Cedula');
 
-    cedulaInput.addEventListener('input', function () {
-        let valor = this.value.replace(/\D/g, ''); // solo números
-
-        if (valor.length > 9) {
-            valor = valor.substring(0, 9);
-        }
-
-        let formateado = '';
-
-        if (valor.length > 0) {
-            formateado = valor.substring(0, 1);
-        }
-        if (valor.length >= 2) {
-            formateado += '-' + valor.substring(1, 5);
-        }
-        if (valor.length >= 6) {
-            formateado += '-' + valor.substring(5, 9);
-        }
-
-        this.value = formateado;
-    });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    const form = document.querySelector('form');
-    const cedulaInput = document.getElementById('Cedula');
-
-    if (form && cedulaInput) {
-        form.addEventListener('submit', function () {
-
-           
-            cedulaInput.value = cedulaInput.value.replace(/\D/g, '');
-
-        });
-    }
-
-});
-</script>
 </body>
 </html>
