@@ -137,27 +137,30 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const cedField = document.getElementById("Cedula");
-    if (!cedField) return;
 
-    const ced = cedField.value.trim();
+    const cedulaInput = document.getElementById("Cedula");
+    const form = document.querySelector("form");
 
-    const esperar = setInterval(() => {
-        if (typeof ConsultarNombre === "function") {
-            clearInterval(esperar);
-            if (ced.length >= 9) {
-                setTimeout(() => ConsultarNombre(), 200);
-            }
-        }
-    }, 100);
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const cedulaInput = document.getElementById('Cedula');
+    if (!cedulaInput) return;
 
-    cedulaInput.addEventListener('input', function () {
-        let valor = this.value.replace(/\D/g, ''); // solo números
+    //cargado automatico
+    const params = new URLSearchParams(window.location.search);
+    const cedulaURL = params.get("cedula");
+
+    if (cedulaURL) {
+        cedulaInput.value = cedulaURL;
+
+        
+        cedulaInput.dispatchEvent(new Event("input"));
+
+        // Focus automático
+        cedulaInput.focus();
+    }
+
+    //formato -
+    cedulaInput.addEventListener("input", function () {
+
+        let valor = this.value.replace(/\D/g, '');
 
         if (valor.length > 9) {
             valor = valor.substring(0, 9);
@@ -177,20 +180,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
         this.value = formateado;
     });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
 
-    const form = document.querySelector('form');
-    const cedulaInput = document.getElementById('Cedula');
+   //consultar nombre
+    const intentarConsulta = () => {
+        const ced = cedulaInput.value.replace(/\D/g, '');
 
-    if (form && cedulaInput) {
-        form.addEventListener('submit', function () {
+        if (typeof ConsultarNombre === "function" && ced.length >= 9) {
+            setTimeout(() => ConsultarNombre(), 200);
+            return true;
+        }
+        return false;
+    };
 
-           
+    // Intenta varias veces (por si el script carga después)
+    let intentos = 0;
+    const intervalo = setInterval(() => {
+        if (intentarConsulta() || intentos > 10) {
+            clearInterval(intervalo);
+        }
+        intentos++;
+    }, 100);
+
+    //limpia antes de enviar
+    if (form) {
+        form.addEventListener("submit", function () {
             cedulaInput.value = cedulaInput.value.replace(/\D/g, '');
-
         });
     }
 
