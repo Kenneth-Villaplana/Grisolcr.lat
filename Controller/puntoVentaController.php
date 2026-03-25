@@ -20,6 +20,13 @@ class PuntoVentaController {
     public function getProductos() {
         try {
             return $this->puntoVentaModel->obtenerProductos();
+
+            $productosFiltrados = array_filter($productos, function($p) {
+            return isset($p['Cantidad']) && intval($p['Cantidad']) > 0;
+        });
+
+        return array_values($productosFiltrados);
+        
         } catch (\Throwable $e) {
             return ['error' => 'Error al obtener productos: '.$e->getMessage()];
         }
