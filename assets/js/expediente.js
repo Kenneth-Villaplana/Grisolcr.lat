@@ -22,33 +22,7 @@ function mostrarMensaje(mensaje, tipo = "info", extraHTML = "") {
 
 //solo para errores criticos
 function mostrarModal(titulo, mensaje, tipo = "info") {
-    const modalHtml = `
-        <div class="modal fade" id="modalPaciente" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content border-${tipo}">
-                    <div class="modal-header bg-${tipo} text-white">
-                        <h5 class="modal-title">${titulo}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        ${mensaje}
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    document.body.insertAdjacentHTML("beforeend", modalHtml);
-
-    const modal = new bootstrap.Modal(document.getElementById("modalPaciente"));
-    modal.show();
-
-    document.getElementById("modalPaciente").addEventListener("hidden.bs.modal", () => {
-        document.getElementById("modalPaciente").remove();
-    });
+    mostrarMensaje(`<strong>${titulo}:</strong> ${mensaje}`, tipo);
 }
 /* ============================================
    BUSCAR PACIENTE
@@ -128,7 +102,7 @@ async function buscarPaciente() {
 
             btnHistorial.href = `/Controller/historialExpedientePacienteController.php?PacienteId=${data.PacienteId}`;
             btnHistorial.style.display = 'block';
-
+ return;
         }
 
       //usuario sin paciente
@@ -174,10 +148,9 @@ async function buscarPaciente() {
     } catch (err) {
         console.error(err);
 
-        mostrarModal(
-            "Error del sistema",
-            "Ocurrió un error al buscar el paciente. Por favor intente nuevamente.",
-            "danger"
+        mostrarMensaje(
+            "Ocurrió un error al buscar el paciente. Intente nuevamente.",
+            "error"
         );
     }
 
