@@ -2,10 +2,25 @@
 const  PACIENTE_CONTROLLER= "/Controller/pacienteController.php";
 
 
-/* ============================================
-   MODAL HELPERS (Bootstrap 5)
-============================================ */
 
+function mostrarMensaje(mensaje, tipo = "info", extraHTML = "") {
+    const contenedor = document.getElementById("mensajeSistema");
+
+    contenedor.innerHTML = `
+        <div class="mensaje-sistema mensaje-${tipo}">
+            <div>
+                ${mensaje}
+                ${extraHTML}
+            </div>
+        </div>
+    `;
+
+    setTimeout(() => {
+        if (contenedor) contenedor.innerHTML = "";
+    }, 4000);
+}
+
+//solo para errores criticos
 function mostrarModal(titulo, mensaje, tipo = "info") {
     const modalHtml = `
         <div class="modal fade" id="modalPaciente" tabindex="-1">
@@ -35,7 +50,6 @@ function mostrarModal(titulo, mensaje, tipo = "info") {
         document.getElementById("modalPaciente").remove();
     });
 }
-
 /* ============================================
    BUSCAR PACIENTE
 ============================================ */
@@ -51,7 +65,7 @@ async function buscarPaciente() {
     resultadoDiv.innerHTML = '';
 
     if (!cedula) {
-        mostrarModal("Campo requerido", "Por favor ingrese una cédula.", "warning");
+        mostrarMensaje("Por favor ingrese una cédula.", "warning");
         return;
     }
 
@@ -76,19 +90,19 @@ async function buscarPaciente() {
             throw new Error("Respuesta no es JSON válido");
         }
 
-        /* =============================
-           CASO: ERROR CONTROLADO
-        ============================= */
+        //si paciente no existe
         if (data.error) {
-            mostrarModal(
-                "Paciente no encontrado",
+
+            mostrarMensaje(
+                data.error,
+                "error",
                 `
-                ${data.error}<br><br>
-                <a href="RegistrarPaciente.php" class="btn btn-success w-100">
-                    Registrar Paciente
-                </a>
-                `,
-                "danger"
+                <div class="mt-3">
+                    <a href="RegistrarPaciente.php" class="btn btn-success w-100">
+                        Registrar Paciente
+                    </a>
+                </div>
+                `
             );
             return;
         }
@@ -97,6 +111,8 @@ async function buscarPaciente() {
            CASO: PACIENTE EXISTE
         ============================= */
         if (data.PacienteId) {
+
+             mostrarMensaje("Paciente encontrado correctamente.", "success");
 
             resultadoDiv.innerHTML = `
                 <div class="alert alert-success">
@@ -113,21 +129,13 @@ async function buscarPaciente() {
             btnHistorial.href = `/Controller/historialExpedientePacienteController.php?PacienteId=${data.PacienteId}`;
             btnHistorial.style.display = 'block';
 
-            mostrarModal(
-                "Paciente encontrado",
-                `${data.nombre} ${data.apellido}`,
-                "success"
-            );
         }
 
-        /* =============================
-           CASO: USUARIO SIN PACIENTE
-        ============================= */
+      //usuario sin paciente
         else if (data.UsuarioId) {
 
-            mostrarModal(
-                "Usuario encontrado",
-                "Existe el usuario pero no tiene expediente. ¿Desea crearlo?",
+           mostrarMensaje(
+                "El usuario existe pero no tiene expediente. Puede crearlo.",
                 "warning"
             );
 
@@ -155,13 +163,12 @@ async function buscarPaciente() {
             };
 
             btnAgregar.style.display = 'block';
+                return;
         }
 
-        /* =============================
-           CASO: RESPUESTA VACÍA
-        ============================= */
+        //sin resultado
         else {
-            mostrarModal("Sin resultados", "No se encontró información.", "warning");
+                mostrarMensaje("No se encontró información.", "warning");
         }
 
     } catch (err) {
@@ -173,4 +180,5 @@ async function buscarPaciente() {
             "danger"
         );
     }
+
 }
