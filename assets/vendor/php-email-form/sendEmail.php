@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 function cargarConfigMailJson(): array
 {
-    $ruta = __DIR__ . '/../../../config/mail.json';
+    $ruta = '/var/www/html/config/mail.json';
 
     if (!file_exists($ruta)) {
         return [];
