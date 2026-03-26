@@ -3,11 +3,14 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+// ✅ Cargar PHPMailer manual (LOCAL)
+require_once __DIR__ . '/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/PHPMailer/src/SMTP.php';
 
 function cargarConfigMailJson(): array
 {
-    $ruta = '/var/www/html/config/mail.json';
+    $ruta = '/var/www/html/config/mail.json'; // ✅ ruta absoluta segura
 
     if (!file_exists($ruta)) {
         return [];
@@ -24,6 +27,7 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
     $mail = new PHPMailer(true);
     $config = cargarConfigMailJson();
 
+    // ✅ CONFIG
     $host       = $config['SMTP_HOST'] ?? 'mail.privateemail.com';
     $port       = (int)($config['SMTP_PORT'] ?? 587);
     $username   = $config['SMTP_USER'] ?? '';
@@ -33,6 +37,7 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
     $fromEmail  = $fromEmail ?: $username;
     $fromName   = $fromName ?: 'Óptica Grisol';
 
+    // Validaciones
     if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
         return "Mailer Error: Invalid FROM email";
     }
@@ -48,6 +53,7 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
     try {
         $mail->CharSet = 'UTF-8';
 
+        // SMTP
         $mail->isSMTP();
         $mail->Host       = $host;
         $mail->SMTPAuth   = true;
@@ -55,12 +61,14 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
         $mail->Password   = $password;
         $mail->Port       = $port;
 
+        // Seguridad
         if ($secure === 'ssl') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         } else {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         }
 
+        // Fix SSL (DigitalOcean)
         $mail->SMTPOptions = [
             'ssl' => [
                 'verify_peer'       => false,
@@ -69,9 +77,13 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
             ]
         ];
 
+        // Remitente
         $mail->setFrom($fromEmail, $fromName);
+
+        // Destinatario
         $mail->addAddress($destino);
 
+        // Contenido
         $mail->isHTML(true);
         $mail->Subject = $asunto;
         $mail->Body    = $mensajeHTML;
