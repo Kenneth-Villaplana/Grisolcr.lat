@@ -1,4 +1,9 @@
 <?php
+// MOSTRAR ERRORES (DEBUG)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 include_once __DIR__ . '/../Model/recuperarModel.php';
 
@@ -44,10 +49,10 @@ GuardarTokenRecuperacion($correo, $token);
 
 // Cargar configuración
 $configMail = cargarConfigMail();
-$base_url = rtrim($configMail['APP_URL'] ?? 'https://grisolcr.lat', '/');
+$base_url = rtrim($configMail['APP_URL'] ?? 'https://opticagrisol.com', '/');
 $enlace = $base_url . "/View/restablecerContrasenna.php?token=" . urlencode($token);
 
-$asunto = "Recuperación de Contraseña Optica Grisol";
+$asunto = "Recuperación de Contraseña Óptica Grisol";
 
 $nombre = htmlspecialchars($usuario['Nombre'] ?? '', ENT_QUOTES, 'UTF-8');
 $apellido = htmlspecialchars($usuario['Apellido'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -93,7 +98,13 @@ $mensaje = "
 require_once __DIR__ . '/../assets/vendor/php-email-form/sendEmail.php';
 
 // sendEmail leerá el mail.json, 
-$resultado = sendEmail(null, null, $correo, $asunto, $mensaje);
+$resultado = sendEmail(
+    'no-reponder@opticagrisol.com',
+    'Óptica Grisol',
+    $correo,
+    $asunto,
+    $mensaje
+);
 
 if ($resultado === true) {
     $_SESSION["txtMensaje"] = "Se ha enviado un enlace de recuperación a su correo.";
