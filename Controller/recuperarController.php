@@ -4,7 +4,7 @@ include_once __DIR__ . '/../Model/recuperarModel.php';
 
 function cargarConfigMail(): array
 {
-    $ruta = __DIR__ . '/../config/mail.json';
+    $ruta = __DIR__ . '/../config/mail.example.json';
 
     if (!file_exists($ruta)) {
         return [];
@@ -44,10 +44,10 @@ GuardarTokenRecuperacion($correo, $token);
 
 // Cargar configuración
 $configMail = cargarConfigMail();
-$base_url = rtrim($configMail['APP_URL'] ?? 'https://grisolcr.lat', '/');
+$base_url = rtrim($configMail['APP_URL'] ?? 'https://opticagrisol.com', '/');
 $enlace = $base_url . "/View/restablecerContrasenna.php?token=" . urlencode($token);
 
-$asunto = "Recuperación de Contraseña Optica Grisol";
+$asunto = "Recuperación de Contraseña Óptica Grisol";
 
 $nombre = htmlspecialchars($usuario['Nombre'] ?? '', ENT_QUOTES, 'UTF-8');
 $apellido = htmlspecialchars($usuario['Apellido'] ?? '', ENT_QUOTES, 'UTF-8');
