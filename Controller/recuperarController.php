@@ -93,7 +93,13 @@ $mensaje = "
 require_once __DIR__ . '/../assets/vendor/php-email-form/sendEmail.php';
 
 // sendEmail leerá el mail.json, 
-$resultado = sendEmail(null, null, $correo, $asunto, $mensaje);
+$resultado = sendEmail(
+    'no-reponder@opticagrisol.com',
+    'Óptica Grisol',
+    $correo,
+    $asunto,
+    $mensaje
+);
 
 if ($resultado === true) {
     $_SESSION["txtMensaje"] = "Se ha enviado un enlace de recuperación a su correo.";

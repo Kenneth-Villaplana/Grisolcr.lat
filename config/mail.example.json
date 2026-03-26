@@ -1,8 +1,8 @@
 {
-  "APP_URL": "https://grisolcr.lat",
-  "MAIL_FROM": "correo@ejemplo.com",
-  "MAIL_APP_PASSWORD": "app_password",
-  "MAIL_HOST": "smtp.gmail.com",
+  "APP_URL": "https://opticagrisol.com",
+  "MAIL_FROM": "no-responder@opticagrisol.com",
+  "MAIL_APP_PASSWORD": "aDefj_8bVedv_44!",
+  "MAIL_HOST": "mail.privateemail.com",
   "MAIL_PORT": 587,
   "MAIL_ENCRYPTION": "tls",
   "MAIL_TIMEOUT": 15,
