@@ -7,21 +7,6 @@ error_reporting(E_ALL);
 session_start();
 include_once __DIR__ . '/../Model/recuperarModel.php';
 
-function cargarConfigMail(): array
-{
-    $ruta = __DIR__ . '/../config/mail.json';
-
-    if (!file_exists($ruta)) {
-        return [];
-    }
-
-    $contenido = file_get_contents($ruta);
-    $config = json_decode($contenido, true);
-
-    return is_array($config) ? $config : [];
-}
-
-
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: ../View/recuperarCuenta.php");
     exit;
@@ -47,9 +32,8 @@ if (!$usuario) {
 $token = bin2hex(random_bytes(32));
 GuardarTokenRecuperacion($correo, $token);
 
-// Cargar configuración
-$configMail = cargarConfigMail();
-$base_url = rtrim($configMail['APP_URL'] ?? 'https://opticagrisol.com', '/');
+// URL base (ya no dependemos de mail.json)
+$base_url = 'https://opticagrisol.com';
 $enlace = $base_url . "/View/restablecerContrasenna.php?token=" . urlencode($token);
 
 $asunto = "Recuperación de Contraseña Óptica Grisol";
@@ -68,7 +52,7 @@ $mensaje = "
         </p>
         <p style='font-size: 15px; color: #333;'>
             Hemos recibido una solicitud para restablecer la contraseña de su cuenta en 
-            <strong>Óptica Grisol</strong>. Si usted realizó esta solicitud, por favor haga clic en el siguiente botón:
+            <strong>Óptica Grisol</strong>.
         </p>
         <div style='text-align:center; margin: 30px 0;'>
             <a href='{$enlace}' 
@@ -78,18 +62,14 @@ $mensaje = "
                 Restablecer Contraseña
             </a>
         </div>
-        <p style='font-size: 14px; color: #555;'>
-            Si el botón no funciona, puede copiar y pegar el siguiente enlace en su navegador:
-        </p>
         <p style='word-break: break-all; font-size: 13px; color: #0D3B66;'>
             {$enlace}
         </p>
         <p style='font-size: 14px; color: #777; margin-top: 20px;'>
-            Si usted no solicitó este cambio, puede ignorar este mensaje. 
-            Su cuenta permanecerá segura.
+            Si usted no solicitó este cambio, puede ignorar este mensaje.
         </p>
         <p style='text-align:center; margin-top: 30px; font-size: 14px; color:#999;'>
-            © " . date("Y") . " Óptica Grisol — Sistema de Gestión
+            © " . date("Y") . " Óptica Grisol
         </p>
     </div>
 </div>
@@ -97,9 +77,9 @@ $mensaje = "
 
 require_once __DIR__ . '/../assets/vendor/php-email-form/sendEmail.php';
 
-// sendEmail leerá el mail.json, 
+// 🔥 CORRECCIÓN IMPORTANTE: email correcto
 $resultado = sendEmail(
-    'no-reponder@opticagrisol.com',
+    'no-responder@opticagrisol.com',
     'Óptica Grisol',
     $correo,
     $asunto,
