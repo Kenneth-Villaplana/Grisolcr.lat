@@ -1482,4 +1482,121 @@ footer, .footer {
     .time-slots-grid {
         grid-template-columns: 1fr;
     }
+
+    /* CONTENEDOR PRINCIPAL CENTRADO */
+.citas-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
 }
+
+
+.cita-card {
+    border-radius: 18px;
+    padding: 1.2rem 1.3rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    transition: all .25s ease;
+}
+
+.cita-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(0,0,0,0.1);
+}
+
+
+.cita-header {
+    align-items: flex-start;
+}
+
+.cita-header h5 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+.cita-info-grid {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 1rem;
+}
+
+
+.cita-actions {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 0.8rem;
+}
+
+
+.cita-actions .btn {
+    border-radius: 999px;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+}
+
+
+@media (max-width: 768px) {
+
+    /* CONTENEDOR TIPO CARD */
+    .citas-wrapper {
+        padding: 0 6px;
+    }
+
+  
+    .cita-card {
+        padding: 0.8rem;
+        border-radius: 14px;
+    }
+
+    /* HEADER */
+    .cita-header h5 {
+        font-size: 0.9rem;
+    }
+
+    .cita-header p {
+        font-size: 0.7rem;
+    }
+
+    /* BADGE */
+    .estado-badge {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+
+    
+    .cita-info-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        background: #f8fafc;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    .info-item svg {
+        display: none; 
+    }
+
+   
+    .cita-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .cita-actions .btn {
+        flex: 1;
+        font-size: 0.75rem;
+        padding: 0.6rem;
+    }
+
+   
+    .cita-actions .btn:last-child {
+        flex: 1 0 100%;
+    }
+}
+}
+
