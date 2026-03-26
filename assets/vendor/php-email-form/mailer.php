@@ -32,3 +32,4 @@ function enviarCorreo($correo_emisor, $password_app, $correo_destino, $asunto, $
         return "Error enviando correo: " . $e->getMessage();
     }
 }
+//test
