@@ -147,8 +147,8 @@ $isEmpleado = ($rolName === 'Empleado');
             <?php endif; ?>
         </div>
 
-        <div class="citas-container">
-
+        <div class="citas-container"><div class="citas-wrapper">
+    <div class="citas-container">
             <?php if (empty($citas)): ?>
                 <div class="empty-state">
                     <i data-lucide="calendar-x"></i>
@@ -277,7 +277,7 @@ $isEmpleado = ($rolName === 'Empleado');
     <?php endif; ?>
 
 </div>
-
+</div>
 </div>
 
 
