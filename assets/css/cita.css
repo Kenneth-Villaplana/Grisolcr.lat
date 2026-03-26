@@ -1081,3 +1081,156 @@ footer, .footer {
     display: block;
 }
 
+/*ajustes responsive celular*/
+@media (max-width: 768px) {
+
+    /* 🔹 HEADER */
+    .header-premium {
+        padding: 1.8rem 1rem;
+    }
+
+    .header-premium-title {
+        font-size: 1.6rem;
+    }
+
+    .header-premium-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* 🔹 CONTENEDOR GENERAL */
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* 🔹 TARJETAS */
+    .cita-card {
+        padding: 1rem;
+    }
+
+    /* 🔹 HEADER DE CITA */
+    .cita-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    .estado-badge {
+        align-self: flex-start;
+    }
+
+    /* 🔹 GRID INFO */
+    .cita-info-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .info-item {
+        font-size: 0.8rem;
+    }
+
+    /* 🔹 ACCIONES */
+    .cita-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cita-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 🔹 FILTROS */
+    .filter-card {
+        padding: 1.2rem;
+    }
+
+    /* 🔹 BOTÓN NUEVA CITA */
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .d-flex.justify-content-between .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 🔹 MODAL */
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .modal-confirm .modal-body {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .modal-confirm .modal-header {
+        padding: 1.2rem;
+    }
+
+    .modal-confirm .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-confirm .modal-footer .btn {
+        width: 100%;
+    }
+
+    /* 🔹 INPUTS MODAL */
+    .input-narrow {
+        max-width: 100%;
+    }
+
+    /* 🔹 HORARIOS */
+    .time-slots-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 🔹 STATUS */
+    .availability-status {
+        font-size: 0.85rem;
+        padding: 0.8rem;
+    }
+}
+
+
+/* ===========================================================
+   📱 EXTRA SMALL (CELULARES PEQUEÑOS)
+   =========================================================== */
+@media (max-width: 480px) {
+
+    .header-premium-title {
+        font-size: 1.4rem;
+    }
+
+    .header-premium-icon {
+        width: 65px;
+        height: 65px;
+    }
+
+    .header-premium-icon i {
+        width: 30px;
+        height: 30px;
+    }
+
+    .cita-header h5 {
+        font-size: 0.95rem;
+    }
+
+    .cita-header p {
+        font-size: 0.75rem;
+    }
+
+    .time-slots-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        font-size: 0.75rem;
+    }
+
+    .filter-label {
+        font-size: 0.8rem;
+    }
+}
