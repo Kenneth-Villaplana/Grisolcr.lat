@@ -2287,94 +2287,229 @@ footer {
 
 /* catalogo de lentes*/
 
-        .catalogo-hero {
-            min-height: 45vh;
-             background: radial-gradient(circle at top left,
+.catalogo-hero {
+    min-height: 45vh;
+    background: radial-gradient(circle at top left,
         #0ea5e9 0%,
         #020617 45%,
         #111827 100%);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
 
-        .catalogo-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-        }
+/* Glass overlay */
+.catalogo-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.05);
+}
 
-        .catalogo-subtitle {
-            font-size: 1.15rem;
-            opacity: .9;
-        }
+/* Contenido sobre el glass */
+.catalogo-hero .container {
+    position: relative;
+    z-index: 2;
+}
 
-        .filtro-card {
-            background: #fff;
-            border-radius: 18px;
-            padding: 22px;
-            border: 1px solid #e2e8f0;
-        }
+.catalogo-title {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
 
-        .filtro-op {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 12px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
+.catalogo-subtitle {
+    font-size: 1.1rem;
+    opacity: .9;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-       
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            padding: 18px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            transition: .3s;
-        }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-        }
+.catalogo-section {
+    background: #f8fafc;
+}
 
-        .product-img-wrapper {
-            border: 1px solid #d1d5db;
-            border-radius: 16px;
-            padding: 12px;
-            background: #ffffff;
-        }
 
-        .product-image {
-            width: 100%;
-            height: 210px;
-            object-fit: contain;
-        }
+.filtro-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 90px;
+}
 
-        .product-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-top: 12px;
-        }
+.filtro-op {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 8px 10px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
 
-        .product-price {
-            color: #0369a1;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
+.filtro-op:hover {
+    background: #f1f5f9;
+}
 
-@media(max-width: 768px) {
+
+.product-card {
+    background: linear-gradient(180deg, #ffffff 70%, #f8fafc 100%);
+    border-radius: 22px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: all .25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* brillo elegante */
+.product-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    background: linear-gradient(120deg, transparent, rgba(14,165,233,0.08), transparent);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.product-card:hover::after {
+    opacity: 1;
+}
+
+.product-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+
+.product-img-wrapper {
+    border-radius: 18px;
+    padding: 14px;
+    background: linear-gradient(145deg, #ffffff, #f1f5f9);
+    border: 1px solid #d1d5db;
+}
+
+.product-image {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+
+.product-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 12px;
+    color: #1f2937;
+}
+
+.product-price {
+    color: #0ea5e9;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+/*tablet*/
+@media(max-width: 992px) {
+
+    .filtro-card {
+        position: relative;
+        top: auto;
+    }
+
+    .catalogo-title {
+        font-size: 2.4rem;
+    }
+
     .product-image {
-        height: 220px;
+        height: 200px;
     }
 }
 
-@media(max-width: 480px) {
+/*celulares*/
+@media(max-width: 768px) {
+
+    .catalogo-hero {
+        min-height: 35vh;
+        padding: 30px 15px;
+    }
+
+    .catalogo-title {
+        font-size: 2rem;
+    }
+
+    .catalogo-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .filtro-card {
+        padding: 16px;
+    }
+
+    #contenedorProductos {
+        row-gap: 20px;
+    }
+
+    .product-card {
+        padding: 14px;
+    }
+
     .product-image {
-        height: 180px;
+        height: 190px;
+    }
+}
+
+/*celures pequeños*/
+@media(max-width: 480px) {
+
+    .catalogo-title {
+        font-size: 1.6rem;
+    }
+
+    .catalogo-subtitle {
+        font-size: 0.85rem;
+    }
+
+   
+    .producto-item {
+        width: 100%;
+    }
+
+    .product-card {
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    .product-image {
+        height: 170px;
+    }
+
+    .product-title {
+        font-size: 0.95rem;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
     }
 }
 
