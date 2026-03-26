@@ -1,10 +1,10 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/PHPMailer/Exception.php';
-require __DIR__ . '/PHPMailer/PHPMailer.php';
-require __DIR__ . '/PHPMailer/SMTP.php';
+// ✅ usar composer
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
 function cargarConfigMailJson(): array
 {
@@ -20,78 +20,76 @@ function cargarConfigMailJson(): array
     return is_array($config) ? $config : [];
 }
 
-function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
+function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
     $mail = new PHPMailer(true);
     $config = cargarConfigMailJson();
 
-    $emisor = trim((string)($emisor ?: ($config['MAIL_FROM'] ?? '')));
-    $password = (string)($password ?: ($config['MAIL_APP_PASSWORD'] ?? ''));
-    $host = trim((string)($config['MAIL_HOST'] ?? 'smtp.gmail.com'));
-    $port = (int)($config['MAIL_PORT'] ?? 587);
-    $encryption = strtolower(trim((string)($config['MAIL_ENCRYPTION'] ?? 'tls')));
-    $timeout = (int)($config['MAIL_TIMEOUT'] ?? 15);
-    $fromName = trim((string)($config['MAIL_FROM_NAME'] ?? 'Óptica Grisol'));
-    $debug = !empty($config['MAIL_DEBUG']);
+    // ✅ usar config correcta
+    $host       = $config['SMTP_HOST'] ?? 'mail.privateemail.com';
+    $port       = (int)($config['SMTP_PORT'] ?? 587);
+    $username   = $config['SMTP_USER'] ?? '';
+    $password   = $config['SMTP_PASS'] ?? '';
+    $secure     = strtolower($config['SMTP_SECURE'] ?? 'tls');
 
-    $destino = trim((string)$destino);
-    $asunto = (string)$asunto;
+    $fromEmail  = $fromEmail ?: $username;
+    $fromName   = $fromName ?: 'Óptica Grisol';
 
-    if (!filter_var($emisor, FILTER_VALIDATE_EMAIL)) {
-        return "Mailer Error: Invalid address: (From): $emisor";
+    // Validaciones
+    if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
+        return "Mailer Error: Invalid FROM email";
     }
 
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
-        return "Mailer Error: Invalid address: (To): $destino";
+        return "Mailer Error: Invalid DESTINATION email";
     }
 
     if (empty($password)) {
-        return "Mailer Error: SMTP password is empty";
+        return "Mailer Error: SMTP password vacío";
     }
 
     try {
-        if ($debug) {
-            $mail->SMTPDebug = 2;
-            $mail->Debugoutput = function ($str, $level) {
-                error_log("SMTP[$level]: $str");
-            };
-        }
-
         $mail->CharSet = 'UTF-8';
-        $mail->Encoding = 'base64';
 
+        // CONFIG SMTP
         $mail->isSMTP();
-        $mail->Host = $host;
-        $mail->SMTPAuth = true;
-        $mail->Username = $emisor;
-        $mail->Password = $password;
-        $mail->Port = $port;
-        $mail->Timeout = $timeout;
-        $mail->SMTPKeepAlive = false;
+        $mail->Host       = $host;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $username;
+        $mail->Password   = $password;
+        $mail->Port       = $port;
 
-        if ($encryption === 'ssl' || $encryption === 'smtps') {
+        // Seguridad
+        if ($secure === 'ssl') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         } else {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         }
 
+        // ✅ FIX DigitalOcean (IMPORTANTE)
         $mail->SMTPOptions = [
-            'socket' => [
-                'bindto' => '0.0.0.0:0'
-            ],
+            'ssl' => [
+                'verify_peer'       => false,
+                'verify_peer_name'  => false,
+                'allow_self_signed' => true
+            ]
         ];
 
-        $mail->setFrom($emisor, $fromName);
+        // Remitente
+        $mail->setFrom($fromEmail, $fromName);
+
+        // Destino
         $mail->addAddress($destino);
 
+        // Contenido
         $mail->isHTML(true);
         $mail->Subject = $asunto;
-        $mail->Body = $mensajeHTML;
+        $mail->Body    = $mensajeHTML;
 
         $mail->send();
+
         return true;
 
     } catch (Exception $e) {
-        return "Mailer Error: {$mail->ErrorInfo}";
-    }
-}
+        return "Mailer Error: " . $mail->ErrorInfo;
+    }}
