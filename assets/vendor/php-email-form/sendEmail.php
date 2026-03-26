@@ -3,12 +3,12 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// ✅ usar composer (RUTA CORREGIDA)
-require_once __DIR__ . '/../../../../vendor/autoload.php';
+// ✅ usar composer
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
 function cargarConfigMailJson(): array
 {
-    $ruta = __DIR__ . '/../../../config/mail.example.json';
+    $ruta = __DIR__ . '/../../../config/mail.json';
 
     if (!file_exists($ruta)) {
         return [];
@@ -92,5 +92,4 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 
     } catch (Exception $e) {
         return "Mailer Error: " . $mail->ErrorInfo;
-    }
-}
+    }}
