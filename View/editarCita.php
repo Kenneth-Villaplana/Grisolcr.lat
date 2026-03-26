@@ -9,6 +9,42 @@ procesarAccionesCita();
 
 $citas = obtenerCitasSegunRol();
 
+usort($citas, function($a, $b) {
+
+    $fechaA = new DateTime($a['Fecha']);
+    $fechaB = new DateTime($b['Fecha']);
+    $now = new DateTime();
+
+    // Determinar tipo de cita
+    $getPrioridad = function($cita, $fecha) use ($now) {
+
+        $estado = strtolower($cita['Estado']);
+
+        if ($estado === 'pendiente') {
+            return ($fecha >= $now) ? 1 : 2; // activa o vencida
+        }
+
+        if ($estado === 'confirmada') {
+            return ($fecha >= $now) ? 1 : 2;
+        }
+
+        if ($estado === 'finalizada') return 3;
+        if ($estado === 'cancelada') return 4;
+
+        return 5;
+    };
+
+    $prioridadA = $getPrioridad($a, $fechaA);
+    $prioridadB = $getPrioridad($b, $fechaB);
+
+    
+    if ($prioridadA !== $prioridadB) {
+        return $prioridadA - $prioridadB;
+    }
+
+  
+    return $fechaA <=> $fechaB;
+});
 
 $mensajeExito = $_SESSION['mensaje_exito'] ?? "";
 $mensajeError = $_SESSION['mensaje_error'] ?? "";

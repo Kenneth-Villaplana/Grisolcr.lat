@@ -1084,7 +1084,7 @@ footer, .footer {
 /*ajustes responsive celular*/
 @media (max-width: 768px) {
 
-    /* 🔹 HEADER */
+    /* HEADER */
     .header-premium {
         padding: 1.8rem 1rem;
     }
@@ -1097,18 +1097,18 @@ footer, .footer {
         font-size: 0.9rem;
     }
 
-    /* 🔹 CONTENEDOR GENERAL */
+    /* CONTENEDOR GENERAL */
     .container {
         padding-left: 12px;
         padding-right: 12px;
     }
 
-    /* 🔹 TARJETAS */
+    /* TARJETAS */
     .cita-card {
         padding: 1rem;
     }
 
-    /* 🔹 HEADER DE CITA */
+    /* HEADER DE CITA */
     .cita-header {
         flex-direction: column;
         align-items: flex-start;
@@ -1119,7 +1119,7 @@ footer, .footer {
         align-self: flex-start;
     }
 
-    /* 🔹 GRID INFO */
+    /* GRID INFO */
     .cita-info-grid {
         grid-template-columns: 1fr !important;
     }
@@ -1128,7 +1128,7 @@ footer, .footer {
         font-size: 0.8rem;
     }
 
-    /* 🔹 ACCIONES */
+    /* ACCIONES */
     .cita-actions {
         flex-direction: column;
         align-items: stretch;
@@ -1139,12 +1139,12 @@ footer, .footer {
         justify-content: center;
     }
 
-    /* 🔹 FILTROS */
+    /* FILTROS */
     .filter-card {
         padding: 1.2rem;
     }
 
-    /* 🔹 BOTÓN NUEVA CITA */
+    /* BOTÓN NUEVA CITA */
     .d-flex.justify-content-between {
         flex-direction: column;
         align-items: stretch;
@@ -1156,7 +1156,7 @@ footer, .footer {
         justify-content: center;
     }
 
-    /* 🔹 MODAL */
+    /*  MODAL */
     .modal-dialog {
         margin: 10px;
     }
@@ -1177,17 +1177,17 @@ footer, .footer {
         width: 100%;
     }
 
-    /* 🔹 INPUTS MODAL */
+    /* INPUTS MODAL */
     .input-narrow {
         max-width: 100%;
     }
 
-    /* 🔹 HORARIOS */
+    /* HORARIOS */
     .time-slots-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* 🔹 STATUS */
+    /*  STATUS */
     .availability-status {
         font-size: 0.85rem;
         padding: 0.8rem;
@@ -1195,9 +1195,7 @@ footer, .footer {
 }
 
 
-/* ===========================================================
-   📱 EXTRA SMALL (CELULARES PEQUEÑOS)
-   =========================================================== */
+
 @media (max-width: 480px) {
 
     .header-premium-title {
@@ -1232,5 +1230,84 @@ footer, .footer {
 
     .filter-label {
         font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+   
+    .app-header {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .header-premium {
+        padding: 1.2rem 0.8rem;
+    }
+
+    .header-premium-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0.5rem;
+    }
+
+
+    .container.py-4 {
+        padding-top: 10px !important;
+    }
+
+    
+    .cita-card {
+        padding: 0.9rem;
+    }
+
+   
+    .cita-header h5 {
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+
+    .cita-header p {
+        margin-bottom: 0;
+    }
+
+    
+    .estado-badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+
+  
+    .info-item {
+        gap: 0.4rem;
+    }
+
+    .info-item div {
+        font-size: 0.8rem;
+    }
+
+   
+    .info-item svg {
+        width: 16px;
+    }
+
+    
+    .cita-actions .btn {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    
+    .modal-body h5 {
+        font-size: 1rem;
+    }
+
+    .modal-icon {
+        font-size: 2.5rem;
+    }
+
+    
+    .time-slot {
+        padding: 8px;
+        font-size: 0.85rem;
     }
 }
