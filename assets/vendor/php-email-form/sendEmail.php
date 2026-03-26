@@ -1,97 +1,134 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/PHPMailer/Exception.php';
-require __DIR__ . '/PHPMailer/PHPMailer.php';
-require __DIR__ . '/PHPMailer/SMTP.php';
+// ✅ Cargar PHPMailer manual (LOCAL)
+require_once __DIR__ . '/PHPMailer/Exception.php';
+require_once __DIR__ . '/PHPMailer/PHPMailer.php';
+require_once __DIR__ . '/PHPMailer/SMTP.php';
 
 function cargarConfigMailJson(): array
 {
-    $ruta = __DIR__ . '/../../../config/mail.json';
+    $ruta = '/var/www/html/config/mail.json';
 
+    // 🔥 DEBUG 1: validar existencia
     if (!file_exists($ruta)) {
-        return [];
+        die('ERROR: mail.json NO existe en -> ' . $ruta);
     }
 
     $contenido = file_get_contents($ruta);
+
+    // 🔥 DEBUG 2: validar lectura
+    if ($contenido === false) {
+        die('ERROR: No se pudo leer mail.json');
+    }
+
+    // 🔥 DEBUG 3: mostrar contenido (opcional)
+    // var_dump($contenido); exit;
+
     $config = json_decode($contenido, true);
 
-    return is_array($config) ? $config : [];
+    // 🔥 DEBUG 4: validar JSON
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        die('JSON ERROR: ' . json_last_error_msg());
+    }
+
+    // 🔥 DEBUG 5: validar contenido
+    if (!is_array($config) || empty($config)) {
+        die('ERROR: JSON vacío o inválido');
+    }
+
+    return $config;
 }
 
-function sendEmail($emisor, $password, $destino, $asunto, $mensajeHTML)
+function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
     $mail = new PHPMailer(true);
     $config = cargarConfigMailJson();
 
-    $emisor = trim((string)($emisor ?: ($config['MAIL_FROM'] ?? '')));
-    $password = (string)($password ?: ($config['MAIL_APP_PASSWORD'] ?? ''));
-    $host = trim((string)($config['MAIL_HOST'] ?? 'smtp.gmail.com'));
-    $port = (int)($config['MAIL_PORT'] ?? 587);
-    $encryption = strtolower(trim((string)($config['MAIL_ENCRYPTION'] ?? 'tls')));
-    $timeout = (int)($config['MAIL_TIMEOUT'] ?? 15);
-    $fromName = trim((string)($config['MAIL_FROM_NAME'] ?? 'Óptica Grisol'));
-    $debug = !empty($config['MAIL_DEBUG']);
+    // 🔥 DEBUG 6: ver config real
+    // var_dump($config); exit;
 
-    $destino = trim((string)$destino);
-    $asunto = (string)$asunto;
+    // ✅ CONFIG
+    $host       = $config['SMTP_HOST'] ?? '';
+    $port       = (int)($config['SMTP_PORT'] ?? 0);
+    $username   = $config['SMTP_USER'] ?? '';
+    $password   = $config['SMTP_PASS'] ?? '';
+    $secure     = strtolower($config['SMTP_SECURE'] ?? 'tls');
 
-    if (!filter_var($emisor, FILTER_VALIDATE_EMAIL)) {
-        return "Mailer Error: Invalid address: (From): $emisor";
+    // 🔥 DEBUG 7: validar claves críticas
+    if (empty($host)) {
+        die('ERROR: SMTP_HOST vacío');
     }
 
-    if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
-        return "Mailer Error: Invalid address: (To): $destino";
+    if (empty($username)) {
+        die('ERROR: SMTP_USER vacío');
     }
 
     if (empty($password)) {
-        return "Mailer Error: SMTP password is empty";
+        die('ERROR: SMTP_PASS vacío');
+    }
+
+    $fromEmail  = $username; // más seguro
+    $fromName   = $fromName ?: 'Óptica Grisol';
+
+    // Validaciones
+    if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
+        return "Mailer Error: Invalid FROM email";
+    }
+
+    if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
+        return "Mailer Error: Invalid DESTINATION email";
     }
 
     try {
-        if ($debug) {
-            $mail->SMTPDebug = 2;
-            $mail->Debugoutput = function ($str, $level) {
-                error_log("SMTP[$level]: $str");
-            };
-        }
-
         $mail->CharSet = 'UTF-8';
-        $mail->Encoding = 'base64';
 
+        // SMTP
         $mail->isSMTP();
-        $mail->Host = $host;
-        $mail->SMTPAuth = true;
-        $mail->Username = $emisor;
-        $mail->Password = $password;
-        $mail->Port = $port;
-        $mail->Timeout = $timeout;
-        $mail->SMTPKeepAlive = false;
+        $mail->SMTPDebug = 0; // pon 2 si quieres ver logs
+        $mail->Debugoutput = 'error_log';
+        $mail->Timeout = 15;
 
-        if ($encryption === 'ssl' || $encryption === 'smtps') {
+        $mail->Host       = $host;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $username;
+        $mail->Password   = $password;
+        $mail->Port       = $port;
+
+        // Seguridad
+        if ($secure === 'ssl') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         } else {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         }
 
+        // Fix SSL (DigitalOcean)
         $mail->SMTPOptions = [
-            'socket' => [
-                'bindto' => '0.0.0.0:0'
-            ],
+            'ssl' => [
+                'verify_peer'       => false,
+                'verify_peer_name'  => false,
+                'allow_self_signed' => true
+            ]
         ];
 
-        $mail->setFrom($emisor, $fromName);
+        // Remitente
+        $mail->setFrom($fromEmail, $fromName);
+
+        // Destinatario
         $mail->addAddress($destino);
 
+        // Contenido
         $mail->isHTML(true);
         $mail->Subject = $asunto;
-        $mail->Body = $mensajeHTML;
+        $mail->Body    = $mensajeHTML;
 
         $mail->send();
+
         return true;
 
     } catch (Exception $e) {
-        return "Mailer Error: {$mail->ErrorInfo}";
+        return "Mailer Error: " . $mail->ErrorInfo;
     }
 }
