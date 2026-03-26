@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// ✅ usar composer
-require_once __DIR__ . '/../../../vendor/autoload.php';
+// ✅ usar composer (RUTA CORREGIDA)
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 function cargarConfigMailJson(): array
 {
@@ -92,4 +92,5 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 
     } catch (Exception $e) {
         return "Mailer Error: " . $mail->ErrorInfo;
-    }}
+    }
+}
