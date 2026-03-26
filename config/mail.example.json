@@ -1,8 +1,0 @@
-{
-  "APP_URL": "https://opticagrisol.com",
-  "SMTP_HOST": "mail.privateemail.com",
-  "SMTP_PORT": 587,
-  "SMTP_USER": "no-responder@opticagrisol.com",
-  "SMTP_PASS": "aDefj_8bVedv_44!",
-  "SMTP_SECURE": "tls"
-}
