@@ -9,7 +9,7 @@ include_once __DIR__ . '/../Model/recuperarModel.php';
 
 function cargarConfigMail(): array
 {
-    $ruta = __DIR__ . '/../config/mail.example.json';
+    $ruta = __DIR__ . '/../config/mail.json';
 
     if (!file_exists($ruta)) {
         return [];
