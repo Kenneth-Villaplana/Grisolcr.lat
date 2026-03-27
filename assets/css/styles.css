@@ -3026,8 +3026,8 @@ footer {
    
   background: linear-gradient(
         135deg,
-        rgba(30, 58, 138, 0.88),
-        rgba(15, 23, 42, 0.92)
+        rgba(30, 59, 138, 0.151),
+        rgba(15, 23, 42, 0.308)
     ) !important;
 
     backdrop-filter: blur(14px) !important;
