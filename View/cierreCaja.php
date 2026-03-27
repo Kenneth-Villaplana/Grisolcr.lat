@@ -33,7 +33,7 @@ include('layout.php');
 
         <!-- Resumen -->
         <div class="col-lg-7">
-            <div class="card shadow-sm pv-products-card">
+           <div class="card shadow-sm pv-products-card pv-cc-resumen">
                 <div class="pv-products-header d-flex justify-content-between align-items-center mb-2 p-3">
                     <h5 class="mb-0 text-muted fw-semibold">Resumen del día</h5>
                     <span class="badge bg-light text-dark border" id="cc-fecha">Hoy</span>
