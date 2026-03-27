@@ -6,7 +6,7 @@ use Mailgun\Mailgun;
 
 function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
-    $apiKey = trim('key-bb798807bd8f763b31511cd9b3b702a3-c50aa110-c84a9f1b'); 
+    $apiKey = trim('key-8cb25230844bd05428ed12cc4abe77eb-c50aa110-c193edcc'); 
     $domain = 'mg.opticagrisol.com';
 
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
