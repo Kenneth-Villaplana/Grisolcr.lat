@@ -33,7 +33,34 @@ include('layout.php');
                         </span>
                     </div>
                 </div>
+                <div class="cierre-resumen-grid mb-4">
 
+                    <div class="cierre-resumen-item">
+                        <span class="resumen-label">Total Cobrado</span>
+                        <span class="resumen-value" id="resumen-total">₡0.00</span>
+                    </div>
+
+                    <div class="cierre-resumen-item">
+                        <span class="resumen-label">Efectivo</span>
+                        <span class="resumen-value" id="resumen-efectivo">₡0.00</span>
+                    </div>
+
+                    <div class="cierre-resumen-item">
+                        <span class="resumen-label">Tarjeta</span>
+                        <span class="resumen-value" id="resumen-tarjeta">₡0.00</span>
+                    </div>
+
+                    <div class="cierre-resumen-item">
+                        <span class="resumen-label">SINPE</span>
+                        <span class="resumen-value" id="resumen-sinpe">₡0.00</span>
+                    </div>
+
+                    <div class="cierre-resumen-item">
+                        <span class="resumen-label">Transferencia</span>
+                        <span class="resumen-value" id="resumen-transferencia">₡0.00</span>
+                    </div>
+
+                </div>
                 <div class="table-responsive">
                     <table class="table cierre-table align-middle mb-0">
                         <thead>
