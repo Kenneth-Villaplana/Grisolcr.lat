@@ -1,8 +1,6 @@
 const CC_PATH = "../Controller/cierreCajaController.php";
 
-/**
- * 🔥 Helper robusto para convertir texto a número (quita ₡, comas, etc.)
- */
+
 const num = (id) => {
     const el = document.getElementById(id);
     if (!el) return 0;
@@ -41,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * 🔥 Helper fetch seguro (evita crash si backend devuelve HTML o error)
+  Helper fetch(evita crash si backend devuelve HTML o error)
  */
 async function fetchJSON(url, options) {
     const res = await fetch(url, options);
@@ -152,7 +150,7 @@ async function cerrarCaja() {
     const payload = {
         action: "cerrar",
 
-        // 🔥 Fecha local correcta
+        //  Fecha local correcta
         fecha: new Date().toLocaleDateString('sv-SE'),
 
         facturas: parseInt(num("cc-cantidad")),
@@ -175,7 +173,7 @@ async function cerrarCaja() {
         diferencia: num("cc-diferencia")
     };
 
-    console.log("📦 Payload cierre:", payload);
+    console.log(" Payload cierre:", payload);
 
     try {
         const data = await fetchJSON(CC_PATH, {
