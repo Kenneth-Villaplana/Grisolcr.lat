@@ -4,12 +4,34 @@ require_once '/var/www/html/vendor/autoload.php';
 
 use Mailgun\Mailgun;
 
+function cargarConfigMailJson(): array
+{
+    $ruta = __DIR__ . '/../config/mail.json'; // ajusta si tu ruta cambia
+
+    if (!file_exists($ruta)) {
+        return [];
+    }
+
+    $contenido = file_get_contents($ruta);
+    $config = json_decode($contenido, true);
+
+    return is_array($config) ? $config : [];
+}
+
 function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
-    // 🔐 USA EXACTAMENTE LA MISMA KEY DEL CURL (SIN key-)
-    $apiKey = '8cb25230844bd05428ed12cc4abe77eb-c50aa110-c193edcc';
-    $domain = 'mg.opticagrisol.com';
+    // 🔐 Cargar configuración
+    $config = cargarConfigMailJson();
 
+    $apiKey = $config['mailgun_api_key'] ?? '';
+    $domain = $config['mailgun_domain'] ?? '';
+
+    // 🚨 Validación config
+    if (empty($apiKey) || empty($domain)) {
+        return "Error: configuración de Mailgun incompleta";
+    }
+
+    // 🚨 Validación email
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
         return "Error: correo destino inválido";
     }
@@ -17,8 +39,8 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
     try {
         $mg = Mailgun::create($apiKey);
 
-        $result = $mg->messages()->send($domain, [
-            // ⚠️ FORZAMOS FROM CORRECTO DEL DOMINIO
+        $mg->messages()->send($domain, [
+            // ⚠️ FROM siempre del dominio
             'from' => "Optica Grisol <no-responder@$domain>",
             'to' => $destino,
             'subject' => $asunto,
