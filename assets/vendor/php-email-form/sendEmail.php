@@ -3,10 +3,10 @@
 function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
     // 🔐 CONFIG MAILGUN
-    $apiKey = 'key-f97dc49ef6912ad3caf7bc87709f74bd-c50aa110-6d99857f';
+    $apiKey = 'key-ccc080423cf27d3449415151c6053c10-c50aa110-614e2a18'; // 
     $domain = 'mg.opticagrisol.com';
 
-    // Validaciones básicas
+    // ✅ Validaciones básicas
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
         return "Error: correo destino inválido";
     }
@@ -14,6 +14,9 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
     if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
         return "Error: correo remitente inválido";
     }
+
+    // ⚠️ Mailgun recomienda usar un FROM del dominio verificado
+    $from = "$fromName <$fromEmail>";
 
     // Inicializar cURL
     $ch = curl_init();
@@ -24,13 +27,17 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, [
-        'from' => "$fromName <$fromEmail>",
+        'from' => $from,
         'to' => $destino,
         'subject' => $asunto,
         'html' => $mensajeHTML
     ]);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // 🔥 DEBUG (IMPORTANTE)
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10); // evita que se quede pegado
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
     // Ejecutar
     $response = curl_exec($ch);
@@ -39,14 +46,16 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 
     curl_close($ch);
 
-    // Manejo de errores
+    // ❌ Error de conexión
     if ($error) {
         return "cURL Error: " . $error;
     }
 
-    if ($httpCode >= 200 && $httpCode < 300) {
-        return true;
+    // ❌ Error Mailgun
+    if ($httpCode < 200 || $httpCode >= 300) {
+        return "Mailgun Error ($httpCode): " . $response;
     }
 
-    return "Mailgun Error ($httpCode): " . $response;
+    // ✅ Éxito
+    return true;
 }
