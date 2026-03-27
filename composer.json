@@ -1,6 +1,12 @@
 {
     "require": {
         "tecnickcom/tcpdf": "^6.10",
-        "google/apiclient": "^2.18"
+        "google/apiclient": "^2.18",
+        "mailgun/mailgun-php": "^4.4"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
