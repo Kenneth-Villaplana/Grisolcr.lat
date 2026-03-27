@@ -64,13 +64,14 @@ $isEmpleado = ($rolName === 'Empleado');
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Óptica Grisol - <?= $isPaciente ? 'Mis Citas' : 'Gestión de Citas' ?></title>
 
     <?php IncluirCSS(); ?>
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="/assets/css/cita.css">
+    <link rel="stylesheet" href="/assets/css/cita.css?v=5">
 </head>
 
 <body class="bg-main">

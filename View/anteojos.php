@@ -73,7 +73,7 @@ $productos = ObtenerProductos();
                         <?php 
                         $img = (!empty($p['Imagen'])) ? $p['Imagen'] : 'no-image.jpg';
 
-                        // ✅ AJUSTE SIN REMOVER NADA:
+                        
                         // Usar ruta absoluta desde la raíz del sitio (compatible con Azure)
                         $imgSrc = '/assets/img/' . rawurlencode($img);
                         ?>
