@@ -70,7 +70,7 @@ $isEmpleado = ($rolName === 'Empleado');
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="/assets/css/cita.css">
+    <link rel="stylesheet" href="/assets/css/cita.css?v=5">
 </head>
 
 <body class="bg-main">
@@ -147,8 +147,8 @@ $isEmpleado = ($rolName === 'Empleado');
             <?php endif; ?>
         </div>
 
-        <div class="citas-container"><div class="citas-wrapper">
-    <div class="citas-container">
+        <div class="citas-container">
+
             <?php if (empty($citas)): ?>
                 <div class="empty-state">
                     <i data-lucide="calendar-x"></i>
@@ -277,7 +277,7 @@ $isEmpleado = ($rolName === 'Empleado');
     <?php endif; ?>
 
 </div>
-</div>
+
 </div>
 
 
@@ -483,7 +483,7 @@ $isEmpleado = ($rolName === 'Empleado');
 </div>
 
 <?php MostrarFooter(); ?>
- <link rel="stylesheet" href="/assets/css/cita.css">
+
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 <script>
