@@ -64,6 +64,7 @@ $isEmpleado = ($rolName === 'Empleado');
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Óptica Grisol - <?= $isPaciente ? 'Mis Citas' : 'Gestión de Citas' ?></title>
 
     <?php IncluirCSS(); ?>
