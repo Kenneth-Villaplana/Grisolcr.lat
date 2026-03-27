@@ -43,7 +43,7 @@ include('layout.php');
                     <div class="row g-3">
 
                         <div class="col-md-6">
-                            <div class="border rounded-4 p-3 h-100 shadow-sm">
+                            <div class="border rounded-4 p-3 h-100 shadow-sm card-facturas">
                                 <div class="text-muted small">Facturas</div>
                                 <div class="fs-4 fw-bold" id="cc-cantidad">0</div>
                                 <div class="text-muted small mt-2">Total facturado</div>
@@ -52,7 +52,7 @@ include('layout.php');
                         </div>
 
                         <div class="col-md-6">
-                            <div class="border rounded-4 p-3 h-100 shadow-sm">
+                            <div class="border rounded-4 p-3 h-100 shadow-sm card-cobros">
                                 <div class="text-muted small">Cobros (incluye abonos)</div>
                                 <div class="fs-4 fw-bold">₡<span id="cc-total-cobrado">0.00</span></div>
             
@@ -60,7 +60,7 @@ include('layout.php');
                         </div>
 
                         <div class="col-12">
-                            <div class="border rounded-4 p-3 shadow-sm">
+                           <div class="border rounded-4 p-3 shadow-sm card-totales">
                                 <div class="d-flex justify-content-between">
                                     <span class="text-muted">Subtotal</span>
                                     <span class="fw-semibold">₡<span id="cc-subtotal">0.00</span></span>
