@@ -3024,15 +3024,16 @@ footer {
     margin: auto;
 
    
-    background: linear-gradient(
+  background: linear-gradient(
         135deg,
-        rgba(30, 58, 138, 0.85),
-        rgba(15, 23, 42, 0.9)
-    );
+        rgba(30, 58, 138, 0.88),
+        rgba(15, 23, 42, 0.92)
+    ) !important;
 
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
 
+    color: #ffffff !important;
     border-radius: 22px;
     border: 1px solid rgba(255, 255, 255, 0.08);
 
