@@ -3013,126 +3013,124 @@ footer {
 /*registrar paciente*/
 
 .editar-section {
-  display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    background: radial-gradient(circle at 20% 20%, #1e3a8a 0%, #0f172a 60%);
     min-height: 100vh;
 }
 
-/* 
-   CARD PRINCIPAL
-*/
 .register-card-compact {
     width: 100%;
-    max-width: 900px;
+    max-width: 880px;
     margin: auto;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-    border: 1px solid rgba(255,255,255,0.08);
-    animation: fadeUp .6s ease;
-}
 
-/* Animación suave */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+
+    overflow: hidden;
+    animation: fadeUp .6s ease;
 }
 
 
 .register-card-header {
-    background: linear-gradient(135deg, #1e3a8a, #3f72af);
-    padding: 1.5rem;
+    padding: 1.4rem;
     text-align: center;
+
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+
     color: #fff;
 }
 
 .register-card-header h4 {
     font-weight: 700;
-    margin-bottom: 4px;
+    letter-spacing: 0.5px;
 }
 
 .register-card-header small {
-    opacity: 0.85;
+    opacity: 0.7;
 }
 
-/* 
-   FORMULARIO
- */
+/*FORMULARIO */
 .register-card-compact form {
-    padding: 1.5rem;
+    padding: 1.8rem;
 }
 
 /* Labels */
 .form-label {
+    font-size: 0.8rem;
     font-weight: 600;
-    font-size: 0.85rem;
-    color: #cbd5f5;
-    margin-bottom: 4px;
+    color: #94a3b8;
 }
 
-/* Inputs */
+
 .form-control {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
     color: #fff;
-    border-radius: 12px;
-    height: 44px;
-    font-size: 0.9rem;
+
+    border-radius: 14px;
+    height: 46px;
+
     transition: all 0.25s ease;
+}
+
+/* Hover suave */
+.form-control:hover {
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* Focus elegante */
+.form-control:focus {
+    background: rgba(255,255,255,0.08);
+    border-color: #3f72af;
+
+    box-shadow:
+        0 0 0 2px rgba(63,114,175,0.25),
+        0 8px 20px rgba(0,0,0,0.25);
+
+    color: #fff;
 }
 
 /* Placeholder */
 .form-control::placeholder {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.4);
 }
 
-/* Focus */
-.form-control:focus {
-    background: rgba(255,255,255,0.12);
-    border-color: #3f72af;
-    box-shadow: 0 0 0 3px rgba(63,114,175,0.25);
-    color: #fff;
-}
 
-/* Inputs date */
-input[type="date"] {
-    color-scheme: dark;
-}
-
-/* 
-   BOTÓN
-*/
 .btn-register-custom {
     width: 100%;
-    padding: 0.7rem;
+    padding: 0.75rem;
+
     border-radius: 50px;
     font-weight: 600;
+    letter-spacing: 0.4px;
+
     background: linear-gradient(135deg, #1e3a8a, #3f72af);
     border: none;
+
+    box-shadow: 0 10px 25px rgba(30,58,138,0.35);
+
     transition: all 0.25s ease;
-    box-shadow: 0 10px 25px rgba(30,58,138,0.25);
 }
 
 .btn-register-custom:hover {
     transform: translateY(-2px);
+
     background: linear-gradient(135deg, #162d67, #1e3a8a);
-    box-shadow: 0 15px 35px rgba(30,58,138,0.35);
+
+    box-shadow: 0 15px 35px rgba(30,58,138,0.45);
 }
 
 
 .link-azul {
-    color: #93c5fd;
-    text-decoration: none;
+    color: #60a5fa;
     font-weight: 500;
 }
 
@@ -3140,26 +3138,24 @@ input[type="date"] {
     text-decoration: underline;
 }
 
-
-.alert {
-    border-radius: 12px;
-    font-size: 0.9rem;
-}
-
-/* 
-   RESPONSIVE (TABLET)*/
+/*  RESPONSIVE */
 @media (max-width: 768px) {
 
     .register-card-compact {
-        border-radius: 16px;
+        border-radius: 18px;
     }
 
-    .register-card-header {
+    .register-card-compact form {
         padding: 1.2rem;
     }
 
-    .register-card-header h4 {
-        font-size: 1.3rem;
+}
+
+@media (max-width: 480px) {
+
+    .row.g-4 > [class*="col-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 
     .form-control {
@@ -3167,48 +3163,9 @@ input[type="date"] {
         font-size: 0.85rem;
     }
 
-    .form-label {
-        font-size: 0.8rem;
-    }
-
-}
-
-/* 
-   RESPONSIVE */
-@media (max-width: 480px) {
-
-    .editar-section {
-        padding: 20px 10px;
-    }
-
-    .register-card-compact {
-        border-radius: 14px;
-    }
-
-    .register-card-header h4 {
-        font-size: 1.1rem;
-    }
-
-    .register-card-header small {
-        font-size: 0.75rem;
-    }
-
-    /* IMPORTANTE: una sola columna 
-    .row.g-4 > [class*="col-"] {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }*/
-
-    .form-control {
-        height: 40px;
-        font-size: 0.8rem;
-    }
-
     .btn-register-custom {
         font-size: 0.85rem;
-        padding: 0.6rem;
     }
-
 }
 
 /*registrar personal*/
