@@ -6,7 +6,8 @@ use Mailgun\Mailgun;
 
 function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
-    $apiKey = trim('key-8cb25230844bd05428ed12cc4abe77eb-c50aa110-c193edcc'); 
+    // 🔐 USA EXACTAMENTE LA MISMA KEY DEL CURL (SIN key-)
+    $apiKey = '8cb25230844bd05428ed12cc4abe77eb-c50aa110-c193edcc';
     $domain = 'mg.opticagrisol.com';
 
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
@@ -17,7 +18,8 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
         $mg = Mailgun::create($apiKey);
 
         $result = $mg->messages()->send($domain, [
-            'from' => "$fromName <$fromEmail>",
+            // ⚠️ FORZAMOS FROM CORRECTO DEL DOMINIO
+            'from' => "Optica Grisol <no-responder@$domain>",
             'to' => $destino,
             'subject' => $asunto,
             'html' => $mensajeHTML
