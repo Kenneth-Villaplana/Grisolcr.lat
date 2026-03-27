@@ -23,7 +23,7 @@ unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Óptica Grisol - Agendar Cita</title>
 
     <?php IncluirCSS(); ?>
