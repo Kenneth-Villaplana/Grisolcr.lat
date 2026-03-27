@@ -891,285 +891,57 @@ a.btn-inv-ghost:hover {
   }
 }
 /*cierre de caja*/
-.pv-wrapper {
-    background: linear-gradient(135deg, #0f172a, #1e3a8a);
-    min-height: 100vh;
-    padding: 20px;
-}
-
 /*=========================
-header
+bloques internos con color glass
 =========================*/
-.pv-header {
-    padding: 10px 5px;
-}
 
-.pv-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #e0ecff;
-    letter-spacing: 0.5px;
-}
-
-/*=========================
-boton volver
-=========================*/
-.btn-back-custom {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: #e0ecff;
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 0.85rem;
-    backdrop-filter: blur(6px);
-    transition: all 0.25s ease;
-}
-
-.btn-back-custom:hover {
-    background: rgba(255,255,255,0.15);
-    transform: translateY(-2px);
-}
-
-/*=========================
-cards glass
-=========================*/
-.pv-products-card,
-.pv-cart-card {
-
-    border-radius: 22px;
-
+/*facturas*/
+.border.rounded-4:nth-child(1),
+.border.rounded-4.facturas {
     background: linear-gradient(
         135deg,
-        rgba(255,255,255,0.15),
-        rgba(255,255,255,0.05)
+        rgba(59,130,246,0.35),
+        rgba(37,99,235,0.15)
     );
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-
-    transition: all 0.3s ease;
+    border: 1px solid rgba(59,130,246,0.4);
 }
 
-.pv-products-card:hover,
-.pv-cart-card:hover {
-    transform: translateY(-5px) scale(1.01);
-}
-
-/*=========================
-header cards
-=========================*/
-.pv-products-header {
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.pv-cart-header {
-    background: linear-gradient(135deg, #1e40af, #2563eb);
-    border-radius: 22px 22px 0 0;
-    font-size: 1rem;
-    letter-spacing: 0.4px;
-}
-
-/*=========================
-bloques internos
-=========================*/
-.border.rounded-4 {
-
-    border-radius: 18px !important;
-
+/*cobros*/
+.border.rounded-4:nth-child(2),
+.border.rounded-4.cobros {
     background: linear-gradient(
         135deg,
-        rgba(255,255,255,0.25),
-        rgba(255,255,255,0.08)
+        rgba(96,165,250,0.35),
+        rgba(59,130,246,0.15)
     );
-
-    backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(255,255,255,0.15);
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.25),
-        inset 0 1px 0 rgba(255,255,255,0.3);
-
-    transition: all 0.25s ease;
+    border: 1px solid rgba(96,165,250,0.4);
 }
 
-.border.rounded-4:hover {
-    transform: translateY(-3px);
+/*totales*/
+.border.rounded-4:nth-child(3),
+.border.rounded-4.totales {
+    background: linear-gradient(
+        135deg,
+        rgba(147,197,253,0.30),
+        rgba(59,130,246,0.12)
+    );
+    border: 1px solid rgba(147,197,253,0.35);
 }
 
-/*=========================
-textos y montos
-=========================*/
-#cc-total,
-#cc-total-facturado,
-#cc-total-cobrado {
-    color: #93c5fd;
-    text-shadow: 0 0 8px rgba(147,197,253,0.3);
+/*metodos de pago*/
+.pv-cart-card .border.rounded-4 {
+    background: linear-gradient(
+        135deg,
+        rgba(37,99,235,0.30),
+        rgba(29,78,216,0.15)
+    );
+    border: 1px solid rgba(37,99,235,0.4);
 }
 
-/*=========================
-input moderno
-=========================*/
-#cc-efectivo-contado {
-
-    border-radius: 14px;
-
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #fff;
-
-    height: 45px;
-
-    backdrop-filter: blur(10px);
-
-    transition: all 0.25s ease;
-}
-
-#cc-efectivo-contado::placeholder {
-    color: rgba(255,255,255,0.6);
-}
-
-#cc-efectivo-contado:focus {
-    border-color: #60a5fa;
-
-    box-shadow:
-        0 0 0 2px rgba(96,165,250,0.3),
-        0 10px 25px rgba(0,0,0,0.3);
-}
-
-/*=========================
-diferencia
-=========================*/
+/*diferencia*/
 #cc-diferencia {
     font-size: 1.3rem;
     color: #facc15;
-}
-
-/*=========================
-boton cierre
-=========================*/
-#btnCerrarCaja {
-
-    border-radius: 999px;
-
-    font-weight: 600;
-
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    border: none;
-    color: white;
-
-    padding: 12px;
-
-    box-shadow: 0 10px 30px rgba(37,99,235,0.5);
-
-    transition: all 0.25s ease;
-}
-
-#btnCerrarCaja:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(37,99,235,0.7);
-}
-
-/*=========================
-badge fecha
-=========================*/
-#cc-fecha {
-    border-radius: 999px;
-    padding: 5px 12px;
-    font-size: 0.75rem;
-    background: rgba(255,255,255,0.1);
-    color: #e0ecff;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-/*=========================
-modales modernos
-=========================*/
-.modal-content {
-
-    border-radius: 20px;
-
-    background: linear-gradient(
-        135deg,
-        rgba(30,58,138,0.9),
-        rgba(30,64,175,0.85)
-    );
-
-    backdrop-filter: blur(15px);
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    color: white;
-
-    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-}
-
-/*=========================
-animacion
-=========================*/
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.pv-products-card,
-.pv-cart-card {
-    animation: fadeUp 0.6s ease;
-}
-
-/*=========================
-responsive
-=========================*/
-@media (max-width: 768px) {
-
-    .pv-title {
-        font-size: 1.6rem;
-    }
-
-    .pv-products-card,
-    .pv-cart-card {
-        border-radius: 18px;
-    }
-
-    .border.rounded-4 {
-        padding: 1rem !important;
-    }
-
-    #btnCerrarCaja {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .pv-wrapper {
-        padding: 10px;
-    }
-
-    .pv-title {
-        font-size: 1.3rem;
-    }
-
-    .border.rounded-4 {
-        padding: 0.8rem !important;
-    }
-
-    #cc-efectivo-contado {
-        height: 42px;
-        font-size: 0.9rem;
-    }
 }
 /* 
    HISTORIAL CIERRE DE CAJA
