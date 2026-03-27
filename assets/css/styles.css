@@ -929,7 +929,7 @@ boton volver
 }
 
 /*=========================
-card principal resumen
+card resumen del dia (glass azul)
 =========================*/
 .pv-products-card {
 
@@ -937,39 +937,84 @@ card principal resumen
 
     background: linear-gradient(
         135deg,
-        rgba(37,99,235,0.18),
-        rgba(59,130,246,0.08)
+        rgba(59,130,246,0.25),
+        rgba(37,99,235,0.12)
     );
 
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(59,130,246,0.25);
+    border: 1px solid rgba(59,130,246,0.35);
 
     box-shadow:
-        0 15px 40px rgba(37,99,235,0.15),
+        0 20px 45px rgba(37,99,235,0.18),
         inset 0 1px 0 rgba(255,255,255,0.6);
+
+    position: relative;
+    overflow: hidden;
 
     transition: all 0.3s ease;
 }
 
+/*efecto glass superior*/
+.pv-products-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0.35),
+        rgba(255,255,255,0.05)
+    );
+
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 .pv-products-card:hover {
     transform: translateY(-4px);
+
     box-shadow:
-        0 25px 60px rgba(37,99,235,0.25),
+        0 30px 70px rgba(37,99,235,0.25),
         0 0 25px rgba(59,130,246,0.25);
 }
 
 /*=========================
-header cards
+header resumen
 =========================*/
 .pv-products-header {
-    border-bottom: 1px solid rgba(59,130,246,0.2);
+    border-bottom: 1px solid rgba(59,130,246,0.25);
 }
 
 .pv-products-header h5 {
     color: #1e3a8a;
+    font-weight: 600;
 }
 
+/*=========================
+card control caja (derecha)
+=========================*/
+.pv-cart-card {
+
+    border-radius: 22px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.85),
+        rgba(255,255,255,0.65)
+    );
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(0,0,0,0.05);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.08);
+}
+
+/*=========================
+header control caja
+=========================*/
 .pv-cart-header {
     background: linear-gradient(135deg, #1e40af, #2563eb);
     border-radius: 22px 22px 0 0;
@@ -978,100 +1023,27 @@ header cards
 }
 
 /*=========================
-card control caja
-=========================*/
-.pv-cart-card {
-
-    border-radius: 22px;
-
-    background: linear-gradient(
-        135deg,
-        rgba(59,130,246,0.12),
-        rgba(37,99,235,0.05)
-    );
-
-    backdrop-filter: blur(14px);
-
-    border: 1px solid rgba(59,130,246,0.25);
-
-    box-shadow:
-        0 15px 35px rgba(37,99,235,0.12);
-}
-
-/*=========================
-bloques internos base
+tarjetas internas (claras para contraste)
 =========================*/
 .border.rounded-4 {
 
     border-radius: 18px !important;
 
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.75);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.6);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.8);
 
     transition: all 0.25s ease;
 }
 
-/*=========================
-facturas
-=========================*/
-.card-facturas {
-    background: linear-gradient(
-        135deg,
-        rgba(37,99,235,0.25),
-        rgba(37,99,235,0.10)
-    );
-
-    border: 1px solid rgba(37,99,235,0.35);
-
-    box-shadow:
-        0 10px 25px rgba(37,99,235,0.15),
-        inset 0 1px 0 rgba(255,255,255,0.5);
-}
-
-/*=========================
-cobros
-=========================*/
-.card-cobros {
-    background: linear-gradient(
-        135deg,
-        rgba(96,165,250,0.25),
-        rgba(59,130,246,0.10)
-    );
-
-    border: 1px solid rgba(96,165,250,0.35);
-
-    box-shadow:
-        0 10px 25px rgba(96,165,250,0.15),
-        inset 0 1px 0 rgba(255,255,255,0.5);
-}
-
-/*=========================
-totales
-=========================*/
-.card-totales {
-    background: linear-gradient(
-        135deg,
-        rgba(147,197,253,0.25),
-        rgba(59,130,246,0.08)
-    );
-
-    border: 1px solid rgba(147,197,253,0.35);
-
-    box-shadow:
-        0 10px 25px rgba(147,197,253,0.15),
-        inset 0 1px 0 rgba(255,255,255,0.6);
-}
-
-/*=========================
-hover tarjetas
-=========================*/
-.card-facturas:hover,
-.card-cobros:hover,
-.card-totales:hover {
-    transform: translateY(-3px) scale(1.02);
-
-    box-shadow:
-        0 20px 40px rgba(37,99,235,0.25),
-        0 0 20px rgba(59,130,246,0.25);
+.border.rounded-4:hover {
+    transform: translateY(-2px);
 }
 
 /*=========================
@@ -1090,7 +1062,7 @@ input moderno
 
     border-radius: 14px;
 
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.8);
     border: 1px solid rgba(37,99,235,0.2);
 
     height: 45px;
