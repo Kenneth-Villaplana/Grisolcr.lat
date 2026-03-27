@@ -520,9 +520,8 @@
 }
 
 
-/* ===========================================================
-   🎨 VARIABLES BASE
-   =========================================================== */
+/* 
+   VARIABLES BASE */
 :root {
     --blue-primary: #2563eb;
     --blue-accent: #1e40af;
@@ -531,9 +530,7 @@
     --text-dark: #1f2937;
 }
 
-/* ===========================================================
-   📦 CONTENEDOR GENERAL
-   =========================================================== */
+
 .citas-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -541,9 +538,7 @@
     flex-direction: column;
 }
 
-/* ===========================================================
-   🟦 TARJETAS DE CITA (SIEMPRE BLANCAS)
-   =========================================================== */
+
 .cita-card {
     background: #ffffff;
     border-radius: 14px;
@@ -569,9 +564,7 @@
     transform: none;
 }
 
-/* ===========================================================
-   🟦 ENCABEZADO
-   =========================================================== */
+
 .cita-header {
     display: flex;
     justify-content: space-between;
@@ -591,9 +584,7 @@
     color: #6c757d;
 }
 
-/* ===========================================================
-   🟦 BADGES DE ESTADO (SOLO EL BADGE TIENE COLOR)
-   =========================================================== */
+
 .estado-badge {
     padding: .35rem .9rem;
     border-radius: 999px;
@@ -602,7 +593,7 @@
     white-space: nowrap;
 }
 
-/* 🔵 Pendiente → SOLO texto azul */
+
 .estado-pendiente {
     background: transparent;
     color: var(--blue-primary);
@@ -631,6 +622,12 @@
 }
 
 
+.cita-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .75rem;
+    margin-top: .75rem;
+}
 
 .info-item {
     display: flex;
@@ -653,7 +650,7 @@
 
 
 .cita-actions {
-   
+    display: flex;
     justify-content: flex-end;
     gap: .5rem;
     margin-top: .75rem;
@@ -680,7 +677,7 @@
     border-radius: 12px;
 }
 
-/*filtro*/
+/*filtro de citas*/
 .citas-filters {
     max-width: 1200px;
     margin: 0 auto 2rem;
@@ -708,7 +705,7 @@
     font-size: .9rem;
 }
 
-/* motivo*/
+
 .motivo-label {
     color: #6c757d;
     font-weight: 600;
@@ -769,7 +766,7 @@
 }
 
 
-
+/*filtro*/
 .citas-filters {
     max-width: 900px;
     margin: 0 auto 2.5rem;
@@ -857,7 +854,12 @@
     transform: translateY(-1px);
 }
 
-
+/*responsive*/
+@media (max-width: 768px) {
+    .filter-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 
     .filter-actions {
         justify-content: center;
@@ -867,7 +869,7 @@
         width: 100%;
         justify-content: center;
     }
-
+}
 
 
 .motivo-label {
@@ -1053,116 +1055,4 @@ footer, .footer {
     margin-top: 40px !important;
     display: block;
 }
-@media (max-width: 768px) {
 
-    /* CONTENEDORES */
-    .container,
-    .citas-container {
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
-
-    /* HEADER */
-    .header-premium {
-        padding: 1.2rem 1rem !important;
-    }
-
-    .header-premium-title {
-        font-size: 1.6rem !important;
-    }
-
-    /* FILTROS */
-    .filter-card {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 0.8rem !important;
-    }
-
-    .filter-group {
-        width: 100%;
-    }
-
-    .filter-actions {
-        width: 100%;
-    }
-
-    #clearFilters {
-        width: 100%;
-    }
-
-    /* TARJETAS */
-    .cita-card {
-        padding: 1rem !important;
-    }
-
-    /* HEADER CITA */
-    .cita-header {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.5rem !important;
-    }
-
-    /* GRID INFO */
-    .cita-info-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 0.6rem !important;
-    }
-
-    /* ACCIONES */
-    .cita-actions {
-        flex-direction: column !important;
-        width: 100%;
-    }
-
-    .cita-actions .btn {
-        width: 100% !important;
-        justify-content: center;
-    }
-
-    /* WIZARD (IMPORTANTE) */
-    .date-time-selection {
-        grid-template-columns: 1fr !important;
-    }
-
-    /* HORARIOS */
-    .time-slots-container,
-    .time-slots-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-
-    /* MODALES */
-    .modal-dialog {
-        margin: 10px !important;
-    }
-
-    .modal-confirm .modal-footer {
-        flex-direction: column !important;
-    }
-
-    .modal-confirm .btn {
-        width: 100% !important;
-    }
-}
-
-
-/* celulares*/
-@media (max-width: 480px) {
-
-    .header-premium-title {
-        font-size: 1.3rem !important;
-    }
-
-    .step-label {
-        font-size: 0.65rem !important;
-    }
-
-    .time-slots-container,
-    .time-slots-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    .btn {
-        font-size: 0.75rem !important;
-    }
-}
