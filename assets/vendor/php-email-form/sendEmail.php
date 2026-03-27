@@ -3,7 +3,7 @@
 function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
     // 🔐 CONFIG MAILGUN
-    $apiKey = 'key-d2b46df408536cacb434a3a4a622ce48-c50aa110-12696da7';
+    $apiKey = 'key-f97dc49ef6912ad3caf7bc87709f74bd-c50aa110-6d99857f';
     $domain = 'mg.opticagrisol.com';
 
     // Validaciones básicas
