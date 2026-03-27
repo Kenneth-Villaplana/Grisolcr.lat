@@ -890,7 +890,266 @@ a.btn-inv-ghost:hover {
     width: 100%;
   }
 }
+/*cierre de caja*/
+.pv-wrapper {
+    background: #f8fafc;
+    min-height: 100vh;
+}
 
+/* =========================
+   HEADER
+========================= */
+.pv-header {
+    padding: 10px 5px;
+}
+
+.pv-title {
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+/* =========================
+   BOTÓN VOLVER
+========================= */
+.btn-back-custom {
+    background: rgba(30, 58, 138, 0.08);
+    border: 1px solid rgba(30, 58, 138, 0.15);
+    color: #1e3a8a;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    transition: all 0.25s ease;
+}
+
+.btn-back-custom:hover {
+    background: rgba(30, 58, 138, 0.15);
+    transform: translateY(-1px);
+}
+
+/* =========================
+   CARDS GLASS
+========================= */
+.pv-products-card,
+.pv-cart-card {
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.7),
+        rgba(255,255,255,0.4)
+    );
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(0,0,0,0.05);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+
+    transition: all 0.25s ease;
+}
+
+.pv-products-card:hover,
+.pv-cart-card:hover {
+    transform: translateY(-3px);
+}
+
+/* =========================
+   HEADER CARDS
+========================= */
+.pv-products-header {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.pv-cart-header {
+    background: linear-gradient(135deg, #1e3a8a, #3f72af);
+    border-radius: 20px 20px 0 0;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+/* =========================
+   BLOQUES INTERNOS
+========================= */
+.border.rounded-4 {
+
+    border-radius: 16px !important;
+
+    background: rgba(255,255,255,0.75);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(0,0,0,0.06);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+
+    transition: all 0.25s ease;
+}
+
+.border.rounded-4:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   TEXTOS Y MONTOS
+========================= */
+#cc-total,
+#cc-total-facturado,
+#cc-total-cobrado {
+    color: #1e3a8a;
+}
+
+/* =========================
+   INPUT MODERNO
+========================= */
+#cc-efectivo-contado {
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(0,0,0,0.1);
+
+    height: 45px;
+
+    transition: all 0.25s ease;
+}
+
+#cc-efectivo-contado:focus {
+    border-color: #3f72af;
+
+    box-shadow:
+        0 0 0 2px rgba(63,114,175,0.25),
+        0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   DIFERENCIA (DINÁMICO)
+========================= */
+#cc-diferencia {
+    font-size: 1.2rem;
+}
+
+/* =========================
+   BOTÓN CIERRE
+========================= */
+#btnCerrarCaja {
+
+    border-radius: 999px;
+
+    font-weight: 600;
+
+    background: linear-gradient(135deg, #1e3a8a, #3f72af);
+    border: none;
+    color: white;
+
+    padding: 10px;
+
+    box-shadow: 0 10px 25px rgba(30,58,138,0.25);
+
+    transition: all 0.25s ease;
+}
+
+#btnCerrarCaja:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(30,58,138,0.35);
+}
+
+/* =========================
+   BADGE FECHA
+========================= */
+#cc-fecha {
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+}
+
+/* =========================
+   MODALES MODERNOS
+========================= */
+.modal-content {
+
+    border-radius: 18px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.95),
+        rgba(255,255,255,0.85)
+    );
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(0,0,0,0.05);
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   ANIMACIÓN ENTRADA
+========================= */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pv-products-card,
+.pv-cart-card {
+    animation: fadeUp 0.5s ease;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+
+    .pv-title {
+        font-size: 1.5rem;
+    }
+
+    .pv-products-card,
+    .pv-cart-card {
+        border-radius: 16px;
+    }
+
+    .border.rounded-4 {
+        padding: 1rem !important;
+    }
+
+    #btnCerrarCaja {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .pv-wrapper {
+        padding: 10px;
+    }
+
+    .pv-title {
+        font-size: 1.3rem;
+    }
+
+    .border.rounded-4 {
+        padding: 0.8rem !important;
+    }
+
+    #cc-efectivo-contado {
+        height: 42px;
+        font-size: 0.9rem;
+    }
+}
 /* 
    HISTORIAL CIERRE DE CAJA
 */
