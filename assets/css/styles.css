@@ -891,41 +891,39 @@ a.btn-inv-ghost:hover {
   }
 }
 /*cierre de caja*/
-.pv-wrapper {
-    background: #ffffff;
-    min-height: 100vh;
+/*=========================
+fix bootstrap (MUY IMPORTANTE)
+=========================*/
+.pv-products-card.card {
+    background: transparent !important;
 }
 
 /*=========================
-header
+card resumen del dia (el del check)
 =========================*/
-.pv-header {
-    padding: 10px 5px;
-}
+.pv-products-card {
 
-.pv-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1e3a8a;
-}
+    border-radius: 20px;
 
-/*=========================
-boton volver
-=========================*/
-.btn-back-custom {
-    background: rgba(37,99,235,0.08);
-    border: 1px solid rgba(37,99,235,0.2);
-    color: #1e3a8a;
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 0.85rem;
-    backdrop-filter: blur(6px);
-    transition: all 0.25s ease;
-}
+    background: linear-gradient(
+        135deg,
+        rgba(59,130,246,0.22),
+        rgba(37,99,235,0.08)
+    ) !important;
 
-.btn-back-custom:hover {
-    background: rgba(37,99,235,0.15);
-    transform: translateY(-2px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(59,130,246,0.25);
+
+    box-shadow:
+        0 10px 30px rgba(37,99,235,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+
+    position: relative;
+    overflow: hidden;
+
+    transition: all 0.3s ease;
 }
 
 /*=========================
@@ -940,34 +938,7 @@ animacion brillo
     }
 }
 
-/*=========================
-card resumen del dia
-=========================*/
-.pv-products-card {
-
-    border-radius: 20px;
-
-    background: linear-gradient(
-        135deg,
-        rgba(59,130,246,0.22),
-        rgba(37,99,235,0.08)
-    );
-
-    backdrop-filter: blur(16px);
-
-    border: 1px solid rgba(59,130,246,0.25);
-
-    box-shadow:
-        0 10px 30px rgba(37,99,235,0.12),
-        inset 0 1px 0 rgba(255,255,255,0.6);
-
-    position: relative;
-    overflow: hidden;
-
-    transition: all 0.3s ease;
-}
-
-/*brillo animado*/
+/*brillo*/
 .pv-products-card::after {
     content: "";
     position: absolute;
@@ -1002,13 +973,8 @@ header resumen
     border-bottom: 1px solid rgba(59,130,246,0.25);
 }
 
-.pv-products-header h5 {
-    color: #1e3a8a;
-    font-weight: 600;
-}
-
 /*=========================
-cards internas base
+cards internas (las X)
 =========================*/
 .border.rounded-4 {
 
@@ -1022,9 +988,7 @@ cards internas base
     transition: all 0.25s ease;
 }
 
-/*=========================
-facturas
-=========================*/
+/*facturas*/
 .card-facturas {
     background: linear-gradient(
         135deg,
@@ -1033,15 +997,9 @@ facturas
     );
 
     border: 1px solid rgba(37,99,235,0.25);
-
-    box-shadow:
-        0 8px 20px rgba(37,99,235,0.10),
-        inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
-/*=========================
-cobros
-=========================*/
+/*cobros*/
 .card-cobros {
     background: linear-gradient(
         135deg,
@@ -1050,15 +1008,9 @@ cobros
     );
 
     border: 1px solid rgba(96,165,250,0.25);
-
-    box-shadow:
-        0 8px 20px rgba(96,165,250,0.10),
-        inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
-/*=========================
-totales
-=========================*/
+/*totales*/
 .card-totales {
     background: linear-gradient(
         135deg,
@@ -1067,15 +1019,9 @@ totales
     );
 
     border: 1px solid rgba(147,197,253,0.25);
-
-    box-shadow:
-        0 8px 20px rgba(147,197,253,0.10),
-        inset 0 1px 0 rgba(255,255,255,0.7);
 }
 
-/*=========================
-brillo en cards internas
-=========================*/
+/*brillo interno*/
 .card-facturas::after,
 .card-cobros::after,
 .card-totales::after {
@@ -1103,126 +1049,30 @@ brillo en cards internas
 .card-cobros:hover,
 .card-totales:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 25px rgba(37,99,235,0.15);
 }
 
 /*=========================
-card control caja
+resto estilos (igual)
 =========================*/
-.pv-cart-card {
-
-    border-radius: 20px;
-
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.9),
-        rgba(255,255,255,0.7)
-    );
-
-    backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(0,0,0,0.05);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,0.08);
+.pv-wrapper {
+    background: #f4f7fb;
+    min-height: 100vh;
 }
 
-/*=========================
-header control caja
-=========================*/
-.pv-cart-header {
-    background: linear-gradient(135deg, #1e40af, #2563eb);
-    border-radius: 20px 20px 0 0;
-}
-
-/*=========================
-input
-=========================*/
-#cc-efectivo-contado {
-
-    border-radius: 14px;
-
-    background: rgba(255,255,255,0.85);
-    border: 1px solid rgba(37,99,235,0.2);
-
-    height: 45px;
-
-    transition: all 0.25s ease;
-}
-
-#cc-efectivo-contado:focus {
-    border-color: #3b82f6;
-
-    box-shadow:
-        0 0 0 2px rgba(59,130,246,0.25);
-}
-
-/*=========================
-diferencia
-=========================*/
-#cc-diferencia {
-    font-size: 1.3rem;
-    color: #f59e0b;
-}
-
-/*=========================
-boton cierre
-=========================*/
-#btnCerrarCaja {
-
-    border-radius: 999px;
-
-    font-weight: 600;
-
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    border: none;
-    color: white;
-
-    padding: 12px;
-
-    box-shadow: 0 10px 30px rgba(37,99,235,0.3);
-
-    transition: all 0.25s ease;
-}
-
-#btnCerrarCaja:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(37,99,235,0.4);
-}
-
-/*=========================
-badge fecha
-=========================*/
-#cc-fecha {
-    border-radius: 999px;
-    padding: 5px 12px;
-    font-size: 0.75rem;
-
-    background: rgba(37,99,235,0.1);
+.pv-title {
     color: #1e3a8a;
-
-    border: 1px solid rgba(37,99,235,0.2);
 }
 
-/*=========================
-animacion entrada
-=========================*/
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/*boton*/
+#btnCerrarCaja {
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
 }
 
-.pv-products-card,
-.pv-cart-card {
-    animation: fadeUp 0.5s ease;
+/*input*/
+#cc-efectivo-contado {
+    background: rgba(255,255,255,0.85);
 }
 /* 
    HISTORIAL CIERRE DE CAJA
