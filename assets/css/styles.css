@@ -3013,6 +3013,9 @@ footer {
 /*registrar paciente*/
 
 .editar-section {
+  display: flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, #0f172a, #1e3a8a);
     min-height: 100vh;
 }
