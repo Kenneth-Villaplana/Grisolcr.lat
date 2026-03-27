@@ -938,7 +938,17 @@ boton volver
 /*=========================
 card resumen del dia (check)
 =========================*/
-.pv-products-card {
+/*=========================
+fix bootstrap SOLO cierre caja
+=========================*/
+.card.pv-cc-resumen {
+    background: transparent !important;
+}
+
+/*=========================
+card resumen cierre caja
+=========================*/
+.pv-cc-resumen {
 
     border-radius: 20px;
 
@@ -949,7 +959,6 @@ card resumen del dia (check)
     ) !important;
 
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 
     border: 1px solid rgba(59,130,246,0.25);
 
@@ -961,23 +970,8 @@ card resumen del dia (check)
     overflow: hidden;
 }
 
-/*=========================
-header resumen
-=========================*/
-.pv-products-header {
-    border-bottom: 1px solid rgba(59,130,246,0.25);
-}
-
-/*=========================
-animacion brillo
-=========================*/
-@keyframes shineMove {
-    0% { transform: translateX(-120%); }
-    100% { transform: translateX(120%); }
-}
-
-/*brillo solo card principal*/
-.pv-products-card::after {
+/*brillo*/
+.pv-cc-resumen::after {
     content: "";
     position: absolute;
     top: 0;
