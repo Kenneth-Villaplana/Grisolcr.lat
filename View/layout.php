@@ -181,7 +181,7 @@ function IncluirCSS() {
     <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/assets/vendor/glightbox/css/glightbox.min.css">
     <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=9">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=10">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
      <link rel="stylesheet" href="/assets/css/pos.css">
     ';
