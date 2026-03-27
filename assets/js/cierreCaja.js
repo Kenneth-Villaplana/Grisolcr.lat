@@ -230,7 +230,19 @@ async function cargarHistorialCierres() {
         const tbody = document.getElementById("tablaCierres");
         const contador = document.getElementById("cantidadCierres");
 
+         const elTotal = document.getElementById("resumen-total");
+        const elEfectivo = document.getElementById("resumen-efectivo");
+        const elTarjeta = document.getElementById("resumen-tarjeta");
+        const elSinpe = document.getElementById("resumen-sinpe");
+        const elTransferencia = document.getElementById("resumen-transferencia");
+
         if (!tbody) return;
+const money = (val) => {
+            return Number(val || 0).toLocaleString("es-CR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        };
 
         if (!data.length) {
             tbody.innerHTML = `
@@ -240,43 +252,83 @@ async function cargarHistorialCierres() {
                     </td>
                 </tr>`;
             if (contador) contador.textContent = 0;
+
+            if (elTotal) elTotal.textContent = "₡0.00";
+            if (elEfectivo) elEfectivo.textContent = "₡0.00";
+            if (elTarjeta) elTarjeta.textContent = "₡0.00";
+            if (elSinpe) elSinpe.textContent = "₡0.00";
+            if (elTransferencia) elTransferencia.textContent = "₡0.00";
+
             return;
         }
 
         tbody.innerHTML = "";
         if (contador) contador.textContent = data.length;
 
-        data.forEach(c => {
+         let total = 0;
+        let efectivo = 0;
+        let tarjeta = 0;
+        let sinpe = 0;
+        let transferencia = 0;
+
+    
+        let html = "";
+
+         data.forEach(c => {
+
+            const totalCobrado = parseFloat(c.TotalCobrado) || 0;
+            const ef = parseFloat(c.Efectivo) || 0;
+            const tj = parseFloat(c.Tarjeta) || 0;
+            const sp = parseFloat(c.Sinpe) || 0;
+            const tr = parseFloat(c.Transferencia) || 0;
+            const contado = parseFloat(c.EfectivoContado) || 0;
             const diff = parseFloat(c.Diferencia) || 0;
+
+            //  acumular
+            total += totalCobrado;
+            efectivo += ef;
+            tarjeta += tj;
+            sinpe += sp;
+            transferencia += tr;
 
             const diffClass =
                 diff === 0 ? "monto-total" :
                 diff > 0 ? "monto-positivo" :
                 "monto-negativo";
 
-            tbody.innerHTML += `
+            html += `
                 <tr>
                     <td>${c.Fecha}</td>
                     <td><span class="cajero-name">${c.Cajero}</span></td>
                     <td>${c.Facturas}</td>
 
-                    <td><span class="monto-pill monto-total">₡${c.TotalCobrado}</span></td>
-                    <td><span class="monto-pill monto-total">₡${c.Efectivo}</span></td>
-                    <td><span class="monto-pill monto-total">₡${c.Tarjeta}</span></td>
-                    <td><span class="monto-pill monto-total">₡${c.Sinpe}</span></td>
-                    <td><span class="monto-pill monto-total">₡${c.Transferencia}</span></td>
+                    <td><span class="monto-pill monto-total">₡${money(totalCobrado)}</span></td>
+                    <td><span class="monto-pill monto-total">₡${money(ef)}</span></td>
+                    <td><span class="monto-pill monto-total">₡${money(tj)}</span></td>
+                    <td><span class="monto-pill monto-total">₡${money(sp)}</span></td>
+                    <td><span class="monto-pill monto-total">₡${money(tr)}</span></td>
 
-                    <td><span class="monto-pill monto-total">₡${c.EfectivoContado}</span></td>
+                    <td><span class="monto-pill monto-total">₡${money(contado)}</span></td>
 
-                    <td><span class="monto-pill ${diffClass}">₡${c.Diferencia}</span></td>
+                    <td><span class="monto-pill ${diffClass}">₡${money(diff)}</span></td>
 
                     <td>${c.HoraCierre}</td>
                 </tr>
             `;
         });
 
+        tbody.innerHTML = html;
+
+        // ACTUALIZAR RESUMEN SUPERIOR
+        if (elTotal) elTotal.textContent = "₡" + money(total);
+        if (elEfectivo) elEfectivo.textContent = "₡" + money(efectivo);
+        if (elTarjeta) elTarjeta.textContent = "₡" + money(tarjeta);
+        if (elSinpe) elSinpe.textContent = "₡" + money(sinpe);
+        if (elTransferencia) elTransferencia.textContent = "₡" + money(transferencia);
+
     } catch (e) {
         console.error("Error cargando historial:", e);
         mostrarAlerta("Error cargando historial de cierres.");
     }
+
 }
