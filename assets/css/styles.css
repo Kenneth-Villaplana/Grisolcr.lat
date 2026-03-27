@@ -934,44 +934,55 @@ boton volver
 .card.pv-products-card {
     background: transparent !important;
 }
+ 
 
-/*=========================
-card resumen del dia (check)
-=========================*/
-/*=========================
-fix bootstrap SOLO cierre caja
-=========================*/
-.card.pv-cc-resumen {
+.cc-resumen.card,
+.cc-resumen .card-body {
     background: transparent !important;
 }
 
 /*=========================
-card resumen cierre caja
+FONDO REAL 
 =========================*/
-.pv-cc-resumen {
+.cc-resumen {
 
     border-radius: 20px;
 
     background: linear-gradient(
         135deg,
-        rgba(59,130,246,0.20),
-        rgba(37,99,235,0.08)
+        rgba(59,130,246,0.25),
+        rgba(37,99,235,0.10)
     ) !important;
 
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 
-    border: 1px solid rgba(59,130,246,0.25);
+    border: 1px solid rgba(59,130,246,0.30);
 
     box-shadow:
-        0 10px 30px rgba(37,99,235,0.10),
+        0 10px 30px rgba(37,99,235,0.15),
         inset 0 1px 0 rgba(255,255,255,0.6);
 
     position: relative;
     overflow: hidden;
 }
 
-/*brillo*/
-.pv-cc-resumen::after {
+/*=========================
+HEADER 
+=========================*/
+.cc-resumen .pv-products-header {
+    background: transparent !important;
+}
+
+/*=========================
+ANIMACION BRILLO
+=========================*/
+@keyframes shineMove {
+    0% { transform: translateX(-120%); }
+    100% { transform: translateX(120%); }
+}
+
+.cc-resumen::after {
     content: "";
     position: absolute;
     top: 0;
@@ -981,8 +992,8 @@ card resumen cierre caja
 
     background: linear-gradient(
         120deg,
-        rgba(255,255,255,0.5),
-        rgba(255,255,255,0.1),
+        rgba(255,255,255,0.6),
+        rgba(255,255,255,0.15),
         transparent
     );
 
