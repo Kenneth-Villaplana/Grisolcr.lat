@@ -205,7 +205,7 @@ async function agregarAlCarrito(productId) {
     if (existente) {
         existente.cantidad++;
     } else {
-        cart.push({ ...producto, cantidad: 1, descuento: 0 });
+        cart.push({ ...producto, cantidad: 1, descuento: 0, impuesto: 0 });
     }
 
     renderCarrito();
@@ -223,6 +223,12 @@ function actualizarDescuento(id, descuento) {
     renderCarrito();
 }
 
+function actualizarImpuesto(id, impuesto) {
+    const item = cart.find(i => i.id === id);
+    item.impuesto = parseFloat(impuesto) || 0;
+    renderCarrito();
+}
+
 function eliminarProducto(id) {
     cart = cart.filter(i => i.id !== id);
     window.cart = cart;
@@ -232,19 +238,25 @@ function eliminarProducto(id) {
 function calcularTotales() {
     let subtotal = 0;
     let totalDescuento = 0;
+    let totalImpuesto = 0;
 
     cart.forEach(item => {
         const totalProducto = item.precio * item.cantidad;
+        const descuentoLinea = totalProducto * ((parseFloat(item.descuento) || 0) / 100);
+        const baseLinea = totalProducto - descuentoLinea;
+        const impuestoLinea = baseLinea * ((parseFloat(item.impuesto) || 0) / 100);
+
+
         subtotal += totalProducto;
-        totalDescuento += totalProducto * (item.descuento / 100);
+        totalDescuento += descuentoLinea;
+        totalImpuesto += impuestoLinea;
     });
 
-    const iva   = (subtotal - totalDescuento) * 0.13;
-    const total = subtotal - totalDescuento + iva;
+    const total = subtotal - totalDescuento + totalImpuesto;
 
     cartSubtotal.textContent = subtotal.toFixed(2);
     cartDiscount.textContent = totalDescuento.toFixed(2);
-    cartTax.textContent      = iva.toFixed(2);
+    cartTax.textContent      = totalImpuesto.toFixed(2);
     cartTotal.textContent    = total.toFixed(2);
 
     calcularCambio();
@@ -298,7 +310,11 @@ function renderCarrito() {
     }
 
     cart.forEach(item => {
-        const totalProducto = item.precio * item.cantidad * (1 - item.descuento / 100);
+        const subtotalLinea = item.precio * item.cantidad;
+        const descuentoLinea = subtotalLinea * ((parseFloat(item.descuento) || 0) / 100);
+        const baseLinea = subtotalLinea - descuentoLinea;
+        const impuestoLinea = baseLinea * ((parseFloat(item.impuesto) || 0) / 100);
+        const totalProducto = baseLinea + impuestoLinea;
 
         const div = document.createElement("div");
         div.className = "";
@@ -347,6 +363,19 @@ function renderCarrito() {
 
                         <span class="input-group-text">%</span>
                     </div>
+                    
+                    <div class="input-group input-group-sm input-impuesto">
+                        <span class="input-group-text">Imp.</span>
+
+    <                          input type="number" 
+                               min="0" 
+                               max="100" 
+                               value="${item.impuesto || 0}" 
+                               class="form-control"
+                               onchange="actualizarImpuesto(${item.id}, this.value)">
+
+                         <span class="input-group-text">%</span>
+                     </div>
 
                     <div class="item-total">₡${totalProducto.toFixed(2)}</div>
                 </div>
@@ -727,7 +756,8 @@ if (metodoPago === "efectivo") {
             descripcion: i.nombre,
             cantidad: i.cantidad,
             precioUnitario: i.precio,
-            descuento: i.descuento
+            descuento: i.descuento,
+            impuesto: i.impuesto || 0
         }))
     };
 
@@ -834,7 +864,9 @@ function mostrarFacturaTicket(factura) {
                         <th style="width:40%">Producto</th>
                         <th style="width:15%">Cant</th>
                         <th style="width:15%">Desc</th>
+                        <th style="width:15%">Imp</th>
                         <th style="width:30%">Total</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -843,6 +875,7 @@ function mostrarFacturaTicket(factura) {
                             <td>${item.Nombre}</td>
                             <td>${item.Cantidad}</td>
                             <td>${item.Descuento}%</td>
+                            <td>${item.Impuesto || 0}%</td>
                             <td>₡${parseFloat(item.Total).toFixed(2)}</td>
                         </tr>
                     `).join("")}
@@ -852,7 +885,7 @@ function mostrarFacturaTicket(factura) {
             <hr>
             <strong>Subtotal:</strong> ₡${encabezado.Subtotal}<br>
             <strong>Descuento:</strong> -₡${encabezado.Descuento}<br>
-            <strong>IVA (13%):</strong> ₡${encabezado.IVA}<br>
+            <strong>Impuesto:</strong> ₡${encabezado.IVA}<br>
             <hr>
 ${
     (parseFloat(encabezado.SaldoPendiente) > 0)
