@@ -115,7 +115,7 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <span>IVA (13%):</span>
+                            <span>Impuesto:</span>
                             <span>₡<span id="cart-tax">0.00</span></span>
                         </div>
 
