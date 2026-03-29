@@ -367,7 +367,7 @@ function renderCarrito() {
                     <div class="input-group input-group-sm input-impuesto">
                         <span class="input-group-text">Imp.</span>
 
-    <                          input type="number" 
+                            <input type="number" 
                                min="0" 
                                max="100" 
                                value="${item.impuesto || 0}" 
