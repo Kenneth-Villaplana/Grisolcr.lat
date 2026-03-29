@@ -156,7 +156,7 @@ public function generarVenta(
                 "Cantidad"       => $p["cantidad"],
                 "PrecioUnitario" => $p["precioUnitario"],
                 "Descuento"      => $p["descuento"],
-                "Impuesto"       => $p["impuestoPorc"],
+                "Impuesto"       => $impuestoPorc,
                 "Total"          => number_format($totalLinea, 2, ".", "")
             ];
         }
