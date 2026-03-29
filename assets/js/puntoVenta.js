@@ -330,9 +330,9 @@ function renderCarrito() {
                     </button>
                 </div>
 
-                <div class="item-controls">
+                <div class="item-controls d-flex align-items-start gap-2 flex-nowrap">
                     
-                 <div class="input-group input-group-sm" style="width:100px; flex-direction:column; align-items:flex-start;">
+                 <div class="input-group input-group-sm item-control-cant" style="width:110px; flex-direction:column; align-items:flex-start; flex-shrink:0;">
     
                         <div class="d-flex w-100">
                             <span class="input-group-text">Cant.</span>
@@ -351,7 +351,7 @@ function renderCarrito() {
                         </small>
 
                     </div>
-                      <div class="input-group input-group-sm input-descuento">
+                     <div class="input-group input-group-sm input-descuento" style="width:120px; flex-shrink:0;">
                         <span class="input-group-text">Desc.</span>
 
                         <input type="number" 
@@ -364,7 +364,7 @@ function renderCarrito() {
                         <span class="input-group-text">%</span>
                     </div>
                     
-                    <div class="input-group input-group-sm input-impuesto">
+                    <div class="input-group input-group-sm input-impuesto" style="width:120px; flex-shrink:0;">
                         <span class="input-group-text">Imp.</span>
 
                             <input type="number" 
@@ -377,7 +377,7 @@ function renderCarrito() {
                          <span class="input-group-text">%</span>
                      </div>
 
-                    <div class="item-total">₡${totalProducto.toFixed(2)}</div>
+                    <div class="item-total ms-auto">₡${totalProducto.toFixed(2)}</div>
                 </div>
 
             </div>
