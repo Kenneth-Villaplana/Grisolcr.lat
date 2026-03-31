@@ -177,7 +177,7 @@ function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $canti
         }
 
         $sentencia->bind_param(
-            "issii",
+            "issdis",
             $productoId,
             $nombre,
             $descripcion,
