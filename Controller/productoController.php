@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
 
     $nombreImagen = "no-image.jpg"; // por defecto
 
-   if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
+if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
 
-    $carpetaDestino = __DIR__ . '/../assets/img';
+    $carpetaDestino = __DIR__ . '/../assets/img/';
 
     if (!is_dir($carpetaDestino)) {
         mkdir($carpetaDestino, 0777, true);
@@ -48,10 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
 
         $nombreImagen = uniqid() . "." . $extension;
 
-        move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
+        $movido = move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
+
+        if (!$movido) {
+            die("No se pudo mover la imagen a: " . $carpetaDestino . $nombreImagen);
+        }
+    } else {
+        die("Formato no permitido");
     }
-    
-    }
+}
 
       //validaciones
     if ($nombre === '' || $descripcion === '') {
