@@ -17416,3 +17416,9 @@ textarea {
     padding: 4px;
     background: #fff;
 }
+
+#uploadBox {
+    border: 3px solid red !important;
+    background: yellow !important;
+    padding: 30px !important;
+}
