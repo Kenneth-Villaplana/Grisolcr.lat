@@ -76,18 +76,16 @@ include('layout.php');
                         <div id="uploadBox" class="upload-box">
 
                             <div id="uploadPlaceholder">
-
                                 <p class="upload-title">Arrastra una imagen aquí</p>
                                 <p class="upload-subtitle">o haz clic para seleccionarla</p>
 
-                                <button type="button" id="btnSeleccionarImagen" class="btn btn-outline-primary mt-2">
-                                    Buscar imagen
+                                <button type="button" id="btnSeleccionarImagen" class="btn mt-2">
+                                    Buscar una imagen
                                 </button>
 
-                                <small class="text-muted d-block mt-2">
+                                <small class="upload-format-text">
                                     JPG, JPEG, PNG, WEBP
                                 </small>
-
                             </div>
 
                             <!-- Vista previa -->
@@ -101,8 +99,7 @@ include('layout.php');
                                 </div>
                             </div>
 
-                            <input type="file" name="Imagen" id="Imagen" hidden>
-
+                            <input type="file" name="Imagen" id="Imagen" hidden accept=".jpg,.jpeg,.png,.webp">
                         </div>
 
                         <div id="mensajeImagen" class="invalid-feedback d-block text-center mt-2" style="display:none;">
