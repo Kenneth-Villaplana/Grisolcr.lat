@@ -99,7 +99,7 @@ include('layout.php');
                                 </div>
                             </div>
 
-                            <input type="file" name="Imagen" id="Imagen" hidden accept=".jpg,.jpeg,.png,.webp">
+                            <input type="file" name="Imagen" id="Imagen" accept=".jpg,.jpeg,.png,.webp">
                         </div>
 
                         <div id="mensajeImagen" class="invalid-feedback d-block text-center mt-2" style="display:none;">
