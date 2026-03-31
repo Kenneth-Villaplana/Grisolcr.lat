@@ -23,10 +23,35 @@ if (isset($_GET['eliminarProducto'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])) {
-   $nombre = trim($_POST['Nombre'] ?? '');
+    $nombre = trim($_POST['Nombre'] ?? '');
     $descripcion = trim($_POST['Descripcion'] ?? '');
     $precio = floatval($_POST['Precio'] ?? 0);
     $cantidad = intval($_POST['Cantidad'] ?? 0);
+
+    $nombreImagen = "no-image.jpg"; // por defecto
+
+   if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
+
+    $carpetaDestino = __DIR__ . '/../assets/img/productos/';
+
+    if (!is_dir($carpetaDestino)) {
+        mkdir($carpetaDestino, 0777, true);
+    }
+
+    $archivoTmp = $_FILES['Imagen']['tmp_name'];
+    $archivoNombre = basename($_FILES['Imagen']['name']);
+    $extension = strtolower(pathinfo($archivoNombre, PATHINFO_EXTENSION));
+
+    $extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
+
+    if (in_array($extension, $extPermitidas)) {
+
+        $nombreImagen = uniqid() . "." . $extension;
+
+        move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
+    }
+    
+    }
 
       //validaciones
     if ($nombre === '' || $descripcion === '') {
@@ -44,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
         exit;
     }
 
-    $resultado = AgregarProductoModel($nombre, $descripcion, $precio, $cantidad);
+    $resultado = AgregarProductoModel($nombre, $descripcion, $precio, $cantidad, $nombreImagen);
 
     if ($resultado['resultado'] == 1) {
         header("Location: ../View/inventario.php?msg=agregado");
