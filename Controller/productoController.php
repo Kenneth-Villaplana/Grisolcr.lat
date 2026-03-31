@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
 
    if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
 
-    $carpetaDestino = __DIR__ . '/../assets/img/productos/';
+    $carpetaDestino = __DIR__ . '/../assets/img';
 
     if (!is_dir($carpetaDestino)) {
         mkdir($carpetaDestino, 0777, true);
