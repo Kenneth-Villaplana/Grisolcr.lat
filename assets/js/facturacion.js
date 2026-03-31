@@ -256,22 +256,27 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
         });
 
         const data = await res.json();
-        if (!data) return;
+        console.log("DATA RECIBO:", data);
+
+        if (!data || !data.encabezado) {
+            throw new Error("No se recibió información de la factura");
+        }
 
         const f = data.encabezado;
-        const detalle = data.detalle || [];
+        const detalle = Array.isArray(data.detalle) ? data.detalle : [];
 
         let ticketDetalle = detalle.map(d => `
             <tr>
-                <td>${d.Nombre}</td>
-                <td style="text-align:center;">${d.Cantidad}</td>
-                <td style="text-align:center;">${d.Descuento || 0}%</td>
-                <td style="text-align:center;">${d.Impuesto || 0}%</td>
-                <td style="text-align:right;">₡${Number(d.Total).toLocaleString()}</td>
+                <td>${d.Nombre ?? "-"}</td>
+                <td style="text-align:center;">${d.Cantidad ?? 0}</td>
+                <td style="text-align:center;">${parseFloat(d.Descuento || 0)}%</td>
+                <td style="text-align:center;">${parseFloat(d.Impuesto || 0)}%</td>
+                <td style="text-align:right;">₡${Number(d.Total || 0).toLocaleString()}</td>
             </tr>
         `).join("");
 
-        const html = `<div id="ticketAbono" style="font-family: monospace; font-size: 13px; color: #000;">
+        const html = `
+            <div id="ticketAbono" style="font-family: monospace; font-size: 13px; color: #000;">
                 <div style="text-align:center; margin-bottom:10px;">
                     <h5 style="margin:0;">Óptica Grisol</h5>
                     <div>Recibo de abono</div>
@@ -306,7 +311,7 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
                     <tbody>
                         ${ticketDetalle || `
                             <tr>
-                                <td colspan="4" style="text-align:center;">Sin detalle</td>
+                                <td colspan="5" style="text-align:center;">Sin detalle</td>
                             </tr>
                         `}
                     </tbody>
@@ -317,10 +322,15 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
                 <p style="text-align:center; margin-top:10px;">
                     Gracias por su pago
                 </p>
-            </div>`; 
+            </div>
+        `;
 
         const body = document.getElementById("reciboAbonoBody");
-        if (body) body.innerHTML = html;
+        if (body) {
+            body.innerHTML = html;
+        } else {
+            throw new Error("No se encontró el contenedor del recibo");
+        }
 
         new bootstrap.Modal(document.getElementById("modalReciboAbono")).show();
 
@@ -332,41 +342,53 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
 
 
 function imprimirReciboAbono() {
-    const contenido = document.getElementById("ticketAbono").outerHTML;
+    const ticket = document.getElementById("ticketAbono");
+
+    if (!ticket) {
+        alert("No hay recibo para imprimir.");
+        return;
+    }
+
+    const contenido = ticket.outerHTML;
     const ventana = window.open("", "_blank", "width=300,height=600");
+
+    if (!ventana) {
+        alert("El navegador bloqueó la ventana de impresión.");
+        return;
+    }
 
     ventana.document.write(`
         <html>
             <head>
-             <style>
-                @page {
-                    size: 80mm auto;
-                    margin: 0;
-                }
+                <style>
+                    @page {
+                        size: 80mm auto;
+                        margin: 0;
+                    }
 
-                html, body {
-                    width: 80mm;
-                    margin: 0;
-                    padding: 8px;
-                    font-family: monospace;
-                    font-size: 12px;
-                }
+                    html, body {
+                        width: 80mm;
+                        margin: 0;
+                        padding: 8px;
+                        font-family: monospace;
+                        font-size: 12px;
+                    }
 
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
 
-                td, th {
-                    padding: 3px 0;
-                }
+                    td, th {
+                        padding: 3px 0;
+                    }
 
-                hr {
-                    border: none;
-                    border-top: 1px dashed #000;
-                    margin: 6px 0;
-                }
-              </style>
+                    hr {
+                        border: none;
+                        border-top: 1px dashed #000;
+                        margin: 6px 0;
+                    }
+                </style>
             </head>
             <body>${contenido}</body>
         </html>
