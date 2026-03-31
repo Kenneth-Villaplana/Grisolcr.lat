@@ -1,4 +1,4 @@
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     const radios = document.querySelectorAll("input[name='precio']");
     const productos = document.querySelectorAll(".producto-item");
@@ -32,8 +32,6 @@
     });
 
     const uploadBox = document.getElementById("uploadBox");
-    if (!uploadBox) return;
-
     const inputImagen = document.getElementById("Imagen");
     const previewContainer = document.getElementById("previewContainer");
     const previewImagen = document.getElementById("previewImagen");
@@ -41,6 +39,15 @@
     const mensajeImagen = document.getElementById("mensajeImagen");
     const btnSeleccionarImagen = document.getElementById("btnSeleccionarImagen");
     const btnQuitarImagen = document.getElementById("btnQuitarImagen");
+
+    console.log("uploadBox:", uploadBox);
+    console.log("inputImagen:", inputImagen);
+    console.log("btnSeleccionarImagen:", btnSeleccionarImagen);
+
+    if (!uploadBox || !inputImagen || !btnSeleccionarImagen) {
+        console.log("Falta algún elemento del bloque de imagen");
+        return;
+    }
 
     const extensionesPermitidas = ["jpg", "jpeg", "png", "webp"];
 
@@ -86,8 +93,10 @@
         limpiarError();
     }
 
-    btnSeleccionarImagen?.addEventListener("click", (e) => {
+    btnSeleccionarImagen.addEventListener("click", (e) => {
+        e.preventDefault();
         e.stopPropagation();
+        console.log("CLICK en botón imagen");
         inputImagen.click();
     });
 
