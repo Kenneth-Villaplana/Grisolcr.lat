@@ -170,7 +170,7 @@ function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $canti
 
         $enlace = AbrirBD();
 
-        $sentencia = $enlace->prepare("CALL EditarProducto(?, ?, ?, ?, ?)");
+        $sentencia = $enlace->prepare("CALL EditarProducto(?, ?, ?, ?, ?, ?)");
 
         if(!$sentencia){
             throw new Exception($enlace->error);
