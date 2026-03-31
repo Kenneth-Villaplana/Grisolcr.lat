@@ -74,33 +74,35 @@ include('layout.php');
                         <label class="form-label fw-semibold">Imagen del producto</label>
 
                         <div id="uploadBox" class="upload-box">
-                            <input type="file" name="Imagen" id="Imagen" class="d-none" accept=".jpg,.jpeg,.png,.webp">
 
-                            <div id="uploadPlaceholder" class="upload-placeholder">
-                                <div class="upload-icon">🖼️</div>
-                                <p class="mb-1 fw-semibold">Arrastra una imagen aquí</p>
-                                <p class="text-muted small mb-2">o haz clic para seleccionarla</p>
-                                <button type="button" id="btnSeleccionarImagen"
-                                    class="btn btn-outline-primary btn-sm rounded-pill">
+                            <div id="uploadPlaceholder">
+                                <p class="upload-title">Arrastra una imagen aquí</p>
+                                <p class="upload-subtitle">o haz clic para seleccionarla</p>
+
+                                <button type="button" id="btnSeleccionarImagen" class="btn btn-outline-primary mt-2">
                                     Seleccionar imagen
+                                </button>
+
+                                <small class="text-muted d-block mt-2">
+                                    JPG, JPEG, PNG, WEBP
+                                </small>
+                            </div>
+
+                            <div id="previewContainer" class="d-none text-center">
+                                <img id="previewImagen" class="img-fluid rounded mb-2" />
+                                <p id="nombreArchivo"></p>
+
+                                <button type="button" id="btnCambiarImagen" class="btn btn-sm btn-outline-primary">
+                                    Cambiar
+                                </button>
+
+                                <button type="button" id="btnQuitarImagen" class="btn btn-sm btn-outline-danger">
+                                    Quitar
                                 </button>
                             </div>
 
-                            <div id="previewContainer" class="preview-container d-none">
-                                <img id="previewImagen" src="" alt="Vista previa" class="preview-img">
-                                <p id="nombreArchivo" class="small text-muted mt-2 mb-2"></p>
+                            <input type="file" name="Imagen" id="Imagen" hidden>
 
-                                <div class="d-flex justify-content-center gap-2">
-                                    <button type="button" id="btnCambiarImagen"
-                                        class="btn btn-outline-primary btn-sm rounded-pill">
-                                        Cambiar
-                                    </button>
-                                    <button type="button" id="btnQuitarImagen"
-                                        class="btn btn-outline-danger btn-sm rounded-pill">
-                                        Quitar
-                                    </button>
-                                </div>
-                            </div>
                         </div>
 
                         <div id="mensajeImagen" class="invalid-feedback d-block text-center mt-2" style="display:none;">

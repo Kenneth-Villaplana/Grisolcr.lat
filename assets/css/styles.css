@@ -17370,56 +17370,37 @@ textarea {
 /* estilo de imagen de productos */
 
 .upload-box {
-    border: 2px dashed #cfd8dc;
-    border-radius: 18px;
-    padding: 24px;
-    background: #fafafa;
+    border: 2px dashed #d0d5dd;
+    border-radius: 12px;
+    padding: 25px;
     text-align: center;
-    transition: all 0.25s ease;
+    background: #fafafa;
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
+/* hover bonito */
 .upload-box:hover {
     border-color: #0d6efd;
-    background: #f4f9ff;
+    background: #f0f7ff;
 }
 
-.upload-box.dragover {
-    border-color: #198754;
-    background: #eefaf3;
-    transform: scale(1.01);
-}
-
+/* cuando hay error */
 .upload-box.error {
     border-color: #dc3545;
     background: #fff5f5;
 }
 
-.upload-placeholder {
-    pointer-events: none;
+/* título principal */
+.upload-title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
-.upload-placeholder .btn {
-    pointer-events: auto;
-}
-
-.upload-icon {
-    font-size: 2.2rem;
-    margin-bottom: 8px;
-}
-
-.preview-container {
-    text-align: center;
-}
-
-.preview-img {
-    max-width: 220px;
-    max-height: 220px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 14px;
-    border: 1px solid #dcdcdc;
-    padding: 4px;
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+/* subtítulo */
+.upload-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 10px;
 }
