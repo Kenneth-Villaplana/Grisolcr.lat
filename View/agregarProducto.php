@@ -76,29 +76,29 @@ include('layout.php');
                         <div id="uploadBox" class="upload-box">
 
                             <div id="uploadPlaceholder">
+
                                 <p class="upload-title">Arrastra una imagen aquí</p>
                                 <p class="upload-subtitle">o haz clic para seleccionarla</p>
 
                                 <button type="button" id="btnSeleccionarImagen" class="btn btn-outline-primary mt-2">
-                                    Seleccionar imagen
+                                    Buscar imagen
                                 </button>
 
                                 <small class="text-muted d-block mt-2">
                                     JPG, JPEG, PNG, WEBP
                                 </small>
+
                             </div>
 
+                            <!-- Vista previa -->
                             <div id="previewContainer" class="d-none text-center">
-                                <img id="previewImagen" class="img-fluid rounded mb-2" />
-                                <p id="nombreArchivo"></p>
+                                <img id="previewImagen" src="" alt="Preview">
 
-                                <button type="button" id="btnCambiarImagen" class="btn btn-sm btn-outline-primary">
-                                    Cambiar
-                                </button>
-
-                                <button type="button" id="btnQuitarImagen" class="btn btn-sm btn-outline-danger">
-                                    Quitar
-                                </button>
+                                <div class="mt-2">
+                                    <button type="button" id="btnQuitarImagen" class="btn btn-outline-danger btn-sm">
+                                        Quitar imagen
+                                    </button>
+                                </div>
                             </div>
 
                             <input type="file" name="Imagen" id="Imagen" hidden>
