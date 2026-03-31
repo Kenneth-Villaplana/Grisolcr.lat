@@ -17405,7 +17405,6 @@ textarea {
     background: #fff5f5 !important;
 }
 
-/* Placeholder */
 #uploadPlaceholder {
     display: flex !important;
     flex-direction: column !important;
@@ -17429,7 +17428,6 @@ textarea {
     margin-bottom: 18px;
 }
 
-/* Botón */
 #btnSeleccionarImagen {
     background: #ffffff !important;
     color: #344054 !important;
@@ -17448,7 +17446,6 @@ textarea {
     color: #1d2939 !important;
 }
 
-/* Preview */
 #previewContainer {
     width: 100%;
     text-align: center;
@@ -17466,20 +17463,17 @@ textarea {
     margin-top: 10px;
 }
 
-/* Botón quitar */
 #btnQuitarImagen {
     border-radius: 10px;
     font-weight: 500;
     padding: 8px 16px;
 }
 
-/* Mensaje error */
 #mensajeImagen {
     font-size: 14px;
     font-weight: 500;
 }
 
-/* Texto de formatos */
 .upload-format-text {
     color: #98a2b3;
     font-size: 13px;
@@ -17488,7 +17482,6 @@ textarea {
     text-align: center;
 }
 
-/* Responsive */
 @media (max-width: 576px) {
     #uploadBox.upload-box {
         min-height: 200px;
