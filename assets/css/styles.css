@@ -17370,37 +17370,49 @@ textarea {
 /* estilo de imagen de productos */
 
 .upload-box {
-    border: 2px dashed #d0d5dd;
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
+    border: 2px dashed #d0d5dd !important;
+    border-radius: 14px;
+    padding: 28px 20px;
     background: #fafafa;
+    text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-/* hover bonito */
 .upload-box:hover {
-    border-color: #0d6efd;
+    border-color: #0d6efd !important;
     background: #f0f7ff;
 }
 
-/* cuando hay error */
 .upload-box.error {
-    border-color: #dc3545;
+    border-color: #dc3545 !important;
     background: #fff5f5;
 }
 
-/* título principal */
 .upload-title {
     font-weight: 600;
     font-size: 16px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
-/* subtítulo */
 .upload-subtitle {
     font-size: 14px;
     color: #6c757d;
     margin-bottom: 10px;
+}
+
+#previewImagen {
+    max-width: 220px;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 4px;
+    background: #fff;
 }
