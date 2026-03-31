@@ -35,74 +35,97 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const uploadBox = document.getElementById("uploadBox");
-    if (!uploadBox) return; // evita errores en otras páginas
+if (!uploadBox) return; // evita errores en otras páginas
 
-    const inputImagen = document.getElementById("Imagen");
-    const previewContainer = document.getElementById("previewContainer");
-    const previewImagen = document.getElementById("previewImagen");
-    const uploadPlaceholder = document.getElementById("uploadPlaceholder");
-    const nombreArchivo = document.getElementById("nombreArchivo");
-    const mensajeImagen = document.getElementById("mensajeImagen");
+const inputImagen = document.getElementById("Imagen");
+const previewContainer = document.getElementById("previewContainer");
+const previewImagen = document.getElementById("previewImagen");
+const uploadPlaceholder = document.getElementById("uploadPlaceholder");
+const mensajeImagen = document.getElementById("mensajeImagen");
+const btnSeleccionarImagen = document.getElementById("btnSeleccionarImagen");
+const btnQuitarImagen = document.getElementById("btnQuitarImagen");
 
-    const btnSeleccionarImagen = document.getElementById("btnSeleccionarImagen");
-    const btnCambiarImagen = document.getElementById("btnCambiarImagen");
-    const btnQuitarImagen = document.getElementById("btnQuitarImagen");
+const extensionesPermitidas = ["jpg", "jpeg", "png", "webp"];
 
-    const extensionesPermitidas = ["jpg", "jpeg", "png", "webp"];
+function limpiarError() {
+    uploadBox.classList.remove("error");
+    mensajeImagen.style.display = "none";
+    mensajeImagen.textContent = "";
+}
 
-    function limpiarError() {
-        uploadBox.classList.remove("error");
-        mensajeImagen.style.display = "none";
-        mensajeImagen.textContent = "";
+function mostrarError(mensaje) {
+    uploadBox.classList.add("error");
+    mensajeImagen.style.display = "block";
+    mensajeImagen.textContent = mensaje;
+}
+
+function mostrarPreview(file) {
+    limpiarError();
+
+    const extension = file.name.split(".").pop().toLowerCase();
+
+    if (!extensionesPermitidas.includes(extension)) {
+        limpiarSeleccion();
+        mostrarError("Formato no permitido. Solo se aceptan JPG, JPEG, PNG y WEBP.");
+        return;
     }
 
-    function mostrarError(mensaje) {
-        uploadBox.classList.add("error");
-        mensajeImagen.style.display = "block";
-        mensajeImagen.textContent = mensaje;
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        previewImagen.src = e.target.result;
+        uploadPlaceholder.classList.add("d-none");
+        previewContainer.classList.remove("d-none");
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function limpiarSeleccion() {
+    inputImagen.value = "";
+    previewImagen.src = "";
+    previewContainer.classList.add("d-none");
+    uploadPlaceholder.classList.remove("d-none");
+    limpiarError();
+}
+
+btnSeleccionarImagen?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    inputImagen.click();
+});
+
+btnQuitarImagen?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    limpiarSeleccion();
+});
+
+uploadBox.addEventListener("click", () => inputImagen.click());
+
+inputImagen.addEventListener("change", () => {
+    const file = inputImagen.files[0];
+    if (file) mostrarPreview(file);
+});
+
+uploadBox.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    uploadBox.classList.add("dragover");
+});
+
+uploadBox.addEventListener("dragleave", () => {
+    uploadBox.classList.remove("dragover");
+});
+
+uploadBox.addEventListener("drop", (e) => {
+    e.preventDefault();
+    uploadBox.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+    if (file) {
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        inputImagen.files = dataTransfer.files;
+        mostrarPreview(file);
     }
-
-    function mostrarPreview(file) {
-        limpiarError();
-
-        const extension = file.name.split(".").pop().toLowerCase();
-
-        if (!extensionesPermitidas.includes(extension)) {
-            limpiarSeleccion();
-            mostrarError("Formato no permitido.");
-            return;
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            previewImagen.src = e.target.result;
-            nombreArchivo.textContent = file.name;
-            uploadPlaceholder.classList.add("d-none");
-            previewContainer.classList.remove("d-none");
-        };
-
-        reader.readAsDataURL(file);
-    }
-
-    function limpiarSeleccion() {
-        inputImagen.value = "";
-        previewImagen.src = "";
-        nombreArchivo.textContent = "";
-        previewContainer.classList.add("d-none");
-        uploadPlaceholder.classList.remove("d-none");
-        limpiarError();
-    }
-
-    btnSeleccionarImagen?.addEventListener("click", () => inputImagen.click());
-    btnCambiarImagen?.addEventListener("click", () => inputImagen.click());
-    btnQuitarImagen?.addEventListener("click", limpiarSeleccion);
-
-    uploadBox.addEventListener("click", () => inputImagen.click());
-
-    inputImagen.addEventListener("change", () => {
-        const file = inputImagen.files[0];
-        if (file) mostrarPreview(file);
-    });
+});
 
 });
