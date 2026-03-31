@@ -270,7 +270,52 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
             </tr>
         `).join("");
 
-        const html = `...`; 
+        const html = `<div id="ticketAbono" style="font-family: monospace; font-size: 13px; color: #000;">
+                <div style="text-align:center; margin-bottom:10px;">
+                    <h5 style="margin:0;">Óptica Grisol</h5>
+                    <div>Recibo de abono</div>
+                </div>
+
+                <hr>
+
+                <p style="margin:4px 0;"><strong>Factura:</strong> #${f.Id ?? facturaId}</p>
+                <p style="margin:4px 0;"><strong>Fecha:</strong> ${f.Fecha ?? "-"}</p>
+                <p style="margin:4px 0;"><strong>Cliente:</strong> ${f.Cliente ?? "-"}</p>
+                <p style="margin:4px 0;"><strong>Teléfono:</strong> ${f.Telefono ?? "-"}</p>
+
+                <hr>
+
+                <p style="margin:4px 0;"><strong>Total original:</strong> ₡${Number(f.Total || 0).toLocaleString()}</p>
+                <p style="margin:4px 0;"><strong>Abono realizado:</strong> ₡${Number(montoAbonado || 0).toLocaleString()}</p>
+                <p style="margin:4px 0;"><strong>Total abonado acumulado:</strong> ₡${Number(f.Abonado || 0).toLocaleString()}</p>
+                <p style="margin:4px 0;"><strong>Saldo pendiente:</strong> ₡${Number(f.Pendiente || 0).toLocaleString()}</p>
+
+                <hr>
+
+                <table style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left;">Producto</th>
+                            <th style="text-align:center;">Cant.</th>
+                            <th style="text-align:center;">Desc.</th>
+                            <th style="text-align:right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${ticketDetalle || `
+                            <tr>
+                                <td colspan="4" style="text-align:center;">Sin detalle</td>
+                            </tr>
+                        `}
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <p style="text-align:center; margin-top:10px;">
+                    Gracias por su pago
+                </p>
+            </div>`; 
 
         const body = document.getElementById("reciboAbonoBody");
         if (body) body.innerHTML = html;
