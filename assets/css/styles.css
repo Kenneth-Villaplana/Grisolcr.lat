@@ -17367,59 +17367,59 @@ textarea {
 
 }
 
-/* estilo de imagen de productos */
-
 /* =========================
    ESTILO MODERNO DE IMAGEN
 ========================= */
 
-.upload-box {
+#uploadBox.upload-box {
     border: 2px dashed #d9dee7 !important;
-    border-radius: 16px;
-    padding: 38px 24px;
-    background: #fcfcfd;
-    text-align: center;
+    border-radius: 16px !important;
+    padding: 38px 24px !important;
+    background: #fcfcfd !important;
+    text-align: center !important;
     transition: all 0.25s ease;
     cursor: pointer;
     min-height: 230px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
     position: relative;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
-.upload-box:hover {
+#uploadBox.upload-box:hover {
     border-color: #b8c2d1 !important;
-    background: #f8fafc;
+    background: #f8fafc !important;
 }
 
-.upload-box.dragover {
+#uploadBox.upload-box.dragover {
     border-color: #0d6efd !important;
-    background: #eef5ff;
+    background: #eef5ff !important;
     transform: scale(1.01);
 }
 
-.upload-box.error {
+#uploadBox.upload-box.error {
     border-color: #dc3545 !important;
-    background: #fff5f5;
+    background: #fff5f5 !important;
 }
 
-/* Contenido principal */
+/* Placeholder */
 #uploadPlaceholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100%;
 }
 
 .upload-title {
     font-weight: 500;
-    font-size: 26px;
+    font-size: 28px;
     color: #667085;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     line-height: 1.3;
 }
 
@@ -17429,13 +17429,13 @@ textarea {
     margin-bottom: 18px;
 }
 
-/* Botón tipo moderno */
+/* Botón */
 #btnSeleccionarImagen {
-    background: #ffffff;
-    color: #344054;
-    border: 2px solid #d0d5dd;
-    border-radius: 10px;
-    padding: 12px 28px;
+    background: #ffffff !important;
+    color: #344054 !important;
+    border: 2px solid #d0d5dd !important;
+    border-radius: 10px !important;
+    padding: 12px 28px !important;
     font-weight: 600;
     font-size: 16px;
     box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
@@ -17443,14 +17443,15 @@ textarea {
 }
 
 #btnSeleccionarImagen:hover {
-    background: #f9fafb;
-    border-color: #98a2b3;
-    color: #1d2939;
+    background: #f9fafb !important;
+    border-color: #98a2b3 !important;
+    color: #1d2939 !important;
 }
 
 /* Preview */
 #previewContainer {
     width: 100%;
+    text-align: center;
 }
 
 #previewImagen {
@@ -17472,26 +17473,30 @@ textarea {
     padding: 8px 16px;
 }
 
-/* Texto inferior */
+/* Mensaje error */
 #mensajeImagen {
     font-size: 14px;
     font-weight: 500;
 }
 
-small.text-muted {
-    color: #98a2b3 !important;
+/* Texto de formatos */
+.upload-format-text {
+    color: #98a2b3;
     font-size: 13px;
+    margin-top: 14px;
+    display: block;
+    text-align: center;
 }
 
 /* Responsive */
 @media (max-width: 576px) {
-    .upload-box {
+    #uploadBox.upload-box {
         min-height: 200px;
-        padding: 28px 16px;
+        padding: 28px 16px !important;
     }
 
     .upload-title {
-        font-size: 21px;
+        font-size: 22px;
     }
 
     .upload-subtitle {
@@ -17500,7 +17505,7 @@ small.text-muted {
 
     #btnSeleccionarImagen {
         width: 100%;
-        max-width: 240px;
+        max-width: 230px;
     }
 
     #previewImagen {
