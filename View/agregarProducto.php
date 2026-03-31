@@ -37,7 +37,7 @@ include('layout.php');
         <!-- Form -->
         <div class="px-4 py-4">
 <div id="mensajeError" class="alert alert-danger text-center d-none"></div>
-           <form id="formAgregarProducto" action="../Controller/productoController.php" method="POST">
+           <form id="formAgregarProducto" action="../Controller/productoController.php" method="POST" enctype="multipart/form-data">
 
                 <!-- Nombre -->
                 <div class="mb-4">
@@ -62,6 +62,13 @@ include('layout.php');
                         <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
                         <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control input-modern" required>
                     </div>
+                </div>
+
+                <!-- Imagen -->
+                <div class="mb-4">
+                        <label for="Imagen" class="form-label fw-semibold">Imagen del producto</label>
+                        <input type="file" name="Imagen" id="Imagen" class="form-control input-modern" accept=".jpg,.jpeg,.png,.webp">
+                        <small class="text-muted">Formatos permitidos: JPG, JPEG, PNG, WEBP</small>
                 </div>
 
                 <!-- Botón -->
