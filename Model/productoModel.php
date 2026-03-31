@@ -164,7 +164,7 @@ function ObtenerProductoPorId($productoId)
 /* EDITAR PRODUCTO */
 /* ========================= */
 
-function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad)
+function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad, $nombreImagen)
 {
     try {
 
@@ -182,7 +182,8 @@ function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $canti
             $nombre,
             $descripcion,
             $precio,
-            $cantidad
+            $cantidad,
+            $nombreImagen
         );
 
         $sentencia->execute();
