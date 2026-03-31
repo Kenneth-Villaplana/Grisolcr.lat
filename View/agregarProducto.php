@@ -71,41 +71,14 @@ include('layout.php');
 
                     <!-- Imagen -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Imagen del producto</label>
+                        <label for="Imagen" class="form-label fw-semibold">Imagen del producto</label>
 
-                        <div id="uploadBox" class="upload-box">
+                        <input type="file" name="Imagen" id="Imagen" class="form-control mb-2"
+                            accept=".jpg,.jpeg,.png,.webp">
 
-                            <div id="uploadPlaceholder">
-                                <p class="upload-title">Arrastra una imagen aquí</p>
-                                <p class="upload-subtitle">o haz clic para seleccionarla</p>
-
-                                <button type="button" id="btnSeleccionarImagen" class="btn mt-2">
-                                    Buscar una imagen
-                                </button>
-
-                                <small class="upload-format-text">
-                                    JPG, JPEG, PNG, WEBP
-                                </small>
-                            </div>
-
-                            <!-- Vista previa -->
-                            <div id="previewContainer" class="d-none text-center">
-                                <img id="previewImagen" src="" alt="Preview">
-
-                                <div class="mt-2">
-                                    <button type="button" id="btnQuitarImagen" class="btn btn-outline-danger btn-sm">
-                                        Quitar imagen
-                                    </button>
-                                </div>
-                            </div>
-
-                            <input type="file" name="Imagen" id="Imagen" accept=".jpg,.jpeg,.png,.webp">
-                        </div>
-
-                        <div id="mensajeImagen" class="invalid-feedback d-block text-center mt-2" style="display:none;">
-                        </div>
-                        <small class="text-muted d-block text-center mt-2">Formatos permitidos: JPG, JPEG, PNG,
-                            WEBP</small>
+                        <small class="text-muted d-block">
+                            Formatos permitidos: JPG, JPEG, PNG, WEBP
+                        </small>
                     </div>
 
                     <!-- Botón -->
