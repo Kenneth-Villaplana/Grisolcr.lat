@@ -265,7 +265,8 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
             <tr>
                 <td>${d.Nombre}</td>
                 <td style="text-align:center;">${d.Cantidad}</td>
-                <td style="text-align:center;">${d.Descuento}%</td>
+                <td style="text-align:center;">${d.Descuento || 0}%</td>
+                <td style="text-align:center;">${d.Impuesto || 0}%</td>
                 <td style="text-align:right;">₡${Number(d.Total).toLocaleString()}</td>
             </tr>
         `).join("");
@@ -298,6 +299,7 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
                             <th style="text-align:left;">Producto</th>
                             <th style="text-align:center;">Cant.</th>
                             <th style="text-align:center;">Desc.</th>
+                            <th style="text-align:center;">Imp.</th>
                             <th style="text-align:right;">Total</th>
                         </tr>
                     </thead>
