@@ -336,16 +336,35 @@ function imprimirReciboAbono() {
     ventana.document.write(`
         <html>
             <head>
-                <style>
-                    body { 
-                        font-family: monospace; 
-                        margin: 0; 
-                        padding: 10px;
-                        font-size: 13px;
-                    }
-                    table { width:100%; border-collapse: collapse; }
-                    td, th { padding: 2px 0; }
-                </style>
+             <style>
+                @page {
+                    size: 80mm auto;
+                    margin: 0;
+                }
+
+                html, body {
+                    width: 80mm;
+                    margin: 0;
+                    padding: 8px;
+                    font-family: monospace;
+                    font-size: 12px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                td, th {
+                    padding: 3px 0;
+                }
+
+                hr {
+                    border: none;
+                    border-top: 1px dashed #000;
+                    margin: 6px 0;
+                }
+              </style>
             </head>
             <body>${contenido}</body>
         </html>
