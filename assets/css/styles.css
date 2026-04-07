@@ -3369,16 +3369,6 @@ footer {
     color:white;
 }
 
-/* IMAGEN */
-
-.register-modern-right{
-    flex:1;
-    background:
-    linear-gradient(rgba(10,30,80,0.7), rgba(10,30,80,0.7)),
-    url("../img/login-optica.jpg");
-    background-size:cover;
-    background-position:center;
-}
 
 /* TITULOS */
 

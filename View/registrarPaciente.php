@@ -109,9 +109,7 @@ include_once __DIR__ . '/../Controller/loginController.php';
             </form>
         </div>
 
-        <!-- IMAGEN -->
-        <div class="register-modern-right"></div>
-
+      
     </div>
 </section>
 
