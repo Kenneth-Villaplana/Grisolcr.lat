@@ -154,6 +154,7 @@ async function buscarPaciente() {
             "error"
         );
     }
+}
 function limpiarBusqueda() {
     document.getElementById('cedula').value = '';
     document.getElementById('resultado').innerHTML = '';
@@ -174,4 +175,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-}
