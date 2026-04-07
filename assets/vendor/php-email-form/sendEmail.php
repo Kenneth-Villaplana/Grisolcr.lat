@@ -20,18 +20,18 @@ function cargarConfigMailJson(): array
 
 function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
 {
-    // 🔐 Cargar configuración
+    //  Cargar configuración
     $config = cargarConfigMailJson();
 
     $apiKey = $config['mailgun_api_key'] ?? '';
     $domain = $config['mailgun_domain'] ?? '';
 
-    // 🚨 Validación config
+    //  Validación config
     if (empty($apiKey) || empty($domain)) {
         return "Error: configuración de Mailgun incompleta";
     }
 
-    // 🚨 Validación email
+    //  Validación email
     if (!filter_var($destino, FILTER_VALIDATE_EMAIL)) {
         return "Error: correo destino inválido";
     }
@@ -40,7 +40,7 @@ function sendEmail($fromEmail, $fromName, $destino, $asunto, $mensajeHTML)
         $mg = Mailgun::create($apiKey);
 
         $mg->messages()->send($domain, [
-            // ⚠️ FROM siempre del dominio
+            //  FROM siempre del dominio
             'from' => "Optica Grisol <no-responder@$domain>",
             'to' => $destino,
             'subject' => $asunto,
