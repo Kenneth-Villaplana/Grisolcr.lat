@@ -162,4 +162,16 @@ function limpiarBusqueda() {
     document.getElementById('btnAgregarExpediente').style.display = 'none';
     document.getElementById('btnHistorial').style.display = 'none';
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const inputCedula = document.getElementById("cedula");
+
+    if (inputCedula) {
+        inputCedula.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault(); // evita comportamiento raro de formularios
+                buscarPaciente();
+            }
+        });
+    }
+});
 }
