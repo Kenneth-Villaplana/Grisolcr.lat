@@ -65,9 +65,9 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
                     <i class="bi bi-search me-1"></i> Buscar
                 </button>
 
-                <button class="btn-inv-ghost" onclick="location.href='expedientes.php'">
-                    Limpiar
-                </button>
+               <button class="btn-inv-ghost" onclick="limpiarBusqueda()">
+                Limpiar
+            </button>
             </div>
 
             <div id="mensajeSistema" class="col-12 mt-3"></div>

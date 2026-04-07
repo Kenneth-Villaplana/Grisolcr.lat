@@ -154,5 +154,12 @@ async function buscarPaciente() {
             "error"
         );
     }
+function limpiarBusqueda() {
+    document.getElementById('cedula').value = '';
+    document.getElementById('resultado').innerHTML = '';
+    document.getElementById('mensajeSistema').innerHTML = '';
 
+    document.getElementById('btnAgregarExpediente').style.display = 'none';
+    document.getElementById('btnHistorial').style.display = 'none';
+}
 }
