@@ -23,10 +23,40 @@ if (isset($_GET['eliminarProducto'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])) {
-   $nombre = trim($_POST['Nombre'] ?? '');
+    $nombre = trim($_POST['Nombre'] ?? '');
     $descripcion = trim($_POST['Descripcion'] ?? '');
     $precio = floatval($_POST['Precio'] ?? 0);
     $cantidad = intval($_POST['Cantidad'] ?? 0);
+
+    $nombreImagen = "no-image.jpg"; // por defecto
+
+if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
+
+    $carpetaDestino = __DIR__ . '/../assets/img/';
+
+    if (!is_dir($carpetaDestino)) {
+        mkdir($carpetaDestino, 0777, true);
+    }
+
+    $archivoTmp = $_FILES['Imagen']['tmp_name'];
+    $archivoNombre = basename($_FILES['Imagen']['name']);
+    $extension = strtolower(pathinfo($archivoNombre, PATHINFO_EXTENSION));
+
+    $extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
+
+    if (in_array($extension, $extPermitidas)) {
+
+        $nombreImagen = uniqid() . "." . $extension;
+
+        $movido = move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
+
+        if (!$movido) {
+            die("No se pudo mover la imagen a: " . $carpetaDestino . $nombreImagen);
+        }
+    } else {
+        die("Formato no permitido");
+    }
+}
 
       //validaciones
     if ($nombre === '' || $descripcion === '') {
@@ -44,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
         exit;
     }
 
-    $resultado = AgregarProductoModel($nombre, $descripcion, $precio, $cantidad);
+    $resultado = AgregarProductoModel($nombre, $descripcion, $precio, $cantidad, $nombreImagen);
 
     if ($resultado['resultado'] == 1) {
         header("Location: ../View/inventario.php?msg=agregado");
@@ -63,8 +93,45 @@ if (isset($_POST["btnEditarProducto"])) {
     $precio = floatval($_POST["Precio"] ?? 0);
     $cantidad = intval($_POST["Cantidad"] ?? 0);
 
-    //validaciones
+    // Obtener producto actual para conservar imagen si no se sube otra
+    $productoActual = ObtenerProductoPorId($productoId);
+    $nombreImagen = $productoActual['Imagen'] ?? 'no-image.jpg';
 
+    // Si se sube una nueva imagen, reemplazar
+    if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
+
+        $carpetaDestino = __DIR__ . '/../assets/img/';
+
+        if (!is_dir($carpetaDestino)) {
+            mkdir($carpetaDestino, 0777, true);
+        }
+
+        $archivoTmp = $_FILES['Imagen']['tmp_name'];
+        $archivoNombre = basename($_FILES['Imagen']['name']);
+        $extension = strtolower(pathinfo($archivoNombre, PATHINFO_EXTENSION));
+
+        $extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
+
+        if (in_array($extension, $extPermitidas)) {
+
+            $nombreImagen = uniqid() . "." . $extension;
+
+            $movido = move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
+
+            if (!$movido) {
+                $_SESSION["txtMensaje"] = "No se pudo guardar la nueva imagen";
+                header("Location: ../View/editarProducto.php?id=" . $productoId);
+                exit;
+            }
+
+        } else {
+            $_SESSION["txtMensaje"] = "Formato de imagen no permitido";
+            header("Location: ../View/editarProducto.php?id=" . $productoId);
+            exit;
+        }
+    }
+
+    // validaciones
     if ($productoId <= 0) {
         $_SESSION["txtMensaje"] = "Producto inválido";
         header("Location: ../View/inventario.php");
@@ -78,9 +145,9 @@ if (isset($_POST["btnEditarProducto"])) {
     }
 
     if ($precio <= 0) {
-    $_SESSION["txtMensaje"] = "El precio debe ser mayor a 0";
-    header("Location: ../View/editarProducto.php?id=" . $productoId);
-    exit;
+        $_SESSION["txtMensaje"] = "El precio debe ser mayor a 0";
+        header("Location: ../View/editarProducto.php?id=" . $productoId);
+        exit;
     }
 
     if ($cantidad <= 0) {
@@ -89,9 +156,10 @@ if (isset($_POST["btnEditarProducto"])) {
         exit;
     }
 
-    $resultadoEdit = EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad);
+    $resultadoEdit = EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad, $nombreImagen);
 
     $_SESSION["txtMensaje"] = $resultadoEdit['mensaje'];
+
     if ($resultadoEdit['resultado'] == 1) {
         $_SESSION["CambioExitoso"] = true;
     }
@@ -99,7 +167,6 @@ if (isset($_POST["btnEditarProducto"])) {
     header("Location: ../View/editarProducto.php?id=" . $productoId);
     exit;
 }
-
 
 if (isset($_GET['id'])) {
     $productoId = $_GET['id'];

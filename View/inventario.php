@@ -105,6 +105,12 @@ class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 p
 
 <!-- MENSAJES -->
 
+<?php if (isset($_GET['msg']) && $_GET['msg'] == 'agregado') { ?>
+<div class="alert alert-success text-center">
+Producto agregado correctamente.
+</div>
+<?php } ?>
+
 <?php if (isset($_GET['msg']) && $_GET['msg'] == 'eliminado') { ?>
 <div class="alert alert-success text-center">
 Producto eliminado con éxito.

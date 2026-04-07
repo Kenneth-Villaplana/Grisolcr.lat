@@ -6,19 +6,19 @@ include_once __DIR__ . '/../Model/baseDatos.php';
 /* AGREGAR PRODUCTO */
 /* ========================= */
 
-function AgregarProductoModel($nombre, $descripcion, $precio, $cantidad)
+function AgregarProductoModel($nombre, $descripcion, $precio, $cantidad, $nombreImagen)
 {
     try {
 
         $enlace = AbrirBD();
 
-        $sentencia = $enlace->prepare("CALL AgregarProducto(?, ?, ?, ?)");
+        $sentencia = $enlace->prepare("CALL AgregarProducto(?, ?, ?, ?, ?)");
 
         if(!$sentencia){
             throw new Exception($enlace->error);
         }
 
-        $sentencia->bind_param("ssii", $nombre, $descripcion, $precio, $cantidad);
+        $sentencia->bind_param("ssdis", $nombre, $descripcion, $precio, $cantidad, $nombreImagen);
 
         $sentencia->execute();
 
@@ -164,25 +164,26 @@ function ObtenerProductoPorId($productoId)
 /* EDITAR PRODUCTO */
 /* ========================= */
 
-function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad)
+function EditarProductoModel($productoId, $nombre, $descripcion, $precio, $cantidad, $nombreImagen)
 {
     try {
 
         $enlace = AbrirBD();
 
-        $sentencia = $enlace->prepare("CALL EditarProducto(?, ?, ?, ?, ?)");
+        $sentencia = $enlace->prepare("CALL EditarProducto(?, ?, ?, ?, ?, ?)");
 
         if(!$sentencia){
             throw new Exception($enlace->error);
         }
 
         $sentencia->bind_param(
-            "issii",
+            "issdis",
             $productoId,
             $nombre,
             $descripcion,
             $precio,
-            $cantidad
+            $cantidad,
+            $nombreImagen
         );
 
         $sentencia->execute();

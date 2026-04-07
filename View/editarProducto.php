@@ -67,7 +67,8 @@ if(!$producto){
 action="../Controller/productoController.php"
 name="editarProductoForm"
 id="formEditarProducto"
-class="row g-3 justify-content-center">
+class="row g-3 justify-content-center"
+enctype="multipart/form-data">
 
 <input type="hidden" name="btnEditarProducto" value="1">
 
@@ -125,6 +126,28 @@ min="1"
 class="form-control mb-3"
 value="<?php echo htmlspecialchars($producto['Cantidad']); ?>"
 required>
+
+<label class="form-label">Imagen actual</label>
+
+<div class="text-center mb-3">
+    <img
+        src="/assets/img/<?php echo htmlspecialchars($producto['Imagen'] ?? 'no-image.jpg'); ?>"
+        alt="Imagen actual del producto"
+        style="max-width: 180px; max-height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid #ddd; padding: 4px;">
+</div>
+
+<label class="form-label">Cambiar imagen</label>
+
+<input
+type="file"
+name="Imagen"
+id="Imagen"
+class="form-control mb-3"
+accept=".jpg,.jpeg,.png,.webp">
+
+<small class="text-muted d-block mb-2">
+Si no selecciona una nueva imagen, se conservará la actual.
+</small>
 
 </div>
 

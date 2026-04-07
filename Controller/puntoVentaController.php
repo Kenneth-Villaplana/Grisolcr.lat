@@ -131,28 +131,37 @@ public function generarVenta(
 
         $subtotal = 0;
         $descuentoTotal = 0;
+        $impuestoTotal = 0;
         $detalleFactura = [];
 
         foreach ($productos as $p) {
+             
+            $preciounitario = (float)$p["precioUnitario"];
+            $cantidad = (int)$p["cantidad"];
+            $descuentoPorc = (float)$p["descuento"] ?? 0;
+            $impuestoPorc = (float)$p["impuesto"] ?? 0;
 
             $totalProducto  = $p["precioUnitario"] * $p["cantidad"];
-            $descuentoLinea = $totalProducto * ($p["descuento"] / 100);
+            $descuentoLinea = $totalProducto * ($descuentoPorc / 100);
+            $baseLinea = $totalProducto - $descuentoLinea;
+            $impuestoLinea = $baseLinea * ($impuestoPorc / 100); 
+            $totalLinea = $baseLinea + $impuestoLinea;     
 
             $subtotal       += $totalProducto;
             $descuentoTotal += $descuentoLinea;
+            $impuestoTotal  += $impuestoLinea;
 
             $detalleFactura[] = [
                 "Nombre"         => $p["descripcion"],
                 "Cantidad"       => $p["cantidad"],
                 "PrecioUnitario" => $p["precioUnitario"],
                 "Descuento"      => $p["descuento"],
-                "Total"          => number_format($totalProducto - $descuentoLinea, 2, ".", "")
+                "Impuesto"       => $impuestoPorc,
+                "Total"          => number_format($totalLinea, 2, ".", "")
             ];
         }
 
-        $base = $subtotal - $descuentoTotal;
-        $iva  = $base * 0.13;
-        $total = $base + $iva;
+        $total = $subtotal - $descuentoTotal + $impuestoTotal;
 
         $saldoPendiente = ($montoAbono > 0) ? ($total - $montoAbono) : 0;
 
@@ -178,7 +187,7 @@ public function generarVenta(
                 "MetodoPago"            => $metodoPago,
                 "Subtotal"              => number_format($subtotal, 2, ".", ""),
                 "Descuento"             => number_format($descuentoTotal, 2, ".", ""),
-                "IVA"                   => number_format($iva, 2, ".", ""),
+                "IVA"                   => number_format($impuestoTotal, 2, ".", ""),
                 "Total"                 => number_format($total, 2, ".", ""),
                 "Abono"                 => number_format($montoAbono, 2, ".", ""),
                 "SaldoPendiente"        => number_format($saldoPendiente, 2, ".", ""),

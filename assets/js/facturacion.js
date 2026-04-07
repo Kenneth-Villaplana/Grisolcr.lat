@@ -256,24 +256,81 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
         });
 
         const data = await res.json();
-        if (!data) return;
+        console.log("DATA RECIBO:", data);
+
+        if (!data || !data.encabezado) {
+            throw new Error("No se recibió información de la factura");
+        }
 
         const f = data.encabezado;
-        const detalle = data.detalle || [];
+        const detalle = Array.isArray(data.detalle) ? data.detalle : [];
 
         let ticketDetalle = detalle.map(d => `
             <tr>
-                <td>${d.Nombre}</td>
-                <td style="text-align:center;">${d.Cantidad}</td>
-                <td style="text-align:center;">${d.Descuento}%</td>
-                <td style="text-align:right;">₡${Number(d.Total).toLocaleString()}</td>
+                <td>${d.Nombre ?? "-"}</td>
+                <td style="text-align:center;">${d.Cantidad ?? 0}</td>
+                <td style="text-align:center;">${parseFloat(d.Descuento || 0)}%</td>
+                <td style="text-align:center;">${parseFloat(d.Impuesto || 0)}%</td>
+                <td style="text-align:right;">₡${Number(d.Total || 0).toLocaleString()}</td>
             </tr>
         `).join("");
 
-        const html = `...`; 
+        const html = `
+            <div id="ticketAbono" style="font-family: monospace; font-size: 13px; color: #000;">
+                <div style="text-align:center; margin-bottom:10px;">
+                    <h5 style="margin:0;">Óptica Grisol</h5>
+                    <div>Recibo de abono</div>
+                </div>
+
+                <hr>
+
+                <p style="margin:4px 0;"><strong>Factura:</strong> #${f.Id ?? facturaId}</p>
+                <p style="margin:4px 0;"><strong>Fecha:</strong> ${f.Fecha ?? "-"}</p>
+                <p style="margin:4px 0;"><strong>Cliente:</strong> ${f.Cliente ?? "-"}</p>
+                <p style="margin:4px 0;"><strong>Teléfono:</strong> ${f.Telefono ?? "-"}</p>
+
+                <hr>
+
+                <p style="margin:4px 0;"><strong>Total original:</strong> ₡${Number(f.Total || 0).toLocaleString()}</p>
+                <p style="margin:4px 0;"><strong>Abono realizado:</strong> ₡${Number(montoAbonado || 0).toLocaleString()}</p>
+                <p style="margin:4px 0;"><strong>Total abonado acumulado:</strong> ₡${Number(f.Abonado || 0).toLocaleString()}</p>
+                <p style="margin:4px 0;"><strong>Saldo pendiente:</strong> ₡${Number(f.Pendiente || 0).toLocaleString()}</p>
+
+                <hr>
+
+                <table style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left;">Producto</th>
+                            <th style="text-align:center;">Cant.</th>
+                            <th style="text-align:center;">Desc.</th>
+                            <th style="text-align:center;">Imp.</th>
+                            <th style="text-align:right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${ticketDetalle || `
+                            <tr>
+                                <td colspan="5" style="text-align:center;">Sin detalle</td>
+                            </tr>
+                        `}
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <p style="text-align:center; margin-top:10px;">
+                    Gracias por su pago
+                </p>
+            </div>
+        `;
 
         const body = document.getElementById("reciboAbonoBody");
-        if (body) body.innerHTML = html;
+        if (body) {
+            body.innerHTML = html;
+        } else {
+            throw new Error("No se encontró el contenedor del recibo");
+        }
 
         new bootstrap.Modal(document.getElementById("modalReciboAbono")).show();
 
@@ -285,21 +342,52 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
 
 
 function imprimirReciboAbono() {
-    const contenido = document.getElementById("ticketAbono").outerHTML;
+    const ticket = document.getElementById("ticketAbono");
+
+    if (!ticket) {
+        alert("No hay recibo para imprimir.");
+        return;
+    }
+
+    const contenido = ticket.outerHTML;
     const ventana = window.open("", "_blank", "width=300,height=600");
+
+    if (!ventana) {
+        alert("El navegador bloqueó la ventana de impresión.");
+        return;
+    }
 
     ventana.document.write(`
         <html>
             <head>
                 <style>
-                    body { 
-                        font-family: monospace; 
-                        margin: 0; 
-                        padding: 10px;
-                        font-size: 13px;
+                    @page {
+                        size: 80mm auto;
+                        margin: 0;
                     }
-                    table { width:100%; border-collapse: collapse; }
-                    td, th { padding: 2px 0; }
+
+                    html, body {
+                        width: 80mm;
+                        margin: 0;
+                        padding: 8px;
+                        font-family: monospace;
+                        font-size: 12px;
+                    }
+
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+
+                    td, th {
+                        padding: 3px 0;
+                    }
+
+                    hr {
+                        border: none;
+                        border-top: 1px dashed #000;
+                        margin: 6px 0;
+                    }
                 </style>
             </head>
             <body>${contenido}</body>

@@ -4,81 +4,99 @@ include('layout.php');
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Óptica Grisol - Agregar Producto</title>
-  <?php IncluirCSS(); ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Óptica Grisol - Agregar Producto</title>
+    <?php IncluirCSS(); ?>
 </head>
 
 <body>
 
-<?php MostrarMenu(); ?>
+    <?php MostrarMenu(); ?>
 
 
-<main class="container py-5">
+    <main class="container py-5">
 
-    <!-- Botón volver -->
-    <div class="d-flex justify-content-end mb-4">
-        <a href="inventario.php" class="btn btn-back-custom">
+        <!-- Botón volver -->
+        <div class="d-flex justify-content-end mb-4">
+            <a href="inventario.php" class="btn btn-back-custom">
                 <i class="bi bi-arrow-left"></i>Volver al inventario
-        </a>
-    </div>
-
-    <!-- Card principal -->
-    <div class="product-register-card shadow-lg">
-
-        <!-- Header -->
-        <div class="product-register-header text-center">
-            <h4 class="mb-1 fw-bold">Agregar Producto</h4>
-            <small>Complete los datos del nuevo producto</small>
+            </a>
         </div>
 
-        <!-- Form -->
-        <div class="px-4 py-4">
-<div id="mensajeError" class="alert alert-danger text-center d-none"></div>
-           <form id="formAgregarProducto" action="../Controller/productoController.php" method="POST">
+        <!-- Card principal -->
+        <div class="product-register-card shadow-lg">
 
-                <!-- Nombre -->
-                <div class="mb-4">
-                    <label for="Nombre" class="form-label fw-semibold">Nombre del producto</label>
-                    <input type="text" name="Nombre" id="Nombre" class="form-control input-modern" required>
-                </div>
+            <!-- Header -->
+            <div class="product-register-header text-center">
+                <h4 class="mb-1 fw-bold">Agregar Producto</h4>
+                <small>Complete los datos del nuevo producto</small>
+            </div>
 
-                <!-- Descripción -->
-                <div class="mb-4">
-                    <label for="Descripcion" class="form-label fw-semibold">Descripción</label>
-                    <textarea name="Descripcion" id="Descripcion" class="form-control input-modern" rows="3" required></textarea>
-                </div>
+            <!-- Form -->
+            <div class="px-4 py-4">
+                <div id="mensajeError" class="alert alert-danger text-center d-none"></div>
+                <form id="formAgregarProducto" action="../Controller/productoController.php" method="POST"
+                    enctype="multipart/form-data">
 
-                <!-- Fila precio y cantidad -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <label for="Precio" class="form-label fw-semibold">Precio</label>
-                        <input type="number" name="Precio" id="Precio" min="1" class="form-control input-modern" required>
+                    <!-- Nombre -->
+                    <div class="mb-4">
+                        <label for="Nombre" class="form-label fw-semibold">Nombre del producto</label>
+                        <input type="text" name="Nombre" id="Nombre" class="form-control input-modern" required>
                     </div>
 
-                    <div class="col-md-6">
-                        <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
-                        <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control input-modern" required>
+                    <!-- Descripción -->
+                    <div class="mb-4">
+                        <label for="Descripcion" class="form-label fw-semibold">Descripción</label>
+                        <textarea name="Descripcion" id="Descripcion" class="form-control input-modern" rows="3"
+                            required></textarea>
                     </div>
-                </div>
 
-                <!-- Botón -->
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn-save-modern px-5 py-2" name="btnAgregarProducto">
-                        Guardar Producto
-                    </button>
-                </div>
+                    <!-- Fila precio y cantidad -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="Precio" class="form-label fw-semibold">Precio</label>
+                            <input type="number" name="Precio" id="Precio" min="1" class="form-control input-modern"
+                                required>
+                        </div>
 
-            </form>
+                        <div class="col-md-6">
+                            <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control input-modern"
+                                required>
+                        </div>
+                    </div>
 
+                    <!-- Imagen -->
+                    <div class="mb-4">
+                        <label for="Imagen" class="form-label fw-semibold">Imagen del producto</label>
+
+                        <input type="file" name="Imagen" id="Imagen" class="form-control mb-2"
+                            accept=".jpg,.jpeg,.png,.webp">
+
+                        <small class="text-muted d-block">
+                            Formatos permitidos: JPG, JPEG, PNG, WEBP
+                        </small>
+                    </div>
+
+                    <!-- Botón -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-save-modern px-5 py-2" name="btnAgregarProducto">
+                            Guardar Producto
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
         </div>
-    </div>
 
-</main>
-<?php MostrarFooter(); ?>
-<?php IncluirScripts(); ?>
+    </main>
+    <?php MostrarFooter(); ?>
+    <?php IncluirScripts(); ?>
 
 </body>
+
 </html>
