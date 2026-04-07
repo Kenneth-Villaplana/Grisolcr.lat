@@ -17,114 +17,101 @@ include_once __DIR__ . '/../Controller/loginController.php';
 <body>
     <?php MostrarMenu();?>
 
-    <section class="editar-section d-flex align-items-center justify-content-center py-4">
+   <section class="register-modern-wrapper">
 
-    <div class="container">
+    <div class="register-modern-container">
 
-      
-        <div class="row justify-content-center mb-3">
-            <div class="col-12 col-lg-8">
-                <?php
-                if (isset($_SESSION["txtMensaje"])) {
-                    echo '<div class="alert alert-' .
-                        (isset($_SESSION["registroExitoso"]) ? 'success' : 'danger') . '">' .
-                        $_SESSION["txtMensaje"] .
-                    '</div>';
-                    unset($_SESSION["txtMensaje"]);
-                    unset($_SESSION["registroExitoso"]);
-                }
-                ?>
-            </div>
-        </div>
+        <!-- FORMULARIO -->
+        <div class="register-modern-left">
 
-        <div class="row justify-content-center">
+            <h2 class="register-title">Crear Cuenta</h2>
+            <p class="register-subtitle">Complete sus datos para registrarse</p>
 
-            <div class="register-card-compact">
+            <!-- MENSAJES -->
+            <?php if (isset($_SESSION["txtMensaje"])): ?>
+                <div class="alert alert-<?= isset($_SESSION["registroExitoso"]) ? 'success' : 'danger' ?>">
+                    <?= $_SESSION["txtMensaje"]; ?>
+                </div>
+                <?php unset($_SESSION["txtMensaje"], $_SESSION["registroExitoso"]); ?>
+            <?php endif; ?>
 
-                
-                <div class="register-card-header">
-                    <h4 class="mb-0">Registrarse</h4>
-                    <small>Ingrese los datos para crear su cuenta</small>
+            <form method="POST" class="register-form">
+
+                <?php $cedulaPrefill = $_GET['cedula'] ?? ''; ?>
+
+                <!-- GRID -->
+                <div class="register-grid">
+
+                    <div class="input-modern">
+                        <i class="bi bi-person-badge"></i>
+                        <input type="text" name="Cedula" id="Cedula"
+                               value="<?= htmlspecialchars($cedulaPrefill) ?>"
+                               placeholder="Cédula" required onkeyup="ConsultarNombre();">
+                    </div>
+
+                    <div class="input-modern">
+                        <i class="bi bi-person"></i>
+                        <input type="text" name="Nombre" id="Nombre" placeholder="Nombre" required>
+                    </div>
+
+                    <div class="input-modern">
+                        <i class="bi bi-person"></i>
+                        <input type="text" name="Apellido" id="Apellido" placeholder="Primer Apellido" required>
+                    </div>
+
+                    <div class="input-modern">
+                        <i class="bi bi-person"></i>
+                        <input type="text" name="ApellidoDos" id="ApellidoDos" placeholder="Segundo Apellido" required>
+                    </div>
+
+                    <div class="input-modern">
+                        <i class="bi bi-envelope"></i>
+                        <input type="email" name="CorreoElectronico" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="input-modern">
+                        <i class="bi bi-lock"></i>
+                        <input type="password" name="Contrasenna" placeholder="Contraseña" required>
+                    </div>
+
+                    <div class="input-modern">
+                        <i class="bi bi-lock-fill"></i>
+                        <input type="password" name="ConfirmarContrasenna" placeholder="Confirmar contraseña" required>
+                    </div>
+
+                    <div class="input-modern">
+                        <i class="bi bi-telephone"></i>
+                        <input type="text" name="Telefono" placeholder="Teléfono" required>
+                    </div>
+
+                    <div class="input-modern full">
+                        <i class="bi bi-geo-alt"></i>
+                        <input type="text" name="Direccion" placeholder="Dirección">
+                    </div>
+
+                    <div class="input-modern full">
+                        <i class="bi bi-calendar"></i>
+                        <input type="date" name="FechaNacimiento" required max="<?= date('Y-m-d') ?>">
+                    </div>
+
                 </div>
 
-                
-                <div class="p-4">
-                    <form method="POST" name="contactForm" class="row g-4">
-
-                        <?php $cedulaPrefill = $_GET['cedula'] ?? ''; ?>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Cédula</label>
-                            <input type="text" class="form-control" name="Cedula" id="Cedula"
-                                   value="<?= htmlspecialchars($cedulaPrefill) ?>"
-                                   onkeyup="ConsultarNombre();" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="Nombre" id="Nombre" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Primer Apellido</label>
-                            <input type="text" class="form-control" name="Apellido" id="Apellido" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Segundo Apellido</label>
-                            <input type="text" class="form-control" name="ApellidoDos" id="ApellidoDos" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" name="CorreoElectronico" id="CorreoElectronico" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" name="Contrasenna" id="Contrasenna" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Confirmar Contraseña</label>
-                            <input type="password" class="form-control" name="ConfirmarContrasenna" id="ConfirmarContrasenna" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" name="Telefono" id="Telefono" required>
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label">Dirección</label>
-                            <input type="text" class="form-control" name="Direccion" id="Direccion">
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" name="FechaNacimiento" id="FechaNacimiento"
-                                   required max="<?= date('Y-m-d') ?>">
-                        </div>
-
-                        <div class="col-12 text-center mt-3">
-                            <p class="small">¿Ya tienes cuenta?
-                                <a class="link-azul" href="iniciarSesion.php">Iniciar sesión</a>
-                            </p>
-                        </div>
-
-                        <div class="col-12 text-center mt-1">
-                            <button type="submit"
-                                    class="btn btn-primary btn-register-custom"
-                                    name="btnRegistrarPaciente">
-                                Registrarse
-                            </button>
-                        </div>
-
-                    </form>
+                <div class="text-center mt-3">
+                    <small>¿Ya tienes cuenta?
+                        <a href="iniciarSesion.php" class="register-link">Iniciar sesión</a>
+                    </small>
                 </div>
 
-            </div>
+                <button type="submit" class="btn-register-modern" name="btnRegistrarPaciente">
+                    Registrarse
+                </button>
+
+            </form>
         </div>
+
+        <!-- IMAGEN -->
+        <div class="register-modern-right"></div>
+
     </div>
 </section>
 
