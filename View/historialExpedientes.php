@@ -93,7 +93,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
 
-<script src="../assets/js/expediente.js?v=10"></script>
+<script src="../assets/js/expediente.js?v=11"></script>
 
 </body>
 </html>
