@@ -75,9 +75,9 @@ $mensaje = "
 </div>
 ";
 
-require_once __DIR__ . '/../assets/vendor/php-email-form/sendEmail.php';
+require_once __DIR__ . '/../assets/vendor/php-email-form/emailSender.php';
 
-// 🔥 CORRECCIÓN IMPORTANTE: email correcto
+// CORRECCIÓN IMPORTANTE: email correcto
 $resultado = sendEmail(
     'no-responder@opticagrisol.com',
     'Óptica Grisol',

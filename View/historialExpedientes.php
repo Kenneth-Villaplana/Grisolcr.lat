@@ -65,9 +65,9 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
                     <i class="bi bi-search me-1"></i> Buscar
                 </button>
 
-                <button class="btn-inv-ghost" onclick="location.href='expedientes.php'">
-                    Limpiar
-                </button>
+               <button class="btn-inv-ghost" onclick="limpiarBusqueda()">
+                Limpiar
+            </button>
             </div>
 
             <div id="mensajeSistema" class="col-12 mt-3"></div>
@@ -93,7 +93,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
 
-<script src="../assets/js/expediente.js?v=10"></script>
+<script src="../assets/js/expediente.js?v=11"></script>
 
 </body>
 </html>

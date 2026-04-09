@@ -1,8 +1,7 @@
 <?php
 session_start();
 $historial = $_SESSION['historialClinico'] ?? [];
-if (empty($historial))
-    die("No hay expedientes registrados para este paciente.");
+$sinExpedientes = empty($historial);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,7 +25,13 @@ if (empty($historial))
 
 
 <main class="container hc-wrapper">
-
+<?php if ($sinExpedientes): ?>
+    <div id="mensajeSistema" class="mt-3">
+        <div class="mensaje-sistema mensaje-warning text-center">
+            No hay expedientes registrados para este paciente.
+        </div>
+    </div>
+<?php endif; ?>
     
     <div class="hc-header mb-4 mt-4">
         <h2 class="hc-header-title">Historial Clínico del Paciente</h2>
@@ -94,14 +99,13 @@ if (empty($historial))
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Receta del Paciente</h5>
+                    <h5 class="modal-title">Recceta del Paciente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <div class="modal-body">
                     <div id="contenedorReceta"></div>
                 </div>
-
                 <div class="modal-footer">
                    <button class="btn btn-primary" onclick="imprimirReceta()">Imprimir</button>
                     <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
