@@ -98,7 +98,6 @@ include_once __DIR__ . '/../Controller/loginController.php';
                         <div class="input-modern full">
                             <i class="bi bi-calendar"></i>
                             <input type="date" name="FechaNacimiento" required max="<?= date('Y-m-d') ?>"> 
-                                max="<?= date('Y-m-d') ?>">
                         </div>
 
                     </div>
