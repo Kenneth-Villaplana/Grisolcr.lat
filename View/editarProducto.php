@@ -175,7 +175,7 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                                         </p>
                                     </div>
 
-                                    <small class="text-muted d-block mt-2 text-center">
+                                    <small class="text-muted d-block mt-2 upload-note">
                                         Si no selecciona una nueva imagen, se conservará la actual.
                                     </small>
                                 </div>
