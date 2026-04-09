@@ -17631,3 +17631,20 @@ textarea {
     border-color: #22c55e;
     background: linear-gradient(145deg, #f0fdf4, #dcfce7);
 }
+
+.current-product-image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-product-image {
+    max-width: 180px;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid #dbe3ee;
+    padding: 6px;
+    background: #f8fafc;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
