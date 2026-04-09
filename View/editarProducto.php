@@ -154,24 +154,6 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                                     </div>
 
                                 </div>
-
-                                <p class="upload-modern-text mb-3">Arrastra tu imagen o selecciónala</p>
-
-                                <label for="Imagen" class="upload-btn-custom">
-                                    Seleccionar archivo
-                                </label>
-
-                                <input type="file" name="Imagen" id="Imagen" class="upload-hidden-input"
-                                    accept=".jpg,.jpeg,.png,.webp">
-
-                                <p id="nombreArchivoImagenEditar" class="upload-file-name mt-3 mb-0">
-                                    Ningún archivo seleccionado
-                                </p>
-                            </div>
-
-                            <small class="text-muted d-block mt-2">
-                                Si no selecciona una nueva imagen, se conservará la actual.
-                            </small>
                     </div>
                 </div>
 
