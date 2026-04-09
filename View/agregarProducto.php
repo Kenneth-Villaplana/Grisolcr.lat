@@ -73,10 +73,26 @@ include('layout.php');
                     <div class="mb-4">
                         <label for="Imagen" class="form-label fw-semibold">Imagen del producto</label>
 
-                        <input type="file" name="Imagen" id="Imagen" class="form-control mb-2"
-                            accept=".jpg,.jpeg,.png,.webp">
+                        <div class="upload-modern-box">
+                            <div class="upload-modern-icon">
+                                <i class="bi bi-cloud-arrow-up"></i>
+                            </div>
 
-                        <small class="text-muted d-block">
+                            <p class="upload-modern-text mb-3">Arrastra y suelta tu imagen aquí</p>
+
+                            <label for="Imagen" class="upload-btn-custom">
+                                Seleccionar archivo
+                            </label>
+
+                            <input type="file" name="Imagen" id="Imagen" class="upload-hidden-input"
+                                accept=".jpg,.jpeg,.png,.webp">
+
+                            <p id="nombreArchivoImagen" class="upload-file-name mt-3 mb-0">
+                                Ningún archivo seleccionado
+                            </p>
+                        </div>
+
+                        <small class="text-muted d-block mt-2">
                             Formatos permitidos: JPG, JPEG, PNG, WEBP
                         </small>
                     </div>
@@ -96,6 +112,23 @@ include('layout.php');
     </main>
     <?php MostrarFooter(); ?>
     <?php IncluirScripts(); ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputImagen = document.getElementById("Imagen");
+            const nombreArchivo = document.getElementById("nombreArchivoImagen");
+
+            if (inputImagen && nombreArchivo) {
+                inputImagen.addEventListener("change", function () {
+                    if (this.files && this.files.length > 0) {
+                        nombreArchivo.textContent = this.files[0].name;
+                    } else {
+                        nombreArchivo.textContent = "Ningún archivo seleccionado";
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 

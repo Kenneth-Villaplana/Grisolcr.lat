@@ -17564,3 +17564,60 @@ textarea {
 
 }
 
+/* agregar estilo para el área de carga de archivos o agregar productos */
+
+.upload-modern-box {
+    border: 2px dashed #cbd5e1;
+    border-radius: 24px;
+    background: linear-gradient(145deg, #f8fafc, #eef4ff);
+    padding: 40px 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.upload-modern-box:hover {
+    border-color: #3b82f6;
+    background: linear-gradient(145deg, #eef6ff, #e0ecff);
+    transform: translateY(-2px);
+}
+
+.upload-modern-icon {
+    font-size: 65px;
+    color: #3b82f6;
+    margin-bottom: 15px;
+}
+
+.upload-modern-text {
+    font-size: 17px;
+    color: #475569;
+    font-weight: 500;
+}
+
+.upload-btn-custom {
+    display: inline-block;
+    background: linear-gradient(135deg, #2aa4f4, #5b7df6);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.upload-btn-custom:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(91, 125, 246, 0.35);
+}
+
+.upload-hidden-input {
+    display: none;
+}
+
+.upload-file-name {
+    font-size: 14px;
+    color: #64748b;
+}
+
