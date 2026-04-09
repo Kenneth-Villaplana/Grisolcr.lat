@@ -115,7 +115,7 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                                     </div>
                                 </div>
 
-                                <div class="row align-items-start mt-2">
+                                <div class="row align-items-start mt-2  gx-4">
                                     <div class="col-md-4 mb-4">
                                         <label class="form-label image-label-nowrap">Imagen actual</label>
 

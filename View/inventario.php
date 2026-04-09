@@ -2,7 +2,7 @@
 include('layout.php');
 include_once __DIR__ . '/../Model/productoModel.php';
 
-if(session_status() == PHP_SESSION_NONE){
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -10,7 +10,7 @@ if(session_status() == PHP_SESSION_NONE){
 
 $productoFiltro = null;
 
-if(isset($_GET['id']) && is_numeric($_GET['id'])){
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $productoFiltro = intval($_GET['id']);
 }
 
@@ -21,355 +21,332 @@ $listaProductos = ObtenerProductos($productoFiltro);
 /* PRODUCTOS CON INVENTARIO BAJO */
 
 $productosBajos = array_filter($listaProductos, function ($producto) {
-    $cantidad = isset($producto['Cantidad']) ? (int)$producto['Cantidad'] : 0;
+    $cantidad = isset($producto['Cantidad']) ? (int) $producto['Cantidad'] : 0;
     return $cantidad <= 10;
 });
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>Óptica Grisol - Inventario</title>
-<?php IncluirCSS(); ?>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Óptica Grisol - Inventario</title>
+    <?php IncluirCSS(); ?>
 </head>
 
 <body>
 
-<?php MostrarMenu(); ?>
+    <?php MostrarMenu(); ?>
 
-<?php if (!empty($productosBajos)): ?>
-<div class="container mt-4">
+    <?php if (!empty($productosBajos)): ?>
+        <div class="container mt-4">
 
-<div class="alert alert-warning text-center py-2 mb-3 inventario-low-title">
-⚠ <strong>Productos con inventario bajo</strong>
-</div>
+            <div class="alert alert-warning text-center py-2 mb-3 inventario-low-title">
+                ⚠ <strong>Productos con inventario bajo</strong>
+            </div>
 
-<div class="row justify-content-center">
+            <div class="row justify-content-center">
 
-<?php foreach ($productosBajos as $p): ?>
+                <?php foreach ($productosBajos as $p): ?>
 
-<div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-3">
 
-<div class="low-stock-card shadow-sm rounded-4">
+                        <div class="low-stock-card shadow-sm rounded-4">
 
-<div class="low-stock-pill mb-2">
-<span class="dot"></span>
-Inventario bajo
-</div>
+                            <div class="low-stock-pill mb-2">
+                                <span class="dot"></span>
+                                Inventario bajo
+                            </div>
 
-<p class="fw-semibold mt-1 mb-1">
-<?php echo htmlspecialchars($p['Nombre'] ?? ''); ?>
-</p>
+                            <p class="fw-semibold mt-1 mb-1">
+                                <?php echo htmlspecialchars($p['Nombre'] ?? ''); ?>
+                            </p>
 
-<p class="text-muted mb-0 small">
-Cantidad restante:
-<strong class="text-dark">
-<?php echo isset($p['Cantidad']) ? $p['Cantidad'] : 0; ?> unidades
-</strong>
-</p>
+                            <p class="text-muted mb-0 small">
+                                Cantidad restante:
+                                <strong class="text-dark">
+                                    <?php echo isset($p['Cantidad']) ? $p['Cantidad'] : 0; ?> unidades
+                                </strong>
+                            </p>
 
-</div>
-</div>
+                        </div>
+                    </div>
 
-<?php endforeach; ?>
+                <?php endforeach; ?>
 
-</div>
-</div>
-<?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
 
 
-<section class="container my-5 inventario-wrapper">
+    <section class="container my-5 inventario-wrapper">
 
-<!-- TÍTULO + BOTÓN -->
+        <!-- TÍTULO + BOTÓN -->
 
-<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
-<div>
-<h2 class="section-title mb-1">Inventario de Productos</h2>
+            <div>
+                <h2 class="section-title mb-1">Inventario de Productos</h2>
 
-<p class="text-muted mb-0 small">
-Controle existencias, precios y movimientos de su inventario de forma visual.
-</p>
-</div>
+                <p class="text-muted mb-0 small">
+                    Controle existencias, precios y movimientos de su inventario de forma visual.
+                </p>
+            </div>
 
-<a href="agregarProducto.php"
-class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2">
+            <a href="agregarProducto.php"
+                class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2">
 
-<i class="bi bi-plus-circle"></i> Agregar Producto
+                <i class="bi bi-plus-circle"></i> Agregar Producto
 
-</a>
+            </a>
 
-</div>
+        </div>
 
-<!-- MENSAJES -->
+        <!-- MENSAJES -->
 
-<?php if (isset($_GET['msg']) && $_GET['msg'] == 'agregado') { ?>
-<div class="alert alert-success text-center">
-Producto agregado correctamente.
-</div>
-<?php } ?>
+        <?php if (isset($_GET['msg']) && $_GET['msg'] == 'agregado') { ?>
+            <div class="alert alert-success text-center">
+                Producto agregado correctamente.
+            </div>
+        <?php } ?>
 
-<?php if (isset($_GET['msg']) && $_GET['msg'] == 'eliminado') { ?>
-<div class="alert alert-success text-center">
-Producto eliminado con éxito.
-</div>
-<?php } ?>
+        <?php if (isset($_GET['msg']) && $_GET['msg'] == 'eliminado') { ?>
+            <div class="alert alert-success text-center">
+                Producto eliminado con éxito.
+            </div>
+        <?php } ?>
 
-<?php if (isset($_GET['error'])) { ?>
-<div class="alert alert-danger text-center">
-<?php echo htmlspecialchars($_GET['error']); ?>
-</div>
-<?php } ?>
+        <?php if (isset($_GET['error'])) { ?>
+            <div class="alert alert-danger text-center">
+                <?php echo htmlspecialchars($_GET['error']); ?>
+            </div>
+        <?php } ?>
 
 
-<!-- FILTROS -->
+        <!-- FILTROS -->
 
-<div class="inventario-filters shadow-sm rounded-4 mb-5">
+        <div class="inventario-filters shadow-sm rounded-4 mb-5">
 
-<div class="row g-3 align-items-end">
+            <div class="row g-3 align-items-end">
 
-<div class="col-md-6">
+                <div class="col-md-6">
 
-<label for="searchInput" class="form-label fw-semibold inventario-label">
-Buscar producto
-</label>
+                    <label for="searchInput" class="form-label fw-semibold inventario-label">
+                        Buscar producto
+                    </label>
 
-<input type="text"
-id="searchInput"
-class="form-control buscador-producto inventario-input"
-placeholder="Ingrese nombre del producto...">
+                    <input type="text" id="searchInput" class="form-control buscador-producto inventario-input"
+                        placeholder="Ingrese nombre del producto...">
 
-</div>
+                </div>
 
 
-<div class="col-md-3">
+                <div class="col-md-3">
 
-<label for="codigoInput" class="form-label fw-semibold inventario-label">
-Filtrar por ID
-</label>
+                    <label for="codigoInput" class="form-label fw-semibold inventario-label">
+                        Filtrar por ID
+                    </label>
 
-<input type="text"
-id="codigoInput"
-class="form-control inventario-input"
-placeholder="Ej. 555"
-value="<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>">
+                    <input type="text" id="codigoInput" class="form-control inventario-input" placeholder="Ej. 555"
+                        value="<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>">
 
-</div>
+                </div>
 
 
-<div class="col-md-3 text-md-end">
+                <div class="col-md-3 text-md-end">
 
-<label class="form-label d-none d-md-block">&nbsp;</label>
+                    <label class="form-label d-none d-md-block">&nbsp;</label>
 
-<div class="d-flex justify-content-md-end justify-content-center gap-2">
+                    <div class="d-flex justify-content-md-end justify-content-center gap-2">
 
-<button type="button"
-id="btnBuscar"
-class="btn-inv-primary">
+                        <button type="button" id="btnBuscar" class="btn-inv-primary">
 
-<i class="bi bi-search me-2"></i> Buscar
+                            <i class="bi bi-search me-2"></i> Buscar
 
-</button>
+                        </button>
 
-<button type="button"
-id="btnLimpiar"
-class="btn-inv-ghost">
+                        <button type="button" id="btnLimpiar" class="btn-inv-ghost">
 
-Limpiar
+                            Limpiar
 
-</button>
+                        </button>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
 
-<!-- LISTA DE PRODUCTOS -->
+        <!-- LISTA DE PRODUCTOS -->
 
-<div class="row g-4" id="listaProductos">
+        <div class="row g-4" id="listaProductos">
 
-<?php
-if (!empty($listaProductos)) {
+            <?php
+            if (!empty($listaProductos)) {
 
-foreach ($listaProductos as $producto) {
+                foreach ($listaProductos as $producto) {
 
-$cantidad = isset($producto['Cantidad']) ? $producto['Cantidad'] : 0;
-?>
+                    $cantidad = isset($producto['Cantidad']) ? $producto['Cantidad'] : 0;
+                    ?>
 
-<div class="col-xl-6 col-lg-6 col-md-12 producto">
+                    <div class="col-xl-6 col-lg-6 col-md-12 producto">
 
-<div class="card inventory-card shadow-sm h-100">
+                        <div class="card inventory-card shadow-sm h-100">
 
-<div class="card-body d-flex flex-column">
+                            <div class="card-body d-flex flex-column">
 
 
-<!-- NOMBRE + PRECIO -->
+                                <!-- NOMBRE + PRECIO -->
 
-<div class="d-flex justify-content-between align-items-start mb-2 gap-3">
+                                <div class="d-flex justify-content-between align-items-start mb-2 gap-3">
 
-<h5 class="card-title mb-0 product-name">
+                                    <h5 class="card-title mb-0 product-name">
 
-<?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>
+                                        <?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>
 
-</h5>
+                                    </h5>
 
-<span class="product-price text-nowrap">
+                                    <span class="product-price text-nowrap">
 
-₡<?php echo isset($producto['Precio']) ? number_format($producto['Precio'], 2) : '0.00'; ?>
+                                        ₡<?php echo isset($producto['Precio']) ? number_format($producto['Precio'], 2) : '0.00'; ?>
 
-</span>
+                                    </span>
 
-</div>
+                                </div>
 
 
-<!-- CANTIDAD -->
+                                <!-- CANTIDAD -->
 
-<p class="mb-2 small text-muted">
-Cantidad disponible:
-<strong class="text-dark"><?php echo $cantidad; ?></strong>
-</p>
+                                <p class="mb-2 small text-muted">
+                                    Cantidad disponible:
+                                    <strong class="text-dark"><?php echo $cantidad; ?></strong>
+                                </p>
 
 
-<!-- BARRA PROGRESO -->
+                                <!-- BARRA PROGRESO -->
 
-<div class="progress inv-progress mb-3">
+                                <div class="progress inv-progress mb-3">
 
-<div class="progress-bar <?php echo $producto['ColorBarra'] ?? ''; ?>"
-role="progressbar"
-style="width: <?php echo $producto['AnchoBarra'] ?? 0; ?>%;"
-aria-valuenow="<?php echo $cantidad; ?>"
-aria-valuemin="0"
-aria-valuemax="100">
+                                    <div class="progress-bar <?php echo $producto['ColorBarra'] ?? ''; ?>" role="progressbar"
+                                        style="width: <?php echo $producto['AnchoBarra'] ?? 0; ?>%;"
+                                        aria-valuenow="<?php echo $cantidad; ?>" aria-valuemin="0" aria-valuemax="100">
 
-</div>
+                                    </div>
 
-</div>
+                                </div>
 
 
-<!-- ID + ACCIONES -->
+                                <!-- ID + ACCIONES -->
 
-<div class="d-flex justify-content-between align-items-center mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
 
-<span class="inv-id small text-muted">
-ID: <?php echo $producto['ProductoId'] ?? ''; ?>
-</span>
+                                    <span class="inv-id small text-muted">
+                                        ID: <?php echo $producto['ProductoId'] ?? ''; ?>
+                                    </span>
 
 
-<div class="d-flex gap-2">
+                                    <div class="d-flex gap-2">
 
-<a href="editarProducto.php?id=<?php echo $producto['ProductoId'] ?? ''; ?>"
-class="btn btn-sm btn-inv-edit">
+                                        <a href="editarProducto.php?id=<?php echo $producto['ProductoId'] ?? ''; ?>"
+                                            class="btn btn-sm btn-inv-edit">
 
-<i class="bi bi-pencil-square me-1"></i> Editar
+                                            <i class="bi bi-pencil-square me-1"></i> Editar
 
-</a>
+                                        </a>
 
 
-<button
-class="btn btn-sm btn-inv-delete btn-confirmar-eliminar"
-data-id="<?php echo $producto['ProductoId'] ?? ''; ?>"
-data-nombre="<?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>"
-data-bs-toggle="modal"
-data-bs-target="#confirmarEliminarModal">
+                                        <button class="btn btn-sm btn-inv-delete btn-confirmar-eliminar"
+                                            data-id="<?php echo $producto['ProductoId'] ?? ''; ?>"
+                                            data-nombre="<?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>"
+                                            data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal">
 
-<i class="bi bi-trash me-1"></i> Eliminar
+                                            <i class="bi bi-trash me-1"></i> Eliminar
 
-</button>
+                                        </button>
 
-</div>
+                                    </div>
 
-</div>
+                                </div>
 
-</div>
-</div>
-</div>
+                            </div>
+                        </div>
+                    </div>
 
-<?php
-}
-} else {
-?>
+                    <?php
+                }
+            } else {
+                ?>
 
-<div class="col-12 text-center text-muted">
-<p>No se encontraron productos.</p>
-</div>
+                <div class="col-12 text-center text-muted">
+                    <p>No se encontraron productos.</p>
+                </div>
 
-<?php } ?>
+            <?php } ?>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
 
-<?php MostrarFooter(); ?>
-<?php IncluirScripts(); ?>
+    <?php MostrarFooter(); ?>
+    <?php IncluirScripts(); ?>
 
 
-<!-- MODAL ELIMINAR -->
+    <!-- MODAL ELIMINAR -->
 
-<div class="modal fade"
-id="confirmarEliminarModal"
-tabindex="-1"
-aria-labelledby="confirmarEliminarLabel"
-aria-hidden="true">
+    <div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="confirmarEliminarLabel"
+        aria-hidden="true">
 
-<div class="modal-dialog">
+        <div class="modal-dialog">
 
-<div class="modal-content">
+            <div class="modal-content">
 
-<div class="modal-header">
+                <div class="modal-header">
 
-<h5 class="modal-title"
-id="confirmarEliminarLabel">
+                    <h5 class="modal-title" id="confirmarEliminarLabel">
 
-Confirmar eliminación
+                        Confirmar eliminación
 
-</h5>
+                    </h5>
 
-<button type="button"
-class="btn-close"
-data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 
-</div>
+                </div>
 
-<div class="modal-body"
-id="textoModalEliminar">
+                <div class="modal-body" id="textoModalEliminar">
 
-¿Estás seguro que quieres eliminar este producto?
+                    ¿Estás seguro que quieres eliminar este producto?
 
-</div>
+                </div>
 
-<div class="modal-footer">
+                <div class="modal-footer">
 
-<button type="button"
-class="btn btn-secondary"
-data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
 
-Cancelar
+                        Cancelar
 
-</button>
+                    </button>
 
-<a id="enlaceEliminar"
-href="#"
-class="btn btn-danger">
+                    <a id="enlaceEliminar" href="#" class="btn btn-danger">
 
-Eliminar
+                        Eliminar
 
-</a>
+                    </a>
 
-</div>
+                </div>
 
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 
 
-<script src="../assets/js/inventario.js"></script>
+    <script src="../assets/js/inventario.js"></script>
 
 </body>
+
 </html>
