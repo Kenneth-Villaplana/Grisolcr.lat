@@ -3882,6 +3882,11 @@ footer {
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
+
+.image-label-nowrap {
+    white-space: nowrap;
+}
+
 /**/
 
 /*agregar produco*/
@@ -17640,8 +17645,8 @@ textarea {
 }
 
 .current-product-image {
-    max-width: 180px;
-    max-height: 180px;
+    max-width: 200px;
+    max-height: 200px;
     object-fit: cover;
     border-radius: 16px;
     border: 1px solid #dbe3ee;

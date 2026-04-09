@@ -114,7 +114,7 @@ if (!$producto) {
 
                                 <div class="row align-items-start mt-2">
                                     <div class="col-md-4 mb-4">
-                                        <label class="form-label">Imagen actual</label>
+                                        <label class="form-label image-label-nowrap">Imagen actual</label>
 
                                         <div class="current-product-image-box text-center">
                                             <img src="/assets/img/<?php echo htmlspecialchars($producto['Imagen'] ?? 'no-image.jpg'); ?>"
@@ -123,7 +123,7 @@ if (!$producto) {
                                     </div>
 
                                     <div class="col-md-8 mb-4">
-                                        <label class="form-label">Cambiar imagen</label>
+                                        <label class="form-label image-label-nowrap">Cambiar imagen</label>
 
                                         <div class="upload-modern-box" id="uploadBoxEditar">
                                             <div class="upload-modern-icon">
