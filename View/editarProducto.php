@@ -21,6 +21,9 @@ $producto = ObtenerProductoPorId($productoId);
 if (!$producto) {
     die("Producto no encontrado");
 }
+
+$img = (!empty($producto['Imagen'])) ? $producto['Imagen'] : 'no-image.jpg';
+$imgSrc = '/assets/img/' . rawurlencode($img);
 ?>
 
 <!DOCTYPE html>
@@ -117,8 +120,8 @@ if (!$producto) {
                                         <label class="form-label image-label-nowrap">Imagen actual</label>
 
                                         <div class="current-product-image-box text-center">
-                                            <img src="/assets/img/<?php echo htmlspecialchars($producto['Imagen'] ?? 'no-image.jpg'); ?>"
-                                                alt="Imagen actual del producto" class="current-product-image">
+                                            <img src="<?= $imgSrc ?>" alt="Imagen actual del producto"
+                                                class="current-product-image">
                                         </div>
                                     </div>
 
