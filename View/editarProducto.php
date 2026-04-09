@@ -115,20 +115,21 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                                     </div>
                                 </div>
 
-                                <div class="row align-items-start mt-2  gx-4">
-                                    <div class="col-md-4 mb-4">
-                                        <label class="form-label image-label-nowrap">Imagen actual</label>
+                                <div class="mt-3">
 
-                                        <div class="current-product-image-box text-center">
+                                    <div class="mb-4 text-center">
+                                        <label class="form-label d-block">Imagen actual</label>
+
+                                        <div class="current-product-image-box">
                                             <img src="<?= $imgSrc ?>" alt="Imagen actual del producto"
                                                 class="current-product-image">
                                         </div>
                                     </div>
 
-                                    <div class="col-md-8 mb-4">
-                                        <label class="form-label image-label-nowrap">Cambiar imagen</label>
+                                    <div class="mb-4">
+                                        <label class="form-label d-block text-center">Cambiar imagen</label>
 
-                                        <div class="upload-modern-box" id="uploadBoxEditar">
+                                        <div class="upload-modern-box upload-wide" id="uploadBoxEditar">
                                             <div class="upload-modern-icon">
                                                 <i class="bi bi-cloud-arrow-up"></i>
                                             </div>
@@ -147,29 +148,50 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                                             </p>
                                         </div>
 
-                                        <small class="text-muted d-block mt-2">
+                                        <small class="text-muted d-block mt-2 text-center">
                                             Si no selecciona una nueva imagen, se conservará la actual.
                                         </small>
                                     </div>
+
                                 </div>
 
+                                <p class="upload-modern-text mb-3">Arrastra tu imagen o selecciónala</p>
+
+                                <label for="Imagen" class="upload-btn-custom">
+                                    Seleccionar archivo
+                                </label>
+
+                                <input type="file" name="Imagen" id="Imagen" class="upload-hidden-input"
+                                    accept=".jpg,.jpeg,.png,.webp">
+
+                                <p id="nombreArchivoImagenEditar" class="upload-file-name mt-3 mb-0">
+                                    Ningún archivo seleccionado
+                                </p>
                             </div>
 
-                            <div class="col-12 text-center mt-2">
-
-                                <button type="button" class="btn-save-modern px-5" id="btnAbrirModalEditar">
-
-                                    Guardar Cambios
-
-                                </button>
-
-                            </div>
-
-                        </form>
-
+                            <small class="text-muted d-block mt-2">
+                                Si no selecciona una nueva imagen, se conservará la actual.
+                            </small>
                     </div>
                 </div>
+
             </div>
+
+            <div class="col-12 text-center mt-2">
+
+                <button type="button" class="btn-save-modern px-5" id="btnAbrirModalEditar">
+
+                    Guardar Cambios
+
+                </button>
+
+            </div>
+
+            </form>
+
+        </div>
+        </div>
+        </div>
 
         </div>
     </main>
