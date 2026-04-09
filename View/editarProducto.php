@@ -77,31 +77,40 @@ if (!$producto) {
                                     Información
                                 </h6>
 
-                                <label class="form-label">Producto ID</label>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Producto ID</label>
+                                        <input type="text" id="ProductoId" name="ProductoId" class="form-control"
+                                            value="<?php echo htmlspecialchars($producto['ProductoId']); ?>" readonly>
+                                    </div>
 
-                                <input type="text" id="ProductoId" name="ProductoId" class="form-control mb-3"
-                                    value="<?php echo htmlspecialchars($producto['ProductoId']); ?>" readonly>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nombre</label>
+                                        <input type="text" id="Nombre" name="Nombre" class="form-control"
+                                            value="<?php echo htmlspecialchars($producto['Nombre']); ?>" required>
+                                    </div>
+                                </div>
 
-                                <label class="form-label">Nombre</label>
+                                <div class="mb-3">
+                                    <label class="form-label">Descripción</label>
+                                    <textarea name="Descripcion" id="Descripcion" class="form-control auto-grow"
+                                        rows="2"
+                                        required><?php echo htmlspecialchars($producto['Descripcion']); ?></textarea>
+                                </div>
 
-                                <input type="text" id="Nombre" name="Nombre" class="form-control mb-3"
-                                    value="<?php echo htmlspecialchars($producto['Nombre']); ?>" required>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Precio</label>
+                                        <input type="number" name="Precio" id="Precio" min="1" class="form-control"
+                                            value="<?php echo htmlspecialchars($producto['Precio']); ?>" required>
+                                    </div>
 
-                                <label class="form-label">Descripción</label>
-
-                                <textarea name="Descripcion" id="Descripcion" class="form-control mb-3 auto-grow"
-                                    rows="1"
-                                    required><?php echo htmlspecialchars($producto['Descripcion']); ?></textarea>
-
-                                <label class="form-label">Precio</label>
-
-                                <input type="number" name="Precio" id="Precio" min="1" class="form-control mb-3"
-                                    value="<?php echo htmlspecialchars($producto['Precio']); ?>" required>
-
-                                <label class="form-label">Cantidad</label>
-
-                                <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control mb-3"
-                                    value="<?php echo htmlspecialchars($producto['Cantidad']); ?>" required>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Cantidad</label>
+                                        <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control"
+                                            value="<?php echo htmlspecialchars($producto['Cantidad']); ?>" required>
+                                    </div>
+                                </div>
 
                                 <label class="form-label">Imagen actual</label>
 
@@ -205,53 +214,53 @@ if (!$producto) {
     <script src="/assets/js/inventario.js"></script>
 
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const inputImagen = document.getElementById("Imagen");
-    const nombreArchivo = document.getElementById("nombreArchivoImagenEditar");
-    const uploadBox = document.getElementById("uploadBoxEditar");
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputImagen = document.getElementById("Imagen");
+            const nombreArchivo = document.getElementById("nombreArchivoImagenEditar");
+            const uploadBox = document.getElementById("uploadBoxEditar");
 
-    function actualizarNombreArchivo(files) {
-        if (files && files.length > 0) {
-            nombreArchivo.textContent = files[0].name;
-            uploadBox.classList.add("active");
-        } else {
-            nombreArchivo.textContent = "Ningún archivo seleccionado";
-            uploadBox.classList.remove("active");
-        }
-    }
+            function actualizarNombreArchivo(files) {
+                if (files && files.length > 0) {
+                    nombreArchivo.textContent = files[0].name;
+                    uploadBox.classList.add("active");
+                } else {
+                    nombreArchivo.textContent = "Ningún archivo seleccionado";
+                    uploadBox.classList.remove("active");
+                }
+            }
 
-    if (inputImagen && nombreArchivo && uploadBox) {
-        inputImagen.addEventListener("change", function () {
-            actualizarNombreArchivo(this.files);
-        });
+            if (inputImagen && nombreArchivo && uploadBox) {
+                inputImagen.addEventListener("change", function () {
+                    actualizarNombreArchivo(this.files);
+                });
 
-        ["dragenter", "dragover"].forEach(eventName => {
-            uploadBox.addEventListener(eventName, function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadBox.classList.add("dragover");
-            });
-        });
+                ["dragenter", "dragover"].forEach(eventName => {
+                    uploadBox.addEventListener(eventName, function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        uploadBox.classList.add("dragover");
+                    });
+                });
 
-        ["dragleave", "drop"].forEach(eventName => {
-            uploadBox.addEventListener(eventName, function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadBox.classList.remove("dragover");
-            });
-        });
+                ["dragleave", "drop"].forEach(eventName => {
+                    uploadBox.addEventListener(eventName, function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        uploadBox.classList.remove("dragover");
+                    });
+                });
 
-        uploadBox.addEventListener("drop", function (e) {
-            const files = e.dataTransfer.files;
+                uploadBox.addEventListener("drop", function (e) {
+                    const files = e.dataTransfer.files;
 
-            if (files && files.length > 0) {
-                inputImagen.files = files;
-                actualizarNombreArchivo(files);
+                    if (files && files.length > 0) {
+                        inputImagen.files = files;
+                        actualizarNombreArchivo(files);
+                    }
+                });
             }
         });
-    }
-});
-</script>
+    </script>
 
 </body>
 
