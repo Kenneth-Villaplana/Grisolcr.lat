@@ -145,7 +145,7 @@ function MostrarFooter() {
                         <i class="bi bi-facebook"></i>
                     </a>
 
-                    <a href="https://wa.me/50612345678" 
+                    <a href="https://wa.me/50688139883" 
                        class="text-light fs-5">
                         <i class="bi bi-whatsapp"></i>
                     </a>
