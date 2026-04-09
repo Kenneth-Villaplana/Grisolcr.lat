@@ -17621,3 +17621,13 @@ textarea {
     color: #64748b;
 }
 
+.upload-modern-box.dragover {
+    border-color: #2563eb;
+    background: linear-gradient(145deg, #eaf3ff, #dbeafe);
+    transform: scale(1.01);
+}
+
+.upload-modern-box.active {
+    border-color: #22c55e;
+    background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+}

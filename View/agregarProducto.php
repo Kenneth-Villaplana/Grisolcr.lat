@@ -73,7 +73,7 @@ include('layout.php');
                     <div class="mb-4">
                         <label for="Imagen" class="form-label fw-semibold">Imagen del producto</label>
 
-                        <div class="upload-modern-box">
+                        <div class="upload-modern-box" id="uploadBox">
                             <div class="upload-modern-icon">
                                 <i class="bi bi-cloud-arrow-up"></i>
                             </div>
@@ -117,19 +117,50 @@ include('layout.php');
         document.addEventListener("DOMContentLoaded", function () {
             const inputImagen = document.getElementById("Imagen");
             const nombreArchivo = document.getElementById("nombreArchivoImagen");
+            const uploadBox = document.getElementById("uploadBox");
 
-            if (inputImagen && nombreArchivo) {
+            function actualizarNombreArchivo(files) {
+                if (files && files.length > 0) {
+                    nombreArchivo.textContent = files[0].name;
+                    uploadBox.classList.add("active");
+                } else {
+                    nombreArchivo.textContent = "Ningún archivo seleccionado";
+                    uploadBox.classList.remove("active");
+                }
+            }
+
+            if (inputImagen && nombreArchivo && uploadBox) {
                 inputImagen.addEventListener("change", function () {
-                    if (this.files && this.files.length > 0) {
-                        nombreArchivo.textContent = this.files[0].name;
-                    } else {
-                        nombreArchivo.textContent = "Ningún archivo seleccionado";
+                    actualizarNombreArchivo(this.files);
+                });
+
+                ["dragenter", "dragover"].forEach(eventName => {
+                    uploadBox.addEventListener(eventName, function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        uploadBox.classList.add("dragover");
+                    });
+                });
+
+                ["dragleave", "drop"].forEach(eventName => {
+                    uploadBox.addEventListener(eventName, function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        uploadBox.classList.remove("dragover");
+                    });
+                });
+
+                uploadBox.addEventListener("drop", function (e) {
+                    const files = e.dataTransfer.files;
+
+                    if (files && files.length > 0) {
+                        inputImagen.files = files;
+                        actualizarNombreArchivo(files);
                     }
                 });
             }
         });
     </script>
-
 </body>
 
 </html>
