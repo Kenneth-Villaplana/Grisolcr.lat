@@ -3875,7 +3875,8 @@ footer {
 
 .edit-product-card {
     width: 100%;
-    max-width: 850px;
+    max-width: 900px;
+    margin: 0 auto;
     background: #ffffff;
     border-radius: 22px;
     overflow: hidden;

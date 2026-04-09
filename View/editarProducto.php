@@ -71,7 +71,7 @@ if (!$producto) {
 
                             <input type="hidden" name="btnEditarProducto" value="1">
 
-                            <div class="col-12 col-md-8">
+                            <div class="col-12 col-lg-10">
 
                                 <h6 class="edit-section-title text-center mb-3">
                                     Información
@@ -112,37 +112,43 @@ if (!$producto) {
                                     </div>
                                 </div>
 
-                                <label class="form-label">Imagen actual</label>
+                                <div class="row align-items-start mt-2">
+                                    <div class="col-md-4 mb-4">
+                                        <label class="form-label">Imagen actual</label>
 
-                                <div class="current-product-image-box text-center mb-4">
-                                    <img src="/assets/img/<?php echo htmlspecialchars($producto['Imagen'] ?? 'no-image.jpg'); ?>"
-                                        alt="Imagen actual del producto" class="current-product-image">
-                                </div>
-
-                                <label class="form-label">Cambiar imagen</label>
-
-                                <div class="upload-modern-box" id="uploadBoxEditar">
-                                    <div class="upload-modern-icon">
-                                        <i class="bi bi-cloud-arrow-up"></i>
+                                        <div class="current-product-image-box text-center">
+                                            <img src="/assets/img/<?php echo htmlspecialchars($producto['Imagen'] ?? 'no-image.jpg'); ?>"
+                                                alt="Imagen actual del producto" class="current-product-image">
+                                        </div>
                                     </div>
 
-                                    <p class="upload-modern-text mb-3">Arrastra tu imagen o selecciónala</p>
+                                    <div class="col-md-8 mb-4">
+                                        <label class="form-label">Cambiar imagen</label>
 
-                                    <label for="Imagen" class="upload-btn-custom">
-                                        Seleccionar archivo
-                                    </label>
+                                        <div class="upload-modern-box" id="uploadBoxEditar">
+                                            <div class="upload-modern-icon">
+                                                <i class="bi bi-cloud-arrow-up"></i>
+                                            </div>
 
-                                    <input type="file" name="Imagen" id="Imagen" class="upload-hidden-input"
-                                        accept=".jpg,.jpeg,.png,.webp">
+                                            <p class="upload-modern-text mb-3">Arrastra tu imagen o selecciónala</p>
 
-                                    <p id="nombreArchivoImagenEditar" class="upload-file-name mt-3 mb-0">
-                                        Ningún archivo seleccionado
-                                    </p>
+                                            <label for="Imagen" class="upload-btn-custom">
+                                                Seleccionar archivo
+                                            </label>
+
+                                            <input type="file" name="Imagen" id="Imagen" class="upload-hidden-input"
+                                                accept=".jpg,.jpeg,.png,.webp">
+
+                                            <p id="nombreArchivoImagenEditar" class="upload-file-name mt-3 mb-0">
+                                                Ningún archivo seleccionado
+                                            </p>
+                                        </div>
+
+                                        <small class="text-muted d-block mt-2">
+                                            Si no selecciona una nueva imagen, se conservará la actual.
+                                        </small>
+                                    </div>
                                 </div>
-
-                                <small class="text-muted d-block mt-2 mb-2">
-                                    Si no selecciona una nueva imagen, se conservará la actual.
-                                </small>
 
                             </div>
 
