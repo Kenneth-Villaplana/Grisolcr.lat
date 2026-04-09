@@ -4485,6 +4485,56 @@ table.hc-table tbody tr td.acciones-col {
         /**/
 
         
+#modalRegistroExitoso .modal-content {
+    border-radius: 22px !important;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+#modalRegistroExitoso .modal-gradient-header {
+    background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+    padding: 25px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+#modalRegistroExitoso .modal-success-icon {
+    background: #fff;
+    color: #0ea5e9;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+#modalRegistroExitoso .modal-body-custom {
+    padding: 25px 35px;
+    text-align: center;
+    font-size: 1.05rem;
+}
+
+#modalRegistroExitoso .btn-reset-modal {
+    display: inline-block;
+    background: linear-gradient(135deg, #0284c7, #1e40af);
+    color: #fff;
+    padding: 10px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+#modalRegistroExitoso .btn-reset-modal:hover {
+    background: linear-gradient(135deg, #0284c7, #1e40af);
+    color: #fff;
+    transform: scale(1.03);
+}
+
 /* PHP Email Form Messages
 ------------------------------*/
 .php-email-form .error-message {
@@ -17513,3 +17563,4 @@ textarea {
 }
 
 }
+
