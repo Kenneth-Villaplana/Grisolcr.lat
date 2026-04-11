@@ -3351,23 +3351,34 @@ footer {
     background:linear-gradient(135deg,#061b3a,#0b2a5c);
     padding:20px;
 
-    
-    position:relative;
+  
      
 }
 
 .register-modern-container{
     width:100%;
-    max-width:650px; /* más compacto */
+    max-width:650px;
     display:flex;
     justify-content:center;
-     margin: auto;
+    margin:auto;
+
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(14px);
     border-radius:18px;
     box-shadow:0 25px 60px rgba(0,0,0,0.45);
-     animation: floatCard 0.6s ease;
-      transform:translateY(-15px);
+
+    
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.register-modern-container::-webkit-scrollbar{
+    width:6px;
+}
+
+.register-modern-container::-webkit-scrollbar-thumb{
+    background:#5b9dff;
+    border-radius:10px;
 }
 
 @keyframes floatCard{
