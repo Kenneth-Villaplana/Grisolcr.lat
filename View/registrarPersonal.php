@@ -17,7 +17,8 @@ include_once __DIR__ . '/../Controller/loginController.php';
 <?php MostrarMenu(); ?>
 
 <main class="editar-section">
-    <div class="container d-flex justify-content-center">
+
+    <div class="container">
 
         <div class="mb-3 text-end mt-3">
             <a href="personal.php" class="btn  btn-back-custom">
@@ -41,8 +42,8 @@ include_once __DIR__ . '/../Controller/loginController.php';
             </div>
         </div>
 
-        <div class="row justify-content-center w-100">
-    <div class="register-card-compact">
+        <div class="row justify-content-center">
+            <div class="register-card-compact">
 
                 <div class="register-card-header">
                     <h4 class="mb-0">Registrar Personal</h4>
@@ -211,4 +212,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 </body>
-</html>
+</

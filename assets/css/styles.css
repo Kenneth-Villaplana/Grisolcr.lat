@@ -3505,128 +3505,124 @@ footer {
 
 }
 /*registrar personal*/
-
-.editar-section{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#ffffff; /* fondo blanco */
-    padding:40px 20px;
+.register-card-compact .register-card-header {
+    width: 100%;
+    padding: 20px 25px !important;
+    margin: 0 !important;
+    background: linear-gradient(135deg, #0c4e8b, #090446) !important;
+    color: #fff;
+    border-radius: 15px 15px 0 0 !important;
+    display: block;
 }
 
-/* CARD PRINCIPAL (GLASS SUAVE PARA FONDO BLANCO) */
-.register-card-compact{
-    width:100%;
-    max-width:700px;
-    margin:auto;
-    border-radius:18px;
-    overflow:hidden;
-    border:none;
-    background:rgba(255,255,255,0.75);
-    backdrop-filter:blur(12px);
-    box-shadow:0 25px 50px rgba(0,0,0,0.12);
-    animation: fadeUp 0.5s ease;
+
+.register-card-compact {
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden; 
+    border: none;
+    padding: 0 !important;
 }
 
-/* HEADER */
-.register-card-header{
-    padding:25px;
-    background:linear-gradient(135deg,#0ea5e9,#2563eb);
-    color:#ffffff;
-    text-align:center;
+
+.register-card-header {
+    padding: 1.4rem 1.8rem;
+    background: linear-gradient(135deg, #0c4e8b, #090446) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
 }
 
-.register-card-header h4{
-    margin:0;
-    font-weight:700;
+.register-card-header h4 {
+    margin: 0;
+    font-weight: 700;
 }
 
-.register-card-header small{
-    opacity:.9;
+.register-card-header small {
+    font-size: 0.9rem;
+    opacity: 0.95;
+    color: #ffffff !important;
 }
 
-/* BODY */
-.register-card-compact .p-4{
-    padding:35px !important;
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* LABELS */
-.form-label{
-    font-weight:600;
-    color:#1e293b;
+
+
+.form-label {
+    font-weight: 600;
+    color: #1e293b;
 }
 
-/* INPUTS (GLASS LIGHT) */
-.form-control,
-.form-select{
-    background:rgba(255,255,255,0.6);
-    border:1px solid rgba(148,163,184,0.4);
-    padding:10px 14px;
-    border-radius:10px;
-    transition:all .25s ease;
-    backdrop-filter:blur(6px);
+.form-control, 
+.form-select {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: all .25s ease;
 }
 
 .form-control:focus,
-.form-select:focus{
-    border-color:#0ea5e9;
-    box-shadow:0 0 10px rgba(14,165,233,0.25);
-    background:rgba(255,255,255,0.9);
+.form-select:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0px 0px 8px rgba(14,165,233,0.35);
 }
 
-/* BOTÓN */
-.btn-register-custom{
-    width:100%;
-    margin-top:10px;
-    background:linear-gradient(90deg,#2ea6ff,#5b9dff);
-    border:none;
-    border-radius:10px;
-    padding:12px;
-    font-weight:600;
-    color:white;
-    transition:all .25s ease;
+
+.btn-register-custom {
+    background: linear-gradient(135deg, #0ea5e9, #5d82e9);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 35px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: white;
+    transition: .25s ease;
+    box-shadow: 0 6px 18px rgba(14,165,233,0.35);
 }
 
-.btn-register-custom:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,120,255,0.35);
+.btn-register-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(14,165,233,0.45);
 }
 
-/* BOTÓN VOLVER */
-.btn-back-custom{
-    border-radius:10px;
-    border:1px solid #cbd5e1;
-    background:#ffffff;
-    color:#334155;
-    padding:8px 20px;
-    transition:all .25s ease;
+
+.btn-back-custom {
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    padding: 8px 20px;
+    transition: all .25s ease;
 }
 
-.btn-back-custom:hover{
-    background:#f1f5f9;
+
+.btn-back-custom:hover {
+    background: #6c8baada;
+    border-color: #8297b4;
+    color: #1e293b;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
 }
 
-/* ANIMACIÓN */
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+
+.register-card-compact .p-4 {
+    padding: 35px !important;
 }
 
-/* RESPONSIVE */
-@media (max-width:768px){
-    .register-card-compact{
-        margin:0 10px;
+
+@media (max-width: 768px) {
+    .register-card-compact {
+        margin: 0 15px;
     }
 
-    .register-card-header{
-        text-align:center;
+    .register-card-header {
+        text-align: center;
     }
 }
 /*termina vista*/
