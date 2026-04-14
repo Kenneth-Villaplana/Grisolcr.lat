@@ -21,12 +21,11 @@ include_once __DIR__ . '/../Controller/loginController.php';
     <div class="container">
 
         <div class="mb-3 text-end mt-3">
-            <a href="personal.php" class="btn  btn-back-custom">
+            <a href="personal.php" class="btn btn-back-custom">
                 ← Volver a personal
             </a>
         </div>
 
-    
         <div class="row justify-content-center mb-3">
             <div class="col-12 col-lg-8">
                 <?php
@@ -43,122 +42,129 @@ include_once __DIR__ . '/../Controller/loginController.php';
         </div>
 
         <div class="row justify-content-center">
-            <div class="register-card-compact">
+            <div class="col-12 col-lg-9 col-xl-8">
+                <div class="register-card-compact">
 
-                <div class="register-card-header">
-                    <h4 class="mb-0">Registrar Personal</h4>
-                    <small>Ingrese los datos del nuevo miembro del personal</small>
-                </div>
-
-                <div class="p-4">
-                    <form method="POST" name="contactForm" class="row g-4">
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Cédula</label>
-                            <input type="text"
-                                   class="form-control"
-                                   name="Cedula"
-                                   id="Cedula"
-                                   required
-                                   onkeyup="ConsultarNombre();">
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Nombre</label>
-                            <input type="text"
-                                   class="form-control"
-                                   name="Nombre"
-                                   id="Nombre"
-                                   required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Primer Apellido</label>
-                            <input type="text"
-                                   class="form-control"
-                                   name="Apellido"
-                                   id="Apellido"
-                                   required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Segundo Apellido</label>
-                            <input type="text"
-                                   class="form-control"
-                                   name="ApellidoDos"
-                                   id="ApellidoDos"
-                                   required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Correo Electrónico</label>
-                            <input type="email"
-                                   class="form-control"
-                                   name="CorreoElectronico"
-                                   id="CorreoElectronico"
-                                   required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Contraseña</label>
-                            <input type="password"
-                                   class="form-control"
-                                   name="Contrasenna"
-                                   id="Contrasenna"
-                                   required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Confirmar Contraseña</label>
-                            <input type="password"
-                                   class="form-control"
-                                   name="ConfirmarContrasenna"
-                                   id="ConfirmarContrasenna"
-                                   required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label class="form-label">Teléfono</label>
-                            <input type="text"
-                                   class="form-control"
-                                   name="Telefono"
-                                   id="Telefono"
-                                   required>
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label">Dirección</label>
-                            <input type="text"
-                                   class="form-control"
-                                   name="Direccion"
-                                   id="Direccion">
-                        </div>
-                        
-                        <div class="col-md-12">
-                        <label for="FechaNacimiento" class="form-label">Fecha Nacimiento</label>
-                        <input type="date" class="form-control" name="FechaNacimiento" id="FechaNacimiento"
-                               required max="<?= date('Y-m-d') ?>" placeholder="">
+                    <div class="register-card-header">
+                        <h4 class="mb-0">Registrar Personal</h4>
+                        <small>Ingrese los datos del nuevo miembro del personal</small>
                     </div>
-                        <div class="col-12">
-                            <label class="form-label">Seleccione el rol</label>
-                            <select name="RolId" id="RolId" class="form-select" required>
-                                <option value="">Seleccionar</option>
-                                <option value="1">Administrador/a</option>
-                                <option value="2">Asistente</option>
-                                <option value="3">Doctor/a</option>
-                                <option value="4">Cajero/a</option>
-                            </select>
-                        </div>
 
-                        <div class="col-12 text-center mt-1">
-                            <button type="submit"
-                                    class="btn btn-primary btn-register-custom"
-                                    id="btnRegistrarPersonal"
-                                    name="btnRegistrarPersonal">
-                                Registrar
-                            </button>
-                        </div>
-                    </form>
+                    <div class="p-4">
+                        <form method="POST" name="contactForm" class="row g-4">
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Cédula</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="Cedula"
+                                       id="Cedula"
+                                       required
+                                       onkeyup="ConsultarNombre();">
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Nombre</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="Nombre"
+                                       id="Nombre"
+                                       required>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Primer Apellido</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="Apellido"
+                                       id="Apellido"
+                                       required>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Segundo Apellido</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="ApellidoDos"
+                                       id="ApellidoDos"
+                                       required>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email"
+                                       class="form-control"
+                                       name="CorreoElectronico"
+                                       id="CorreoElectronico"
+                                       required>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password"
+                                       class="form-control"
+                                       name="Contrasenna"
+                                       id="Contrasenna"
+                                       required>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Confirmar Contraseña</label>
+                                <input type="password"
+                                       class="form-control"
+                                       name="ConfirmarContrasenna"
+                                       id="ConfirmarContrasenna"
+                                       required>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Teléfono</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="Telefono"
+                                       id="Telefono"
+                                       required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Dirección</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="Direccion"
+                                       id="Direccion">
+                            </div>
+                            
+                            <div class="col-12">
+                                <label for="FechaNacimiento" class="form-label">Fecha Nacimiento</label>
+                                <input type="date"
+                                       class="form-control"
+                                       name="FechaNacimiento"
+                                       id="FechaNacimiento"
+                                       required
+                                       max="<?= date('Y-m-d') ?>">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Seleccione el rol</label>
+                                <select name="RolId" id="RolId" class="form-select" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">Administrador/a</option>
+                                    <option value="2">Asistente</option>
+                                    <option value="3">Doctor/a</option>
+                                    <option value="4">Cajero/a</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 text-center mt-1">
+                                <button type="submit"
+                                        class="btn btn-primary btn-register-custom"
+                                        id="btnRegistrarPersonal"
+                                        name="btnRegistrarPersonal">
+                                    Registrar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,12 +173,13 @@ include_once __DIR__ . '/../Controller/loginController.php';
 
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const cedulaInput = document.getElementById('Cedula');
 
     cedulaInput.addEventListener('input', function () {
-        let valor = this.value.replace(/\D/g, ''); // solo números
+        let valor = this.value.replace(/\D/g, '');
 
         if (valor.length > 9) {
             valor = valor.substring(0, 9);
@@ -194,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -202,14 +210,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (form && cedulaInput) {
         form.addEventListener('submit', function () {
-
-           
             cedulaInput.value = cedulaInput.value.replace(/\D/g, '');
-
         });
     }
 
 });
 </script>
 </body>
-</
+</html>
