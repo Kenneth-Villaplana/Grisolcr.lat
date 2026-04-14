@@ -42,7 +42,7 @@ include_once __DIR__ . '/../Controller/loginController.php';
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-9 col-xl-8">
+            <div class="col-12 col-lg-8">
                 <div class="register-card-compact">
 
                     <div class="register-card-header">
