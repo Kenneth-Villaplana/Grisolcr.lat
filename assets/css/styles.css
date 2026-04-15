@@ -3950,17 +3950,13 @@ select.input-modern {
 
 /* Tarjeta de productos bajos */
 .low-stock-card {
-  background: rgba(255, 243, 224, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 193, 7, 0.4);
-  border-radius: 18px;
-  transition: all 0.25s ease;
+  background: linear-gradient(135deg, #fff7ed, #fffbeb);
+  border: 1px solid rgba(248, 196, 113, 0.4);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-.low-stock-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(255, 193, 7, 0.25);
-}
 .low-stock-card::before {
   content: "";
   position: absolute;
