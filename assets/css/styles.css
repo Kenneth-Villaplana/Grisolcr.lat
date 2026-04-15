@@ -4370,25 +4370,25 @@ textarea.input-modern {
     transform: translateY(0);
   }
 }
-/* ===== LAPTOPS (ajuste fino visual) ===== */
+/* ===== LAPTOPS  ===== */
 @media (min-width: 992px) and (max-width: 1400px) {
 
   .product-register-card {
-    max-width: 700px; /* 👈 reduce ancho */
+    max-width: 700px; 
   }
 
-  /* centra mejor el contenido interno */
+
   .product-register-card .px-4 {
     padding-left: 40px !important;
     padding-right: 40px !important;
   }
 
-  /* evita inputs exageradamente largos */
+
   .input-modern {
     max-width: 100%;
   }
 
-  /* precio y cantidad más equilibrados */
+
   .row .col-md-6 {
     padding-left: 8px;
     padding-right: 8px;
