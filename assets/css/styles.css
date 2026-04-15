@@ -4091,17 +4091,19 @@ select.input-modern {
   color: #0f172a;
 }
 .product-price {
-  color: #3f72af;
   font-weight: 700;
+  font-size: 1.1rem;
 
-  border-bottom: 2px solid rgba(63, 114, 175, 0.5);
-  padding-bottom: 2px;
+  background: linear-gradient(135deg, #3f72af, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* compatibilidad */
+  background-clip: text;
+  color: transparent;
 }
 .inventory-card:hover .product-price {
-  transform: scale(1.05);
-  box-shadow:
-    0 0 0 3px rgba(63, 114, 175, 0.35),
-    0 12px 25px rgba(0, 0, 0, 0.15);
+  filter: brightness(1.1);
 }
 /* Precio */
 .inv-progress {
