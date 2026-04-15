@@ -95,7 +95,7 @@ include('layout.php');
                 <div class="card-body">
 
                     <div class="border rounded-4 p-3 shadow-sm mb-3">
-                        <div class="text-muted small mb-2">Desglose por método (pagos reales)</div>
+                        <div class="text-muted small mb-2">Desglose por método</div>
 
                         <div class="d-flex justify-content-between">
                             <span>Efectivo</span>
