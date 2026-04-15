@@ -41,41 +41,33 @@ include('layout.php');
                 <form id="formAgregarProducto" action="../Controller/productoController.php" method="POST"
                     enctype="multipart/form-data">
 
-                  <!-- Nombre -->
-                <div class="mb-4">
-                    <label for="Nombre" class="form-label fw-semibold">Nombre del producto</label>
-                    <input type="text" name="Nombre" id="Nombre" 
-                        class="form-control input-modern"
-                        placeholder="Nombre del producto"
-                        required>
-                </div>
+                    <!-- Nombre -->
+                    <div class="mb-4">
+                        <label for="Nombre" class="form-label fw-semibold">Nombre del producto</label>
+                        <input type="text" name="Nombre" id="Nombre" class="form-control input-modern" placeholder="Nombre del producto" required>
+                    </div>
 
-                <!-- Descripción -->
-                <div class="mb-4">
-                    <label for="Descripcion" class="form-label fw-semibold">Descripción</label>
-                    <textarea name="Descripcion" id="Descripcion" 
-                        class="form-control input-modern" rows="3"
-                        placeholder="Descripción del producto"
-                        required></textarea>
-                </div>
+                    <!-- Descripción -->
+                    <div class="mb-4">
+                        <label for="Descripcion" class="form-label fw-semibold">Descripción</label>
+                        <textarea name="Descripcion" id="Descripcion" class="form-control input-modern" rows="3"  placeholder="Descripción del producto"
+                            required></textarea>
+                    </div>
 
-                <!-- Precio -->
-                <div class="col-md-6">
-                    <label for="Precio" class="form-label fw-semibold">Precio</label>
-                    <input type="number" name="Precio" id="Precio" min="1"
-                        class="form-control input-modern"
-                        placeholder="₡ Precio"
-                        required>
-                </div>
+                    <!-- Fila precio y cantidad -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="Precio" class="form-label fw-semibold">Precio</label>
+                            <input type="number" name="Precio" id="Precio" min="1" class="form-control input-modern" placeholder="₡ Precio"
+                                required>
+                        </div>
 
-                <!-- Cantidad -->
-                <div class="col-md-6">
-                    <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
-                    <input type="number" name="Cantidad" id="Cantidad" min="1"
-                        class="form-control input-modern"
-                        placeholder="Cantidad disponible"
-                        required>
-                </div>
+                        <div class="col-md-6">
+                            <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
+                            <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control input-modern"  placeholder="Cantidad disponible"
+                                required>
+                        </div>
+                    </div>
 
                     <!-- Imagen -->
                     <div class="mb-4">

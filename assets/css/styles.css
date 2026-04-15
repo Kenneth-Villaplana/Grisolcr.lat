@@ -4229,8 +4229,55 @@ select.input-modern {
   margin-bottom: 30px;
 }
 
+main.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2f7;
+}
 
-/* ===== FORM ===== */
+/* ===== CARD ===== */
+.product-register-card {
+  width: 100%;
+  max-width: 780px; /* 👈 igual que registrar */
+  margin: 0 auto;
+  background: #eef2f7;
+  border-radius: 26px;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  box-shadow:
+    14px 14px 28px rgba(163, 177, 198, 0.45),
+    -14px -14px 28px rgba(255, 255, 255, 0.95);
+}
+
+/* evita conflicto bootstrap */
+.product-register-card.shadow-lg {
+  box-shadow:
+    14px 14px 28px rgba(163, 177, 198, 0.45),
+    -14px -14px 28px rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ===== HEADER ===== */
+.product-register-header {
+  background: transparent !important;
+  padding: 30px 30px 10px 30px;
+  text-align: center;
+  color: #1e293b;
+}
+
+.product-register-header h4 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #1e293b;
+}
+
+.product-register-header small {
+  color: #64748b;
+}
+
+/* ===== FORM PADDING ===== */
 .product-register-card .px-4 {
   padding: 34px !important;
 }
@@ -4239,13 +4286,13 @@ select.input-modern {
 .form-label {
   font-size: 0.8rem;
   color: #64748b;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   margin-left: 6px;
-  font-weight: 500;
 }
 
 /* ===== INPUTS ===== */
 .input-modern {
+  width: 100%; /* 👈 FIX CLAVE */
   background: #eef2f7;
   border: none;
   border-radius: 18px;
@@ -4260,7 +4307,6 @@ select.input-modern {
   transition: all .25s ease;
 }
 
-/* TEXTAREA igual que inputs */
 textarea.input-modern {
   resize: none;
 }
@@ -4284,6 +4330,12 @@ textarea.input-modern {
     0 0 0 3px rgba(56, 189, 248, 0.14);
 }
 
+/* ===== FILA PRECIO/CANTIDAD FIX ===== */
+.row .col-md-6 {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ===== BOTÓN ===== */
 .btn-save-modern {
   background: linear-gradient(135deg, #0ea5e9, #5d82e9);
@@ -4291,10 +4343,8 @@ textarea.input-modern {
   border-radius: 999px;
   padding: 12px 42px;
   min-width: 160px;
-  font-size: 1rem;
   font-weight: 600;
   color: white;
-  transition: .25s ease;
   box-shadow:
     8px 8px 16px rgba(163, 177, 198, 0.35),
     -4px -4px 10px rgba(255, 255, 255, 0.35);
@@ -4302,9 +4352,6 @@ textarea.input-modern {
 
 .btn-save-modern:hover {
   transform: translateY(-2px);
-  box-shadow:
-    10px 10px 18px rgba(163, 177, 198, 0.38),
-    -4px -4px 10px rgba(255, 255, 255, 0.4);
 }
 
 /* ===== BOTÓN VOLVER ===== */
@@ -4318,6 +4365,7 @@ textarea.input-modern {
     5px 5px 10px rgba(163, 177, 198, 0.22),
     -5px -5px 10px rgba(255, 255, 255, 0.85);
 }
+
 @keyframes fadeUp {
   from {
     opacity: 0;
