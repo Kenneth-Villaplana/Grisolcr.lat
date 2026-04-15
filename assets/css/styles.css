@@ -4370,75 +4370,30 @@ textarea.input-modern {
     transform: translateY(0);
   }
 }
-@media (max-width: 600px) {
+/* ===== LAPTOPS (ajuste fino visual) ===== */
+@media (min-width: 992px) and (max-width: 1400px) {
 
-  /* CONTENEDOR */
-  main.container {
-    padding: 20px 10px;
-  }
-
-  /* CARD */
   .product-register-card {
-    border-radius: 18px;
+    max-width: 700px; /* 👈 reduce ancho */
   }
 
-  /* HEADER */
-  .product-register-header {
-    padding: 20px 15px 8px 15px;
-  }
-
-  .product-register-header h4 {
-    font-size: 1.3rem;
-  }
-
-  /* FORM */
+  /* centra mejor el contenido interno */
   .product-register-card .px-4 {
-    padding: 18px 12px !important;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
   }
 
-  /* INPUTS FULL WIDTH */
+  /* evita inputs exageradamente largos */
   .input-modern {
-    width: 100%;
-  }
-
-  /* FORZAR 1 COLUMNA (equivalente a grid 1fr) */
-  .row {
-    flex-direction: column;
-  }
-
-  .row > .col-md-6 {
-    width: 100%;
     max-width: 100%;
   }
 
-  /* ESPACIADO */
-  .mb-4 {
-    margin-bottom: 1rem !important;
+  /* precio y cantidad más equilibrados */
+  .row .col-md-6 {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
-  /* UPLOAD */
-  .upload-modern-box {
-    padding: 20px 15px;
-  }
-
-  .upload-modern-icon {
-    font-size: 38px;
-  }
-
-  .upload-modern-text {
-    font-size: 0.85rem;
-  }
-
-  /* BOTÓN FULL */
-  .btn-save-modern {
-    width: 100%;
-  }
-
-  /* BOTÓN VOLVER */
-  .btn-back-custom {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-  }
 }
 
 /**/
