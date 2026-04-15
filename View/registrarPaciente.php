@@ -47,55 +47,55 @@ include_once __DIR__ . '/../Controller/loginController.php';
                     <!-- GRID -->
                     <div class="register-grid">
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-person-badge"></i>
                             <input type="text" name="Cedula" id="Cedula" value="<?= htmlspecialchars($cedulaPrefill) ?>"
                                 placeholder="Cédula" required onkeyup="ConsultarNombre();">
                         </div>
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-person"></i>
                             <input type="text" name="Nombre" id="Nombre" placeholder="Nombre" required>
                         </div>
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-person"></i>
                             <input type="text" name="Apellido" id="Apellido" placeholder="Primer Apellido" required>
                         </div>
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-person"></i>
                             <input type="text" name="ApellidoDos" id="ApellidoDos" placeholder="Segundo Apellido"
                                 required>
                         </div>
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-envelope"></i>
                             <input type="email" name="CorreoElectronico" placeholder="Correo electrónico" required>
                         </div>
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-lock"></i>
                             <input type="password" name="Contrasenna" placeholder="Contraseña" required>
                         </div>
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-lock-fill"></i>
                             <input type="password" name="ConfirmarContrasenna" placeholder="Confirmar contraseña"
                                 required>
                         </div>
 
-                        <div class="input-modern">
+                        <div class="input-modern-login">
                             <i class="bi bi-telephone"></i>
                             <input type="text" name="Telefono" placeholder="Teléfono" required>
                         </div>
 
-                        <div class="input-modern-loginfull">
+                        <div class="input-modern-login full">
                             <i class="bi bi-geo-alt"></i>
                             <input type="text" name="Direccion" placeholder="Dirección">
                         </div>
 
-                        <div class="input-modern-loginfull">
+                        <div class="input-modern-login full">
                             <i class="bi bi-calendar"></i>
                             <input type="date" name="FechaNacimiento" required max="<?= date('Y-m-d') ?>"> 
                         </div>
