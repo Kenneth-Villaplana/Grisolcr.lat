@@ -3383,7 +3383,6 @@ footer {
   background: #eef2f7;
   border-radius: 26px;
   overflow: hidden;
-  padding: 0 !important;
   border: none;
   box-shadow:
     14px 14px 28px rgba(163, 177, 198, 0.45),
@@ -3397,8 +3396,8 @@ footer {
 
 /* ===== HEADER ===== */
 .edit-header {
-  background: transparent !important;
-  padding: 30px 30px 10px 30px !important;
+  background: transparent;
+  padding: 30px 30px 10px 30px;
   text-align: center;
 }
 
@@ -3432,6 +3431,25 @@ footer {
   padding: 34px !important;
 }
 
+/* ===== TÍTULOS DE SECCIÓN ===== */
+.section-title {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+/* ===== LABELS (AHORA VISIBLES Y MODERNOS) ===== */
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 4px;
+  margin-left: 6px;
+  font-weight: 500;
+}
+
 /* ===== INPUTS ===== */
 .input-modern {
   background: #eef2f7;
@@ -3446,11 +3464,7 @@ footer {
     4px 4px 10px rgba(163, 177, 198, 0.18),
     -4px -4px 10px rgba(255, 255, 255, 0.85);
   transition: all .25s ease;
-}
-
-.input-modern::placeholder {
-  color: #4b5563;
-  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 /* HOVER */
@@ -3472,18 +3486,24 @@ footer {
     0 0 0 3px rgba(56, 189, 248, 0.14);
 }
 
+/* READONLY MÁS SUAVE */
+.input-modern[readonly] {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
 /* SELECT */
 select.input-modern {
   appearance: none;
 }
 
-/* ===== BOTÓN GUARDAR ===== */
+/* ===== BOTÓN ===== */
 .btn-save-modern {
   background: linear-gradient(135deg, #0ea5e9, #5d82e9);
   border: none;
   border-radius: 999px;
   padding: 12px 42px;
-  min-width: 150px;
+  min-width: 160px;
   font-size: 1rem;
   font-weight: 600;
   color: white;
@@ -3501,7 +3521,7 @@ select.input-modern {
 }
 
 /* ===== BOTÓN VOLVER ===== */
-.btn-back-modern {
+.btn-back-custom {
   border-radius: 12px;
   border: none;
   background: #eef2f7;
@@ -3510,23 +3530,17 @@ select.input-modern {
   box-shadow:
     5px 5px 10px rgba(163, 177, 198, 0.22),
     -5px -5px 10px rgba(255, 255, 255, 0.85);
-  transition: all .25s ease;
-}
-
-.btn-back-modern:hover {
-  color: #1e293b;
-  transform: translateY(-1px);
-}
-
-/* ===== ALERT ===== */
-.modern-alert {
-  border-radius: 12px;
 }
 
 /* ===== SWITCH ===== */
 .switch-container .form-check-input {
   scale: 1.2;
   cursor: pointer;
+}
+
+/* ===== ALERT ===== */
+.modern-alert {
+  border-radius: 12px;
 }
 
 /* ===== GRID ===== */
@@ -3546,7 +3560,7 @@ select.input-modern {
   }
 
   .edit-header {
-    padding: 24px 18px 8px 18px !important;
+    padding: 24px 18px 8px 18px;
   }
 
   .edit-header h4 {
@@ -3556,11 +3570,6 @@ select.input-modern {
   .edit-card .p-4 {
     padding: 22px 16px !important;
   }
-}
-
-/* ===== OCULTAR LABELS ===== */
-.form-label {
-  display: none;
 }
 
 /*termina vista*/
