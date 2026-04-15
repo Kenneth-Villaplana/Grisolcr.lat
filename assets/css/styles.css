@@ -3989,12 +3989,14 @@ select.input-modern {
 
 
 .inventario-filters {
-  border-radius: 22px;
-  padding: 20px;
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.4);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
 .inventario-label {
@@ -4003,7 +4005,9 @@ select.input-modern {
 }
 
 .inventario-input {
-  border-radius: 12px;
+   background: rgba(255, 255, 255, 0.7); 
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(4px);
   border: 1px solid #e5e7eb;
   padding: 8px 12px;
   font-size: 0.9rem;
@@ -4056,11 +4060,18 @@ select.input-modern {
 }
 
 .inventory-card {
-  border-radius: 24px;
-  padding: 2px;
-  background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(37,99,235,0.15));
-  transition: all 0.3s ease;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  background: rgba(255, 255, 255, 0.55); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+  transition: all 0.25s ease;
 }
+
 
 .inventory-card .card-body {
   border-radius: 22px;
@@ -4071,8 +4082,8 @@ select.input-modern {
 
 
 .inventory-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 40px rgba(0, 80, 140, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
 .inventory-card::before {
@@ -4113,9 +4124,9 @@ select.input-modern {
 
 /* Precio */
 .inv-progress {
-  height: 10px;
+  height: 8px;
+  background: rgba(0,0,0,0.08);
   border-radius: 999px;
-  background: rgba(0,0,0,0.05);
 }
 
 .inv-progress .progress-bar {
