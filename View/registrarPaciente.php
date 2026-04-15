@@ -90,12 +90,12 @@ include_once __DIR__ . '/../Controller/loginController.php';
                             <input type="text" name="Telefono" placeholder="Teléfono" required>
                         </div>
 
-                        <div class="input-modern full">
+                        <div class="input-modern-loginfull">
                             <i class="bi bi-geo-alt"></i>
                             <input type="text" name="Direccion" placeholder="Dirección">
                         </div>
 
-                        <div class="input-modern full">
+                        <div class="input-modern-loginfull">
                             <i class="bi bi-calendar"></i>
                             <input type="date" name="FechaNacimiento" required max="<?= date('Y-m-d') ?>"> 
                         </div>

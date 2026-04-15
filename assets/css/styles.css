@@ -3663,7 +3663,7 @@ select.input-modern {
   gap: 15px;
 }
 
-.input-modern {
+.input-modern-login {
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.08);
@@ -3671,12 +3671,12 @@ select.input-modern {
   padding: 10px 15px;
 }
 
-.input-modern i {
+.input-modern-login i {
   margin-right: 10px;
   color: #9ec8ff;
 }
 
-.input-modern input {
+.input-modern-login input {
   width: 100%;
   border: none;
   background: transparent;
@@ -3684,11 +3684,11 @@ select.input-modern {
   outline: none;
 }
 
-.input-modern input::placeholder {
+.input-modern-login input::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.input-modern.full {
+.input-modern-login.full {
   grid-column: 1 / 3;
 }
 
