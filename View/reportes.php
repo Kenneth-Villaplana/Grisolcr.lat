@@ -216,125 +216,157 @@ async function loadDashboardVentas() {
 }
 
 /* BARRAS */
-function renderTop(top){
-    const ctx = cTop.getContext('2d');
-    const grad = ctx.createLinearGradient(0,0,0,300);
-    grad.addColorStop(0,"#3f72af");
-    grad.addColorStop(1,"rgba(37,99,235,0.3)");
+function renderTop(top) {
+    const ctx = document.getElementById('cTop').getContext('2d');
 
-    if(chTop) chTop.destroy();
+    if (chTop) chTop.destroy();
 
-    chTop = new Chart(ctx,{
-        type:'bar',
-        data:{
-            labels: top.map(x=>x.producto),
-            datasets:[{
-                data: top.map(x=>x.unidades),
-                backgroundColor: grad,
-                borderRadius:10
+    chTop = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: top.map(x => x.producto),
+            datasets: [{
+                data: top.map(x => x.unidades),
+                backgroundColor: "#3f72af",
+                borderRadius: 20,
+                barThickness: 18
             }]
         },
-        options:{
-            plugins:{legend:{display:false}},
-            scales:{
-                x:{grid:{display:false}},
-                y:{grid:{color:gridColor}}
+        options: {
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: "#f1f5f9",
+                        maxRotation: 40,
+                        minRotation: 20
+                    },
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: { color: "#cbd5f5" },
+                    grid: { color: gridColor }
+                }
             }
         }
     });
 }
 
 /* BARRAS HORIZONTALES */
-function renderTopMoney(top){
-    const ctx = cTopMoney.getContext('2d');
-    const grad = ctx.createLinearGradient(0,0,300,0);
-    grad.addColorStop(0,"#2563eb");
-    grad.addColorStop(1,"rgba(147,197,253,0.3)");
+function renderTopMoney(top) {
+    const ctx = document.getElementById('cTopMoney').getContext('2d');
 
-    if(chTopMoney) chTopMoney.destroy();
+    if (chTopMoney) chTopMoney.destroy();
 
-    chTopMoney = new Chart(ctx,{
-        type:'bar',
-        data:{
-            labels: top.map(x=>x.producto),
-            datasets:[{
-                data: top.map(x=>x.total),
-                backgroundColor: grad,
-                borderRadius:10
+    chTopMoney = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: top.map(x => x.producto),
+            datasets: [{
+                data: top.map(x => x.total),
+                backgroundColor: [
+                    "#3f72af",
+                    "#2563eb",
+                    "#60a5fa",
+                    "#93c5fd",
+                    "#1d4ed8",
+                    "#1e40af",
+                    "#3b82f6",
+                    "#6366f1",
+                    "#818cf8",
+                    "#a5b4fc"
+                ],
+                borderWidth: 0
             }]
         },
-        options:{
-            indexAxis:'y',
-            plugins:{legend:{display:false}},
-            scales:{
-                x:{grid:{color:gridColor}},
-                y:{grid:{display:false}}
+        options: {
+            cutout: "65%",
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        color: "#e2e8f0",
+                        padding: 15,
+                        boxWidth: 12
+                    }
+                }
             }
         }
     });
 }
 
 /* LINEAS */
-function renderMesUnits(meses){
-    const ctx = cMesUnits.getContext('2d');
-    const grad = ctx.createLinearGradient(0,0,0,300);
-    grad.addColorStop(0,"rgba(59,130,246,0.5)");
-    grad.addColorStop(1,"transparent");
+function renderMesUnits(meses) {
+    const ctx = document.getElementById('cMesUnits').getContext('2d');
 
-    if(chMesUnits) chMesUnits.destroy();
+    if (chMesUnits) chMesUnits.destroy();
 
-    chMesUnits = new Chart(ctx,{
-        type:'line',
-        data:{
-            labels: meses.map(x=>x.mes),
-            datasets:[{
-                data: meses.map(x=>x.unidades),
-                borderColor:"#3f72af",
-                backgroundColor:grad,
-                fill:true,
-                tension:.4
+    chMesUnits = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: meses.map(x => x.mes),
+            datasets: [{
+                data: meses.map(x => x.unidades),
+                borderColor: "#60a5fa",
+                backgroundColor: "rgba(96,165,250,0.2)",
+                fill: true,
+                tension: 0.45,
+                pointRadius: 5,
+                pointBackgroundColor: "#60a5fa"
             }]
         },
-        options:{
-            plugins:{legend:{display:false}},
-            scales:{
-                y:{grid:{color:gridColor}},
-                x:{grid:{display:false}}
+        options: {
+            plugins: { legend: { display: false } },
+            scales: {
+                y: {
+                    ticks: { color: "#cbd5f5" },
+                    grid: { color: gridColor }
+                },
+                x: {
+                    ticks: { color: "#e2e8f0" },
+                    grid: { display: false }
+                }
             }
         }
     });
 }
 
-function renderMesMoney(meses){
-    const ctx = cMesMoney.getContext('2d');
-    const grad = ctx.createLinearGradient(0,0,0,300);
-    grad.addColorStop(0,"rgba(37,99,235,0.5)");
-    grad.addColorStop(1,"transparent");
+function renderMesMoney(meses) {
+    const ctx = document.getElementById('cMesMoney').getContext('2d');
 
-    if(chMesMoney) chMesMoney.destroy();
+    if (chMesMoney) chMesMoney.destroy();
 
-    chMesMoney = new Chart(ctx,{
-        type:'line',
-        data:{
-            labels: meses.map(x=>x.mes),
-            datasets:[{
-                data: meses.map(x=>x.total),
-                borderColor:"#2563eb",
-                backgroundColor:grad,
-                fill:true,
-                tension:.4
+    chMesMoney = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: meses.map(x => x.mes),
+            datasets: [{
+                data: meses.map(x => x.total),
+                borderColor: "#2563eb",
+                backgroundColor: "rgba(37,99,235,0.25)",
+                fill: true,
+                tension: 0.45,
+                pointRadius: 5,
+                pointBackgroundColor: "#2563eb"
             }]
         },
-        options:{
-            plugins:{legend:{display:false}},
-            scales:{
-                y:{grid:{color:gridColor}},
-                x:{grid:{display:false}}
+        options: {
+            plugins: { legend: { display: false } },
+            scales: {
+                y: {
+                    ticks: { color: "#cbd5f5" },
+                    grid: { color: gridColor }
+                },
+                x: {
+                    ticks: { color: "#e2e8f0" },
+                    grid: { display: false }
+                }
             }
         }
     });
 }
-
 btnReloadDash.onclick = loadDashboardVentas;
 loadDashboardVentas();
 </script>
