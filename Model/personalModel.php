@@ -84,7 +84,7 @@ function EditarPersonalModel(
         }
 
         $sentencia->bind_param(
-            "issssssissi",
+            "isssssssisi",
             $idUsuario,
             $cedula,
             $nombre,
