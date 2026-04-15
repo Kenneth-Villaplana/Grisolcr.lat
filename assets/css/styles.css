@@ -4520,7 +4520,46 @@ textarea.input-modern {
 }
 
 /**/
+/*reportes*/
+  /* GLASS */
+        .dash-glass {
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            transition: all 0.25s ease;
+        }
 
+        .dash-glass:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .dash-glass h5 {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        /* KPIs */
+        .kpi {
+            font-size: 30px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3f72af, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .kpi-sub {
+            color: #cbd5f5;
+            font-size: 0.9rem;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 320px !important;
+        }
+/**/
 
 /*historial expedientes*/
 

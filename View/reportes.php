@@ -16,27 +16,6 @@ include('layout.php');
     <!-- Chart.js para los dashboards -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-    <style>
-        .dash-glass {
-            border-radius: 18px;
-            background: rgba(255,255,255,.06);
-            border: 1px solid rgba(255,255,255,.12);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,.25);
-        }
-        .kpi {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -.5px;
-        }
-        .kpi-sub {
-            opacity: .8;
-        }
-        canvas {
-            width: 100% !important;
-            height: 330px !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -134,31 +113,34 @@ include('layout.php');
     </div>
 -->
     <!-- DASHBOARD INTERACTIVO (nuevo) -->
-    <section class="mb-4">
-        <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+     <section>
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
             <div>
                 <h3 class="mb-0">Dashboard de Ventas</h3>
-                <div class="text-muted">Productos más vendidos y tendencia mensual (en vivo desde la BD)</div>
+                <small class="text-muted">Visualización moderna en tiempo real</small>
             </div>
-            <button id="btnReloadDash" type="button" class="btn btn-outline-success mt-2">
+
+            <button id="btnReloadDash" class="btn btn-outline-primary mt-2">
                 <i class="bi bi-arrow-clockwise"></i> Recargar
             </button>
         </div>
 
         <!-- KPIs -->
-        <div class="row g-3 mb-3">
+        <div class="row g-3 mb-4">
             <div class="col-md-4">
                 <div class="p-3 dash-glass">
                     <div class="kpi-sub">Unidades totales</div>
                     <div id="kpiUnidades" class="kpi">—</div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="p-3 dash-glass">
                     <div class="kpi-sub">Ingresos totales (₡)</div>
                     <div id="kpiTotal" class="kpi">—</div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="p-3 dash-glass">
                     <div class="kpi-sub">Producto Top #1</div>
@@ -167,165 +149,194 @@ include('layout.php');
             </div>
         </div>
 
-        <!-- Gráficos -->
-        <div class="row g-3">
+        <!-- GRÁFICOS -->
+        <div class="row g-4">
+
             <div class="col-lg-6">
                 <div class="p-3 dash-glass">
-                    <h5 class="mb-2">Top 10 productos (unidades)</h5>
+                    <h5>Top productos (unidades)</h5>
                     <canvas id="cTop"></canvas>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <div class="p-3 dash-glass">
-                    <h5 class="mb-2">Top 10 productos (₡ total vendido)</h5>
+                    <h5>Top productos (₡)</h5>
                     <canvas id="cTopMoney"></canvas>
                 </div>
             </div>
+
             <div class="col-12">
                 <div class="p-3 dash-glass">
-                    <h5 class="mb-2">Tendencia mensual (unidades)</h5>
+                    <h5>Tendencia mensual (unidades)</h5>
                     <canvas id="cMesUnits"></canvas>
                 </div>
             </div>
+
             <div class="col-12">
                 <div class="p-3 dash-glass">
-                    <h5 class="mb-2">Tendencia mensual (₡)</h5>
+                    <h5>Tendencia mensual (₡)</h5>
                     <canvas id="cMesMoney"></canvas>
                 </div>
             </div>
+
         </div>
     </section>
+
 </main>
 
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
 
 <script>
+Chart.defaults.color = "#cbd5f5";
+Chart.defaults.font.family = "'Inter', sans-serif";
+
+const gridColor = "rgba(255,255,255,0.08)";
+
 let chTop, chTopMoney, chMesUnits, chMesMoney;
 
 async function loadDashboardVentas() {
-    const respuesta = await fetch('/Controller/dashbaordVentasData.php', { cache: 'no-store' });
-    const data = await respuesta.json();
+    const res = await fetch('/Controller/dashbaordVentasData.php');
+    const data = await res.json();
 
-    if (!data.ok) {
-        console.error(data.error);
-        alert('Error cargando dashboard: ' + data.error);
-        return;
-    }
+    if (!data.ok) return;
 
-    // KPIs
-    const totalUnidades = (data.meses || []).reduce((acc, fila) => acc + (fila.unidades || 0), 0);
-    const totalMoney    = (data.meses || []).reduce((acc, fila) => acc + (fila.total || 0), 0);
+    const totalUnidades = data.meses.reduce((a,b)=>a+b.unidades,0);
+    const totalMoney = data.meses.reduce((a,b)=>a+b.total,0);
 
-    document.getElementById('kpiUnidades').textContent = totalUnidades.toLocaleString('es-CR');
-    document.getElementById('kpiTotal').textContent    = totalMoney.toLocaleString('es-CR', { minimumFractionDigits: 2 });
-    document.getElementById('kpiTop1').textContent     = (data.top && data.top[0]) ? data.top[0].producto : '—';
+    kpiUnidades.textContent = totalUnidades.toLocaleString();
+    kpiTotal.textContent = totalMoney.toLocaleString();
+    kpiTop1.textContent = data.top[0]?.producto || '—';
 
-    renderTop(data.top || []);
-    renderTopMoney(data.top || []);
-    renderMesUnits(data.meses || []);
-    renderMesMoney(data.meses || []);
+    renderTop(data.top);
+    renderTopMoney(data.top);
+    renderMesUnits(data.meses);
+    renderMesMoney(data.meses);
 }
 
-function renderTop(top) {
-    const labels = top.map(x => x.producto);
-    const values = top.map(x => x.unidades);
+/* BARRAS */
+function renderTop(top){
+    const ctx = cTop.getContext('2d');
+    const grad = ctx.createLinearGradient(0,0,0,300);
+    grad.addColorStop(0,"#3f72af");
+    grad.addColorStop(1,"rgba(37,99,235,0.3)");
 
-    if (chTop) chTop.destroy();
-    chTop = new Chart(document.getElementById('cTop'), {
-        type: 'bar',
-        data: {
-            labels,
-            datasets: [{
-                label: 'Unidades',
-                data: values,
-                borderWidth: 1
+    if(chTop) chTop.destroy();
+
+    chTop = new Chart(ctx,{
+        type:'bar',
+        data:{
+            labels: top.map(x=>x.producto),
+            datasets:[{
+                data: top.map(x=>x.unidades),
+                backgroundColor: grad,
+                borderRadius:10
             }]
         },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
+        options:{
+            plugins:{legend:{display:false}},
+            scales:{
+                x:{grid:{display:false}},
+                y:{grid:{color:gridColor}}
+            }
         }
     });
 }
 
-function renderTopMoney(top) {
-    const labels = top.map(x => x.producto);
-    const values = top.map(x => x.total);
+/* BARRAS HORIZONTALES */
+function renderTopMoney(top){
+    const ctx = cTopMoney.getContext('2d');
+    const grad = ctx.createLinearGradient(0,0,300,0);
+    grad.addColorStop(0,"#2563eb");
+    grad.addColorStop(1,"rgba(147,197,253,0.3)");
 
-    if (chTopMoney) chTopMoney.destroy();
-    chTopMoney = new Chart(document.getElementById('cTopMoney'), {
-        type: 'bar',
-        data: {
-            labels,
-            datasets: [{
-                label: '₡ total vendido',
-                data: values,
-                borderWidth: 1
+    if(chTopMoney) chTopMoney.destroy();
+
+    chTopMoney = new Chart(ctx,{
+        type:'bar',
+        data:{
+            labels: top.map(x=>x.producto),
+            datasets:[{
+                data: top.map(x=>x.total),
+                backgroundColor: grad,
+                borderRadius:10
             }]
         },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { x: { beginAtZero: true } }
+        options:{
+            indexAxis:'y',
+            plugins:{legend:{display:false}},
+            scales:{
+                x:{grid:{color:gridColor}},
+                y:{grid:{display:false}}
+            }
         }
     });
 }
 
-function renderMesUnits(meses) {
-    const labels = meses.map(x => x.mes);
-    const values = meses.map(x => x.unidades);
+/* LINEAS */
+function renderMesUnits(meses){
+    const ctx = cMesUnits.getContext('2d');
+    const grad = ctx.createLinearGradient(0,0,0,300);
+    grad.addColorStop(0,"rgba(59,130,246,0.5)");
+    grad.addColorStop(1,"transparent");
 
-    if (chMesUnits) chMesUnits.destroy();
-    chMesUnits = new Chart(document.getElementById('cMesUnits'), {
-        type: 'line',
-        data: {
-            labels,
-            datasets: [{
-                label: 'Unidades',
-                data: values,
-                tension: 0.3
+    if(chMesUnits) chMesUnits.destroy();
+
+    chMesUnits = new Chart(ctx,{
+        type:'line',
+        data:{
+            labels: meses.map(x=>x.mes),
+            datasets:[{
+                data: meses.map(x=>x.unidades),
+                borderColor:"#3f72af",
+                backgroundColor:grad,
+                fill:true,
+                tension:.4
             }]
         },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
+        options:{
+            plugins:{legend:{display:false}},
+            scales:{
+                y:{grid:{color:gridColor}},
+                x:{grid:{display:false}}
+            }
         }
     });
 }
 
-function renderMesMoney(meses) {
-    const labels = meses.map(x => x.mes);
-    const values = meses.map(x => x.total);
+function renderMesMoney(meses){
+    const ctx = cMesMoney.getContext('2d');
+    const grad = ctx.createLinearGradient(0,0,0,300);
+    grad.addColorStop(0,"rgba(37,99,235,0.5)");
+    grad.addColorStop(1,"transparent");
 
-    if (chMesMoney) chMesMoney.destroy();
-    chMesMoney = new Chart(document.getElementById('cMesMoney'), {
-        type: 'line',
-        data: {
-            labels,
-            datasets: [{
-                label: '₡',
-                data: values,
-                tension: 0.3
+    if(chMesMoney) chMesMoney.destroy();
+
+    chMesMoney = new Chart(ctx,{
+        type:'line',
+        data:{
+            labels: meses.map(x=>x.mes),
+            datasets:[{
+                data: meses.map(x=>x.total),
+                borderColor:"#2563eb",
+                backgroundColor:grad,
+                fill:true,
+                tension:.4
             }]
         },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
+        options:{
+            plugins:{legend:{display:false}},
+            scales:{
+                y:{grid:{color:gridColor}},
+                x:{grid:{display:false}}
+            }
         }
     });
 }
 
-document.getElementById('btnReloadDash').addEventListener('click', () => {
-    loadDashboardVentas().catch(err => alert(err.message));
-});
-
-// Carga inicial
-loadDashboardVentas().catch(err => console.error(err));
+btnReloadDash.onclick = loadDashboardVentas;
+loadDashboardVentas();
 </script>
 
 </body>
