@@ -92,7 +92,7 @@ include('layout.php');
                             </p>
                         </div>
 
-                        <small class="text-muted d-block mt-2">
+                        <small class="text-muted d-block mt-2 text-center">
                             Formatos permitidos: JPG, JPEG, PNG, WEBP
                         </small>
                     </div>
