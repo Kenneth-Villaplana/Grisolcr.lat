@@ -4235,7 +4235,7 @@ select.input-modern {
 .product-register-card {
   width: 100%;
   max-width: 780px; 
-  margin: 40px auto;
+    margin: 0 auto;
   background: #eef2f7;
   border-radius: 26px;
   overflow: hidden;
@@ -4368,6 +4368,23 @@ textarea.input-modern {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* ===== LAPTOPS PEQUEÑAS ===== */
+@media (max-width: 1200px) {
+  .product-register-card {
+    max-width: 700px;
+  }
+}
+
+/* ===== TABLETS ===== */
+@media (max-width: 992px) {
+  .product-register-card {
+    max-width: 600px;
+  }
+
+  .product-register-header h4 {
+    font-size: 1.6rem;
   }
 }
 
