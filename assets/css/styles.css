@@ -3989,14 +3989,15 @@ select.input-modern {
 
 
 .inventario-filters {
-  border-radius: 20px;
+  border-radius: 22px;
+  padding: 20px;
 
   background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 
   border: 1px solid rgba(255, 255, 255, 0.3);
 
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
 .inventario-label {
@@ -4023,130 +4024,87 @@ select.input-modern {
   border-radius: 999px;
   padding: 9px 22px;
   border: none;
+
   background: linear-gradient(135deg, #0ea5e9, #2563eb);
   color: #ffffff;
+
   font-weight: 600;
   font-size: 0.9rem;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
-  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
   transition: all 0.25s ease;
 }
 
 .btn-inv-primary:hover {
   transform: translateY(-1px);
-  filter: brightness(1.04);
-  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.4);
 }
 
 .btn-inv-ghost {
   border-radius: 999px;
   padding: 9px 20px;
+
   border: 1px solid #e5e7eb;
-  background: #ffffff;
-  color: #111827;
+  background: rgba(255, 255, 255, 0.7);
+
   font-weight: 500;
   font-size: 0.9rem;
+
   transition: all 0.25s ease;
-  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.04);
 }
 
 .btn-inv-ghost:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
+  background: rgba(243, 244, 246, 0.8);
   transform: translateY(-1px);
 }
+
 
 .inventory-card {
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.25);
 
-  background: rgba(255, 255, 255, 0.55); 
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 
   transition: all 0.25s ease;
+  overflow: hidden;
 }
-
-
-.inventory-card .card-body {
-  border-radius: 22px;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.4);
-}
-
 
 .inventory-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
-.inventory-card::before {
-  content: "";
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  border-radius: 999px;
-  bottom: -50px;
-  right: -50px;
-  pointer-events: none;
-}
-.inventory-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  background: linear-gradient(
-    120deg,
-    transparent 20%,
-    rgba(255,255,255,0.4),
-    transparent 80%
-  );
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.inventory-card:hover::after {
-  opacity: 0.4;
-}
 
 /* Título producto */
-.inventory-card .product-name {
-  font-size: 1.02rem;
+.product-name {
+  font-size: 1.05rem;
   font-weight: 600;
   color: #0f172a;
 }
-
+.product-price {
+  font-weight: 700;
+  color: #16a34a;
+  font-size: 1.1rem;
+}
 /* Precio */
 .inv-progress {
   height: 8px;
-  background: rgba(0,0,0,0.08);
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 999px;
+  overflow: hidden;
 }
 
 .inv-progress .progress-bar {
   border-radius: 999px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* animación */
-.inv-progress .progress-bar::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.6),
-    transparent
-  );
-  animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
@@ -4155,56 +4113,62 @@ select.input-modern {
 }
 
 /* Acciones */
-.btn-inv-edit,
-.btn-inv-delete {
-  border-radius: 999px;
-  padding: 6px 16px;
-  backdrop-filter: blur(6px);
-}
 .btn-inv-edit {
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.4);
+  border-radius: 999px;
+  padding: 6px 14px;
+
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+
+  color: #1d4ed8;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
 }
+
 .btn-inv-edit:hover {
-  background: #dbeafe;
-  color: #1e40af;
+  background: rgba(59, 130, 246, 0.2);
 }
 
 .btn-inv-delete {
-  background: rgba(239,68,68,0.1);
-  border: 1px solid rgba(239,68,68,0.5);
+  border-radius: 999px;
+  padding: 6px 14px;
+
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+
+  color: #b91c1c;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
 }
 
 .btn-inv-delete:hover {
-  background: #fee2e2;
-  color: #991b1b;
+  background: rgba(239, 68, 68, 0.2);
 }
-
 
 .inv-id {
   color: #6b7280;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 992px) {
   .inventory-card {
-    border-radius: 20px;
+    border-radius: 18px;
   }
 }
 
 @media (max-width: 768px) {
   .inventario-filters {
-    padding: 16px 16px;
+    padding: 16px;
   }
 
   .inventory-card {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 }
 
