@@ -73,7 +73,7 @@ include('layout.php');
                     <div class="mb-4">
                         <label for="Imagen" class="form-label fw-semibold">Imagen del producto</label>
 
-                        <div class="upload-modern-box" id="uploadBox">
+                        <div class="upload-modern-box upload-wide" id="uploadBox">
                             <div class="upload-modern-icon">
                                 <i class="bi bi-cloud-arrow-up"></i>
                             </div>

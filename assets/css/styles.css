@@ -4212,21 +4212,23 @@ select.input-modern {
 
 
 /* ===== INPUTS ===== */
+.input-modern,
 .edit-product-card .form-control,
 .edit-product-card textarea {
   border-radius: 12px;
   padding: 9px 12px;
   border: none;
-  background: #eef2f7;
+  background: #f8fafc;
   box-shadow:
     inset 4px 4px 8px rgba(163, 177, 198, 0.35),
     inset -4px -4px 8px rgba(255, 255, 255, 0.9);
   transition: 0.2s ease;
 }
-
+.input-modern:focus,
 .edit-product-card .form-control:focus,
 .edit-product-card textarea:focus {
   outline: none;
+  background: #f8fafc;
   box-shadow:
     inset 2px 2px 6px rgba(163, 177, 198, 0.4),
     inset -2px -2px 6px rgba(255, 255, 255, 0.9),
