@@ -4370,21 +4370,74 @@ textarea.input-modern {
     transform: translateY(0);
   }
 }
-/* ===== LAPTOPS PEQUEÑAS ===== */
-@media (max-width: 1200px) {
-  .product-register-card {
-    max-width: 700px;
-  }
-}
+@media (max-width: 600px) {
 
-/* ===== TABLETS ===== */
-@media (max-width: 992px) {
+  /* CONTENEDOR */
+  main.container {
+    padding: 20px 10px;
+  }
+
+  /* CARD */
   .product-register-card {
-    max-width: 600px;
+    border-radius: 18px;
+  }
+
+  /* HEADER */
+  .product-register-header {
+    padding: 20px 15px 8px 15px;
   }
 
   .product-register-header h4 {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
+  }
+
+  /* FORM */
+  .product-register-card .px-4 {
+    padding: 18px 12px !important;
+  }
+
+  /* INPUTS FULL WIDTH */
+  .input-modern {
+    width: 100%;
+  }
+
+  /* FORZAR 1 COLUMNA (equivalente a grid 1fr) */
+  .row {
+    flex-direction: column;
+  }
+
+  .row > .col-md-6 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* ESPACIADO */
+  .mb-4 {
+    margin-bottom: 1rem !important;
+  }
+
+  /* UPLOAD */
+  .upload-modern-box {
+    padding: 20px 15px;
+  }
+
+  .upload-modern-icon {
+    font-size: 38px;
+  }
+
+  .upload-modern-text {
+    font-size: 0.85rem;
+  }
+
+  /* BOTÓN FULL */
+  .btn-save-modern {
+    width: 100%;
+  }
+
+  /* BOTÓN VOLVER */
+  .btn-back-custom {
+    font-size: 0.85rem;
+    padding: 6px 12px;
   }
 }
 
