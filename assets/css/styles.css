@@ -3367,7 +3367,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eef2f7;
+  background: #e6ebf2;
   padding: 40px 20px;
 }
 
@@ -3383,6 +3383,7 @@ footer {
   background: #eef2f7;
   border-radius: 26px;
   overflow: hidden;
+  padding: 0 !important;
   border: none;
   box-shadow:
     14px 14px 28px rgba(163, 177, 198, 0.45),
@@ -3391,13 +3392,17 @@ footer {
 }
 
 .shadow-modern {
-  box-shadow: none !important;
+  box-shadow:
+    14px 14px 28px rgba(163, 177, 198, 0.45),
+    -14px -14px 28px rgba(255, 255, 255, 0.95) !important;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER  ===== */
 .edit-header {
-  background: transparent;
-  padding: 30px 30px 10px 30px;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 30px 30px 10px 30px !important;
   text-align: center;
 }
 
@@ -3410,8 +3415,8 @@ footer {
 
 .edit-header p {
   font-size: 0.95rem;
+  opacity: 1;
   color: #64748b;
-  margin: 0;
 }
 
 /* ===== ANIMACIÓN ===== */
@@ -3440,7 +3445,7 @@ footer {
   margin-top: 10px;
 }
 
-/* ===== LABELS (AHORA VISIBLES Y MODERNOS) ===== */
+/* ===== LABELS  ===== */
 .form-label {
   display: block;
   font-size: 0.8rem;
