@@ -84,10 +84,10 @@ include('layout.php');
                                 value="<?= $usuario['Direccion'] ?? '' ?>" required>
                         </div>
 
-                        <div class="col-12 text-center mt-3">
-                            <button type="submit" name="btnEditarPerfil" class="btn btn-primary">
-                                Guardar Cambios
-                            </button>
+                        <div class="col-12 text-center"> 
+                            <button type="submit" class="btn-save-modern" name="btnEditarPerfil">
+                            <i class="bi bi-pencil-square"></i> Guardar Cambios
+                        </button>
                         </div>
 
                     </form>

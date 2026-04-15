@@ -4230,60 +4230,103 @@ select.input-modern {
 }
 
 
-/* Card */
-.product-register-card {
-  max-width: 600px;
-  margin: 0 auto;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 0;
-  overflow: hidden;
+/* ===== FORM ===== */
+.product-register-card .px-4 {
+  padding: 34px !important;
 }
 
-/* Header */
-.product-register-header {
-  background: linear-gradient(135deg, #0c4e8b, #090446);
-  color: white;
-  padding: 35px 20px;
+/* ===== LABELS ===== */
+.form-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 5px;
+  margin-left: 6px;
+  font-weight: 500;
 }
 
-/* Inputs modernos */
+/* ===== INPUTS ===== */
 .input-modern {
-  border-radius: 12px;
-  padding: 10px 14px;
-  border: 1px solid #e2e8f0;
-  transition: 0.2s ease;
+  background: #eef2f7;
+  border: none;
+  border-radius: 18px;
+  padding: 14px 16px;
+  color: #1e293b;
+  font-size: 0.95rem;
+  box-shadow:
+    inset 2px 2px 5px rgba(163, 177, 198, 0.18),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.9),
+    4px 4px 10px rgba(163, 177, 198, 0.18),
+    -4px -4px 10px rgba(255, 255, 255, 0.85);
+  transition: all .25s ease;
 }
 
+/* TEXTAREA igual que inputs */
+textarea.input-modern {
+  resize: none;
+}
+
+/* HOVER */
+.input-modern:hover {
+  box-shadow:
+    inset 2px 2px 5px rgba(163, 177, 198, 0.20),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.95),
+    5px 5px 12px rgba(163, 177, 198, 0.22),
+    -5px -5px 12px rgba(255, 255, 255, 0.95);
+}
+
+/* FOCUS */
 .input-modern:focus {
-  border-color: #0ea5e9;
-  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25);
+  background: #f3f6fb;
+  outline: none;
+  box-shadow:
+    inset 3px 3px 7px rgba(163, 177, 198, 0.25),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.95),
+    0 0 0 3px rgba(56, 189, 248, 0.14);
 }
 
-/* Botón guardar */
-.btn-save-custom {
-  border-radius: 12px;
+/* ===== BOTÓN ===== */
+.btn-save-modern {
   background: linear-gradient(135deg, #0ea5e9, #5d82e9);
   border: none;
-  color: white;
+  border-radius: 999px;
+  padding: 12px 42px;
+  min-width: 160px;
+  font-size: 1rem;
   font-weight: 600;
-  transition: 0.25s ease;
+  color: white;
+  transition: .25s ease;
+  box-shadow:
+    8px 8px 16px rgba(163, 177, 198, 0.35),
+    -4px -4px 10px rgba(255, 255, 255, 0.35);
 }
 
-.btn-save-custom:hover {
-  filter: brightness(1.05);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+.btn-save-modern:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    10px 10px 18px rgba(163, 177, 198, 0.38),
+    -4px -4px 10px rgba(255, 255, 255, 0.4);
 }
 
-/* Botón volver */
+/* ===== BOTÓN VOLVER ===== */
 .btn-back-custom {
   border-radius: 12px;
-  padding: 8px 14px;
-  transition: 0.25s ease;
+  border: none;
+  background: #eef2f7;
+  color: #334155;
+  padding: 8px 20px;
+  box-shadow:
+    5px 5px 10px rgba(163, 177, 198, 0.22),
+    -5px -5px 10px rgba(255, 255, 255, 0.85);
 }
-
-.btn-back-custom:hover {
-  background: #f0f0f0;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /**/
@@ -17917,15 +17960,17 @@ textarea {
 /* agregar estilo para el área de carga de archivos o agregar productos */
 
 .upload-modern-box {
-  border: 2px dashed #cbd5e1;
-  border-radius: 24px;
-  background: linear-gradient(145deg, #f8fafc, #eef4ff);
-  padding: 40px 25px;
+  border: none;
+  border-radius: 18px;
+  background: #eef2f7;
+  padding: 30px 20px;
   text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    inset 2px 2px 5px rgba(163, 177, 198, 0.18),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.9),
+    4px 4px 10px rgba(163, 177, 198, 0.18),
+    -4px -4px 10px rgba(255, 255, 255, 0.85);
 }
-
 .upload-modern-box:hover {
   border-color: #3b82f6;
   background: linear-gradient(145deg, #eef6ff, #e0ecff);
@@ -17933,23 +17978,23 @@ textarea {
 }
 
 .upload-modern-icon {
-  font-size: 65px;
-  color: #3b82f6;
+   font-size: 55px;
+  color: #0ea5e9;
   margin-bottom: 15px;
 }
 
 .upload-modern-text {
-  font-size: 17px;
-  color: #475569;
+    font-size: 0.95rem;
+  color: #64748b;
   font-weight: 500;
 }
 
 .upload-btn-custom {
   display: inline-block;
-  background: linear-gradient(135deg, #2aa4f4, #5b7df6);
+   background: linear-gradient(135deg, #0ea5e9, #5d82e9);
   color: #fff;
-  padding: 12px 28px;
-  border-radius: 20px;
+  padding: 10px 24px;
+  border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
