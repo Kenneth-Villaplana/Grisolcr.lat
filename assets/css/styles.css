@@ -4179,21 +4179,21 @@ select.input-modern {
 .edit-product-card {
   width: 100%;
   max-width: 780px;
-  margin: 40px auto;
+    margin: 20px auto;
   background: #eef2f7;
-  border-radius: 26px;
+  border-radius: 24px;
   overflow: hidden;
   border: none;
-  box-shadow:
-    14px 14px 28px rgba(163, 177, 198, 0.45),
-    -14px -14px 28px rgba(255, 255, 255, 0.95);
+ box-shadow:
+    10px 10px 22px rgba(163, 177, 198, 0.4),
+    -10px -10px 22px rgba(255, 255, 255, 0.9);
 }
 
 
 /* ===== HEADER ===== */
 .edit-product-header {
   background: transparent !important;
-  padding: 30px 30px 10px 30px;
+   padding: 20px 20px 5px 20px;
   text-align: center;
   box-shadow: none;
 }
@@ -4201,21 +4201,21 @@ select.input-modern {
 .edit-product-header h4 {
   color: #1e293b !important;
   font-weight: 700;
-  font-size: 1.8rem;
+   font-size: 1.5rem;
   margin-bottom: 5px;
 }
 
 .edit-product-header small {
   color: #64748b !important;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 
 /* ===== INPUTS ===== */
 .edit-product-card .form-control,
 .edit-product-card textarea {
-  border-radius: 14px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 9px 12px;
   border: none;
   background: #eef2f7;
   box-shadow:
@@ -4283,7 +4283,7 @@ select.input-modern {
 @media(max-width: 768px) {
 
   .edit-product-card {
-    margin: 20px;
+    margin: 15px;
     border-radius: 20px;
   }
 
@@ -4292,11 +4292,11 @@ select.input-modern {
   }
 
   .edit-product-header h4 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   .current-product-image {
-    max-width: 140px;
+    max-width: 110px;
   }
 }
 @media(max-width:600px) {
