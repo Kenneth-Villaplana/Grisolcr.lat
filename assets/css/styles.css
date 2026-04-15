@@ -4342,16 +4342,16 @@ select.input-modern {
 /* ===== CARD ===== */
 .product-register-card {
   width: 100%;
-  max-width: 780px; 
-    margin: 0 auto;
+  max-width: 720px; 
+   margin: 20px auto;
   background: #eef2f7;
-  border-radius: 26px;
+  border-radius: 24px;
   overflow: hidden;
   padding: 0;
   border: none;
-  box-shadow:
-    14px 14px 28px rgba(163, 177, 198, 0.45),
-    -14px -14px 28px rgba(255, 255, 255, 0.95);
+ box-shadow:
+    10px 10px 22px rgba(163, 177, 198, 0.4),
+    -10px -10px 22px rgba(255, 255, 255, 0.9);
 }
 
 /* evita conflicto bootstrap */
@@ -4364,24 +4364,25 @@ select.input-modern {
 /* ===== HEADER ===== */
 .product-register-header {
   background: transparent !important;
-  padding: 30px 30px 10px 30px;
+   padding: 20px 20px 5px 20px;
   text-align: center;
   color: #1e293b;
 }
 
 .product-register-header h4 {
-  font-weight: 700;
-  font-size: 1.8rem;
   color: #1e293b;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .product-register-header small {
   color: #64748b;
+  font-size: 0.85rem;
 }
 
 /* ===== FORM PADDING ===== */
 .product-register-card .px-4 {
-  padding: 34px !important;
+  padding: 18px !important;
 }
 
 /* ===== LABELS ===== */
@@ -4394,18 +4395,16 @@ select.input-modern {
 
 /* ===== INPUTS ===== */
 .input-modern {
-  width: 100%; /* 👈 FIX CLAVE */
+  width: 100%; 
   background: #eef2f7;
   border: none;
-  border-radius: 18px;
-  padding: 14px 16px;
+  border-radius: 12px;
+  padding: 9px 12px;
   color: #1e293b;
-  font-size: 0.95rem;
-  box-shadow:
-    inset 2px 2px 5px rgba(163, 177, 198, 0.18),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.9),
-    4px 4px 10px rgba(163, 177, 198, 0.18),
-    -4px -4px 10px rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+   box-shadow:
+    inset 4px 4px 8px rgba(163, 177, 198, 0.35),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.9);
   transition: all .25s ease;
 }
 
@@ -4427,9 +4426,9 @@ textarea.input-modern {
   background: #f3f6fb;
   outline: none;
   box-shadow:
-    inset 3px 3px 7px rgba(163, 177, 198, 0.25),
-    inset -3px -3px 7px rgba(255, 255, 255, 0.95),
-    0 0 0 3px rgba(56, 189, 248, 0.14);
+    inset 2px 2px 6px rgba(163, 177, 198, 0.4),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.9),
+    0 0 0 2px rgba(14, 165, 233, 0.25);
 }
 
 /* ===== FILA PRECIO/CANTIDAD FIX ===== */
@@ -4442,8 +4441,8 @@ textarea.input-modern {
 .btn-save-modern {
   background: linear-gradient(135deg, #0ea5e9, #5d82e9);
   border: none;
-  border-radius: 999px;
-  padding: 12px 42px;
+   border-radius: 20px;
+  padding: 8px 22px;
   min-width: 160px;
   font-weight: 600;
   color: white;
@@ -4479,12 +4478,15 @@ textarea.input-modern {
   }
 }
 /* ===== LAPTOPS  ===== */
-@media (min-width: 992px) and (max-width: 1400px) {
+@media(max-width:600px) {
 
   .product-register-card {
-    max-width: 700px; 
+    margin: 15px;
   }
 
+  .upload-modern-box {
+    padding: 18px 10px;
+  }
 
   .product-register-card .px-4 {
     padding-left: 40px !important;
@@ -18138,13 +18140,11 @@ textarea {
   border: none;
   border-radius: 18px;
   background: #eef2f7;
-  padding: 30px 20px;
+   padding: 20px 15px;
   text-align: center;
   box-shadow:
-    inset 2px 2px 5px rgba(163, 177, 198, 0.18),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.9),
-    4px 4px 10px rgba(163, 177, 198, 0.18),
-    -4px -4px 10px rgba(255, 255, 255, 0.85);
+    inset 6px 6px 12px rgba(163, 177, 198, 0.35),
+    inset -6px -6px 12px rgba(255, 255, 255, 0.9);
 }
 .upload-modern-box:hover {
   border-color: #3b82f6;
@@ -18153,13 +18153,13 @@ textarea {
 }
 
 .upload-modern-icon {
-   font-size: 55px;
+   font-size: 40px;
   color: #0ea5e9;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .upload-modern-text {
-    font-size: 0.95rem;
+  font-size: 14px;
   color: #64748b;
   font-weight: 500;
 }
@@ -18168,8 +18168,8 @@ textarea {
   display: inline-block;
    background: linear-gradient(135deg, #0ea5e9, #5d82e9);
   color: #fff;
-  padding: 10px 24px;
-  border-radius: 999px;
+  border-radius: 18px;
+  padding: 8px 20px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -18187,7 +18187,7 @@ textarea {
 }
 
 .upload-file-name {
-  font-size: 14px;
+  font-size: 13px;
   color: #64748b;
 }
 
