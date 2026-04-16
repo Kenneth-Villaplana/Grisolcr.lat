@@ -55,7 +55,7 @@ include('layout.php');
                         <div class="col-12 text-center mt-2">
                             <p class="small mb-0">
                                 ¿No tienes cuenta?
-                                <a class="link-azul" href="RegistrarPaciente.php">Registrarse</a>
+                                <a href="registrarPaciente.php" class="register-modern-link">Registrarse</a>
                             </p>
                         </div>
 
