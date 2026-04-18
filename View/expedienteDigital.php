@@ -111,7 +111,7 @@ include('layout.php');
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label invisible">.</label>
+                                    <label class="form-label invisible d-block">¿Usa lentes?</label>
                                     <select name="usaLentes" class="form-select input-modern">
                                         <option value="" disabled selected>¿Usa lentes?</option>
                                         <option value="Sí">Sí</option>
@@ -120,7 +120,9 @@ include('layout.php');
                                 </div>
 
                                 <div class="col-md-6">
-                                    <small class="text-muted">Último control visual *</small>
+                                    <label class="form-label d-block">
+                                        Último control visual <span class="text-danger">*</span>
+                                    </label>
                                     <input type="date" name="UltimoControl"
                                         class="form-control input-modern campo-obligatorio">
                                     <div class="invalid-feedback">
