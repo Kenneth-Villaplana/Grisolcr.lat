@@ -144,7 +144,7 @@ include('layout.php');
                 <div class="col-md-4 d-flex justify-content-center">
                     <div class="kpi-circle-wrap">
                         <div class="kpi-circle kpi-circle-cyan">
-                            <span class="kpi-circle-label">Ingresos totales (€)</span>
+                            <span class="kpi-circle-label">Ingresos totales</span>
                             <h3 id="kpiMoney" class="kpi-circle-value">6 511 994</h3>
                         </div>
                     </div>
