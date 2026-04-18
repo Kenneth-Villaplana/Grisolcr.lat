@@ -139,15 +139,14 @@ function cargarProductos() {
     })
         .then(res => res.json())
         .then(data => {
-            window.productos = data
-            .filter(p => parseInt(p.Cantidad) > 0)
-            .map(p => ({
-                id: parseInt(p.ProductoId),
-                nombre: p.Nombre,
-                precio: parseFloat(p.Precio),
-                descripcion: p.Descripcion || "",
-                 imagen: p.Imagen || "no-image.jpg"
-            }));
+          window.productos = data
+        .filter(p => parseInt(p.Cantidad) > 0)
+        .map(p => ({
+            id: parseInt(p.ProductoId),
+            nombre: p.Nombre,
+            precio: parseFloat(p.Precio),
+            descripcion: p.Descripcion || ""
+        }));
 
             renderProductos();
         });
