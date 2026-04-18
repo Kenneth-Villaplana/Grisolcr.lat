@@ -111,6 +111,7 @@ include('layout.php');
                                 </div>
 
                                 <div class="col-md-6">
+                                    <label class="form-label invisible">.</label>
                                     <select name="usaLentes" class="form-select input-modern">
                                         <option value="" disabled selected>¿Usa lentes?</option>
                                         <option value="Sí">Sí</option>
