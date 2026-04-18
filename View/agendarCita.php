@@ -206,31 +206,29 @@ unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
 
                             <div class="row g-3">
 
-                                <!-- CÉDULA PRIMERO -->
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Cédula *</label>
-                                    <input type="text" class="form-control" id="extCedula" name="cedula"
-                                        oninput="consultarCedulaAPI()">
+                                    <input type="text" class="form-control input-modern" id="extCedula" name="cedula"
+                                        placeholder="Cédula *" oninput="consultarCedulaAPI()">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Nombre *</label>
-                                    <input type="text" class="form-control" id="extNombre" name="nombre">
+                                    <input type="text" class="form-control input-modern" id="extNombre" name="nombre"
+                                        placeholder="Nombre *">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Apellido *</label>
-                                    <input type="text" class="form-control" id="extApellido" name="apellido">
+                                    <input type="text" class="form-control input-modern" id="extApellido" name="apellido"
+                                        placeholder="Apellido *">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Teléfono *</label>
-                                    <input type="text" class="form-control" id="extTelefono" name="telefono">
+                                    <input type="text" class="form-control input-modern" id="extTelefono" name="telefono"
+                                        placeholder="Teléfono *">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Correo *</label>
-                                    <input type="email" class="form-control" id="extCorreo" name="correo">
+                                    <input type="email" class="form-control input-modern" id="extCorreo" name="correo"
+                                        placeholder="Correo *">
                                 </div>
 
                             </div>
@@ -238,9 +236,7 @@ unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
                         </div>
                     <?php endif; ?>
 
-
-                    <div class="mb-4">
-                        <label for="motivo" class="form-label fw-bold">Motivo de la consulta *</label>
+                    <div class="mb-4 mt-4">
                         <textarea class="form-control input-modern campo-obligatorio" id="motivo" name="motivo" rows="4"
                             placeholder="Describa el motivo de su consulta (campo obligatorio)" required></textarea>
                         <div class="invalid-feedback">
