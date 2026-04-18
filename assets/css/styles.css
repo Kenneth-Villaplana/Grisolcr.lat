@@ -1748,47 +1748,6 @@ select.form-select,
   color: #1e293b;
 }
 
-.input-group-text {
-  border-radius: 12px !important;
-}
-
-.input-group input {
-  border-radius: 0 12px 12px 0 !important;
-}
-
-.input-group .input-group-text {
-  border-radius: 12px 0 0 12px !important;
-}
-
-
-.cart-item-modern .input-group {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #d1d5db;
-}
-
-.cart-item-modern .input-group input {
-  border: none;
-  border-left: 1px solid #e5e7eb;
-}
-
-.cart-item-modern .input-group .input-group-text {
-  font-size: 0.75rem;
-  background: #f1f5f9;
-  border-right: 1px solid #e5e7eb;
-}
-
-
-.pv-totals div {
-  font-size: 0.95rem;
-}
-
-.pv-totals span:last-child {
-  font-weight: 600;
-  color: #1e293b;
-}
-
-
 #btnFinalizar {
   border-radius: 999px !important;
   font-size: 1rem;
