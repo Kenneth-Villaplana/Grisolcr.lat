@@ -18549,3 +18549,118 @@ textarea {
   margin: 8px auto 0;
   text-align: center;
 }
+
+/* ===== prueba 18/04/2026 ===== */
+/* ===== OVERRIDE FINAL REPORTES DASHBOARD ===== */
+main.dashboard-page section.dashboard-shell{
+    background: rgba(255, 255, 255, 0.42) !important;
+    border: 1px solid rgba(255, 255, 255, 0.60) !important;
+    border-radius: 28px !important;
+    padding: 30px !important;
+    box-shadow:
+        0 25px 60px rgba(15, 23, 42, 0.10),
+        0 8px 20px rgba(148, 163, 184, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.60) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+}
+
+main.dashboard-page .kpi-circle-wrap{
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+main.dashboard-page .kpi-circle{
+    width: 220px !important;
+    height: 220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    overflow: hidden !important;
+    background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(240,245,255,0.88)) !important;
+    box-shadow:
+        0 18px 38px rgba(15, 23, 42, 0.10),
+        inset 0 1px 0 rgba(255,255,255,0.95) !important;
+    border: 1px solid rgba(255,255,255,0.85) !important;
+    margin: 0 auto !important;
+}
+
+main.dashboard-page .kpi-circle::before{
+    content: "" !important;
+    position: absolute !important;
+    inset: 10px !important;
+    border-radius: 50% !important;
+    padding: 8px !important;
+    background: conic-gradient(from 220deg, #cfe0ff, #7fb0ff, #2563eb, #dbeafe, #cfe0ff) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 8px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 8px)) !important;
+    opacity: 0.95 !important;
+}
+
+main.dashboard-page .kpi-circle-blue::before{
+    background: conic-gradient(from 220deg, #dbeafe, #93c5fd, #2563eb, #60a5fa, #dbeafe) !important;
+}
+
+main.dashboard-page .kpi-circle-cyan::before{
+    background: conic-gradient(from 220deg, #e0f2fe, #7dd3fc, #0ea5e9, #38bdf8, #e0f2fe) !important;
+}
+
+main.dashboard-page .kpi-circle::after{
+    content: "" !important;
+    position: absolute !important;
+    inset: 26px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(145deg, rgba(255,255,255,0.97), rgba(245,248,255,0.95)) !important;
+    box-shadow: inset 0 1px 8px rgba(148, 163, 184, 0.10) !important;
+}
+
+main.dashboard-page .kpi-circle-label,
+main.dashboard-page .kpi-circle-value{
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+main.dashboard-page .kpi-circle-label{
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    color: #7b879a !important;
+    margin-bottom: 0.5rem !important;
+    max-width: 130px !important;
+    line-height: 1.25 !important;
+}
+
+main.dashboard-page .kpi-circle-value{
+    font-size: 2.3rem !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -1px !important;
+    margin: 0 !important;
+    color: #1f4da3 !important;
+    max-width: 150px !important;
+    word-break: break-word !important;
+}
+
+main.dashboard-page .kpi-top-card{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    min-height: 220px !important;
+    padding: 1.7rem !important;
+}
+
+main.dashboard-page .dashboard-btn{
+    background: rgba(255,255,255,0.75) !important;
+    color: #2563eb !important;
+    border: 1px solid rgba(37, 99, 235, 0.22) !important;
+    border-radius: 14px !important;
+    padding: 10px 18px !important;
+    font-weight: 600 !important;
+}
