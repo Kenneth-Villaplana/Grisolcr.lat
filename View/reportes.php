@@ -133,9 +133,9 @@ include('layout.php');
                 <!-- KPI redondo 1 -->
                 <div class="col-md-4 d-flex justify-content-center">
                     <div class="kpi-circle-wrap">
-                        <div class="kpi-circle kpi-circle-blue" style="width:220px;height:220px;border-radius:50%;background:red;border:8px solid green;display:flex;align-items:center;justify-content:center;">
-                            <span class="kpi-circle-label">PRUEBA KPI</span>
-                            <h3 id="kpiUnits" class="kpi-circle-value">9999</h3>
+                        <div class="kpi-circle kpi-circle-blue">
+                            <span class="kpi-circle-label">Unidades totales</span>
+                            <h3 id="kpiUnits" class="kpi-circle-value">226</h3>
                         </div>
                     </div>
                 </div>
@@ -204,6 +204,11 @@ include('layout.php');
         Chart.defaults.font.family = "'Inter', 'Segoe UI', sans-serif";
 
         const gridColor = "rgba(148, 163, 184, 0.18)";
+
+        const kpiUnits = document.getElementById('kpiUnits');
+        const kpiMoney = document.getElementById('kpiMoney');
+        const kpiTop1 = document.getElementById('kpiTop1');
+        const btnReloadDash = document.getElementById('btnReloadDash');
 
         let chTop, chTopMoney, chMesUnits, chMesMoney;
 
