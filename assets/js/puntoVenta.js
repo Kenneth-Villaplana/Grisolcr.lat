@@ -183,7 +183,7 @@ function renderProductos() {
         const precio = Number(producto.precio || 0).toLocaleString("es-CR");
 
         const card = document.createElement("div");
-        card.className = "col-6 col-md-4 col-xl-3 mb-3";
+       card.className = "col-md-6 col-lg-4 mb-3";
 
         card.innerHTML = `
             <div class="card h-100 shadow-sm">
