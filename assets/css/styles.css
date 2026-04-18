@@ -1554,11 +1554,10 @@ a.btn-inv-ghost:hover {
 }
 
 /* PRECIO */
-.pv-products .card-text{
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: #06b6d4;
-    margin-bottom: 6px;
+.pv-products .card-text { 
+font-size: 0.95rem; 
+font-weight: 700; 
+color: #2563eb; 
 }
 
 /* Botón agregar */
