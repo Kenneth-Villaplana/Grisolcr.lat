@@ -217,7 +217,7 @@ include('layout.php');
             const totalMoney = data.meses.reduce((a, b) => a + b.total, 0);
 
             kpiUnits.textContent = totalUnidades.toLocaleString();
-            kpiTotal.textContent = totalMoney.toLocaleString();
+            kpiMoney.textContent = totalMoney.toLocaleString();
             kpiTop1.textContent = data.top[0]?.producto || '—';
 
             renderTop(data.top);
