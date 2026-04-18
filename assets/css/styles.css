@@ -5079,6 +5079,12 @@ canvas{
   }
 }
 
+.form-select.input-modern {
+    height: 46px; /* mismo alto que tus inputs */
+    padding: 10px 14px;
+    border-radius: 14px;
+}
+
 /**/
 
 /*historial de expediente paciente*/
