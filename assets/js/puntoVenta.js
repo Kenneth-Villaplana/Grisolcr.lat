@@ -165,16 +165,23 @@ function renderProductos() {
             card.className = "col-md-4 mb-3";
 
             card.innerHTML = `
-                <div class="card h-100 shadow-sm">
-                    <img src="${producto.imagen}" 
-                         class="card-img-top p-3" 
-                         alt="${producto.nombre}" 
-                         style="height: 220px; object-fit: contain;">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 
+                    <!-- Imagen -->
+                    <div class="text-center bg-light p-3">
+                        <img src="${producto.imagen}" 
+                             alt="${producto.nombre}"
+                             style="height:180px; width:100%; object-fit:contain;"
+                             onerror="this.src='imgs/no-image.png'">
+                    </div>
+
+                    <!-- Contenido -->
                     <div class="card-body d-flex flex-column">
-                        <strong class="card-title text-dark">${producto.nombre}</strong>
+                        <h6 class="fw-bold text-dark mb-2" style="min-height:55px;">
+                            ${producto.nombre}
+                        </h6>
 
-                        <p class="card-text fw-bold text-primary mt-2">
+                        <p class="fw-bold text-primary fs-5 mb-3">
                             ₡${producto.precio.toLocaleString()}
                         </p>
 
@@ -183,6 +190,7 @@ function renderProductos() {
                             Agregar
                         </button>
                     </div>
+
                 </div>
             `;
 
