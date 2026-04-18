@@ -161,28 +161,35 @@ function renderProductos() {
     window.productos
         .filter(p => p.nombre.toLowerCase().includes(filtro))
         .forEach(producto => {
+
+            const img = producto.imagen && producto.imagen.trim() !== ""
+                ? producto.imagen
+                : "no-image.jpg";
+
             const card = document.createElement("div");
             card.className = "col-md-4 mb-3";
 
             card.innerHTML = `
                 <div class="card h-100 shadow-sm">
-                    <img src="${producto.imagen}" 
-                         class="card-img-top p-3" 
-                         alt="${producto.nombre}" 
-                         style="height: 220px; object-fit: contain;">
+
+                    <img src="/assets/img/${img}"
+                         class="card-img-top p-3"
+                         style="height:180px;object-fit:contain;"
+                         onerror="this.src='/assets/img/no-image.jpg'">
 
                     <div class="card-body d-flex flex-column">
-                        <strong class="card-title text-dark">${producto.nombre}</strong>
+                        <strong>${producto.nombre}</strong>
 
-                        <p class="card-text fw-bold text-primary mt-2">
+                        <p class="fw-bold text-primary mt-2">
                             ₡${producto.precio.toLocaleString()}
                         </p>
 
-                        <button class="btn btn-primary-custom w-100 mt-auto"
-                                onclick="agregarAlCarrito(${producto.id})">
+                        <button class="btn btn-primary-custom mt-auto w-100"
+                            onclick="agregarAlCarrito(${producto.id})">
                             Agregar
                         </button>
                     </div>
+
                 </div>
             `;
 
