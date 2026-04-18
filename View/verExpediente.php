@@ -68,9 +68,9 @@ function campo($label, $valor)
             <input 
                 type='text' 
                 class='form-control input-modern' 
-                name='" . strtolower(str_replace(' ', '_', $label)) . "'
                 value='" . htmlspecialchars($valor ?? '') . "' 
-                placeholder='" . htmlspecialchars($label) . "'>
+                placeholder='" . htmlspecialchars($label) . "'
+                readonly>
         </div>
     ";
 }
