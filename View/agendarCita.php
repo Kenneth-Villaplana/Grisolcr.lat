@@ -242,8 +242,7 @@ unset($_SESSION['mensaje_exito'], $_SESSION['mensaje_error']);
                     <div class="mb-4">
                         <label for="motivo" class="form-label fw-bold">Motivo de la consulta *</label>
                         <textarea class="form-control input-modern campo-obligatorio" id="motivo" name="motivo" rows="4"
-                            placeholder="Describa brevemente el motivo de su consulta..." required></textarea>
-
+                            placeholder="Describa el motivo de su consulta (campo obligatorio)" required></textarea>
                         <div class="invalid-feedback">
                             El motivo de la consulta es obligatorio.
                         </div>
