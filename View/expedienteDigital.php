@@ -106,23 +106,20 @@ include('layout.php');
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label">Motivo de consulta</label>
-                                    <input type="text" name="MotivoConsulta"
-                                        class="form-control input-modern campo-obligatorio">
+                                    <input type="text" name="motivoConsulta" class="form-control input-modern"
+                                        placeholder="Motivo de consulta">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label">Usa lentes</label>
                                     <select name="usaLentes" class="form-select input-modern">
+                                        <option value="" disabled selected>¿Usa lentes?</option>
                                         <option value="Sí">Sí</option>
                                         <option value="No">No</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label">
-                                        Último control visual <span class="text-danger">*</span>
-                                    </label>
+                                    <small class="text-muted">Último control visual *</small>
                                     <input type="date" name="UltimoControl"
                                         class="form-control input-modern campo-obligatorio">
                                     <div class="invalid-feedback">
@@ -130,10 +127,11 @@ include('layout.php');
                                     </div>
                                 </div>
 
-                                <div class="col-12">
-                                    <label class="form-label">Antecedentes generales</label>
-                                    <textarea name="Descripcion" rows="2" class="form-control input-modern"></textarea>
+                                <div class="col-md-6">
+                                    <input type="text" name="antecedentes" class="form-control input-modern"
+                                        placeholder="Antecedentes generales">
                                 </div>
+
                             </div>
                         </div>
                     </div>
