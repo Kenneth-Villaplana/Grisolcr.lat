@@ -166,10 +166,22 @@ function renderProductos() {
 
             card.innerHTML = `
                 <div class="card h-100 shadow-sm">
+                    <img src="${producto.imagen}" 
+                         class="card-img-top p-3" 
+                         alt="${producto.nombre}" 
+                         style="height: 220px; object-fit: contain;">
+
                     <div class="card-body d-flex flex-column">
                         <strong class="card-title text-dark">${producto.nombre}</strong>
-                        <p class="card-text fw-bold text-primary mt-2">₡${producto.precio.toLocaleString()}</p>
-                        <button class="btn btn-primary-custom w-100 mt-auto" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
+
+                        <p class="card-text fw-bold text-primary mt-2">
+                            ₡${producto.precio.toLocaleString()}
+                        </p>
+
+                        <button class="btn btn-primary-custom w-100 mt-auto"
+                                onclick="agregarAlCarrito(${producto.id})">
+                            Agregar
+                        </button>
                     </div>
                 </div>
             `;
