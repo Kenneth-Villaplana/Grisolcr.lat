@@ -4985,11 +4985,6 @@ canvas{
   }
 }
 
-.form-label {
-    margin-bottom: 8px;
-    min-height: 24px;
-}
-
 /*agregar expediente*/
 .expediente-header {
   background: linear-gradient(135deg, #0c4e8b, #090446);
