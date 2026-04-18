@@ -145,56 +145,78 @@ function cargarProductos() {
                 id: parseInt(p.ProductoId),
                 nombre: p.Nombre,
                 precio: parseFloat(p.Precio),
-                descripcion: p.Descripcion || ""
+                descripcion: p.Descripcion || "",
+                 imagen: p.Imagen || "no-image.jpg"
             }));
 
             renderProductos();
         });
 }
 
-
 function renderProductos() {
     productosContainer.innerHTML = "";
 
     const filtro = (searchInput?.value || "").toLowerCase();
 
-    window.productos
-        .filter(p => p.nombre.toLowerCase().includes(filtro))
-        .forEach(producto => {
+    const productosFiltrados = window.productos.filter(p =>
+        p.nombre.toLowerCase().includes(filtro)
+    );
 
-            const img = producto.imagen && producto.imagen.trim() !== ""
-                ? producto.imagen
-                : "no-image.jpg";
+    if (productosFiltrados.length === 0) {
+        productosContainer.innerHTML = `
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="bi bi-search fs-1 text-muted"></i>
+                    <p class="mt-3 text-muted mb-0">No se encontraron productos</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
 
-            const card = document.createElement("div");
-            card.className = "col-md-4 mb-3";
+    productosFiltrados.forEach(producto => {
 
-            card.innerHTML = `
-                <div class="card h-100 shadow-sm">
+        const img = producto.imagen && producto.imagen.trim() !== ""
+            ? producto.imagen
+            : "no-image.jpg";
 
+        const precio = Number(producto.precio || 0).toLocaleString("es-CR");
+
+        const card = document.createElement("div");
+        card.className = "col-6 col-md-4 col-xl-3 mb-3";
+
+        card.innerHTML = `
+            <div class="card h-100 shadow-sm">
+
+                <div class="producto-img-wrap">
                     <img src="/assets/img/${img}"
-                         class="card-img-top p-3"
-                         style="height:180px;object-fit:contain;"
+                         class="card-img-top"
                          onerror="this.src='/assets/img/no-image.jpg'">
+                </div>
 
-                    <div class="card-body d-flex flex-column">
-                        <strong>${producto.nombre}</strong>
+                <div class="card-body d-flex flex-column">
 
-                        <p class="fw-bold text-primary mt-2">
-                            ₡${producto.precio.toLocaleString()}
-                        </p>
+                    <strong class="card-title" title="${producto.nombre}">
+                        ${producto.nombre}
+                    </strong>
 
-                        <button class="btn btn-primary-custom mt-auto w-100"
-                            onclick="agregarAlCarrito(${producto.id})">
-                            Agregar
-                        </button>
-                    </div>
+                    <p class="card-text mt-2">
+                        ₡${precio}
+                    </p>
+
+                    <button class="btn btn-primary-custom mt-auto w-100"
+                        onclick="agregarAlCarrito(${producto.id})">
+                        <i class="bi bi-plus-lg me-1"></i>
+                        Agregar
+                    </button>
 
                 </div>
-            `;
 
-            productosContainer.appendChild(card);
-        });
+            </div>
+        `;
+
+        productosContainer.appendChild(card);
+    });
 }
 
 
