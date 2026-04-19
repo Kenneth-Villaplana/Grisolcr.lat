@@ -912,15 +912,17 @@ a.btn-inv-ghost:hover {
   }
 }
 
-/*cierre de caja*/
+/* =====================================
+   CIERRE DE CAJA - BASE GENERAL
+===================================== */
 .pv-wrapper {
   background: #ffffff;
   min-height: 100vh;
 }
 
-/* =========================
+/* =====================================
    HEADER
-========================= */
+===================================== */
 .pv-header {
   padding: 10px 5px;
 }
@@ -931,9 +933,9 @@ a.btn-inv-ghost:hover {
   color: #1e3a8a;
 }
 
-/* =========================
+/* =====================================
    BOTÓN VOLVER
-========================= */
+===================================== */
 .btn-back-custom {
   background: rgba(30, 58, 138, 0.08);
   border: 1px solid rgba(30, 58, 138, 0.15);
@@ -949,28 +951,25 @@ a.btn-inv-ghost:hover {
   transform: translateY(-1px);
 }
 
-/* =========================
-   CARDS GLASS
-========================= */
+/* =====================================
+   CARDS PRINCIPALES
+===================================== */
 .pv-products-card,
 .pv-cart-card {
-
   border-radius: 20px;
-
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.4));
-
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.4)
+  );
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-
   border: 1px solid rgba(0, 0, 0, 0.05);
-
   box-shadow:
     0 15px 40px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
-
   transition: all 0.25s ease;
+  animation: fadeUp 0.5s ease;
 }
 
 .pv-products-card:hover,
@@ -978,9 +977,9 @@ a.btn-inv-ghost:hover {
   transform: translateY(-3px);
 }
 
-/* =========================
-   HEADER CARDS
-========================= */
+/* =====================================
+   HEADER DE CARDS
+===================================== */
 .pv-products-header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -992,23 +991,18 @@ a.btn-inv-ghost:hover {
   letter-spacing: 0.3px;
 }
 
-/* =========================
-   BLOQUES INTERNOS
-========================= */
+/* =====================================
+   BLOQUES INTERNOS GENÉRICOS
+===================================== */
 .border.rounded-4 {
-
   border-radius: 16px !important;
-
   background: rgba(255, 255, 255, 0.75);
-
   backdrop-filter: blur(10px);
-
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 0, 0, 0.06);
-
   box-shadow:
     0 10px 25px rgba(0, 0, 0, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
-
   transition: all 0.25s ease;
 }
 
@@ -1016,62 +1010,51 @@ a.btn-inv-ghost:hover {
   transform: translateY(-2px);
 }
 
-/* =========================
+/* =====================================
    TEXTOS Y MONTOS
-========================= */
+===================================== */
 #cc-total,
 #cc-total-facturado,
-#cc-total-cobrado {
+#cc-cobros {
   color: #1e3a8a;
 }
 
-/* =========================
-   INPUT MODERNO
-========================= */
+/* =====================================
+   INPUT EFECTIVO CONTADO
+===================================== */
 #cc-efectivo-contado {
-
   border-radius: 14px;
-
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(0, 0, 0, 0.1);
-
   height: 45px;
-
   transition: all 0.25s ease;
 }
 
 #cc-efectivo-contado:focus {
   border-color: #3f72af;
-
   box-shadow:
     0 0 0 2px rgba(63, 114, 175, 0.25),
     0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* =========================
-   DIFERENCIA (DINÁMICO)
-========================= */
+/* =====================================
+   DIFERENCIA
+===================================== */
 #cc-diferencia {
   font-size: 1.2rem;
 }
 
-/* =========================
-   BOTÓN CIERRE
-========================= */
+/* =====================================
+   BOTÓN CERRAR CAJA
+===================================== */
 #btnCerrarCaja {
-
   border-radius: 999px;
-
   font-weight: 600;
-
   background: linear-gradient(135deg, #1e3a8a, #3f72af);
   border: none;
   color: white;
-
   padding: 10px;
-
   box-shadow: 0 10px 25px rgba(30, 58, 138, 0.25);
-
   transition: all 0.25s ease;
 }
 
@@ -1080,36 +1063,34 @@ a.btn-inv-ghost:hover {
   box-shadow: 0 15px 35px rgba(30, 58, 138, 0.35);
 }
 
-/* =========================
+/* =====================================
    BADGE FECHA
-========================= */
+===================================== */
 #cc-fecha {
   border-radius: 999px;
   padding: 5px 12px;
   font-size: 0.75rem;
 }
 
-/* =========================
-   MODALES MODERNOS
-========================= */
+/* =====================================
+   MODALES
+===================================== */
 .modal-content {
-
   border-radius: 18px;
-
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0.85));
-
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.85)
+  );
   backdrop-filter: blur(10px);
-
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 0, 0, 0.05);
-
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
-/* =========================
-   ANIMACIÓN ENTRADA
-========================= */
+/* =====================================
+   ANIMACIÓN
+===================================== */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -1122,16 +1103,10 @@ a.btn-inv-ghost:hover {
   }
 }
 
-.pv-products-card,
-.pv-cart-card {
-  animation: fadeUp 0.5s ease;
-}
-
-/* =========================
+/* =====================================
    RESPONSIVE
-========================= */
+===================================== */
 @media (max-width: 768px) {
-
   .pv-title {
     font-size: 1.5rem;
   }
@@ -1151,7 +1126,6 @@ a.btn-inv-ghost:hover {
 }
 
 @media (max-width: 480px) {
-
   .pv-wrapper {
     padding: 10px;
   }
@@ -1170,76 +1144,182 @@ a.btn-inv-ghost:hover {
   }
 }
 
-/* =========================
-   MEJORAS VISUALES CIERRE CAJA
-   OVERRIDES FINALES
-========================= */
+/* =====================================
+   CIERRE DE CAJA - OVERRIDES FINALES
+   ESTA PARTE DEBE IR AL FINAL
+===================================== */
 
-/* Card de cobros */
+.pv-wrapper {
+  background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%) !important;
+}
+
+.pv-title {
+  font-size: 2.6rem !important;
+  font-weight: 800 !important;
+  color: #1f3f97 !important;
+}
+
+.pv-header p {
+  font-size: 1.08rem;
+  color: #667085 !important;
+}
+
+/* Cards principales más notorias */
+.pv-products-card,
+.pv-cart-card {
+  background: #ffffff !important;
+  border: 1px solid #dbe4f0 !important;
+  border-radius: 28px !important;
+  box-shadow: 0 16px 40px rgba(31, 63, 151, 0.08) !important;
+  overflow: hidden;
+}
+
+.pv-cart-header {
+  background: linear-gradient(135deg, #1f6feb 0%, #355fb1 100%) !important;
+  color: #fff !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  padding: 16px 20px !important;
+  border-radius: 28px 28px 0 0 !important;
+}
+
+.pv-products-header {
+  padding: 18px 18px 10px 18px !important;
+  border-bottom: 1px solid #e8eef5 !important;
+}
+
+.pv-products-header h5 {
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  color: #5d6778 !important;
+}
+
+#cc-fecha {
+  background: #f3f7fc !important;
+  border: 1px solid #dbe4f0 !important;
+  color: #2d3748 !important;
+  border-radius: 999px !important;
+  padding: 8px 14px !important;
+  font-weight: 700 !important;
+}
+
+/* Tarjetas internas destacadas */
+.card-facturas,
+.card-cobros,
+.card-totales {
+  border-radius: 22px !important;
+  border: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06) !important;
+  padding: 1.4rem !important;
+}
+
+.card-facturas {
+  background: linear-gradient(135deg, #ffffff 0%, #eef4ff 100%) !important;
+  border-left: 7px solid #2d6df6 !important;
+}
+
 .card-cobros {
-  border-radius: 16px !important;
-  background: linear-gradient(135deg, #ffffff 0%, #eefcf5 100%) !important;
-  border-left: 6px solid #22a06b !important;
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #ebfbf3 100%) !important;
+  border-left: 7px solid #1fa971 !important;
 }
 
-/* Caja de desglose por método */
+.card-totales {
+  background: linear-gradient(135deg, #ffffff 0%, #fff8eb 100%) !important;
+  border-left: 7px solid #f0ad2c !important;
+}
+
+/* Montos */
+#cc-cantidad {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  color: #1f2937 !important;
+}
+
+#cc-total-facturado,
+#cc-cobros,
+#cc-total {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: #1f3f97 !important;
+}
+
+/* Caja de métodos */
 .cc-metodos-box {
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  padding: 1rem;
-  transition: all 0.25s ease;
-}
-
-.cc-metodos-box:hover {
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ffffff 0%, #f7faff 100%) !important;
+  border: 1px solid #dde6f2 !important;
+  border-radius: 22px !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05) !important;
+  padding: 1.3rem !important;
 }
 
 .cc-metodos-box .d-flex {
-  padding: 4px 0;
-  font-size: 1rem;
+  padding: 6px 0 !important;
+  font-size: 1.05rem !important;
 }
 
 .cc-metodos-box .fw-semibold,
 .cc-metodos-box .fw-bold {
-  color: #1f2937;
+  color: #1f2937 !important;
 }
 
-/* Caja de diferencia */
+/* Input */
+#cc-efectivo-contado {
+  height: 56px !important;
+  border-radius: 18px !important;
+  border: 1px solid #d8e1ee !important;
+  background: #fff !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  font-size: 1.1rem !important;
+  padding: 0 18px !important;
+}
+
+#cc-efectivo-contado:focus {
+  border-color: #2d6df6 !important;
+  box-shadow: 0 0 0 0.2rem rgba(45, 109, 246, 0.15) !important;
+}
+
+/* Caja diferencia */
 .cc-diferencia-box {
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  padding: 1rem 1.2rem;
-  transition: all 0.25s ease;
-}
-
-.cc-diferencia-box:hover {
-  transform: translateY(-2px);
-}
-
-.cc-diferencia-box .text-muted {
-  font-size: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f6f9ff 100%) !important;
+  border: 1px solid #dde6f2 !important;
+  border-radius: 22px !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05) !important;
+  padding: 1.2rem 1.4rem !important;
 }
 
 .cc-diferencia-box #cc-diferencia {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1f2937;
+  font-size: 1.9rem !important;
+  font-weight: 800 !important;
+  color: #1f2937 !important;
 }
+
+/* Botón */
+#btnCerrarCaja {
+  height: 58px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  background: linear-gradient(135deg, #1f3f97 0%, #4c82d4 100%) !important;
+  color: white !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  box-shadow: 0 14px 30px rgba(31, 63, 151, 0.28) !important;
+}
+
+#btnCerrarCaja:hover {
+  transform: translateY(-1px);
+}
+
+/* Botón volver más limpio */
+.btn-back-custom {
+  background: #ffffff !important;
+  border: 1px solid #e5eaf2 !important;
+  color: #1f2937 !important;
+  border-radius: 16px !important;
+  padding: 12px 20px !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05) !important;
+  font-weight: 700 !important;
+}
+
 
 /* 
    HISTORIAL CIERRE DE CAJA
