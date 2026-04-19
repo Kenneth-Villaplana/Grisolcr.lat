@@ -86,8 +86,66 @@ include('layout.php');
                                             <span class="fw-bold">Total</span>
                                             <span class="fw-bold">₡<span id="cc-total">0.00</span></span>
                                         </div>
+
+                                    </div>
+
+                                </div>
+
+                                 <!-- IZQUIERDA -->
+                                <div class="col-lg-7">
+                                    <div class="cc-metodos-box">
+                                        <div class="text-muted small mb-3">Desglose por método</div>
+
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Efectivo</span>
+                                            <span class="fw-semibold">₡<span id="cc-efectivo">0.00</span></span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Tarjeta</span>
+                                            <span class="fw-semibold">₡<span id="cc-tarjeta">0.00</span></span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>SINPE</span>
+                                            <span class="fw-semibold">₡<span id="cc-sinpe">0.00</span></span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Transferencia</span>
+                                            <span class="fw-semibold">₡<span id="cc-transferencia">0.00</span></span>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-bold">Efectivo esperado</span>
+                                            <span class="fw-bold">₡<span id="cc-efectivo-esperado">0.00</span></span>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <!-- DERECHA -->
+                                <div class="col-lg-5">
+                                    <div class="cc-action-panel d-flex flex-column">
+                                        <div class="text-center fw-semibold mb-3">Cierre manual</div>
+
+                                        <div class="mb-2">
+                                            <input type="number" id="cc-efectivo-contado" class="form-control"
+                                                placeholder="Ej. 25000">
+                                        </div>
+
+                                        <small class="text-muted mb-3 d-block">
+                                            Ingrese lo contado en caja para calcular la diferencia.
+                                        </small>
+
+                                        <div class="cc-diferencia-box mb-3">
+                                            <div class="text-muted small mb-1">Diferencia</div>
+                                            <div class="fw-bold fs-2">₡<span id="cc-diferencia">0.00</span></div>
+                                        </div>
+
+                                        <div id="cc-error-msg" class="pv-error-msg mt-2" style="display:none;"></div>
+
+                                        <button class="btn mt-auto" id="btnCerrarCaja">
+                                            <i class="bi bi-check2-circle me-2"></i>Cerrar caja
+                                        </button>
 
                             </div>
                         </div>
