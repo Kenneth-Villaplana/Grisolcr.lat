@@ -96,36 +96,36 @@ include('layout.php');
 
                     <!-- CONTROL DE CAJA -->
                     <div class="card shadow-sm pv-cart-card mt-4">
-                        <div class="card-header pv-cart-header text-white fw-bold text-center">
+                        <div class="card-header text-white fw-semibold pv-cart-header text-center">
                             Control de caja
                         </div>
 
                         <div class="card-body">
-                            <div class="row g-4">
+                            <div class="row g-4 align-items-stretch">
 
-                                <!-- Desglose -->
+                                <!-- IZQUIERDA -->
                                 <div class="col-lg-6">
                                     <div class="cc-metodos-box h-100">
-                                        <div class="text-muted small mb-2">Desglose por método</div>
+                                        <div class="text-muted small mb-3">Desglose por método</div>
 
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between mb-2">
                                             <span>Efectivo</span>
                                             <span class="fw-semibold">₡<span id="cc-efectivo">0.00</span></span>
                                         </div>
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between mb-2">
                                             <span>Tarjeta</span>
                                             <span class="fw-semibold">₡<span id="cc-tarjeta">0.00</span></span>
                                         </div>
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between mb-2">
                                             <span>SINPE</span>
                                             <span class="fw-semibold">₡<span id="cc-sinpe">0.00</span></span>
                                         </div>
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between mb-2">
                                             <span>Transferencia</span>
                                             <span class="fw-semibold">₡<span id="cc-transferencia">0.00</span></span>
                                         </div>
 
-                                        <hr class="my-2">
+                                        <hr>
 
                                         <div class="d-flex justify-content-between">
                                             <span class="fw-bold">Efectivo esperado</span>
@@ -134,29 +134,31 @@ include('layout.php');
                                     </div>
                                 </div>
 
-                                <!-- Acción de cierre -->
-                                <!-- Efectivo -->
-                                <div class="cc-action-panel h-100">
-                                    <div class="cc-block-title text-center">Cierre manual</div>
+                                <!-- DERECHA -->
+                                <div class="col-lg-6">
+                                    <div class="cc-action-panel h-100 d-flex flex-column">
+                                        <div class="text-center fw-semibold mb-3">Cierre manual</div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Efectivo contado</label>
-                                        <input type="number" id="cc-efectivo-contado" class="form-control cc-input"
-                                            placeholder="Ej. 25000">
-                                        <small class="text-muted">Ingrese lo contado en caja para calcular la
-                                            diferencia.</small>
+                                        <div class="mb-2">
+                                            <input type="number" id="cc-efectivo-contado" class="form-control cc-input"
+                                                placeholder="Ej. 25000">
+                                        </div>
+
+                                        <small class="text-muted mb-3 d-block">
+                                            Ingrese lo contado en caja para calcular la diferencia.
+                                        </small>
+
+                                        <div class="cc-diferencia-box mb-3">
+                                            <div class="text-muted small mb-1">Diferencia</div>
+                                            <div class="fw-bold fs-2">₡<span id="cc-diferencia">0.00</span></div>
+                                        </div>
+
+                                        <div id="cc-error-msg" class="pv-error-msg mt-2" style="display:none;"></div>
+
+                                        <button class="btn mt-auto" id="btnCerrarCaja">
+                                            <i class="bi bi-check2-circle me-2"></i>Cerrar caja
+                                        </button>
                                     </div>
-
-                                    <div class="cc-diferencia-box mb-3">
-                                        <div class="text-muted small mb-1">Diferencia</div>
-                                        <div class="fw-bold fs-3">₡<span id="cc-diferencia">0.00</span></div>
-                                    </div>
-
-                                    <div id="cc-error-msg" class="pv-error-msg mt-2" style="display:none;"></div>
-
-                                    <button class="btn" id="btnCerrarCaja">
-                                        <i class="bi bi-check2-circle me-2"></i>Cerrar caja
-                                    </button>
                                 </div>
 
                             </div>
@@ -166,59 +168,57 @@ include('layout.php');
 
             </div>
 
-        </div>
+            <!-- Modal aviso estilo POS -->
+            <div class="modal fade" id="modalAlertaCC" tabindex="-1">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content shadow rounded-4">
 
-        <!-- Modal aviso estilo POS -->
-        <div class="modal fade" id="modalAlertaCC" tabindex="-1">
-            <div class="modal-dialog modal-sm modal-dialog-centered">
-                <div class="modal-content shadow rounded-4">
+                        <div class="modal-header border-0 pb-0 text-center">
+                            <h6 class="modal-title fw-bold text-center">Aviso</h6>
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
 
-                    <div class="modal-header border-0 pb-0 text-center">
-                        <h6 class="modal-title fw-bold text-center">Aviso</h6>
-                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                        <div class="modal-body text-center" id="modalAlertaCCBody"
+                            style="font-size: 0.95rem; padding-top: 0;">
+                        </div>
+
+                        <div class="modal-footer border-0 pt-0 d-flex justify-content-center">
+                            <button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">
+                                Aceptar
+                            </button>
+                        </div>
+
                     </div>
-
-                    <div class="modal-body text-center" id="modalAlertaCCBody"
-                        style="font-size: 0.95rem; padding-top: 0;">
-                    </div>
-
-                    <div class="modal-footer border-0 pt-0 d-flex justify-content-center">
-                        <button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">
-                            Aceptar
-                        </button>
-                    </div>
-
                 </div>
             </div>
-        </div>
-        <!-- Modal confirmación cierre de caja -->
-        <div class="modal fade" id="modalConfirmarCierre" tabindex="-1">
-            <div class="modal-dialog modal-sm modal-dialog-centered">
-                <div class="modal-content shadow rounded-4">
+            <!-- Modal confirmación cierre de caja -->
+            <div class="modal fade" id="modalConfirmarCierre" tabindex="-1">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content shadow rounded-4">
 
-                    <div class="modal-header border-0 pb-0 text-center">
-                        <h6 class="modal-title fw-bold w-100">Confirmar cierre</h6>
+                        <div class="modal-header border-0 pb-0 text-center">
+                            <h6 class="modal-title fw-bold w-100">Confirmar cierre</h6>
+                        </div>
+
+                        <div class="modal-body text-center" style="font-size: 0.95rem;">
+                            ¿Está seguro que desea cerrar la caja del día?<br>
+                            <span class="text-muted small">
+                                Esta acción no se puede deshacer.
+                            </span>
+                        </div>
+
+                        <div class="modal-footer border-0 pt-0 d-flex justify-content-center gap-2">
+                            <button class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                                Cancelar
+                            </button>
+                            <button class="btn btn-danger rounded-pill px-4" id="btnConfirmarCierre">
+                                Sí, cerrar
+                            </button>
+                        </div>
+
                     </div>
-
-                    <div class="modal-body text-center" style="font-size: 0.95rem;">
-                        ¿Está seguro que desea cerrar la caja del día?<br>
-                        <span class="text-muted small">
-                            Esta acción no se puede deshacer.
-                        </span>
-                    </div>
-
-                    <div class="modal-footer border-0 pt-0 d-flex justify-content-center gap-2">
-                        <button class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-                        <button class="btn btn-danger rounded-pill px-4" id="btnConfirmarCierre">
-                            Sí, cerrar
-                        </button>
-                    </div>
-
                 </div>
             </div>
-        </div>
     </main>
 
     <?php MostrarFooter(); ?>

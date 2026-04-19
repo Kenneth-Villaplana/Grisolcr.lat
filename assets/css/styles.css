@@ -1279,6 +1279,15 @@ a.btn-inv-ghost:hover {
 }
 
 .cc-metodos-box,
+.cc-action-panel {
+  background: linear-gradient(135deg, #ffffff 0%, #f7faff 100%);
+  border: 1px solid #dde6f2;
+  border-radius: 22px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  padding: 1.3rem;
+}
+
+.cc-metodos-box,
 .cc-diferencia-box {
   height: 100%;
 }
@@ -1306,6 +1315,7 @@ a.btn-inv-ghost:hover {
   border-radius: 20px;
   padding: 18px;
   text-align: center;
+  min-height: 120px;
 }
 
 .cc-diferencia-box #cc-diferencia {
@@ -1327,6 +1337,7 @@ a.btn-inv-ghost:hover {
   padding: 14px 18px;
   box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
   transition: all 0.25s ease;
+  margin-top: auto;
 }
 
 #btnCerrarCaja:hover {
@@ -1357,6 +1368,8 @@ a.btn-inv-ghost:hover {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  justify-content: flex-start;
+  height: 100%;
 }
 
 .cc-diferencia-box {
