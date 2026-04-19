@@ -104,7 +104,7 @@ include('layout.php');
                             <div class="row g-4 align-items-stretch">
 
                                 <!-- IZQUIERDA -->
-                                <div class="col-lg-6">
+                                <div class="col-lg-7">
                                     <div class="cc-metodos-box">
                                         <div class="text-muted small mb-3">Desglose por método</div>
 
@@ -135,7 +135,7 @@ include('layout.php');
                                 </div>
 
                                 <!-- DERECHA -->
-                                <div class="col-lg-6">
+                                <div class="col-lg-5">
                                     <div class="cc-action-panel d-flex flex-column">
                                         <div class="text-center fw-semibold mb-3">Cierre manual</div>
 

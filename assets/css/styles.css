@@ -982,6 +982,7 @@ a.btn-inv-ghost:hover {
 ===================================== */
 .pv-products-header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 12px 16px 8px 16px !important;
 }
 
 .pv-cart-header {
@@ -989,6 +990,7 @@ a.btn-inv-ghost:hover {
   border-radius: 20px 20px 0 0;
   font-size: 0.95rem;
   letter-spacing: 0.3px;
+  padding: 7px 12px !important;
 }
 
 /* =====================================
@@ -1148,7 +1150,7 @@ a.btn-inv-ghost:hover {
   .card-cobros,
   .card-totales {
     padding: 1rem !important;
-    min-height: auto !important;
+    /* min-height: auto !important; */
   }
 }
 
@@ -1360,7 +1362,7 @@ a.btn-inv-ghost:hover {
   background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
   border: 1px solid #dbe4f0;
   border-radius: 24px;
-  padding: 14px 16px;
+  padding: 10px 12px !important;
   box-shadow: 0 20px 45px rgba(31, 63, 151, 0.08);
 }
 
@@ -1387,6 +1389,138 @@ a.btn-inv-ghost:hover {
   margin-top: 8px;
   position: relative;
   z-index: 5;
+}
+
+/* ===== MODO COMPACTO ===== */
+
+/* Contenedor principal */
+.cc-dashboard-card {
+  padding: 12px 14px !important;
+}
+
+/* Espaciado entre filas */
+.row.g-4 {
+  --bs-gutter-y: 12px !important;
+}
+
+.row.g-3 {
+  --bs-gutter-y: 10px !important;
+}
+
+/* Cards de resumen */
+.card-facturas,
+.card-cobros,
+.card-totales {
+  padding: 0.9rem !important;
+  min-height: auto !important;
+}
+
+/* Textos */
+#cc-cantidad {
+  font-size: 1.4rem !important;
+}
+
+#cc-total-facturado,
+#cc-cobros,
+#cc-total {
+  font-size: 1.4rem !important;
+}
+
+/* Header azul */
+.pv-cart-header {
+  padding: 8px 12px !important;
+  font-size: 0.95rem !important;
+}
+
+/* Panel izquierdo y derecho */
+.cc-metodos-box,
+.cc-action-panel {
+  padding: 1rem !important;
+}
+
+/* Input */
+#cc-efectivo-contado {
+  height: 42px !important;
+  font-size: 0.95rem !important;
+}
+
+/* Diferencia */
+.cc-diferencia-box {
+  min-height: 70px !important;
+  padding: 10px !important;
+}
+
+#cc-diferencia {
+  font-size: 1.3rem !important;
+}
+
+/* Botón */
+#btnCerrarCaja {
+  padding: 10px 14px !important;
+  font-size: 0.95rem !important;
+  border-radius: 14px !important;
+}
+
+/* ===== POS ULTRA COMPACTO ===== */
+
+.cc-metodos-box,
+.cc-action-panel {
+  min-height: auto !important;
+}
+
+.cc-metodos-box .d-flex {
+  padding: 2px 0 !important;
+  font-size: 0.96rem !important;
+}
+
+.cc-action-panel {
+  gap: 6px !important;
+}
+
+.cc-action-panel .mb-3,
+.cc-action-panel .mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.cc-action-panel small,
+.cc-action-panel .text-muted {
+  font-size: 0.82rem !important;
+  line-height: 1.2 !important;
+}
+
+.cc-diferencia-box {
+  min-height: 64px !important;
+  padding: 8px 10px !important;
+  border-radius: 16px !important;
+}
+
+.cc-diferencia-box .text-muted {
+  font-size: 0.78rem !important;
+  margin-bottom: 2px !important;
+}
+
+#cc-diferencia {
+  font-size: 1.15rem !important;
+  line-height: 1.1 !important;
+}
+
+#btnCerrarCaja {
+  margin-top: 6px !important;
+  padding: 9px 12px !important;
+  font-size: 0.92rem !important;
+}
+
+.card-facturas,
+.card-cobros,
+.card-totales {
+  min-height: 140px !important;
+  padding: 0.85rem 0.95rem !important;
+}
+
+.card-facturas .fw-bold,
+.card-cobros .fw-bold,
+.card-totales .fw-bold {
+  line-height: 1.1 !important;
 }
 
 /* 
