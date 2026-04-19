@@ -1144,6 +1144,14 @@ a.btn-inv-ghost:hover {
   }
 }
 
+@media (min-width: 992px) {
+  .card-facturas,
+  .card-cobros,
+  .card-totales {
+    min-height: 180px;
+  }
+}
+
 /* =====================================
    CIERRE DE CAJA - OVERRIDES FINALES
    ESTA PARTE DEBE IR AL FINAL
@@ -1211,6 +1219,7 @@ a.btn-inv-ghost:hover {
   border: none !important;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06) !important;
   padding: 1.4rem !important;
+  min-height: 180px;
 }
 
 .card-facturas {
@@ -1260,6 +1269,11 @@ a.btn-inv-ghost:hover {
 .cc-metodos-box .fw-semibold,
 .cc-metodos-box .fw-bold {
   color: #1f2937 !important;
+}
+
+.cc-metodos-box,
+.cc-diferencia-box {
+  height: 100%;
 }
 
 /* Input */
