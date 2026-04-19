@@ -43,7 +43,7 @@ include('layout.php');
                         </div>
 
                         <div class="card-body pt-0">
-                            <div class="row g-3">
+                            <div class="row g-2">
 
                                 <!-- Facturas -->
                                 <div class="col-lg-4 col-md-6">
@@ -105,7 +105,7 @@ include('layout.php');
 
                                 <!-- IZQUIERDA -->
                                 <div class="col-lg-6">
-                                    <div class="cc-metodos-box h-100">
+                                    <div class="cc-metodos-box">
                                         <div class="text-muted small mb-3">Desglose por método</div>
 
                                         <div class="d-flex justify-content-between mb-2">
@@ -136,7 +136,7 @@ include('layout.php');
 
                                 <!-- DERECHA -->
                                 <div class="col-lg-6">
-                                    <div class="cc-action-panel h-100 d-flex flex-column">
+                                    <div class="cc-action-panel d-flex flex-column">
                                         <div class="text-center fw-semibold mb-3">Cierre manual</div>
 
                                         <div class="mb-2">
