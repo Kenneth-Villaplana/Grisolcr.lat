@@ -17,17 +17,17 @@ include('layout.php');
 
     <main class="container py-5 pv-wrapper">
 
-        <div class="mb-1 text-end mt-3">
-            <a href="puntoVenta.php" class="btn  btn-back-custom">
+        <!-- Botón arriba a la derecha -->
+        <div class="d-flex justify-content-end mt-3 mb-2">
+            <a href="puntoVenta.php" class="btn btn-back-custom">
                 ← Volver a Punto de Venta
             </a>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 pv-header">
-            <div>
-                <h2 class="mb-1 pv-title">Cierre de Caja</h2>
-                <p class="mb-0 text-muted small">Resumen del día y registro del cierre.</p>
-            </div>
+        <!-- Header centrado -->
+        <div class="pv-header text-center mb-4">
+            <h2 class="pv-title mb-1">Cierre de Caja</h2>
+            <p class="text-muted mb-0">Resumen del día y registro del cierre.</p>
         </div>
 
         <div class="cc-dashboard-card">

@@ -925,14 +925,14 @@ a.btn-inv-ghost:hover {
 ===================================== */
 .pv-header {
   padding: 10px 5px;
+  text-align: center;
 }
 
 .pv-title {
-  font-size: 1.9rem;
-  font-weight: 600;
-  color: #1e3a8a;
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #1f3f97;
 }
-
 /* =====================================
    BOTÓN VOLVER
 ===================================== */
@@ -1170,8 +1170,8 @@ a.btn-inv-ghost:hover {
 }
 
 .pv-header p {
-  font-size: 1.08rem;
-  color: #667085 !important;
+  font-size: 1.05rem;
+  color: #6b7280;
 }
 
 /* Cards principales más notorias */
@@ -1312,14 +1312,14 @@ a.btn-inv-ghost:hover {
 .cc-diferencia-box {
   background: linear-gradient(135deg, #f4f8ff, #edf4ff);
   border: 1px solid #d8e5ff;
-  border-radius: 20px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 14px 16px;
   text-align: center;
-  min-height: 120px;
+  min-height: 90px;
 }
 
 .cc-diferencia-box #cc-diferencia {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #1f3f97;
 }
