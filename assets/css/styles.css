@@ -913,19 +913,19 @@ a.btn-inv-ghost:hover {
 }
 
 /* =====================================
-   CIERRE DE CAJA - BASE GENERAL
+   CIERRE DE CAJA
 ===================================== */
+
 .pv-wrapper {
-  background: #ffffff;
+  background: linear-gradient(180deg, #f9fbff 0%, #edf3fb 55%, #e8f0fa 100%);
   min-height: 100vh;
+  padding: 24px;
 }
 
-/* =====================================
-   HEADER
-===================================== */
+/* Header */
 .pv-header {
-  padding: 10px 5px;
   text-align: center;
+  padding: 10px 5px;
 }
 
 .pv-title {
@@ -934,593 +934,237 @@ a.btn-inv-ghost:hover {
   color: #1f3f97;
 }
 
-/* =====================================
-   BOTÓN VOLVER
-===================================== */
-.btn-back-custom {
-  background: rgba(30, 58, 138, 0.08);
-  border: 1px solid rgba(30, 58, 138, 0.15);
-  color: #1e3a8a;
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  transition: all 0.25s ease;
-}
-
-.btn-back-custom:hover {
-  background: rgba(30, 58, 138, 0.15);
-  transform: translateY(-1px);
-}
-
-/* =====================================
-   CARDS PRINCIPALES
-===================================== */
-.pv-products-card,
-.pv-cart-card {
-  border-radius: 20px;
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.4));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  transition: all 0.25s ease;
-  animation: fadeUp 0.5s ease;
-  padding: 16px !important;
-}
-
-.pv-products-card:hover,
-.pv-cart-card:hover {
-  transform: translateY(-3px);
-}
-
-/* =====================================
-   HEADER DE CARDS
-===================================== */
-.pv-products-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 12px 16px 8px 16px !important;
-}
-
-.pv-cart-header {
-  background: linear-gradient(135deg, #1e3a8a, #3f72af);
-  border-radius: 20px 20px 0 0;
-  font-size: 0.95rem;
-  letter-spacing: 0.3px;
-  padding: 7px 12px !important;
-}
-
-/* =====================================
-   BLOQUES INTERNOS GENÉRICOS
-===================================== */
-.border.rounded-4 {
-  border-radius: 16px !important;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  transition: all 0.25s ease;
-}
-
-.border.rounded-4:hover {
-  transform: translateY(-2px);
-}
-
-/* =====================================
-   TEXTOS Y MONTOS
-===================================== */
-#cc-total,
-#cc-total-facturado,
-#cc-cobros {
-  color: #1e3a8a;
-}
-
-/* =====================================
-   INPUT EFECTIVO CONTADO
-===================================== */
-#cc-efectivo-contado {
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  height: 45px;
-  transition: all 0.25s ease;
-}
-
-#cc-efectivo-contado:focus {
-  border-color: #3f72af;
-  box-shadow:
-    0 0 0 2px rgba(63, 114, 175, 0.25),
-    0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* =====================================
-   DIFERENCIA
-===================================== */
-#cc-diferencia {
-  font-size: 1.2rem;
-}
-
-/* =====================================
-   BOTÓN CERRAR CAJA
-===================================== */
-#btnCerrarCaja {
-  border-radius: 999px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #1e3a8a, #3f72af);
-  border: none;
-  color: white;
-  padding: 10px;
-  box-shadow: 0 10px 25px rgba(30, 58, 138, 0.25);
-  transition: all 0.25s ease;
-}
-
-#btnCerrarCaja:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(30, 58, 138, 0.35);
-}
-
-/* =====================================
-   BADGE FECHA
-===================================== */
-#cc-fecha {
-  border-radius: 999px;
-  padding: 5px 12px;
-  font-size: 0.75rem;
-}
-
-/* =====================================
-   MODALES
-===================================== */
-.modal-content {
-  border-radius: 18px;
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0.85));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-}
-
-/* =====================================
-   ANIMACIÓN
-===================================== */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =====================================
-   RESPONSIVE
-===================================== */
-@media (max-width: 768px) {
-  .pv-title {
-    font-size: 1.5rem;
-  }
-
-  .pv-products-card,
-  .pv-cart-card {
-    border-radius: 16px;
-  }
-
-  .border.rounded-4 {
-    padding: 1rem !important;
-  }
-
-  #btnCerrarCaja {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .pv-wrapper {
-    padding: 10px;
-  }
-
-  .pv-title {
-    font-size: 1.3rem;
-  }
-
-  .border.rounded-4 {
-    padding: 0.8rem !important;
-  }
-
-  #cc-efectivo-contado {
-    height: 42px;
-    font-size: 0.9rem;
-  }
-}
-
-@media (min-width: 992px) {
-
-  .card-facturas,
-  .card-cobros,
-  .card-totales {
-    padding: 1rem !important;
-    /* min-height: auto !important; */
-  }
-}
-
-/* =====================================
-   CIERRE DE CAJA - OVERRIDES FINALES
-   ESTA PARTE DEBE IR AL FINAL
-===================================== */
-
-.pv-wrapper {
-  background: linear-gradient(180deg, #f9fbff 0%, #edf3fb 55%, #e8f0fa 100%) !important;
-  min-height: 100vh;
-  padding: 24px;
-}
-
-.pv-title {
-  font-size: 2.6rem !important;
-  font-weight: 800 !important;
-  color: #1f3f97 !important;
-}
-
 .pv-header p {
   font-size: 1.05rem;
   color: #6b7280;
 }
 
-/* Cards principales más notorias */
-.pv-products-card,
-.pv-cart-card {
-  border-radius: 26px;
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow:
-    0 20px 45px rgba(31, 63, 151, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.25s ease;
-}
-
-.pv-cart-header {
-  background: linear-gradient(135deg, #1f3f97, #4c7bd9);
-  border-radius: 26px 26px 0 0;
-  font-size: 1.05rem;
-  letter-spacing: 0.3px;
-  text-align: center;
-  justify-content: center;
-  padding: 14px 18px;
-}
-
-.pv-products-header {
-  padding: 18px 18px 10px 18px !important;
-  border-bottom: 1px solid #e8eef5 !important;
-}
-
-.pv-products-header h5 {
-  font-size: 1.1rem !important;
-  font-weight: 800 !important;
-  color: #5d6778 !important;
-}
-
-#cc-fecha {
-  background: #f3f7fc !important;
-  border: 1px solid #dbe4f0 !important;
-  color: #2d3748 !important;
-  border-radius: 999px !important;
-  padding: 8px 14px !important;
-  font-weight: 700 !important;
-}
-
-/* Tarjetas internas destacadas */
-.card-facturas,
-.card-cobros,
-.card-totales {
-  border-radius: 22px !important;
-  border: none !important;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06) !important;
-  padding: 1.4rem !important;
-  min-height: 180px;
-}
-
-.card-facturas {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
-  border-left: 7px solid #2563eb !important;
-}
-
-.card-cobros {
-  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
-  border-left: 7px solid #16a34a !important;
-}
-
-.card-totales {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
-  border-left: 7px solid #d97706 !important;
-}
-
-/* Montos */
-#cc-cantidad {
-  font-size: 1.6rem !important;
-  font-weight: 800 !important;
-  color: #1f2937 !important;
-}
-
-#cc-total-facturado,
-#cc-cobros,
-#cc-total {
-  font-size: 1.6rem !important;
-  font-weight: 800 !important;
-  color: #1f3f97 !important;
-}
-
-/* Caja de métodos */
-.cc-metodos-box {
-  background: linear-gradient(135deg, #ffffff 0%, #f7faff 100%) !important;
-  border: 1px solid #dde6f2 !important;
-  border-radius: 22px !important;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05) !important;
-  padding: 1.3rem !important;
-}
-
-.cc-metodos-box .d-flex {
-  padding: 6px 0 !important;
-  font-size: 1.05rem !important;
-}
-
-.cc-metodos-box .fw-semibold,
-.cc-metodos-box .fw-bold {
-  color: #1f2937 !important;
-}
-
-.cc-metodos-box,
-.cc-action-panel {
-  background: linear-gradient(135deg, #ffffff 0%, #f7faff 100%);
-  border: 1px solid #dde6f2;
-  border-radius: 22px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
-  padding: 1.3rem;
-}
-
-.cc-metodos-box,
-.cc-diferencia-box {
-  height: 100%;
-}
-
-/* Input */
-#cc-efectivo-contado {
-  height: 56px !important;
-  border-radius: 18px !important;
-  border: 1px solid #d8e1ee !important;
-  background: #fff !important;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03) !important;
-  font-size: 1.1rem !important;
-  padding: 0 18px !important;
-}
-
-#cc-efectivo-contado:focus {
-  border-color: #2d6df6 !important;
-  box-shadow: 0 0 0 0.2rem rgba(45, 109, 246, 0.15) !important;
-}
-
-/* Caja diferencia */
-.cc-diferencia-box {
-  background: linear-gradient(135deg, #f4f8ff, #edf4ff);
-  border: 1px solid #d8e5ff;
-  border-radius: 18px;
-  padding: 14px 16px;
-  text-align: center;
-  min-height: 90px;
-}
-
-.cc-diferencia-box #cc-diferencia {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #1f3f97;
-}
-
-/* Botón */
-#btnCerrarCaja {
-  display: block;
-  width: 100%;
-  border-radius: 18px;
-  font-weight: 700;
-  font-size: 1rem;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  border: none;
-  color: white;
-  padding: 14px 18px;
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
-  transition: all 0.25s ease;
-  margin-top: auto;
-}
-
-#btnCerrarCaja:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.32);
-}
-
-/* Botón volver más limpio */
+/* Botón volver */
 .btn-back-custom {
-  background: #ffffff !important;
-  border: 1px solid #e5eaf2 !important;
-  color: #1f2937 !important;
-  border-radius: 16px !important;
-  padding: 12px 20px !important;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05) !important;
-  font-weight: 700 !important;
+  background: #fff;
+  border: 1px solid #e5eaf2;
+  color: #1f2937;
+  border-radius: 16px;
+  padding: 12px 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+  font-weight: 700;
+  transition: all 0.25s ease;
 }
 
+.btn-back-custom:hover {
+  transform: translateY(-1px);
+}
+
+/* Contenedor general */
 .cc-dashboard-card {
   background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
   border: 1px solid #dbe4f0;
   border-radius: 24px;
-  padding: 10px 12px !important;
+  padding: 14px 16px;
   box-shadow: 0 20px 45px rgba(31, 63, 151, 0.08);
 }
 
-.cc-action-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: flex-start;
-  height: 100%;
+/* Cards principales */
+.pv-products-card,
+.pv-cart-card {
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 16px 32px rgba(31, 63, 151, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  padding: 14px;
 }
 
-.cc-diferencia-box {
-  min-height: 80px;
-  height: auto !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 12px;
+/* Header resumen */
+.pv-products-header {
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid #e8eef5;
 }
 
-#btnCerrarCaja {
-  display: block !important;
-  width: 100% !important;
-  margin-top: 8px;
-  position: relative;
-  z-index: 5;
+.pv-products-header h5 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #5d6778;
+  margin: 0;
 }
 
-/* ===== MODO COMPACTO ===== */
-
-/* Contenedor principal */
-.cc-dashboard-card {
-  padding: 12px 14px !important;
+/* Header control */
+.pv-cart-header {
+  background: linear-gradient(135deg, #1f6ff2, #355faa);
+  border-radius: 18px 18px 0 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  text-align: center;
+  padding: 9px 12px;
 }
 
-/* Espaciado entre filas */
-.row.g-4 {
-  --bs-gutter-y: 12px !important;
+/* Fecha */
+#cc-fecha {
+  background: #f3f7fc;
+  border: 1px solid #dbe4f0;
+  color: #2d3748;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 0.8rem;
 }
 
-.row.g-3 {
-  --bs-gutter-y: 10px !important;
-}
-
-/* Cards de resumen */
+/* Cards resumen */
 .card-facturas,
 .card-cobros,
 .card-totales {
+  border-radius: 18px !important;
+  border: none !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05) !important;
   padding: 0.9rem !important;
-  min-height: auto !important;
+  min-height: 130px;
 }
 
-/* Textos */
+.card-facturas {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+  border-left: 6px solid #2563eb !important;
+}
+
+.card-cobros {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
+  border-left: 6px solid #16a34a !important;
+}
+
+.card-totales {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+  border-left: 6px solid #d97706 !important;
+}
+
+/* Montos */
 #cc-cantidad {
-  font-size: 1.4rem !important;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1f2937;
 }
 
 #cc-total-facturado,
 #cc-cobros,
 #cc-total {
-  font-size: 1.4rem !important;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1f3f97;
 }
 
-/* Header azul */
-.pv-cart-header {
-  padding: 8px 12px !important;
-  font-size: 0.95rem !important;
-}
-
-/* Panel izquierdo y derecho */
+/* Paneles inferiores */
 .cc-metodos-box,
 .cc-action-panel {
-  padding: 1rem !important;
+  background: linear-gradient(135deg, #fff 0%, #f7faff 100%);
+  border: 1px solid #dde6f2;
+  border-radius: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+  padding: 1rem;
 }
 
-/* Input */
+/* Métodos */
+.cc-metodos-box {
+  height: auto;
+  min-height: unset;
+}
+
+.cc-metodos-box .d-flex {
+  padding: 2px 0;
+  margin-bottom: 2px;
+  font-size: 0.98rem;
+}
+
+.cc-metodos-box hr {
+  margin: 10px 0;
+}
+
+.cc-metodos-box .fw-semibold,
+.cc-metodos-box .fw-bold {
+  color: #1f2937;
+}
+
+/* Panel derecho */
+.cc-action-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 #cc-efectivo-contado {
-  height: 42px !important;
-  font-size: 0.95rem !important;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid #d8e1ee;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+  font-size: 0.98rem;
+  padding: 0 16px;
+}
+
+#cc-efectivo-contado:focus {
+  border-color: #2d6df6;
+  box-shadow: 0 0 0 0.2rem rgba(45, 109, 246, 0.15);
 }
 
 /* Diferencia */
 .cc-diferencia-box {
-  min-height: 70px !important;
-  padding: 10px !important;
+  background: linear-gradient(135deg, #f4f8ff, #edf4ff);
+  border: 1px solid #d8e5ff;
+  border-radius: 16px;
+  padding: 12px;
+  text-align: center;
+  min-height: 78px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #cc-diferencia {
-  font-size: 1.3rem !important;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1f3f97;
 }
 
-/* Botón */
+/* Botón cerrar */
 #btnCerrarCaja {
-  padding: 10px 14px !important;
-  font-size: 0.95rem !important;
-  border-radius: 14px !important;
+  width: 100%;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #1f3f97 0%, #4c82d4 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 11px 14px;
+  box-shadow: 0 12px 24px rgba(31, 63, 151, 0.24);
+  margin-top: 4px;
+  transition: all 0.2s ease;
 }
 
-/* ===== POS ULTRA COMPACTO ===== */
-
-.cc-metodos-box,
-.cc-action-panel {
-  min-height: auto !important;
+#btnCerrarCaja:hover {
+  transform: translateY(-1px);
 }
 
-.cc-metodos-box .d-flex {
-  padding: 2px 0 !important;
-  font-size: 0.96rem !important;
+/* Modal */
+.modal-content {
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.88));
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
-.cc-action-panel {
-  gap: 6px !important;
-}
+/* Responsive */
+@media (max-width: 768px) {
+  .pv-title {
+    font-size: 1.8rem;
+  }
 
-.cc-action-panel .mb-3,
-.cc-action-panel .mb-2 {
-  margin-bottom: 0.5rem !important;
-}
+  .pv-wrapper {
+    padding: 14px;
+  }
 
-.cc-action-panel small,
-.cc-action-panel .text-muted {
-  font-size: 0.82rem !important;
-  line-height: 1.2 !important;
-}
-
-.cc-diferencia-box {
-  min-height: 64px !important;
-  padding: 8px 10px !important;
-  border-radius: 16px !important;
-}
-
-.cc-diferencia-box .text-muted {
-  font-size: 0.78rem !important;
-  margin-bottom: 2px !important;
-}
-
-#cc-diferencia {
-  font-size: 1.15rem !important;
-  line-height: 1.1 !important;
-}
-
-#btnCerrarCaja {
-  margin-top: 6px !important;
-  padding: 9px 12px !important;
-  font-size: 0.92rem !important;
-}
-
-.card-facturas,
-.card-cobros,
-.card-totales {
-  min-height: 140px !important;
-  padding: 0.85rem 0.95rem !important;
-}
-
-.card-facturas .fw-bold,
-.card-cobros .fw-bold,
-.card-totales .fw-bold {
-  line-height: 1.1 !important;
+  .card-facturas,
+  .card-cobros,
+  .card-totales {
+    min-height: auto;
+  }
 }
 
 /* 

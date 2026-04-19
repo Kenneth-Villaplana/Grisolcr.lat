@@ -36,8 +36,8 @@ include('layout.php');
 
                 <!-- RESUMEN DEL DÍA -->
                 <div class="col-12">
-                    <div class="card shadow-sm pv-products-card">
-                        <div class="pv-products-header d-flex justify-content-between align-items-center mb-2 p-3">
+                    <div class="card pv-products-card">
+                        <div class="pv-products-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0 text-muted fw-semibold">Resumen del día</h5>
                             <span class="badge bg-light text-dark border" id="cc-fecha">Hoy</span>
                         </div>
@@ -47,7 +47,7 @@ include('layout.php');
 
                                 <!-- Facturas -->
                                 <div class="col-lg-4 col-md-6">
-                                    <div class="border rounded-4 p-3 h-100 shadow-sm card-facturas">
+                                    <div class="border rounded-4 p-3 h-100 card-facturas">
                                         <div class="text-muted small">Facturas</div>
                                         <div class="fs-4 fw-bold" id="cc-cantidad">0</div>
                                         <div class="text-muted small mt-2">Total facturado</div>
@@ -95,13 +95,13 @@ include('layout.php');
 
 
                     <!-- CONTROL DE CAJA -->
-                    <div class="card shadow-sm pv-cart-card mt-4">
+                    <div class="card pv-cart-card mt-4">
                         <div class="card-header text-white fw-semibold pv-cart-header text-center">
                             Control de caja
                         </div>
 
                         <div class="card-body">
-                            <div class="row g-4 align-items-stretch">
+                            <div class="row g-3 align-items-start">
 
                                 <!-- IZQUIERDA -->
                                 <div class="col-lg-7">
@@ -140,7 +140,7 @@ include('layout.php');
                                         <div class="text-center fw-semibold mb-3">Cierre manual</div>
 
                                         <div class="mb-2">
-                                            <input type="number" id="cc-efectivo-contado" class="form-control cc-input"
+                                            <input type="number" id="cc-efectivo-contado" class="form-control"
                                                 placeholder="Ej. 25000">
                                         </div>
 
