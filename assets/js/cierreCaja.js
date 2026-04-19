@@ -87,7 +87,7 @@ async function cargarResumen() {
         document.getElementById("cc-iva").textContent = r.IVA || "0.00";
         document.getElementById("cc-total").textContent = r.TotalFacturado || "0.00";
         document.getElementById("cc-total-facturado").textContent = r.TotalFacturado || "0.00";
-        document.getElementById("cc-total-cobrado").textContent = r.TotalCobrado || "0.00";
+        document.getElementById("cc-cobros").textContent = r.TotalCobrado || "0.00";
 
         document.getElementById("cc-efectivo").textContent = m.efectivo || "0.00";
         document.getElementById("cc-tarjeta").textContent = m.tarjeta || "0.00";
