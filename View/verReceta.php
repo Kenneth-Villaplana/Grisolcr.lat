@@ -136,7 +136,7 @@ if (!$receta) {
             Observaciones
         </h5>
 
-        <textarea class="form-control input-modern" rows="3" disabled><?= $receta['Diagnostico'] ?></textarea>
+        <textarea class="form-control input-modern" rows="3" disabled><?= $receta['Observaciones'] ?></textarea>
 
         <br>
     </section>
