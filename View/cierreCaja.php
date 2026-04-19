@@ -129,18 +129,18 @@ include('layout.php');
                                 <!-- DERECHA -->
                                 <div class="col-lg-5">
                                     <div class="cc-action-panel d-flex flex-column">
-                                        <div class="text-center fw-semibold mb-3">Cierre manual</div>
+                                        <div class="text-center fw-semibold mb-2">Cierre manual</div>
 
                                         <div class="mb-2">
                                             <input type="number" id="cc-efectivo-contado" class="form-control"
                                                 placeholder="Ej. 25000">
                                         </div>
 
-                                        <small class="text-muted mb-3 d-block">
+                                        <small class="text-muted mb-2 d-block">
                                             Ingrese lo contado en caja para calcular la diferencia.
                                         </small>
 
-                                        <div class="cc-diferencia-box mb-3">
+                                        <div class="cc-diferencia-box mb-2">
                                             <div class="text-muted small mb-1">Diferencia</div>
                                             <div class="fw-bold fs-2">₡<span id="cc-diferencia">0.00</span></div>
                                         </div>
