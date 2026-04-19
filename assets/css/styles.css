@@ -1158,7 +1158,9 @@ a.btn-inv-ghost:hover {
 ===================================== */
 
 .pv-wrapper {
-  background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%) !important;
+  background: linear-gradient(180deg, #f9fbff 0%, #edf3fb 55%, #e8f0fa 100%) !important;
+  min-height: 100vh;
+  padding: 24px;
 }
 
 .pv-title {
@@ -1175,20 +1177,25 @@ a.btn-inv-ghost:hover {
 /* Cards principales más notorias */
 .pv-products-card,
 .pv-cart-card {
-  background: #ffffff !important;
-  border: 1px solid #dbe4f0 !important;
-  border-radius: 28px !important;
-  box-shadow: 0 16px 40px rgba(31, 63, 151, 0.08) !important;
-  overflow: hidden;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 20px 45px rgba(31, 63, 151, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.25s ease;
 }
 
 .pv-cart-header {
-  background: linear-gradient(135deg, #1f6feb 0%, #355fb1 100%) !important;
-  color: #fff !important;
-  font-size: 1.2rem !important;
-  font-weight: 800 !important;
-  padding: 16px 20px !important;
-  border-radius: 28px 28px 0 0 !important;
+  background: linear-gradient(135deg, #1f3f97, #4c7bd9);
+  border-radius: 26px 26px 0 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+  text-align: center;
+  justify-content: center;
+  padding: 14px 18px;
 }
 
 .pv-products-header {
@@ -1309,18 +1316,22 @@ a.btn-inv-ghost:hover {
 
 /* Botón */
 #btnCerrarCaja {
-  height: 58px !important;
-  border-radius: 999px !important;
-  border: none !important;
-  background: linear-gradient(135deg, #1f3f97 0%, #4c82d4 100%) !important;
-  color: white !important;
-  font-size: 1.2rem !important;
-  font-weight: 800 !important;
-  box-shadow: 0 14px 30px rgba(31, 63, 151, 0.28) !important;
+  display: block;
+  width: 100%;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  color: white;
+  padding: 14px 18px;
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+  transition: all 0.25s ease;
 }
 
 #btnCerrarCaja:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.32);
 }
 
 /* Botón volver más limpio */
