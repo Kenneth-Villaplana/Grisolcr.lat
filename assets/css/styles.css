@@ -1170,6 +1170,77 @@ a.btn-inv-ghost:hover {
   }
 }
 
+/* =========================
+   MEJORAS VISUALES CIERRE CAJA
+   OVERRIDES FINALES
+========================= */
+
+/* Card de cobros */
+.card-cobros {
+  border-radius: 16px !important;
+  background: linear-gradient(135deg, #ffffff 0%, #eefcf5 100%) !important;
+  border-left: 6px solid #22a06b !important;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Caja de desglose por método */
+.cc-metodos-box {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  padding: 1rem;
+  transition: all 0.25s ease;
+}
+
+.cc-metodos-box:hover {
+  transform: translateY(-2px);
+}
+
+.cc-metodos-box .d-flex {
+  padding: 4px 0;
+  font-size: 1rem;
+}
+
+.cc-metodos-box .fw-semibold,
+.cc-metodos-box .fw-bold {
+  color: #1f2937;
+}
+
+/* Caja de diferencia */
+.cc-diferencia-box {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  padding: 1rem 1.2rem;
+  transition: all 0.25s ease;
+}
+
+.cc-diferencia-box:hover {
+  transform: translateY(-2px);
+}
+
+.cc-diferencia-box .text-muted {
+  font-size: 1rem;
+}
+
+.cc-diferencia-box #cc-diferencia {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
 /* 
    HISTORIAL CIERRE DE CAJA
 */
