@@ -78,7 +78,7 @@ if (!$receta) {
 
     <div class="mt-3">
         <strong>Observaciones:</strong>
-        <p><?= $receta['Diagnostico'] ?></p>
+        <p><?= $receta['Observaciones'] ?></p>
     </div>
 
     <div class="firma-block text-center mt-5">
