@@ -1214,18 +1214,18 @@ a.btn-inv-ghost:hover {
 }
 
 .card-facturas {
-  background: linear-gradient(135deg, #ffffff 0%, #eef4ff 100%) !important;
-  border-left: 7px solid #2d6df6 !important;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+  border-left: 7px solid #2563eb !important;
 }
 
 .card-cobros {
-  background: linear-gradient(135deg, #ffffff 0%, #ebfbf3 100%) !important;
-  border-left: 7px solid #1fa971 !important;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
+  border-left: 7px solid #16a34a !important;
 }
 
 .card-totales {
-  background: linear-gradient(135deg, #ffffff 0%, #fff8eb 100%) !important;
-  border-left: 7px solid #f0ad2c !important;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+  border-left: 7px solid #d97706 !important;
 }
 
 /* Montos */
