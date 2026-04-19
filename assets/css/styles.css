@@ -1301,17 +1301,17 @@ a.btn-inv-ghost:hover {
 
 /* Caja diferencia */
 .cc-diferencia-box {
-  background: linear-gradient(135deg, #ffffff 0%, #f6f9ff 100%) !important;
-  border: 1px solid #dde6f2 !important;
-  border-radius: 22px !important;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05) !important;
-  padding: 1.2rem 1.4rem !important;
+  background: linear-gradient(135deg, #f4f8ff, #edf4ff);
+  border: 1px solid #d8e5ff;
+  border-radius: 20px;
+  padding: 18px;
+  text-align: center;
 }
 
 .cc-diferencia-box #cc-diferencia {
-  font-size: 1.9rem !important;
-  font-weight: 800 !important;
-  color: #1f2937 !important;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1f3f97;
 }
 
 /* Botón */

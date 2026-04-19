@@ -158,6 +158,10 @@ include('layout.php');
                                         <button class="btn btn-success btn-lg" id="btnCerrarCaja">
                                             <i class="bi bi-check2-circle me-1"></i> Cerrar caja
                                         </button>
+                                        <button id="btnCerrarCaja"
+                                            style="display:block !important; width:100% !important; background:red !important; color:#fff !important; padding:16px !important;">
+                                            Cerrar caja
+                                        </button>
                                     </div>
                                 </div>
                             </div>
