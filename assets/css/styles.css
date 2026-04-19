@@ -1147,7 +1147,7 @@ a.btn-inv-ghost:hover {
   .card-facturas,
   .card-cobros,
   .card-totales {
-    padding: 1.1rem !important;
+    padding: 1rem !important;
     min-height: auto !important;
   }
 }
@@ -1246,7 +1246,7 @@ a.btn-inv-ghost:hover {
 
 /* Montos */
 #cc-cantidad {
-  font-size: 2.2rem !important;
+  font-size: 1.6rem !important;
   font-weight: 800 !important;
   color: #1f2937 !important;
 }
@@ -1254,7 +1254,7 @@ a.btn-inv-ghost:hover {
 #cc-total-facturado,
 #cc-cobros,
 #cc-total {
-  font-size: 2rem !important;
+  font-size: 1.6rem !important;
   font-weight: 800 !important;
   color: #1f3f97 !important;
 }

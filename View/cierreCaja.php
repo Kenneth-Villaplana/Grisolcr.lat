@@ -31,7 +31,7 @@ include('layout.php');
         </div>
 
         <div class="cc-dashboard-card">
-            <div class="row g-4">
+            <div class="row g-2">
 
 
                 <!-- RESUMEN DEL DÍA -->
