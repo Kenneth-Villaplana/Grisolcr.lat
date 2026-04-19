@@ -91,7 +91,7 @@ include('layout.php');
                         </div>
                     </div>
                 </div>
-            </div>
+            
 
             <!-- CONTROL DE CAJA -->
             <div class="col-12">
@@ -135,6 +135,7 @@ include('layout.php');
                             </div>
 
                             <!-- Acción de cierre -->
+                            <!-- Efectivo -->
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Efectivo contado</label>
@@ -144,11 +145,19 @@ include('layout.php');
                                         diferencia.</small>
                                 </div>
 
+                                <!-- Diferencia -->
                                 <div class="cc-diferencia-box mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="text-muted">Diferencia</span>
                                         <span class="fw-bold">₡<span id="cc-diferencia">0.00</span></span>
                                     </div>
+                                </div>
+
+                                <!-- Boton -->
+                                <div class="d-grid">
+                                    <button class="btn btn-success btn-lg" id="btnCerrarCaja">
+                                        <i class="bi bi-check2-circle me-1"></i> Cerrar caja
+                                    </button>
                                 </div>
 
                                 <div id="cc-error-msg" class="pv-error-msg mt-3" style="display:none;"></div>
@@ -163,6 +172,8 @@ include('layout.php');
                         </div>
                     </div>
                 </div>
+            </div>
+
             </div>
 
         </div>

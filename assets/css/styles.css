@@ -1334,6 +1334,20 @@ a.btn-inv-ghost:hover {
   font-weight: 700 !important;
 }
 
+.cc-dashboard-card {
+  background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
+  border: 1px solid #dbe4f0;
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 20px 45px rgba(31, 63, 151, 0.08);
+}
+
+.pv-products-card,
+.pv-cart-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
 
 /* 
    HISTORIAL CIERRE DE CAJA
