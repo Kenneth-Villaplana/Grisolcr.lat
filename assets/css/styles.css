@@ -1353,13 +1353,27 @@ a.btn-inv-ghost:hover {
   box-shadow: 0 20px 45px rgba(31, 63, 151, 0.08);
 }
 
-.pv-products-card,
-.pv-cart-card {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
+.cc-action-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
+.cc-diferencia-box {
+  min-height: 140px;
+  height: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#btnCerrarCaja {
+  display: block !important;
+  width: 100% !important;
+  margin-top: 8px;
+  position: relative;
+  z-index: 5;
+}
 /* 
    HISTORIAL CIERRE DE CAJA
 */
