@@ -15,12 +15,12 @@ try {
     // recibe datos del formulario
     $pacienteId = $_POST['PacienteId'] ?? null;
 
-    $ocupacion = $_POST['Ocupacion'] ?? null;
-    $motivoConsulta = $_POST['MotivoConsulta'] ?? null;
+    $ocupacion = $_POST['ocupacion'] ?? null;
+    $motivoConsulta = $_POST['motivoConsulta'] ?? null;
     $usaLentes = $_POST['usaLentes'] ?? 'No';
     $ultimoControl = $_POST['UltimoControl'] ?? null;
 
-    $antecedente = $_POST['Descripcion'] ?? null;
+    $antecedente = $_POST['antecedentes'] ?? null;
 
     $orbitaCejas = $_POST['orbitaCejas'] ?? null;
     $parpadosPestanas = $_POST['parpadosPestanas'] ?? null;
