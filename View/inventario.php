@@ -85,9 +85,9 @@ $productosBajos = array_filter($listaProductos, function ($producto) {
 
         <!-- TÍTULO + BOTÓN -->
 
-        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div class="inventario-header mb-4">
 
-            <div>
+            <div class="inventario-header-center">
                 <h2 class="section-title mb-1">Inventario de Productos</h2>
 
                 <p class="text-muted mb-0 small">
@@ -95,12 +95,14 @@ $productosBajos = array_filter($listaProductos, function ($producto) {
                 </p>
             </div>
 
-            <a href="agregarProducto.php"
-                class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2">
+            <div class="inventario-header-action">
+                <a href="agregarProducto.php"
+                    class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2">
 
-                <i class="bi bi-plus-circle"></i> Agregar Producto
+                    <i class="bi bi-plus-circle"></i> Agregar Producto
 
-            </a>
+                </a>
+            </div>
 
         </div>
 
