@@ -1339,6 +1339,17 @@ a.btn-inv-ghost:hover {
   box-shadow: 0 10px 25px rgba(30, 58, 138, 0.15);
 }
 
+.cierre-header {
+  text-align: center;
+}
+
+.cierre-chip-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
 .resumen-label {
   display: block;
   font-size: 0.75rem;
