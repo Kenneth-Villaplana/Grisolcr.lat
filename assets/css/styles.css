@@ -5158,10 +5158,10 @@ canvas {
 
 
 .expediente-section-card {
-  background: #ffffff;
+  background: transparent;
   border-radius: 18px;
-  padding: 25px 28px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  box-shadow: none;
   margin-bottom: 25px;
 }
 
