@@ -23,7 +23,7 @@ require_once __DIR__ . '/layout.php';
                 Historia Clínica de Optometría
             </h2>
 
-            <a href="historialExpedientes.php" class="btn btn-back-custom-exp d-flex align-items-center gap-2">
+            <a href="historialExpedientes.php" class="btn btn-back-modern-exp d-flex align-items-center gap-2">
                 <i data-lucide="arrow-left"></i> Volver
             </a>
 
