@@ -47,7 +47,7 @@ include('layout.php');
 
                                 <!-- Facturas -->
                                 <div class="col-lg-4 col-md-6">
-                                    <div class="border rounded-4 p-3 h-100 card-facturas">
+                                    <div class="border rounded-4 p-3 card-facturas">
                                         <div class="text-muted small">Facturas</div>
                                         <div class="fs-4 fw-bold" id="cc-cantidad">0</div>
                                         <div class="text-muted small mt-2">Total facturado</div>
@@ -57,7 +57,7 @@ include('layout.php');
 
                                 <!-- Cobros -->
                                 <div class="col-lg-4 col-md-6">
-                                    <div class="border rounded-4 p-3 h-100 shadow-sm card-cobros">
+                                    <div class="border rounded-4 p-3 shadow-sm card-cobros">
                                         <div class="text-muted small">Cobros (incluye abonos)</div>
                                         <div class="fs-5 fw-semibold">₡<span id="cc-cobros">0.00</span></div>
                                     </div>
@@ -66,23 +66,23 @@ include('layout.php');
                                 <!-- Totales -->
                                 <div class="col-lg-4 col-md-12">
                                     <div
-                                        class="border rounded-4 p-3 h-100 shadow-sm card-totales d-flex flex-column justify-content-between">
+                                        class="border rounded-4 p-3 shadow-sm card-totales d-flex flex-column justify-content-between">
                                         <div>
-                                            <div class="d-flex justify-content-between">
+                                            <div class="d-flex justify-content-between mb-1">
                                                 <span class="text-muted">Subtotal</span>
                                                 <span class="fw-semibold">₡<span id="cc-subtotal">0.00</span></span>
                                             </div>
-                                            <div class="d-flex justify-content-between">
+                                            <div class="d-flex justify-content-between mb-1">
                                                 <span class="text-muted">Descuento</span>
                                                 <span class="fw-semibold">-₡<span id="cc-descuento">0.00</span></span>
                                             </div>
-                                            <div class="d-flex justify-content-between">
+                                            <div class="d-flex justify-content-between mb-1">
                                                 <span class="text-muted">IVA</span>
                                                 <span class="fw-semibold">₡<span id="cc-iva">0.00</span></span>
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-between border-top pt-2 mt-3">
+                                        <div class="d-flex justify-content-between border-top pt-2 mt-2">
                                             <span class="fw-bold">Total</span>
                                             <span class="fw-bold">₡<span id="cc-total">0.00</span></span>
                                         </div>

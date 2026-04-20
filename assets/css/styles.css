@@ -1020,34 +1020,25 @@ a.btn-inv-ghost:hover {
   border-radius: 18px !important;
   border: none !important;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05) !important;
-  padding: 0.75rem 0.9rem !important;
-  min-height: 110px;
+  padding: 0.8rem 1rem !important;
+  min-height: 150px;
+}
+
+/* Para que los 3 se vean compactos y parejos */
+.card-facturas,
+.card-cobros {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.card-facturas small,
-.card-cobros small,
-.card-totales small {
-  font-size: 0.85rem;
-  margin-bottom: 2px;
-}
-
-#cc-cantidad {
-  font-size: 1.2rem;
-}
-
-#cc-total-facturado,
-#cc-cobros,
-#cc-total {
-  font-size: 1.25rem;
-}
-
 .card-totales {
-  gap: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+/* Fondos */
 .card-facturas {
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
   border-left: 6px solid #2563eb !important;
@@ -1063,19 +1054,29 @@ a.btn-inv-ghost:hover {
   border-left: 6px solid #d97706 !important;
 }
 
+/* Textos pequeños */
+.card-facturas .small,
+.card-cobros .small,
+.card-totales .small,
+.card-totales .text-muted {
+  font-size: 0.9rem;
+}
+
 /* Montos */
 #cc-cantidad {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #1f2937;
+  line-height: 1.1;
 }
 
 #cc-total-facturado,
 #cc-cobros,
 #cc-total {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #1f3f97;
+  line-height: 1.1;
 }
 
 /* Paneles inferiores */
@@ -1203,6 +1204,9 @@ a.btn-inv-ghost:hover {
     min-height: auto;
   }
 }
+/* 
+   HASTA AQUI CIERRE DE CAJA 
+*/
 
 /* 
    HISTORIAL CIERRE DE CAJA
