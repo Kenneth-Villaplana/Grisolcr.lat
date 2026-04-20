@@ -1568,6 +1568,9 @@ a.btn-inv-ghost:hover {
   height: 100%;
 }
 
+.pv-header-center {
+  text-align: center;
+}
 
 .pv-products .card:hover {
   transform: translateY(-3px);
