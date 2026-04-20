@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/seguridad.php';
+
 include('layout.php');
 require_once __DIR__ . '/../Controller/recetaController.php';
 

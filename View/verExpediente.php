@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/seguridad.php';
+
 include('layout.php');
 include('../Model/baseDatos.php');
 

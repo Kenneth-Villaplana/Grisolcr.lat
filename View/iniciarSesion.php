@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/seguridad.php';
+
 if(session_status() == PHP_SESSION_NONE) { session_start(); }
 include_once 'layout.php';
 include_once __DIR__ . '/../Controller/loginController.php';

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/seguridad.php';
+
 session_start();
 $historial = $_SESSION['historialClinico'] ?? [];
 $sinExpedientes = empty($historial);
