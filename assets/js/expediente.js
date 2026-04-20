@@ -17,7 +17,7 @@ function mostrarMensaje(mensaje, tipo = "info", extraHTML = "") {
 
     setTimeout(() => {
         if (contenedor) contenedor.innerHTML = "";
-    }, 4000);
+    }, 8000);
 }
 
 //solo para errores criticos
