@@ -1213,6 +1213,20 @@ a.btn-inv-ghost:hover {
     min-height: auto;
   }
 }
+
+.cc-alerta-cierre {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-left: 4px solid #f59e0b;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: #92400e;
+}
+
 /* 
    HASTA AQUI CIERRE DE CAJA 
 */

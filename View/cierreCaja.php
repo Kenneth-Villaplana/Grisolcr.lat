@@ -123,6 +123,11 @@ include('layout.php');
                                             <span class="fw-bold">Efectivo esperado</span>
                                             <span class="fw-bold">₡<span id="cc-efectivo-esperado">0.00</span></span>
                                         </div>
+
+                                        <div class="cc-alerta-cierre mt-2">
+                                            ⚠️ Una vez realizado el cierre de caja, no se podrán registrar más ventas en
+                                            el día.
+                                        </div>
                                     </div>
                                 </div>
 
