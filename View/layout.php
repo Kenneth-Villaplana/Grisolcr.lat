@@ -2,7 +2,10 @@
 require_once __DIR__ . '/../assets/helpers/seguridad.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+
 }
+
+validarAccesoAutomatico();
 
 function MostrarMenu() {
     $rol = $_SESSION['RolID'] ?? null;

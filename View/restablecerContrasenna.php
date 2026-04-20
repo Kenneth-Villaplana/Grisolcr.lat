@@ -1,6 +1,6 @@
 <?php
 
-include_once('layout.php');
+require_once __DIR__ . '/layout.php';
 include_once __DIR__ . '/../Model/recuperarModel.php';
 
 if (session_status() == PHP_SESSION_NONE) {

@@ -1,6 +1,7 @@
 <?php
-
+require_once __DIR__ . '/layout.php';
 session_start();
+
 $historial = $_SESSION['historialClinico'] ?? [];
 $sinExpedientes = empty($historial);
 ?>

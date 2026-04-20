@@ -1,6 +1,6 @@
 <?php
 
-include('layout.php');
+require_once __DIR__ . '/layout.php';
 include_once __DIR__ . '/../Controller/puntoVentaController.php';
 
 $controller = new PuntoVentaController();

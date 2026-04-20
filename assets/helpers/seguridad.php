@@ -4,19 +4,42 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+/*  Roles del sistema:
+- $_SESSION['RolID'] = 'Paciente' o 'Empleado'
+- $_SESSION['EmpleadoRol']:
+    1 = Administrador
+    2 = Asistente
+    3 = Doctor
+    4 = Cajero
+*/
 function obtenerPermisosVista() {
     return array(
 
-        // Públicas
-        'index.php' => array('publico' => true),
-        'about.php' => array('publico' => true),
-        'anteojos.php' => array('publico' => true),
-        'iniciarSesion.php' => array('publico' => true),
+        /*publicas*/
+        'index.php'            => array('publico' => true),
+        'about.php'            => array('publico' => true),
+        'anteojos.php'         => array('publico' => true),
+        'iniciarSesion.php'    => array('publico' => true),
+        'registrarPaciente.php'=> array('publico' => true),
+        'recuperarCuenta.php'  => array('publico' => true),
 
-        // Paciente
+        /*cualquier usuario logeado*/
+        'editarPerfil.php' => array('auth' => true),
+
+        /*
+        Paciente
+         Menúl:
+         - agendarCita.php
+         - editarCita.php
+         - misRecetas.php
+        
+         Internas:
+         - verReceta.php (desde misRecetas)
+        */
         'agendarCita.php' => array(
             'roles' => array(
-                array('RolID' => 'Paciente')
+                array('RolID' => 'Paciente'),
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 3, 4))
             )
         ),
         'editarCita.php' => array(
@@ -36,20 +59,67 @@ function obtenerPermisosVista() {
             )
         ),
 
-        // Cualquier usuario logueado
-        'editarPerfil.php' => array('auth' => true),
-
-        // Empleados caja / administración
-        'reportes.php' => array(
+        /*
+        Personal
+         Menú:
+        - personal.php (solo admin)
+        
+         Internas:
+         - agregarPersonal.php
+         - editarPersonal.php
+        */
+        'personal.php' => array(
             'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
             )
         ),
+        'agregarPersonal.php' => array(
+            'roles' => array(
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
+            )
+        ),
+        'editarPersonal.php' => array(
+            'roles' => array(
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
+            )
+        ),
+
+        /*
+        inventario
+         Menú:
+         - inventario.php (admin, asistente, cajero)
+        
+         Internas:
+         - agregarProducto.php
+         - editarProducto.php
+        */
         'inventario.php' => array(
             'roles' => array(
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
             )
         ),
+        'agregarProducto.php' => array(
+            'roles' => array(
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
+            )
+        ),
+        'editarProducto.php' => array(
+            'roles' => array(
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
+            )
+        ),
+
+        /*
+        Facturacion
+         Menú:
+         - facturacion.php (admin, asistente, cajero)
+         - historialCierreCaja.php (admin, asistente, cajero)
+        
+         Internas:
+         - puntoVenta.php
+        - cierreCaja.php
+        - registrarClientePOS.php
+        */
         'facturacion.php' => array(
             'roles' => array(
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
@@ -70,23 +140,25 @@ function obtenerPermisosVista() {
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
             )
         ),
-        'registrarClientePOS.php' => array(
-            'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
-            )
-        ),
-        'editarProducto.php' => array(
-            'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
-            )
-        ),
-        'agregarProducto.php' => array(
-            'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
-            )
-        ),
 
-        // Expedientes
+        /*
+        Historial de expedientes
+         Menú:
+         - historialExpedientes.php
+           Doctor: aparece en menú
+           Admin/Asistente/Cajero: también aparece en menú
+        
+         Internas:
+        - expedienteDigital.php
+        - historialExpedientePaciente.php
+        - registrarClientePOS.php
+         - recetaParaDoctor.php
+        
+        
+        registrarClientePOS.php aparece también desde facturación.
+         unión de permisos necesarios:
+         admin, asistente, doctor, cajero.
+        */
         'historialExpedientes.php' => array(
             'roles' => array(
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 3, 4))
@@ -99,111 +171,133 @@ function obtenerPermisosVista() {
         ),
         'expedienteDigital.php' => array(
             'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(3))
-            )
-        ),
-        'verExpediente.php' => array(
-            'roles' => array(
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 3, 4))
             )
         ),
         'recetaParaDoctor.php' => array(
             'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(3))
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 3, 4))
+            )
+        ),
+        'registrarClientePOS.php' => array(
+            'roles' => array(
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 3, 4))
             )
         ),
 
-        // Personal
-        'personal.php' => array(
+        /*
+        Reportes
+        - reportes.php (admin, asistente, cajero)
+        */
+        'reportes.php' => array(
             'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
-            )
-        ),
-        'editarPersonal.php' => array(
-            'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
-            )
-        ),
-        'agregarPersonal.php' => array(
-            'roles' => array(
-                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 4))
             )
         ),
     );
 }
 
+/* obtiene el nombre del archivo actual que se está ejecutando
+   usa la url (request_uri) y elimina cualquier parámetro
+   ejemplo: /view/facturacion.php?id=1 -> facturacion.php */
 function obtenerVistaActual() {
-    return basename($_SERVER['PHP_SELF']);
+    return basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 }
+
 
 function usuarioAutenticado() {
-    return !empty($_SESSION['RolID']);
+    return isset($_SESSION['RolID']) && !empty($_SESSION['RolID']);
 }
 
+/* valida si el usuario cumple con alguna regla de acceso por rol
+   recibe un arreglo de reglas definidas en seguridad.php */
 function usuarioTienePermisoPorRol($reglas) {
-    $rolID = isset($_SESSION['RolID']) ? $_SESSION['RolID'] : null;
-    $empleadoRol = isset($_SESSION['EmpleadoRol']) ? (int)$_SESSION['EmpleadoRol'] : null;
 
+    /* obtiene el rol general (paciente o empleado) */
+    $rol = isset($_SESSION['RolID']) ? $_SESSION['RolID'] : null;
+
+    /* obtiene el rol específico de empleado (1,2,3,4) */
+    $empleadoRol = isset($_SESSION['EmpleadoRol']) ? (int) $_SESSION['EmpleadoRol'] : null;
+
+    /* recorre todas las reglas permitidas */
     foreach ($reglas as $regla) {
+
+        /* si la regla no tiene rol definido, la ignora */
         if (!isset($regla['RolID'])) {
             continue;
         }
 
-        if ($regla['RolID'] !== $rolID) {
+        /* si el rol no coincide, pasa a la siguiente regla */
+        if ($regla['RolID'] !== $rol) {
             continue;
         }
 
+        /* si la regla solo pide rol entonces permite acceso */
         if (!isset($regla['EmpleadoRol'])) {
             return true;
         }
 
-        $rolesPermitidos = (array)$regla['EmpleadoRol'];
-
-        if ($rolID === 'Empleado' && in_array($empleadoRol, $rolesPermitidos, true)) {
+        /* si es empleado, valida si su rol específico está dentro de los permitidos */
+        if ($rol === 'Empleado' && in_array($empleadoRol, $regla['EmpleadoRol'], true)) {
             return true;
         }
     }
 
+    /* si ninguna regla coincide, no tiene permiso */
+    return false;
+}
+
+
+function usuarioPuedeVerVista($vista) {
+
+    /* obtiene todas las reglas de acceso */
+    $permisos = obtenerPermisosVista();
+
+    /* si la vista no está registrada, se bloquea */
+    if (!isset($permisos[$vista])) {
+        return false;
+    }
+
+    $config = $permisos[$vista];
+
+    /* si es pública, cualquiera puede entrar */
+    if (!empty($config['publico'])) {
+        return true;
+    }
+
+    /* si requiere solo login, valida que tenga sesión */
+    if (!empty($config['auth'])) {
+        return usuarioAutenticado();
+    }
+
+    /* si requiere roles específicos */
+    if (!empty($config['roles'])) {
+
+        /* si no hay sesión, no puede entrar */
+        if (!usuarioAutenticado()) {
+            return false;
+        }
+
+        /* valida si cumple con los roles definidos */
+        return usuarioTienePermisoPorRol($config['roles']);
+    }
+
+    /* si no cumple ninguna condición se bloquea */
     return false;
 }
 
 function validarAccesoAutomatico() {
+
+    /* obtiene el archivo actual */
     $vistaActual = obtenerVistaActual();
-    $permisos = obtenerPermisosVista();
 
-    if (!array_key_exists($vistaActual, $permisos)) {
-        mostrarAccesoDenegado('Vista no registrada en la política de seguridad.');
+    /* si el usuario no tiene permiso, muestra error 403 */
+    if (!usuarioPuedeVerVista($vistaActual)) {
+        mostrarAccesoDenegado();
     }
-
-    $config = $permisos[$vistaActual];
-
-    if (!empty($config['publico'])) {
-        return;
-    }
-
-    if (!empty($config['auth'])) {
-        if (!usuarioAutenticado()) {
-            mostrarAccesoDenegado('Debes iniciar sesión para acceder a esta página.');
-        }
-        return;
-    }
-
-    if (!empty($config['roles'])) {
-        if (!usuarioAutenticado()) {
-            mostrarAccesoDenegado('Debes iniciar sesión para acceder a esta página.');
-        }
-
-        if (!usuarioTienePermisoPorRol($config['roles'])) {
-            mostrarAccesoDenegado('No tienes permisos para acceder a esta página.');
-        }
-
-        return;
-    }
-
-    mostrarAccesoDenegado('Configuración de seguridad inválida.');
 }
 
-function mostrarAccesoDenegado($motivo = 'Acceso no autorizado.') {
+function mostrarAccesoDenegado() {
     http_response_code(403);
 
     echo '
@@ -214,9 +308,10 @@ function mostrarAccesoDenegado($motivo = 'Acceso no autorizado.') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>403 - Acceso denegado</title>
         <style>
+            *{box-sizing:border-box}
             body{
                 margin:0;
-                font-family:Arial,sans-serif;
+                font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
                 background:#f1f5f9;
                 min-height:100vh;
                 display:flex;
@@ -235,7 +330,7 @@ function mostrarAccesoDenegado($motivo = 'Acceso no autorizado.') {
             }
             .code{
                 font-size:56px;
-                font-weight:bold;
+                font-weight:700;
                 color:#dc2626;
                 margin-bottom:10px;
             }
@@ -263,7 +358,6 @@ function mostrarAccesoDenegado($motivo = 'Acceso no autorizado.') {
             <div class="code">403</div>
             <h1>Acceso denegado</h1>
             <p>No tienes permisos para acceder a esta página.</p>
-            <p>' . htmlspecialchars($motivo, ENT_QUOTES, 'UTF-8') . '</p>
             <a href="/index.php">Ir al inicio</a>
         </div>
     </body>
@@ -271,6 +365,4 @@ function mostrarAccesoDenegado($motivo = 'Acceso no autorizado.') {
     ';
     exit;
 }
-
-validarAccesoAutomatico();
 ?>

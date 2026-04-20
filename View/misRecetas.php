@@ -1,6 +1,6 @@
 <?php
 
-include('layout.php');
+require_once __DIR__ . '/layout.php';
 require_once __DIR__ . '/../Controller/recetaController.php';
 
 if (session_status() === PHP_SESSION_NONE) {

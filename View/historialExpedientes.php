@@ -1,6 +1,5 @@
 <?php
-
-include('layout.php');
+require_once __DIR__ . '/layout.php';
 
 if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
     echo '<div class="alert alert-success text-center">El expediente se ha creado correctamente.</div>';

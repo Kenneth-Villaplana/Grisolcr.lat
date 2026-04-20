@@ -2,7 +2,7 @@
 session_start();
 
 require_once __DIR__ . '/../Controller/usuarioController.php';
-include('layout.php');
+require_once __DIR__ . '/layout.php';
 ?>
 
 <!DOCTYPE html>

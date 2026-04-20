@@ -1,6 +1,6 @@
 <?php
 
-include('layout.php');
+require_once __DIR__ . '/layout.php';
 include('../Model/baseDatos.php');
 
 $expedienteId = $_GET['ExpedienteId'] ?? null;
