@@ -948,7 +948,7 @@ a.btn-inv-ghost:hover {
 ===================================== */
 
 .pv-wrapper {
-  background: linear-gradient(180deg, #f9fbff 0%, #edf3fb 55%, #e8f0fa 100%);
+  background: linear-gradient(180deg, #f9fbff 0%, #edf3fb 55%, #e8f0fa 100%) !important;
   min-height: 100vh;
   padding: 24px;
 }
@@ -1236,7 +1236,7 @@ a.btn-inv-ghost:hover {
 
   .pv-wrapper {
     padding: 14px;
-    background: #eef2f7;
+    background: #eef2f7 !important;
   }
 
   .card-facturas,
