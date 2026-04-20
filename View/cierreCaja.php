@@ -126,7 +126,7 @@ include('layout.php');
 
                                         <div class="cc-alerta-cierre mt-2 alerta-bottom">
                                             ⚠️ Una vez realizado el cierre de caja, no se podrán registrar más ventas en
-                                            el día.
+                                            el día. Solo se podrá hacer un cierre por día, así que asegúrese de que toda la información esté correcta antes de proceder.
                                         </div>
                                     </div>
                                 </div>
