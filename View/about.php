@@ -1,4 +1,6 @@
-<?php include('layout.php'); ?>
+<?php 
+require_once __DIR__ . '/seguridad.php';
+include('layout.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">

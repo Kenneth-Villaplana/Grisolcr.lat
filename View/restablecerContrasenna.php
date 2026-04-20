@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/seguridad.php';
 include_once('layout.php');
 include_once __DIR__ . '/../Model/recuperarModel.php';
 

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/seguridad.php';
 require_once __DIR__ . '/layout.php';
 require_once __DIR__ . '/../Controller/facturacionController.php';
 require_once __DIR__ . '/../Controller/puntoVentaController.php';
