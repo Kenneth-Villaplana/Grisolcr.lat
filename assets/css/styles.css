@@ -4379,6 +4379,30 @@ select.input-modern {
 .inventario-header .section-title::after {
   display: none;
 }
+
+.inventario-header,
+.inventario-header-center,
+.inventario-header .section-title {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.inventario-header::before,
+.inventario-header::after,
+.inventario-header-center::before,
+.inventario-header-center::after,
+.inventario-header .section-title::before,
+.inventario-header .section-title::after {
+  content: none !important;
+  display: none !important;
+}
+
+.inventario-header .section-title {
+  display: inline-block !important;
+  padding: 0 !important;
+  margin: 0 0 4px 0 !important;
+}
 /*termina vista*/
 
 /*editarinvenario*/
