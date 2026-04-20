@@ -3340,9 +3340,16 @@ footer {
   pointer-events: none;
 }
 
+/* header */
+.staff-card-header {
+  position: relative;
+  z-index: 2;
+}
+
 /* header del card */
 .staff-card-header h5 {
   color: #0f172a;
+  
 }
 
 .staff-chip-count {
@@ -3382,7 +3389,7 @@ footer {
 
 .staff-table thead th {
   border-bottom: 1px solid #e5e7eb;
-  padding: 12px 12px;
+  padding: 12px;
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -3407,6 +3414,7 @@ footer {
 .staff-table tbody td {
   padding: 11px 12px;
   border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
 }
 
 
@@ -3426,6 +3434,8 @@ footer {
 .staff-name {
   font-weight: 600;
   color: #0f172a;
+  white-space: normal;
+  line-height: 1.3;
 }
 
 .staff-text-muted {
@@ -3454,6 +3464,7 @@ footer {
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .status-dot {
@@ -3495,6 +3506,13 @@ footer {
   .staff-filters-card {
     padding: 16px 16px;
   }
+  .staff-col-email,
+  .staff-col-address {
+    max-width: 140px;
+  }
+   .staff-col-name {
+    max-width: 170px;
+  }
 }
 
 .body-fullscreen {
@@ -3511,8 +3529,17 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .staff-table {
+    min-width: 900px;
+  }
+
   .staff-table thead {
     font-size: 0.7rem;
+  }
+
+  .staff-table th:last-child,
+  .staff-table td:last-child {
+    background: #ffffff;
   }
 }
 
