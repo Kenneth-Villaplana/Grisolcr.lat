@@ -5487,6 +5487,14 @@ table.hc-table tbody tr td.acciones-col {
 /**/
 
 /*recuperar contraseña*/
+.editar-section-pass {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 40px 20px;
+}
 .reset-card {
   background: #ffffff;
   border-radius: 20px;

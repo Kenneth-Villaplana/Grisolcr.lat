@@ -14,7 +14,7 @@ include('layout.php');
 
 <?php MostrarMenu(); ?>
 
-<section class="editar-section d-flex align-items-center justify-content-center py-5 my-5">
+<section class="editar-section-pass d-flex align-items-center justify-content-center py-5 my-5">
     <div class="container">
 
         <div class="row justify-content-center mb-3">
