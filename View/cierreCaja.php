@@ -43,7 +43,7 @@ include('layout.php');
                         </div>
 
                         <div class="card-body pt-0">
-                            <div class="row g-2">
+                            <div class="row g-2 align-items-start">
 
                                 <!-- Facturas -->
                                 <div class="col-lg-4 col-md-6">
