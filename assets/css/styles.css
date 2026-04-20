@@ -309,11 +309,33 @@ input[type=number]::-webkit-outer-spin-button {
 
 .facturacion-header {
   position: relative;
+  min-height: 70px;
 }
 
+
 .facturacion-header-center {
-  flex: 1;
   text-align: center;
+}
+
+.facturacion-header-action {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .facturacion-header {
+    min-height: auto;
+  }
+
+  .facturacion-header-action {
+    position: static;
+    transform: none;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 /* ============================
