@@ -4351,6 +4351,11 @@ select.input-modern {
   }
 }
 
+.inventario-header {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /*termina vista*/
 
 /*editarinvenario*/
