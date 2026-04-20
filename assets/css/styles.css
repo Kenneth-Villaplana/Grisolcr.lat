@@ -4134,7 +4134,7 @@ select.input-modern {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
 
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid transparent;
 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
