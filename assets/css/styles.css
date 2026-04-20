@@ -5242,16 +5242,16 @@ canvas {
   font-size: 1.8rem;
 }
 
-.btn-back-modern {
+.btn-back-modern-exp {
   border-radius: 30px;
   border: 1px solid #cbd5e1;
   background: #fff;
   padding: 8px 20px;
-  color: #1e293b;
+  color: #ffffff;
   transition: 0.25s ease;
 }
 
-.btn-back-modern:hover {
+.btn-back-modern-exp:hover {
   background: #f3f4f6;
   transform: translateY(-2px);
 }
