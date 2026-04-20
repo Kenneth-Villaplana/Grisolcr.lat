@@ -4375,6 +4375,19 @@ select.input-modern {
   }
 }
 
+.inventario-header {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.inventario-header .section-title {
+  border: none;
+  box-shadow: none;
+}
+
+.inventario-header .section-title::after {
+  display: none;
+}
 /*termina vista*/
 
 /*editarinvenario*/
