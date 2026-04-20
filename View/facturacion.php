@@ -27,7 +27,7 @@ $controller = new PuntoVentaController();
       <!-- TÍTULO + NUEVA FACTURA -->
       <div class="facturacion-header mb-4">
         <div class="facturacion-header-center">
-          <h2 class="mb-1 titulo-facturacion">Historial de Facturación</h2>
+          <h2 class="mb-1 titulo-facturacion">Facturación</h2>
           <span class="text-muted small d-block">Consulta, gestiona y administra las facturas.</span>
         </div>
 

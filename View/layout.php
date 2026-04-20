@@ -75,7 +75,7 @@ function MostrarMenu() {
             echo '
                 <li><a class="dropdown-item" href="/View/reportes.php">Reportes</a></li>
                 <li><a class="dropdown-item" href="/View/inventario.php">Inventario</a></li>
-                <li><a class="dropdown-item" href="/View/facturacion.php">Historial de Facturación</a></li>
+                <li><a class="dropdown-item" href="/View/facturacion.php">Facturación</a></li>
                 <li><a class="dropdown-item" href="/View/historialCierreCaja.php">Historial Cierre de Caja</a></li>
                 <li><a class="dropdown-item" href="/View/historialExpedientes.php">Historial de Expedientes</a></li>
                 <li><a class="dropdown-item" href="/View/editarCita.php">Manipular Citas</a></li>';
