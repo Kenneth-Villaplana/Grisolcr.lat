@@ -1036,6 +1036,15 @@ a.btn-inv-ghost:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 2px;
+}
+
+.card-totales hr {
+  margin: 6px 0;
+}
+
+.card-totales span {
+  line-height: 1.1;
 }
 
 /* Fondos */

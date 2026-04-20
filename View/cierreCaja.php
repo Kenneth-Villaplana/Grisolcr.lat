@@ -68,21 +68,21 @@ include('layout.php');
                                     <div
                                         class="border rounded-4 p-3 shadow-sm card-totales d-flex flex-column justify-content-between">
                                         <div>
-                                            <div class="d-flex justify-content-between mb-1">
+                                            <div class="d-flex justify-content-between small mb-1">
                                                 <span class="text-muted">Subtotal</span>
                                                 <span class="fw-semibold">₡<span id="cc-subtotal">0.00</span></span>
                                             </div>
-                                            <div class="d-flex justify-content-between mb-1">
+                                            <div class="d-flex justify-content-between small mb-1">
                                                 <span class="text-muted">Descuento</span>
                                                 <span class="fw-semibold">-₡<span id="cc-descuento">0.00</span></span>
                                             </div>
-                                            <div class="d-flex justify-content-between mb-1">
+                                            <div class="d-flex justify-content-between small mb-1">
                                                 <span class="text-muted">IVA</span>
                                                 <span class="fw-semibold">₡<span id="cc-iva">0.00</span></span>
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-between border-top pt-2 mt-2">
+                                        <div class="d-flex justify-content-between border-top pt-1 mt-1">
                                             <span class="fw-bold">Total</span>
                                             <span class="fw-bold">₡<span id="cc-total">0.00</span></span>
                                         </div>
