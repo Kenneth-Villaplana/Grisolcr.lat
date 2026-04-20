@@ -3360,6 +3360,10 @@ footer {
 .staff-table-responsive {
   position: relative;
   z-index: 2;
+   width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
 }
 
 .staff-table {
@@ -3367,6 +3371,8 @@ footer {
   border-spacing: 0;
   width: 100%;
   font-size: 0.93rem;
+   min-width: 100%;
+  table-layout: auto;
   color: #111827;
 }
 
