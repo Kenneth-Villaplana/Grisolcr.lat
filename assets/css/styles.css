@@ -1227,6 +1227,10 @@ a.btn-inv-ghost:hover {
   color: #92400e;
 }
 
+.alerta-bottom {
+  margin-top: auto;
+}
+
 /* 
    HASTA AQUI CIERRE DE CAJA 
 */

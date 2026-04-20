@@ -97,7 +97,7 @@ include('layout.php');
 
                                 <!-- IZQUIERDA -->
                                 <div class="col-lg-7">
-                                    <div class="cc-metodos-box">
+                                    <div class="cc-metodos-box h-100 d-flex flex-column">
                                         <div class="text-muted small mb-3">Desglose por método</div>
 
                                         <div class="d-flex justify-content-between mb-2">
@@ -124,7 +124,7 @@ include('layout.php');
                                             <span class="fw-bold">₡<span id="cc-efectivo-esperado">0.00</span></span>
                                         </div>
 
-                                        <div class="cc-alerta-cierre mt-2">
+                                        <div class="cc-alerta-cierre mt-2 alerta-bottom">
                                             ⚠️ Una vez realizado el cierre de caja, no se podrán registrar más ventas en
                                             el día.
                                         </div>
