@@ -5247,7 +5247,7 @@ canvas {
   border: 1px solid #cbd5e1;
   background: #fff;
   padding: 8px 20px;
-  color: #1e293b;
+  color: #ffffff !important;
   transition: 0.25s ease;
 }
 
