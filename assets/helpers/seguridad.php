@@ -65,7 +65,7 @@ function obtenerPermisosVista() {
         - personal.php (solo admin)
         
          Internas:
-         - agregarPersonal.php
+         - registrarPersonal.php
          - editarPersonal.php
         */
         'personal.php' => array(
@@ -73,7 +73,7 @@ function obtenerPermisosVista() {
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
             )
         ),
-        'agregarPersonal.php' => array(
+        'registrarPersonal.php' => array(
             'roles' => array(
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1))
             )
