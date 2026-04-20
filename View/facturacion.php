@@ -24,20 +24,20 @@ $controller = new PuntoVentaController();
   <div class="facturacion-card shadow-lg rounded-4 p-4 p-md-5">
 
     <!-- TÍTULO + NUEVA FACTURA -->
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-      <div>
-        <h2 class="mb-1 titulo-facturacion">Facturación</h2>
-        <span class="text-muted small">Consulta, gestiona y administra las facturas.</span>
-      </div>
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 facturacion-header">
+  <div class="facturacion-header-center">
+    <h2 class="mb-1 titulo-facturacion">Facturación</h2>
+    <span class="text-muted small d-block">Consulta, gestiona y administra las facturas.</span>
+  </div>
 
-      <div>
-        <a href="puntoVenta.php"
-           class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2 justify-content-center">
-                <i class="bi bi-plus-circle"></i>
-                <span>Nueva factura</span>
-        </a>
-      </div>
-    </div>
+  <div>
+    <a href="puntoVenta.php"
+       class="btn btn-staff-outline rounded-pill d-flex align-items-center gap-2 px-4 py-2 justify-content-center">
+        <i class="bi bi-plus-circle"></i>
+        <span>Nueva factura</span>
+    </a>
+  </div>
+</div>
 
     <!-- FILTROS -->
     <div class="filter-card shadow-sm rounded-4 mb-4">
