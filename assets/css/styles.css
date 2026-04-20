@@ -4361,6 +4361,14 @@ select.input-modern {
   box-shadow: none !important;
 }
 
+.inventario-header .section-title {
+  border: none;
+  box-shadow: none;
+}
+
+.inventario-header .section-title::after {
+  display: none;
+}
 /*termina vista*/
 
 /*editarinvenario*/
