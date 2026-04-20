@@ -4082,6 +4082,12 @@ select.input-modern {
   padding-bottom: 20px;
 }
 
+.inventario-wrapper .expediente-section-card {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
 /* Aviso inventario bajo */
 .inventario-low-title {
   border-radius: 999px;
@@ -5158,10 +5164,10 @@ canvas {
 
 
 .expediente-section-card {
-  background: transparent;
+  background: #ffffff;
   border-radius: 18px;
-  padding: 0;
-  box-shadow: none;
+  padding: 25px 28px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   margin-bottom: 25px;
 }
 
