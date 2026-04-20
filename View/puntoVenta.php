@@ -21,7 +21,7 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 <body>
     <?php MostrarMenu(); ?>
 
-    <main class="container-fluid py-5 pv-wrapper ">
+    <main class="container py-5 pv-wrapper ">
 
         <div class=" text-end mt-3">
             <a href="cierreCaja.php" class="btn  btn-back-custom">

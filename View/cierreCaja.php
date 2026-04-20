@@ -16,7 +16,7 @@ require_once __DIR__ . '/layout.php';
 <body>
     <?php MostrarMenu(); ?>
 
-    <main class="container-fluid py-5 pv-wrapper">
+    <main class="container py-5 pv-wrapper">
 
         <!-- Botón arriba a la derecha -->
         <div class="d-flex justify-content-end mt-3 mb-2">
