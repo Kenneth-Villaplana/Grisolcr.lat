@@ -2632,20 +2632,19 @@ footer {
 }
 
 .about-title {
-  font-size: clamp(2.2rem, 3vw + 1rem, 3.3rem);
+  font-size: clamp(2rem, 2.5vw + 0.8rem, 2.8rem);
   letter-spacing: .5px;
   color: #f8fafc !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .about-subtitle {
-  max-width: 640px;
+  max-width: 600px;
   margin: 0 auto;
   color: #e2e8f0 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  font-size: 1.05rem;
+  font-size: 0.99rem;
 }
-
 
 .orb {
   position: absolute;
@@ -2653,9 +2652,9 @@ footer {
   filter: blur(60px);
   opacity: .40;
   z-index: 1 !important;
-  /* siempre detrás */
 }
 
+/* azul */
 .orb-1 {
   width: 260px;
   height: 260px;
@@ -2664,6 +2663,7 @@ footer {
   left: -40px;
 }
 
+/* verde */
 .orb-2 {
   width: 200px;
   height: 200px;
@@ -2672,6 +2672,7 @@ footer {
   right: 12%;
 }
 
+/* morado */
 .orb-3 {
   width: 180px;
   height: 180px;
@@ -2901,7 +2902,7 @@ footer {
 }
 
 .catalogo-title {
-  font-size: clamp(2.2rem, 3vw + 1rem, 3.3rem);
+  font-size: clamp(2rem, 2.5vw + 0.8rem, 2.8rem);
   letter-spacing: .5px;
   color: #f8fafc !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
@@ -2914,7 +2915,7 @@ footer {
   margin: 0 auto;
   color: #e2e8f0 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  font-size: 1.05rem;
+  font-size: 0.99rem;
 }
 .orb {
   position: absolute;
