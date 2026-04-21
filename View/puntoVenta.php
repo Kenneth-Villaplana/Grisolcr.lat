@@ -150,7 +150,7 @@ $esExitoSesion = !empty($_SESSION["registroExitoso"]);
                         </div>
                         <div class="mt-2" id="bloqueEfectivo" style="display:none;">
                             <label class="form-label fw-semibold">Efectivo recibido</label>
-                            <input type="number" id="montoEfectivo" class="form-control">
+                            <input type="number" id="montoEfectivo" class="form-control" placeholder="Ingrese el efectivo recibido">
 
                             <small id="cambioTexto" class="text-success fw-semibold d-block mt-1">
                                 Cambio: ₡0.00
