@@ -152,7 +152,7 @@ $productosBajos = array_filter($listaProductos, function ($producto) {
                         Filtrar por ID
                     </label>
 
-                    <input type="text" id="codigoInput" class="form-control inventario-input" placeholder="Ej. 555"
+                    <input type="text" id="codigoInput" class="form-control inventario-input" placeholder="ID del producto"
                         value="<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>">
 
                 </div>
