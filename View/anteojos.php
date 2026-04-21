@@ -94,7 +94,7 @@ $productos = ObtenerProductos();
                     $imgSrc = '/assets/img/' . rawurlencode($img);
                     ?>
 
-                    <div class="col-lg-4 col-md-6 producto-item" data-precio="<?= $p['Precio'] ?>">
+                   <div class="col-6 col-md-6 col-lg-4 producto-item" data-precio="<?= $p['Precio'] ?>">
                     <div class="product-card">
                         <div class="product-img-wrapper">
                             <img src="<?= $imgSrc ?>" 
