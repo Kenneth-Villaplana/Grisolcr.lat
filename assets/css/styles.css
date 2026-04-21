@@ -1724,8 +1724,6 @@ body:has(.pv-wrapper) .pv-wrapper {
   color: white;
 }
 
-
-
 .pv-cart-card {
   border-radius: 22px !important;
   border: 2px solid #e2e8f0;
@@ -1782,10 +1780,12 @@ body:has(.pv-wrapper) .pv-wrapper {
 /* Controles */
 .cart-item-modern .item-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 6px;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow: hidden;
 }
 
 /* Inputs */
@@ -1951,13 +1951,9 @@ select.form-select,
   margin-bottom: 14px;
 }
 
-
-
-.input-descuento {
-  width: 120px !important;
+.cart-item-modern .input-impuesto {
+  width: 88px !important;
 }
-
-
 
 .pos-card {
   max-width: 650px;
@@ -2025,6 +2021,176 @@ select.form-select,
   color: #0d6efd;
 }
 
+/* ===== AJUSTE FINO DEL ITEM DEL CARRITO ===== */
+
+.cart-item-modern {
+  padding: 0.75rem 0.85rem !important;
+}
+
+.cart-item-modern .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 0.55rem;
+}
+
+.cart-item-modern .item-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1e293b;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-modern .delete-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: #dc2626;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.cart-item-modern .item-controls {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cart-item-modern .item-control-cant,
+.cart-item-modern .input-descuento,
+.cart-item-modern .input-impuesto {
+  flex-shrink: 0;
+}
+
+.cart-item-modern .input-group {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+}
+
+.cart-item-modern .input-group-text {
+  background: #f1f5f9 !important;
+  border: none !important;
+  border-right: 1px solid #e5e7eb !important;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #475569;
+  padding: 0.28rem 0.4rem;
+}
+
+.cart-item-modern .form-control {
+  border: none !important;
+  background: #fff;
+  font-size: 0.78rem;
+  padding: 0.22rem 0.3rem;
+  text-align: center;
+  min-width: 0;
+}
+
+.cart-item-modern .item-total {
+  margin-left: auto;
+  min-width: 86px;
+  max-width: 86px;
+  white-space: nowrap;
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  flex-shrink: 0;
+}
+
+/* ===== FIX DEFINITIVO CARRITO ===== */
+
+.cart-item-modern .input-group {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+}
+
+.cart-item-modern .item-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cart-item-modern .item-control-cant {
+  width: 82px !important;
+  flex-shrink: 0;
+}
+
+.cart-item-modern .input-descuento,
+.cart-item-modern .input-impuesto {
+  width: 108px !important;
+  flex-shrink: 0;
+}
+
+.cart-item-modern .input-group-text {
+  white-space: nowrap;
+  font-size: 0.68rem;
+  padding: 0.28rem 0.40rem;
+}
+
+.cart-item-modern .form-control {
+  min-width: 0 !important;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.35rem;
+  text-align: center;
+}
+
+.cart-item-modern .input-descuento .form-control,
+.cart-item-modern .input-impuesto .form-control {
+  width: 34px !important;
+  min-width: 34px !important;
+}
+
+.cart-item-modern .item-total {
+  margin-left: auto;
+  min-width: 92px;
+  white-space: nowrap;
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Anchos específicos para que todo entre en una sola línea */
+.cart-item-modern .item-control-cant {
+  width: 82px !important;
+}
+
+.cart-item-modern .input-descuento {
+  width: 100px !important;
+}
+
+.cart-item-modern .input-impuesto {
+  width: 100px !important;
+}
+
+.cart-item-modern .stock-error {
+  font-size: 0.68rem;
+  line-height: 1.1;
+  margin-left: 6px !important;
+}
+
+.cart-item-modern .input-descuento .form-control,
+.cart-item-modern .input-impuesto .form-control {
+  min-width: 34px;
+}
+
+.cart-item-modern .input-descuento .input-group-text,
+.cart-item-modern .input-impuesto .input-group-text {
+  white-space: nowrap;
+}
 
 /* Inicio*/
 :root {
