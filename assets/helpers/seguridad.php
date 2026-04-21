@@ -22,6 +22,7 @@ function obtenerPermisosVista() {
         'iniciarSesion.php'    => array('publico' => true),
         'registrarPaciente.php'=> array('publico' => true),
         'recuperarCuenta.php'  => array('publico' => true),
+        'restablecerContrasena.php' => array('publico' => true),
 
         /*cualquier usuario logeado*/
         'editarPerfil.php' => array('auth' => true),
@@ -208,10 +209,9 @@ function obtenerPermisosVista() {
    ejemplo: /view/facturacion.php?id=1 -> facturacion.php */
 function obtenerVistaActual() {
     $ruta = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $vista = basename($ruta);
+    $vista = basename(trim($ruta, '/'));
 
-    // Si entra desde el dominio raíz, tratarlo como index.php
-    if (empty($vista) || $vista === '/' || $ruta === '/') {
+    if (empty($vista)) {
         return 'index.php';
     }
 
