@@ -2874,104 +2874,77 @@ footer {
 /**/
 
 /* catalogo de lentes*/
-
 .catalogo-hero {
-  min-height: 42vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 60px 20px;
-  overflow: hidden;
+  min-height: 45vh;
+  padding: 4rem 0;
 
-   background: radial-gradient(circle at top left,
+  background: radial-gradient(circle at top left,
       #0ea5e9 0%,
       #020617 45%,
       #111827 100%);
+
   color: #f1f5f9;
+  position: relative;
+  overflow: hidden;
 }
 
-/* efecto glass suave */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(8px);
-  background: rgba(255,255,255,0.04);
+/* contenido encima */
+.catalogo-hero .container {
+  position: relative;
+  z-index: 3 !important;
 }
 
-/* blobs modernos */
-.catalogo-hero::before,
-.catalogo-hero::after {
-  content: "";
+/* título */
+.catalogo-title {
+  font-size: clamp(2.2rem, 3vw + 1rem, 3.3rem);
+  letter-spacing: .5px;
+  color: #f8fafc !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* subtítulo */
+.catalogo-subtitle {
+  max-width: 640px;
+  margin: 0 auto;
+  color: #e2e8f0 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-size: 1.05rem;
+}
+
+/* ORBS (efecto glow) */
+.orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.25;
-}
-.catalogo-hero::before {
-  width: 300px;
-  height: 300px;
-    content: "";
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(circle at 15% 40%, rgba(14,165,233,0.6), transparent 40%),
-    radial-gradient(circle at 85% 70%, rgba(34,197,94,0.5), transparent 40%),
-    radial-gradient(circle at 90% 20%, rgba(99,102,241,0.5), transparent 40%);
-
-  filter: blur(60px);
-  opacity: 0.6;
-  top: -80px;
-  left: -80px;
+  opacity: .40;
+  z-index: 1 !important;
 }
 
-.catalogo-hero::after {
+/* azul */
+.orb-1 {
   width: 260px;
   height: 260px;
-  background: #6366f1;
-  bottom: -80px;
-  right: -60px;
-   content: "";
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.03);
-}
-.catalogo-hero .hero-content {
-  position: relative;
-  z-index: 2;
+  background: rgba(56, 189, 248, .9);
+  top: -50px;
+  left: -40px;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 720px;
+/* verde */
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  background: rgba(34, 197, 94, .8);
+  bottom: -40px;
+  right: 12%;
 }
 
-.catalogo-hero .container {
-  position: relative;
-  z-index: 2;
-}
-
-.catalogo-title {
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  font-weight: 800;
-  margin-bottom: 12px;
-  letter-spacing: -0.5px;
-  animation: fadeUp 0.8s ease;
-   color: #e2e8f0 !important;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-}
-
-.catalogo-subtitle {
-  font-size: 1.05rem;
-  opacity: 0.9;
-  line-height: 1.6;
-  margin-bottom: 18px;
-   color: #e2e8f0 !important;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+/* morado */
+.orb-3 {
+  width: 180px;
+  height: 180px;
+  background: rgba(129, 140, 248, .8);
+  top: 20%;
+  right: -40px;
 }
 
 /* badges */
