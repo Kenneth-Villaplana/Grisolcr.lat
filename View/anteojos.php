@@ -38,8 +38,8 @@ $productos = ObtenerProductos();
         <div class="catalogo-toolbar">
             <div class="catalogo-toolbar-top">
                 <div>
-                    <h2 class="catalogo-toolbar-title">Catálogo de anteojos</h2>
-                    <p class="catalogo-toolbar-subtitle">Filtra por rango de precio y explora nuestros modelos disponibles.</p>
+                    <h2 class="catalogo-toolbar-title text-center">Catálogo de anteojos</h2>
+                    <p class="catalogo-toolbar-subtitle text-center">Filtra por rango de precio y explora nuestros modelos disponibles.</p>
                 </div>
 
                 <div class="catalogo-resultados">
