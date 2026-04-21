@@ -2198,6 +2198,35 @@ select.form-select,
   width: 108px !important;
 }
 
+.cart-item-modern {
+  overflow: hidden;
+}
+
+.cart-item-modern .item-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.cart-item-modern .item-controls::-webkit-scrollbar {
+  height: 6px;
+}
+
+.cart-item-modern .item-controls::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.cart-item-modern .item-controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* Inicio*/
 :root {
   --brand-blue: #0ea5e9;
