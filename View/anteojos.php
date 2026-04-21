@@ -23,81 +23,84 @@ $productos = ObtenerProductos();
 
 <?php MostrarMenu(); ?>
 
-
 <header class="catalogo-hero d-flex align-items-center text-center">
     <div class="container position-relative">
-        <h1 class="fw-bold catalogo-title">Productos Disponibles</h1>
-        <p class="catalogo-subtitle">Explore nuestra selección de lentes y armazones de alta calidad.</p>
+        <h1 class="catalogo-title">Encuentre sus lentes ideales</h1>
+        <p class="catalogo-subtitle">
+            Descubra nuestra colección de lentes y armazones con diseños modernos, cómodos y elegantes para cada estilo.
+        </p>
     </div>
 </header>
 
-
-<section class="catalogo-section py-5">
+<section class="catalogo-section">
     <div class="container">
 
-        <div class="row g-4">
+        <div class="catalogo-toolbar">
+            <div class="catalogo-toolbar-top">
+                <div>
+                    <h2 class="catalogo-toolbar-title">Catálogo de anteojos</h2>
+                    <p class="catalogo-toolbar-subtitle">Filtra por rango de precio y explora nuestros modelos disponibles.</p>
+                </div>
 
-            
-            <div class="col-lg-3">
-                <div class="filtro-card p-4 shadow-sm">
-                    <h4 class="fw-bold mb-3">Filtrar por precio</h4>
-
-                    <label class="filtro-op">
-                        <input type="radio" name="precio" value="todos" checked>
-                        Mostrar todos
-                    </label>
-
-                    <label class="filtro-op">
-                        <input type="radio" name="precio" value="1">
-                        ₡5.000 – ₡30.000
-                    </label>
-
-                    <label class="filtro-op">
-                        <input type="radio" name="precio" value="2">
-                        ₡30.000 – ₡80.000
-                    </label>
-
-                    <label class="filtro-op">
-                        <input type="radio" name="precio" value="3">
-                        ₡80.000 o más
-                    </label>
+                <div class="catalogo-resultados">
+                    <span id="contadorResultados"><?= $totalProductos ?></span> productos disponibles
                 </div>
             </div>
 
-          
-            <div class="col-lg-9">
-                <div id="contenedorProductos" class="row gy-4">
+            <div class="catalogo-filtros">
+                <label>
+                    <input type="radio" name="precio" value="todos" checked>
+                    <span class="filtro-op filtro-chip">Todos</span>
+                </label>
 
-                    <?php foreach ($productos as $p): ?>
+                <label>
+                    <input type="radio" name="precio" value="1">
+                    <span class="filtro-op filtro-chip">₡5.000 – ₡30.000</span>
+                </label>
 
-                        <?php 
-                        $img = (!empty($p['Imagen'])) ? $p['Imagen'] : 'no-image.jpg';
+                <label>
+                    <input type="radio" name="precio" value="2">
+                    <span class="filtro-op filtro-chip">₡30.000 – ₡80.000</span>
+                </label>
 
-                        
-                        // Usar ruta absoluta desde la raíz del sitio (compatible con Azure)
-                        $imgSrc = '/assets/img/' . rawurlencode($img);
-                        ?>
+                <label>
+                    <input type="radio" name="precio" value="3">
+                    <span class="filtro-op filtro-chip">₡80.000 o más</span>
+                </label>
+            </div>
+        </div>
 
-                        <div class="col-md-4 producto-item" data-precio="<?= $p['Precio'] ?>">
+        <div class="catalogo-grid-wrap">
+            <div id="contenedorProductos" class="row">
 
-                            <div class="product-card shadow-sm">
-                                <div class="product-img-wrapper">
-                                   <img src="<?= $imgSrc ?>" 
-                                        class="product-image"
-                                        alt="<?= htmlspecialchars($p['Nombre']) ?>">
-                                </div>
+                <?php foreach ($productos as $p): ?>
+                    <?php 
+                    $img = (!empty($p['Imagen'])) ? $p['Imagen'] : 'no-image.jpg';
+                    $imgSrc = '/assets/img/' . rawurlencode($img);
+                    ?>
 
-                                <h5 class="product-title mt-3"><?= $p['Nombre'] ?></h5>
+                    <div class="col-lg-4 col-md-6 producto-item" data-precio="<?= $p['Precio'] ?>">
+                        <div class="product-card">
+                            <div class="product-img-wrapper">
+                                <img src="<?= $imgSrc ?>" 
+                                     class="product-image"
+                                     alt="<?= htmlspecialchars($p['Nombre']) ?>">
+                            </div>
+
+                            <div class="product-body">
+                                <h5 class="product-title"><?= htmlspecialchars($p['Nombre']) ?></h5>
 
                                 <p class="product-price">
                                     ₡<?= number_format($p['Precio'], 0, ',', '.') ?>
                                 </p>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                </div>
+                    </div>
+                <?php endforeach; ?>
+
             </div>
         </div>
+
     </div>
 </section>
 
