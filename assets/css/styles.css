@@ -2928,8 +2928,8 @@ footer {
 .catalogo-toolbar {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 22px;
-  padding: 22px;
+  padding: 18px 22px 20px;
+  border-radius: 24px;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
   margin-top: -34px;
   position: relative;
@@ -2941,9 +2941,11 @@ footer {
    justify-content: center !important;
    flex-direction: column;
   align-items: center;
-  gap: 6px;
+   text-align: center;
+  gap: 4px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
-  margin-bottom: 18px;
+ 
 }
 
 .catalogo-toolbar-top > div {
@@ -2952,34 +2954,36 @@ footer {
 
 .catalogo-toolbar-title {
   margin: 0;
-  font-size: 1.15rem;
+   font-size: 1.9rem;
+   margin-bottom: 2px;
   font-weight: 700;
   color: #1f2937;
-   justify-content: center !important;
+   
 }
 
 .catalogo-toolbar-subtitle {
-  margin: 4px 0 0;
-  font-size: 0.94rem;
+  margin: 0;
+  font-size: 1rem;
   color: #64748b;
-   justify-content: center !important;
+   
 }
 
 .catalogo-resultados {
   font-size: 0.95rem;
-  color: #475569;
+  color: #94a3b8;
   font-weight: 600;
   white-space: nowrap;
    width: 100%;
   text-align: center;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 /* filtros arriba */
 .catalogo-filtros {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
+   margin-top: 8px;
   justify-content: center;
 }
 
@@ -2998,14 +3002,14 @@ footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 10px 18px;
+  min-height: 46px;
+  padding: 10px 20px;
   border-radius: 999px;
   background: #f8fafc;
   border: 1px solid #dbe3ee;
   color: #334155;
-  font-size: 0.94rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.22s ease;
   user-select: none;
@@ -3028,7 +3032,7 @@ footer {
 
 /* grilla de productos */
 .catalogo-grid-wrap {
-  margin-top: 26px;
+  margin-top: 34px;
 }
 
 #contenedorProductos {
