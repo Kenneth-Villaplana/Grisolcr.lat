@@ -258,28 +258,28 @@ $esExitoSesion = !empty($_SESSION["registroExitoso"]);
         </script>
     <?php endif; ?>
 
-<?php if (!empty($mensajeSesion)): ?>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modalBody = document.getElementById("modalAlertaPOSBody");
-            const modalElemento = document.getElementById("modalAlertaPOS");
+    <?php if (!empty($mensajeSesion) && $esExitoSesion): ?>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const modalBody = document.getElementById("modalAlertaPOSBody");
+                const modalElemento = document.getElementById("modalAlertaPOS");
 
-            if (modalBody) {
-                modalBody.textContent = <?= json_encode($mensajeSesion) ?>;
-            }
+                if (modalBody) {
+                    modalBody.textContent = <?= json_encode($mensajeSesion) ?>;
+                }
 
-            if (modalElemento) {
-                const modal = new bootstrap.Modal(modalElemento);
-                modal.show();
-            }
-        });
-    </script>
+                if (modalElemento) {
+                    const modal = new bootstrap.Modal(modalElemento);
+                    modal.show();
+                }
+            });
+        </script>
+    <?php endif; ?>
+
     <?php
-        unset($_SESSION["txtMensaje"]);
-        unset($_SESSION["registroExitoso"]);
+    unset($_SESSION["txtMensaje"]);
+    unset($_SESSION["registroExitoso"]);
     ?>
-<?php endif; ?>
-
     <script src="../assets/js/puntoVenta.js?v=<?= time(); ?>"></script>
 
 </body>
