@@ -2955,12 +2955,14 @@ footer {
   font-size: 1.15rem;
   font-weight: 700;
   color: #1f2937;
+   justify-content: center !important;
 }
 
 .catalogo-toolbar-subtitle {
   margin: 4px 0 0;
   font-size: 0.94rem;
   color: #64748b;
+   justify-content: center !important;
 }
 
 .catalogo-resultados {

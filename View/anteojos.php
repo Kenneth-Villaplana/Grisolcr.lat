@@ -43,7 +43,7 @@ $productos = ObtenerProductos();
                 </div>
 
                 <div class="catalogo-resultados">
-                    <span id="contadorResultados"><?= $totalProductos ?></span> productos disponibles
+                    <span id="contadorResultados"><?= $totalProductos ?></span> 
                 </div>
             </div>
 
