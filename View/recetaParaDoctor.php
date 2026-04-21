@@ -21,7 +21,7 @@ if (!$receta) {
 
     <!-- ENCABEZADO -->
     <div class="header d-flex align-items-start gap-3">
-        <img src="/assets/img/logo.jpg" alt="Logo" height="80">
+        <img src="../assets/img/logo.jpeg" alt="Logo" height="80">
 
         <div class="doctor">
             <h3>Dr. LEONARDO SOLANO GRIJALBA</h3>
