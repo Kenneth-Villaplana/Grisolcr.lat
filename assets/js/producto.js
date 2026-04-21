@@ -30,23 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
- const imagenes = document.querySelectorAll(".product-image-clickable");
-    const modalElement = document.getElementById("modalImagenProducto");
-    const modalTitulo = document.getElementById("modalImagenTitulo");
-    const modalImagen = document.getElementById("modalImagenProductoImg");
-
-    if (modalElement && modalTitulo && modalImagen) {
-        const modal = new bootstrap.Modal(modalElement);
-
-        imagenes.forEach(img => {
-            img.addEventListener("click", function () {
-                modalTitulo.textContent = this.dataset.nombre || "Producto";
-                modalImagen.src = this.dataset.img || this.src;
-                modalImagen.alt = this.dataset.nombre || "Producto";
-                modal.show();
-            });
-        });
-    }
 
 
 });
