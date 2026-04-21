@@ -22,7 +22,7 @@ function obtenerPermisosVista() {
         'iniciarSesion.php'    => array('publico' => true),
         'registrarPaciente.php'=> array('publico' => true),
         'recuperarCuenta.php'  => array('publico' => true),
-        'restablecerContrasena.php' => array('publico' => true),
+        'restablecerContrasenna.php' => array('publico' => true),
 
         /*cualquier usuario logeado*/
         'editarPerfil.php' => array('auth' => true),
