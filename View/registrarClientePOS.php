@@ -46,10 +46,6 @@ $redirect = $_GET['redirect'] ?? '';
                     <small>Complete los datos para agregar el cliente al sistema</small>
                 </div>
 
-                <?php
-                $mostrarModalRegistro = !empty($_SESSION["registroExitoso"]);
-                ?>
-
                 <?php if (isset($_SESSION["txtMensaje"]) && empty($_SESSION["registroExitoso"])): ?>
                     <div class="alert alert-danger mx-4 mt-3 mb-0">
                         <?= $_SESSION["txtMensaje"]; ?>
@@ -191,30 +187,6 @@ $redirect = $_GET['redirect'] ?? '';
             }
         });
     </script>
-
-    <div class="modal fade" id="modalRegistroExitoso" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center p-4">
-                <h4 class="text-success">¡Registro exitoso!</h4>
-                <p>El cliente ha sido registrado correctamente.</p>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-            </div>
-        </div>
-    </div>
-
-    <?php if ($mostrarModalRegistro): ?>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                let modal = new bootstrap.Modal(document.getElementById("modalRegistroExitoso"));
-                modal.show();
-            });
-        </script>
-    <?php endif; ?>
-
-    <?php
-    unset($_SESSION["txtMensaje"]);
-    unset($_SESSION["registroExitoso"]);
-    ?>
 </body>
 
 </html>
