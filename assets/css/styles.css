@@ -2106,6 +2106,63 @@ select.form-select,
   flex-shrink: 0;
 }
 
+/* ===== FIX DEFINITIVO CARRITO ===== */
+
+.cart-item-modern .input-group {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+}
+
+.cart-item-modern .item-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cart-item-modern .item-control-cant {
+  width: 82px !important;
+  flex-shrink: 0;
+}
+
+.cart-item-modern .input-descuento,
+.cart-item-modern .input-impuesto {
+  width: 108px !important;
+  flex-shrink: 0;
+}
+
+.cart-item-modern .input-group-text {
+  white-space: nowrap;
+  font-size: 0.68rem;
+  padding: 0.28rem 0.40rem;
+}
+
+.cart-item-modern .form-control {
+  min-width: 0 !important;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.35rem;
+  text-align: center;
+}
+
+.cart-item-modern .input-descuento .form-control,
+.cart-item-modern .input-impuesto .form-control {
+  width: 34px !important;
+  min-width: 34px !important;
+}
+
+.cart-item-modern .item-total {
+  margin-left: auto;
+  min-width: 92px;
+  white-space: nowrap;
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
 /* Anchos específicos para que todo entre en una sola línea */
 .cart-item-modern .item-control-cant {
   width: 82px !important;
