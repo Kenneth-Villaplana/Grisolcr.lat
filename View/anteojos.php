@@ -24,17 +24,18 @@ $productos = ObtenerProductos();
 <?php MostrarMenu(); ?>
 
 <header class="catalogo-hero">
-  <div class="hero-overlay"></div>
 
-  <div class="container hero-content text-center">
+    
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-    <h1 class="catalogo-title">
-      Encuentre su estilo perfecto
-    </h1>
-
-    <p class="catalogo-subtitle">
-      Lentes modernos, cómodos y elegantes diseñados para acompañarte todos los días.
-    </p>
+    <div class="container text-center">
+        <h1 class="catalogo-title">Encuentre sus lentes ideales</h1>
+        <p class="catalogo-subtitle">
+            Tecnología avanzada, salud visual y asesoría personalizada
+            para brindarte una experiencia única.
+        </p>
 
     <!-- badges -->
     <div class="hero-badges">
