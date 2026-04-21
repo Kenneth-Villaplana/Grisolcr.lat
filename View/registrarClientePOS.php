@@ -62,6 +62,7 @@ $redirect = $_GET['redirect'] ?? '';
                         id="Cedula"
                         name="Cedula"
                         value="<?= htmlspecialchars($cedulaPrefill) ?>"
+                        placeholder="Cédula"
                         required
                         readonly>
                 </div>
@@ -70,13 +71,13 @@ $redirect = $_GET['redirect'] ?? '';
                     <!-- NOMBRE -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Nombre</label>
-                        <input type="text" class="form-control" id="Nombre" name="Nombre" readonly required>
+                        <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre" readonly required>
                     </div>
 
                     <!-- APELLIDO 1 -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Primer Apellido</label>
-                        <input type="text" class="form-control" id="Apellido" name="Apellido" readonly required>
+                        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="Primer Apellido" readonly required>
                     </div>
                 </div>
 
@@ -84,13 +85,13 @@ $redirect = $_GET['redirect'] ?? '';
                     <!-- APELLIDO 2 -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Segundo Apellido</label>
-                        <input type="text" class="form-control" id="ApellidoDos" name="ApellidoDos" readonly required>
+                        <input type="text" class="form-control" id="ApellidoDos" name="ApellidoDos" placeholder="Segundo Apellido" readonly required>
                     </div>
 
                     <!-- EMAIL -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Correo Electrónico</label>
-                        <input type="email" class="form-control" name="CorreoElectronico" required>
+                        <input type="email" class="form-control" name="CorreoElectronico" placeholder="Correo electrónico" required>
                     </div>
                 </div>
 
@@ -98,13 +99,13 @@ $redirect = $_GET['redirect'] ?? '';
                     <!-- CONTRASEÑA -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Contraseña</label>
-                        <input type="password" class="form-control" name="Contrasenna" required>
+                        <input type="password" class="form-control" name="Contrasenna" placeholder="Contraseña" required>
                     </div>
 
                     <!-- CONFIRMAR CONTRASEÑA -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Confirmar Contraseña</label>
-                        <input type="password" class="form-control" name="ConfirmarContrasenna" required>
+                        <input type="password" class="form-control" name="ConfirmarContrasenna" placeholder="Confirmar contraseña" required>
                     </div>
                 </div>
 
@@ -112,13 +113,13 @@ $redirect = $_GET['redirect'] ?? '';
                     <!-- TELÉFONO -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Teléfono</label>
-                        <input type="text" class="form-control" name="Telefono">
+                        <input type="text" class="form-control" name="Telefono" placeholder="Teléfono">
                     </div>
 
                     <!-- DIRECCIÓN -->
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-semibold">Dirección</label>
-                        <input type="text" class="form-control" name="Direccion">
+                        <input type="text" class="form-control" name="Direccion" placeholder="Dirección">
                     </div>
                 </div>
 
