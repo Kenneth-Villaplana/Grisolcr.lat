@@ -2227,6 +2227,28 @@ select.form-select,
   background: transparent;
 }
 
+.cart-item-modern .item-total {
+  min-width: 110px;
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .cart-item-modern .item-title {
+    font-size: 0.95rem;
+  }
+
+  .cart-item-modern .item-controls {
+    gap: 8px;
+  }
+
+  .cart-item-modern .item-total {
+    min-width: 120px;
+  }
+}
+
 /* Inicio*/
 :root {
   --brand-blue: #0ea5e9;
