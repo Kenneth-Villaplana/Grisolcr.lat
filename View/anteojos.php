@@ -23,13 +23,34 @@ $productos = ObtenerProductos();
 
 <?php MostrarMenu(); ?>
 
-<header class="catalogo-hero d-flex align-items-center text-center">
-    <div class="container position-relative">
-        <h1 class="catalogo-title">Encuentre sus lentes ideales</h1>
-        <p class="catalogo-subtitle">
-            Descubra nuestra colección de lentes y armazones con diseños modernos, cómodos y elegantes para cada estilo.
-        </p>
+<header class="catalogo-hero">
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-content text-center">
+
+    <h1 class="catalogo-title">
+      Encuentra tu estilo perfecto
+    </h1>
+
+    <p class="catalogo-subtitle">
+      Lentes modernos, cómodos y elegantes diseñados para acompañarte todos los días.
+    </p>
+
+    <!-- badges -->
+    <div class="hero-badges">
+      <span>✔ Protección UV</span>
+      <span>✔ Diseños modernos</span>
+      <span>✔ Alta calidad</span>
     </div>
+
+    <!-- botón -->
+    <div class="hero-actions">
+      <a href="#catalogo" class="btn btn-hero-primary">
+        Ver catálogo
+      </a>
+    </div>
+
+  </div>
 </header>
 
 <section class="catalogo-section">

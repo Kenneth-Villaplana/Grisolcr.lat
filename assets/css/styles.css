@@ -2876,27 +2876,56 @@ footer {
 /* catalogo de lentes*/
 
 .catalogo-hero {
-  min-height: 36vh;
-  background: radial-gradient(circle at top left,
-      #0ea5e9 0%,
-      #020617 45%,
-      #111827 100%);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  min-height: 42vh;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
   overflow: hidden;
-  padding: 42px 0;
+
+  background: linear-gradient(135deg, #0ea5e9 0%, #1e3a8a 60%, #020617 100%);
+  color: white;
 }
 
+/* efecto glass suave */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.04);
+}
+
+/* blobs modernos */
+.catalogo-hero::before,
 .catalogo-hero::after {
   content: "";
   position: absolute;
-  inset: 0;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.25;
+}
+.catalogo-hero::before {
+  width: 300px;
+  height: 300px;
+  background: #38bdf8;
+  top: -80px;
+  left: -80px;
+}
+
+.catalogo-hero::after {
+  width: 260px;
+  height: 260px;
+  background: #6366f1;
+  bottom: -80px;
+  right: -60px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
 }
 
 .catalogo-hero .container {
@@ -2905,18 +2934,61 @@ footer {
 }
 
 .catalogo-title {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   font-weight: 800;
+  margin-bottom: 12px;
   letter-spacing: -0.5px;
-  margin-bottom: 10px;
+  animation: fadeUp 0.8s ease;
 }
 
 .catalogo-subtitle {
   font-size: 1.05rem;
-  opacity: .92;
-  max-width: 650px;
-  margin: 0 auto;
+  opacity: 0.9;
   line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* badges */
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hero-badges span {
+  background: rgba(255,255,255,0.12);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(6px);
+}
+
+.btn-hero-primary {
+  background: #ffffff;
+  color: #1e3a8a;
+  border-radius: 999px;
+  padding: 10px 26px;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.btn-hero-primary:hover {
+  background: #e0f2fe;
+  transform: translateY(-2px);
+}
+
+/* animación */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .catalogo-section {
@@ -3066,7 +3138,7 @@ footer {
   position: absolute;
   inset: 0;
   border-radius: 22px;
-
+  background: linear-gradient(120deg, transparent, rgba(14, 165, 233, 0.06), transparent);
   opacity: 0;
   transition: 0.3s;
 }
