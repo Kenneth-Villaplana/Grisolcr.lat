@@ -545,14 +545,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-
-
 .appointment-card {
   border: 1px solid #ddd;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-
 }
 
 .agenda-title {
@@ -605,14 +602,11 @@ main.editar-section {
   display: block;
 }
 
-
-
 .profile-card .p-4,
 .register-card .p-4 {
   flex-grow: 1;
   padding-bottom: 30px !important;
 }
-
 
 .profile-section-title,
 .register-section-title {
@@ -622,14 +616,12 @@ main.editar-section {
   text-align: center;
 }
 
-
 .btn-save-custom,
 .btn-register-custom {
   padding: 0.6rem 2.5rem;
   border-radius: 50px;
   font-size: 1rem;
 }
-
 
 .btn-inv-ghost,
 a.btn-inv-ghost {
@@ -648,6 +640,7 @@ a.btn-inv-ghost {
   min-width: 120px;
 }
 
+
 /* Hover */
 .btn-inv-ghost:hover,
 a.btn-inv-ghost:hover {
@@ -657,8 +650,17 @@ a.btn-inv-ghost:hover {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 768px) {
+/* CONTENEDOR PRINCIPAL PARA CENTRAR BIEN */
+.form-section.register-pos-page {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
 
+@media (max-width: 768px) {
   .profile-section-title,
   .register-section-title {
     text-align: left;
@@ -669,21 +671,46 @@ a.btn-inv-ghost:hover {
     padding-top: 20px;
     padding-bottom: 70px;
   }
+
+  .form-section.register-pos-page {
+    min-height: auto;
+    display: block;
+    padding-top: 24px;
+    padding-bottom: 90px;
+  }
+
+  .register-pos-back {
+    margin-top: 10px;
+    margin-bottom: 18px;
+  }
+
+  .register-card-compact {
+    max-width: 100% !important;
+  }
+
+  .register-card-compact .p-4 {
+    padding: 20px 18px 28px !important;
+  }
 }
 
+.register-pos-page .container {
+  width: 100%;
+}
+
+.register-pos-back {
+  margin-bottom: 20px;
+}
 
 .register-card-compact {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.07);
-  max-width: 600px !important;
-  /* más angosto */
+  max-width: 750px !important;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-bottom: 60px;
 }
 
 
@@ -691,7 +718,6 @@ a.btn-inv-ghost:hover {
 .register-card-compact .register-card-header {
   background: #f8f9fa;
   padding: 25px 20px;
-  /* más pequeño */
   text-align: center;
   border-bottom: 1px solid #eee;
 }
@@ -708,9 +734,9 @@ a.btn-inv-ghost:hover {
 
 /* Contenido */
 .register-card-compact .p-4 {
-  padding: 24px 26px !important;
-  /* más compacto */
+  padding: 24px 26px 32px !important;
 }
+
 
 /* Títulos */
 .register-card-compact .register-section-title {
@@ -719,7 +745,6 @@ a.btn-inv-ghost:hover {
   text-align: center;
 }
 
-/* Botón */
 .register-card-compact .btn-register-custom {
   padding: 0.55rem 2.3rem;
   border-radius: 50px;
@@ -746,6 +771,7 @@ a.btn-inv-ghost:hover {
   padding: 2rem;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
+
 
 .register-container h4 {
   font-weight: bold;
