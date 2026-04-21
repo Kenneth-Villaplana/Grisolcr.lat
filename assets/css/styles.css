@@ -2116,9 +2116,10 @@ select.form-select,
 
 .cart-item-modern .item-controls {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 6px;
-  flex-wrap: nowrap !important;
+  flex-wrap: nowrap;
   width: 100%;
   overflow: hidden;
 }
@@ -2190,6 +2191,11 @@ select.form-select,
 .cart-item-modern .input-descuento .input-group-text,
 .cart-item-modern .input-impuesto .input-group-text {
   white-space: nowrap;
+}
+
+.cart-item-modern .input-descuento,
+.cart-item-modern .input-impuesto {
+  width: 108px !important;
 }
 
 /* Inicio*/
