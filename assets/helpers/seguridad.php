@@ -151,6 +151,7 @@ function obtenerPermisosVista() {
          Internas:
         - expedienteDigital.php
         - historialExpedientePaciente.php
+        - verExpediente.php
         - registrarClientePOS.php
          - recetaParaDoctor.php
         
@@ -165,6 +166,11 @@ function obtenerPermisosVista() {
             )
         ),
         'historialExpedientePaciente.php' => array(
+            'roles' => array(
+                array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 3, 4))
+            )
+        ),
+        'verExpediente.php' => array(
             'roles' => array(
                 array('RolID' => 'Empleado', 'EmpleadoRol' => array(1, 2, 3, 4))
             )
