@@ -50,22 +50,22 @@ $productos = ObtenerProductos();
             <div class="catalogo-filtros">
                 <label>
                     <input type="radio" name="precio" value="todos" checked>
-                    <span class="filtro-op filtro-chip">Todos</span>
+                    <span class="filtro-op">Todos</span>
                 </label>
 
                 <label>
                     <input type="radio" name="precio" value="1">
-                    <span class="filtro-op filtro-chip">₡5.000 – ₡30.000</span>
+                    <span class="filtro-op">₡5.000 – ₡30.000</span>
                 </label>
 
                 <label>
                     <input type="radio" name="precio" value="2">
-                    <span class="filtro-op filtro-chip">₡30.000 – ₡80.000</span>
+                    <span class="filtro-op">₡30.000 – ₡80.000</span>
                 </label>
 
                 <label>
                     <input type="radio" name="precio" value="3">
-                    <span class="filtro-op filtro-chip">₡80.000 o más</span>
+                    <span class="filtro-op">₡80.000 o más</span>
                 </label>
             </div>
         </div>
@@ -80,22 +80,22 @@ $productos = ObtenerProductos();
                     ?>
 
                     <div class="col-lg-4 col-md-6 producto-item" data-precio="<?= $p['Precio'] ?>">
-                        <div class="product-card">
-                            <div class="product-img-wrapper">
-                                <img src="<?= $imgSrc ?>" 
-                                     class="product-image"
-                                     alt="<?= htmlspecialchars($p['Nombre']) ?>">
-                            </div>
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="<?= $imgSrc ?>" 
+                                class="product-image"
+                                alt="<?= htmlspecialchars($p['Nombre']) ?>">
+                        </div>
 
-                            <div class="product-body">
-                                <h5 class="product-title"><?= htmlspecialchars($p['Nombre']) ?></h5>
+                        <div class="product-body">
+                            <h5 class="product-title"><?= htmlspecialchars($p['Nombre']) ?></h5>
 
-                                <p class="product-price">
-                                    ₡<?= number_format($p['Precio'], 0, ',', '.') ?>
-                                </p>
-                            </div>
+                            <p class="product-price">
+                                ₡<?= number_format($p['Precio'], 0, ',', '.') ?>
+                            </p>
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
 
             </div>

@@ -2876,40 +2876,27 @@ footer {
 /* catalogo de lentes*/
 
 .catalogo-hero {
-  min-height: 38vh;
-  background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 45%, #eef2ff 100%);
-  color: #0f172a;
+  min-height: 36vh;
+  background: radial-gradient(circle at top left,
+      #0ea5e9 0%,
+      #020617 45%,
+      #111827 100%);
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 50px 0 40px;
-}
-
-.catalogo-hero::before {
-  content: "";
-  position: absolute;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: rgba(14, 165, 233, 0.10);
-  top: -120px;
-  left: -120px;
-  filter: blur(20px);
+  padding: 42px 0;
 }
 
 .catalogo-hero::after {
   content: "";
   position: absolute;
-  width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  background: rgba(59, 130, 246, 0.08);
-  bottom: -120px;
-  right: -100px;
-  filter: blur(24px);
+  inset: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .catalogo-hero .container {
@@ -2918,34 +2905,33 @@ footer {
 }
 
 .catalogo-title {
-  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 800;
-  letter-spacing: -0.8px;
-  color: #1e3a8a;
-  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
 }
 
 .catalogo-subtitle {
   font-size: 1.05rem;
-  color: #475569;
-  max-width: 680px;
+  opacity: .92;
+  max-width: 650px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .catalogo-section {
   background: #f8fafc;
-  padding-bottom: 4rem;
+  padding: 36px 0 70px;
 }
 
-/* barra superior del catalogo */
+/* barra superior */
 .catalogo-toolbar {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 22px;
-  padding: 20px 22px;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-  margin-top: -40px;
+  padding: 22px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  margin-top: -34px;
   position: relative;
   z-index: 3;
 }
@@ -2953,10 +2939,10 @@ footer {
 .catalogo-toolbar-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 18px;
+  align-items: flex-start;
+  gap: 14px;
   flex-wrap: wrap;
+  margin-bottom: 18px;
 }
 
 .catalogo-toolbar-title {
@@ -2968,7 +2954,7 @@ footer {
 
 .catalogo-toolbar-subtitle {
   margin: 4px 0 0;
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   color: #64748b;
 }
 
@@ -2979,34 +2965,40 @@ footer {
   white-space: nowrap;
 }
 
+/* filtros arriba */
 .catalogo-filtros {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
+.catalogo-filtros label {
+  margin: 0;
+}
+
 /* ocultar radio real */
 .catalogo-filtros input[type="radio"] {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .filtro-op {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 46px;
+  min-height: 44px;
   padding: 10px 18px;
   border-radius: 999px;
   background: #f8fafc;
   border: 1px solid #dbe3ee;
   color: #334155;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.22s ease;
   user-select: none;
-  margin-bottom: 0;
+  white-space: nowrap;
 }
 
 .filtro-op:hover {
@@ -3016,85 +3008,70 @@ footer {
   transform: translateY(-1px);
 }
 
-.catalogo-filtros input[type="radio"]:checked + .filtro-chip {
+.catalogo-filtros input[type="radio"]:checked + .filtro-op {
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   border-color: #2563eb;
   color: #ffffff;
-  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
 }
 
-.filtro-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* area productos */
+/* grilla de productos */
 .catalogo-grid-wrap {
-  margin-top: 28px;
+  margin-top: 26px;
 }
 
 #contenedorProductos {
   row-gap: 24px;
+  margin-bottom: 30px; /* separa del footer */
 }
 
-/* cards */
 .producto-item {
   display: flex;
 }
 
+/* cards */
 .product-card {
   width: 100%;
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 72%, #f8fafc 100%);
   border-radius: 22px;
-  padding: 16px;
+  padding: 14px;
   text-align: center;
   border: 1px solid #e2e8f0;
-  transition: all .28s ease;
+  transition: all .25s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.product-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(59,130,246,0.03) 100%);
-  pointer-events: none;
-}
-
 .product-card::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: -130%;
-  width: 70%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.55s ease;
+  inset: 0;
+  border-radius: 22px;
+  background: linear-gradient(120deg, transparent, rgba(14, 165, 233, 0.06), transparent);
+  opacity: 0;
+  transition: 0.3s;
 }
 
 .product-card:hover::after {
-  left: 160%;
+  opacity: 1;
 }
 
 .product-card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.10);
   border-color: #bfdbfe;
 }
 
 .product-img-wrapper {
   border-radius: 18px;
-  padding: 18px;
-  background: linear-gradient(145deg, #f8fafc, #eef2f7);
-  border: 1px solid #e5e7eb;
-  min-height: 255px;
+  padding: 12px;
+  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  border: 1px solid #dbe2ea;
+  min-height: 210px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3102,119 +3079,86 @@ footer {
 
 .product-image {
   width: 100%;
-  height: 220px;
+  height: 160px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .product-card:hover .product-image {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .product-body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding-top: 14px;
+  padding-top: 12px;
 }
 
 .product-title {
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 650;
   color: #1f2937;
   margin: 0;
   line-height: 1.4;
-  min-height: 48px;
+  min-height: 44px;
 }
 
 .product-price {
   color: #2563eb;
-  font-size: 1.28rem;
+  font-size: 1.18rem;
   font-weight: 800;
-  margin-top: 10px;
+  margin-top: 8px;
   margin-bottom: 0;
-}
-
-.product-price::before {
-  content: "precio";
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  color: #94a3b8;
-  text-transform: uppercase;
-  margin-bottom: 2px;
-}
-
-/* estado sin resultados */
-.catalogo-sin-resultados {
-  width: 100%;
-  background: #ffffff;
-  border: 1px dashed #cbd5e1;
-  border-radius: 20px;
-  padding: 32px 20px;
-  text-align: center;
-  color: #64748b;
-  font-weight: 600;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
 }
 
 /* tablet */
 @media (max-width: 992px) {
-  .catalogo-hero {
-    min-height: 32vh;
-    padding: 42px 0 34px;
+  .catalogo-title {
+    font-size: 2.3rem;
   }
 
   .catalogo-toolbar {
-    margin-top: -30px;
+    margin-top: -26px;
     padding: 18px;
   }
 
-  .catalogo-toolbar-top {
-    align-items: flex-start;
-  }
-
   .product-img-wrapper {
-    min-height: 230px;
+    min-height: 190px;
   }
 
   .product-image {
-    height: 200px;
+    height: 150px;
   }
 }
 
-/* celular */
+/* celulares */
 @media (max-width: 768px) {
   .catalogo-hero {
-    min-height: 28vh;
-    padding: 34px 15px 30px;
+    min-height: 30vh;
+    padding: 30px 15px;
   }
 
   .catalogo-title {
-    font-size: 2rem;
+    font-size: 1.95rem;
   }
 
   .catalogo-subtitle {
     font-size: 0.95rem;
   }
 
+  .catalogo-section {
+    padding: 28px 0 56px;
+  }
+
   .catalogo-toolbar {
-    margin-top: -24px;
-    border-radius: 18px;
+    margin-top: -18px;
     padding: 16px;
+    border-radius: 18px;
   }
 
   .catalogo-toolbar-top {
     margin-bottom: 14px;
-  }
-
-  .catalogo-toolbar-title {
-    font-size: 1rem;
-  }
-
-  .catalogo-resultados {
-    font-size: 0.9rem;
   }
 
   .catalogo-filtros {
@@ -3224,57 +3168,61 @@ footer {
   .filtro-op {
     width: 100%;
     justify-content: center;
-    padding: 11px 14px;
   }
 
   .product-card {
-    padding: 14px;
+    padding: 13px;
     border-radius: 18px;
   }
 
   .product-img-wrapper {
-    min-height: 210px;
-    padding: 14px;
+    min-height: 185px;
+    padding: 12px;
   }
 
   .product-image {
-    height: 185px;
+    height: 145px;
   }
 
   .product-title {
-    font-size: 1rem;
     min-height: auto;
+    font-size: 0.98rem;
   }
 
-  .product-price {
-    font-size: 1.16rem;
+  #contenedorProductos {
+    row-gap: 20px;
+    margin-bottom: 24px;
   }
 }
 
 /* celulares pequeños */
 @media (max-width: 480px) {
   .catalogo-title {
-    font-size: 1.7rem;
+    font-size: 1.65rem;
   }
 
   .catalogo-subtitle {
-    font-size: 0.88rem;
-  }
-
-  .product-img-wrapper {
-    min-height: 190px;
-  }
-
-  .product-image {
-    height: 160px;
+    font-size: 0.86rem;
   }
 
   .product-card {
     padding: 12px;
   }
 
+  .product-img-wrapper {
+    min-height: 170px;
+  }
+
+  .product-image {
+    height: 130px;
+  }
+
   .product-title {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
+  }
+
+  .product-price {
+    font-size: 1.08rem;
   }
 }
 
