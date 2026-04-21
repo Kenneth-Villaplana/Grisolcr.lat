@@ -974,18 +974,16 @@ a.btn-inv-ghost:hover {
    CIERRE DE CAJA
 ===================================== */
 body:has(.pv-wrapper) {
-  background: linear-gradient(180deg, #f9fbff 0%, #edf3fb 55%, #e8f0fa 100%) !important;
+  background: #eef2f7 !important;
 }
 
 body:has(.pv-wrapper) .pv-wrapper {
   background: transparent !important;
-  min-height: 100vh;
-  padding: 24px;
 }
 
 
 .pv-wrapper {
-  background: transparent !important;
+  background: #eef2f7 !important;
   min-height: 100vh;
   padding: 24px;
 }
