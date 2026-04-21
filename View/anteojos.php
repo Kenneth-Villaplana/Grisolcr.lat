@@ -30,7 +30,7 @@ $productos = ObtenerProductos();
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <div class="container text-center">
+      <div class="container text-center">
         <h1 class="catalogo-title">Encuentre sus lentes ideales</h1>
         <p class="catalogo-subtitle">
             Tecnología avanzada, salud visual y asesoría personalizada
