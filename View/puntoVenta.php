@@ -3,10 +3,6 @@
 require_once __DIR__ . '/layout.php';
 include_once __DIR__ . '/../Controller/puntoVentaController.php';
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 $controller = new PuntoVentaController();
 $productos = $controller->getProductos();
 $cedulaPrefill = $_GET['cedula'] ?? '';
