@@ -49,14 +49,14 @@ $controller = new PuntoVentaController();
             <!-- Filtro número -->
             <div class="form-group">
               <label class="form-label mb-1">Número de factura</label>
-              <input type="text" id="codigoInput" class="form-control filtro-input text-center" placeholder="Ej. 1023">
+              <input type="text" id="codigoInput" class="form-control filtro-input text-center" placeholder="Número de factura">
             </div>
 
             <!-- Filtro cédula -->
             <div class="form-group">
               <label class="form-label mb-1">Cédula del cliente</label>
               <input type="text" id="cedulaInput" class="form-control filtro-input text-center"
-                placeholder="Ej. 01XXXXXX">
+                placeholder="Cédula del cliente">
             </div>
           </div>
 

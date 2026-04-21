@@ -683,6 +683,7 @@ a.btn-inv-ghost:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  margin-bottom: 60px;
 }
 
 
