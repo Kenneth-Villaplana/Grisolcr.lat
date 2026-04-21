@@ -828,6 +828,8 @@ async function finalizarVenta() {
         nombreClienteSpan.dataset.nombre = "";
 
         montoAbonoInput.value = "";
+        montoEfectivoInput.value = "";
+        cambioTexto.textContent = "Cambio: ₡0.00";
 
         document.getElementById("telefonoClienteDiv").style.display = "none";
 
