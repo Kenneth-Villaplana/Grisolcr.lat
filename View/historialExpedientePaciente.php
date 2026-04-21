@@ -101,7 +101,7 @@ $sinExpedientes = empty($historial);
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Recceta del Paciente</h5>
+                    <h5 class="modal-title">Receta del Paciente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
