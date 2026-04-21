@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/layout.php';
 
+$mensajeSesion = $_SESSION["txtMensaje"] ?? '';
+$esExitoSesion = !empty($_SESSION["registroExitoso"]);
+
 if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
     echo '<div class="alert alert-success text-center">El expediente se ha creado correctamente.</div>';
 }
@@ -8,6 +11,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Historial de Expedientes Digitales</title>
@@ -16,84 +20,119 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito') {
 
 <body class="expedientes-page">
 
-<?php MostrarMenu(); ?>
+    <?php MostrarMenu(); ?>
 
 
-  <header class="hero-img-header personal-hero">
-    <div class="container position-relative">
-    <h1 class="expediente-title">Historial de Expedientes</h1>
-    <p class="expediente-subtitle">
-        Consulta, administra y gestiona la información de tus pacientes
-    </p>
-</header>
+    <header class="hero-img-header personal-hero">
+        <div class="container position-relative">
+            <h1 class="expediente-title">Historial de Expedientes</h1>
+            <p class="expediente-subtitle">
+                Consulta, administra y gestiona la información de tus pacientes
+            </p>
+    </header>
 
-<main class="container my-5">
+    <main class="container my-5">
 
-    <!-- Mensajes -->
-    <?php if (isset($_SESSION['mensajeInfo'])): ?>
-        <div class="alert alert-warning text-center"><?= $_SESSION['mensajeInfo']; ?></div>
-        <?php unset($_SESSION['mensajeInfo']); ?>
-    <?php endif; ?>
+        <!-- Mensajes -->
+        <?php if (isset($_SESSION['mensajeInfo'])): ?>
+            <div class="alert alert-warning text-center"><?= $_SESSION['mensajeInfo']; ?></div>
+            <?php unset($_SESSION['mensajeInfo']); ?>
+        <?php endif; ?>
 
-    <?php if (isset($_SESSION['mensajeError'])): ?>
-        <div class="alert alert-danger text-center"><?= $_SESSION['mensajeError']; ?></div>
-        <?php unset($_SESSION['mensajeError']); ?>
-    <?php endif; ?>
+        <?php if (isset($_SESSION['mensajeError'])): ?>
+            <div class="alert alert-danger text-center"><?= $_SESSION['mensajeError']; ?></div>
+            <?php unset($_SESSION['mensajeError']); ?>
+        <?php endif; ?>
 
-    <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'actualizado'): ?>
-        <div class="alert alert-success text-center">El expediente se actualizó correctamente.</div>
-    <?php endif; ?>
+        <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'actualizado'): ?>
+            <div class="alert alert-success text-center">El expediente se actualizó correctamente.</div>
+        <?php endif; ?>
 
 
-   
-    <section class="expediente-card mx-auto shadow-lg">
-        <div class="text-center mb-4">
-            <h3 class="fw-bold">
-                <i class="bi bi-search"></i> Buscar Paciente
-            </h3>
-        </div>
 
-        <div class="row g-3 justify-content-center">
-
-            <div class="col-md-8">
-                <label class="form-label fw-semibold">Cédula del Paciente:</label>
-                <input type="text" id="cedula" class="form-control inventario-input" placeholder="Cédula del Paciente">
+        <section class="expediente-card mx-auto shadow-lg">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold">
+                    <i class="bi bi-search"></i> Buscar Paciente
+                </h3>
             </div>
 
-            <div class="col-md-8 d-flex justify-content-center gap-3">
-                <button class="btn-inv-primary" onclick="buscarPaciente()">
-                    <i class="bi bi-search me-1"></i> Buscar
-                </button>
+            <div class="row g-3 justify-content-center">
 
-               <button class="btn-inv-ghost" onclick="limpiarBusqueda()">
-                Limpiar
-            </button>
-            </div>
-
-            <div id="mensajeSistema" class="col-12 mt-3"></div>
-            <div id="resultado" class="col-12 mt-4"></div>
-
-            
-            <div class="col-md-8 text-center mt-3">
-                <div class="btn-group-vertical w-75 mx-auto">
-                    <a id="btnAgregarExpediente" class="btn btn-outline-primary mb-2" style="display:none;">
-                        <i class="bi bi-plus-square"></i> Agregar Expediente
-                    </a>
-                    <a id="btnHistorial" class="btn btn-outline-secondary mb-2" style="display:none;">
-                        <i class="bi bi-clock-history"></i> Historial Clínico
-                    </a>
+                <div class="col-md-8">
+                    <label class="form-label fw-semibold">Cédula del Paciente:</label>
+                    <input type="text" id="cedula" class="form-control inventario-input"
+                        placeholder="Cédula del Paciente">
                 </div>
+
+                <div class="col-md-8 d-flex justify-content-center gap-3">
+                    <button class="btn-inv-primary" onclick="buscarPaciente()">
+                        <i class="bi bi-search me-1"></i> Buscar
+                    </button>
+
+                    <button class="btn-inv-ghost" onclick="limpiarBusqueda()">
+                        Limpiar
+                    </button>
+                </div>
+
+                <div id="mensajeSistema" class="col-12 mt-3"></div>
+                <div id="resultado" class="col-12 mt-4"></div>
+
+
+                <div class="col-md-8 text-center mt-3">
+                    <div class="btn-group-vertical w-75 mx-auto">
+                        <a id="btnAgregarExpediente" class="btn btn-outline-primary mb-2" style="display:none;">
+                            <i class="bi bi-plus-square"></i> Agregar Expediente
+                        </a>
+                        <a id="btnHistorial" class="btn btn-outline-secondary mb-2" style="display:none;">
+                            <i class="bi bi-clock-history"></i> Historial Clínico
+                        </a>
+                    </div>
+                </div>
+
             </div>
+        </section>
 
+    </main>
+
+    <div class="modal fade" id="modalRegistroPacienteExitoso" tabindex="-1"
+        aria-labelledby="modalRegistroPacienteExitosoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4" style="border-radius: 22px;">
+                <h4 class="text-success mb-3" id="modalRegistroPacienteExitosoLabel">¡Registro exitoso!</h4>
+                <p id="modalRegistroPacienteExitosoBody" class="mb-4">El paciente ha sido registrado correctamente.</p>
+                <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">Aceptar</button>
+            </div>
         </div>
-    </section>
+    </div>
 
-</main>
+    <?php MostrarFooter(); ?>
+    <?php IncluirScripts(); ?>
 
-<?php MostrarFooter(); ?>
-<?php IncluirScripts(); ?>
+    <?php if (!empty($mensajeSesion) && $esExitoSesion): ?>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const modalBody = document.getElementById("modalRegistroPacienteExitosoBody");
+                const modalElemento = document.getElementById("modalRegistroPacienteExitoso");
 
-<script src="../assets/js/expediente.js?v=11"></script>
+                if (modalBody) {
+                    modalBody.textContent = <?= json_encode($mensajeSesion) ?>;
+                }
+
+                if (modalElemento) {
+                    const modal = new bootstrap.Modal(modalElemento);
+                    modal.show();
+                }
+            });
+        </script>
+        <?php
+        unset($_SESSION["txtMensaje"]);
+        unset($_SESSION["registroExitoso"]);
+        ?>
+    <?php endif; ?>
+
+    <script src="../assets/js/expediente.js?v=11"></script>
 
 </body>
+
 </html>
