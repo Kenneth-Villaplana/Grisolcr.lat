@@ -2938,11 +2938,16 @@ footer {
 
 .catalogo-toolbar-top {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 14px;
+   justify-content: center !important;
+   flex-direction: column;
+  align-items: center;
+  gap: 6px;
   flex-wrap: wrap;
   margin-bottom: 18px;
+}
+
+.catalogo-toolbar-top > div {
+  width: 100%;
 }
 
 .catalogo-toolbar-title {
@@ -2963,6 +2968,9 @@ footer {
   color: #475569;
   font-weight: 600;
   white-space: nowrap;
+   width: 100%;
+  text-align: center;
+  margin-top: 6px;
 }
 
 /* filtros arriba */
@@ -2970,6 +2978,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  justify-content: center;
 }
 
 .catalogo-filtros label {
