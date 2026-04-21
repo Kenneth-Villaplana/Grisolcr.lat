@@ -8,7 +8,7 @@ $agendarUrl = "/View/registrarPaciente.php";
 
 // Paciente logueado
 if (isset($_SESSION["UsuarioID"]) && empty($_SESSION["EmpleadoRol"])) {
-    $agendarUrl = "/../View/agendarCita.php";
+    $agendarUrl = "/View/agendarCita.php";
 }
 
 require_once __DIR__ . '/View/layout.php';
@@ -52,12 +52,17 @@ require_once __DIR__ . '/View/layout.php';
             </p>
 
             <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start gap-3">
-              <a href="<?php echo htmlspecialchars($agendarUrl); ?>" class="btn-primary-modern">
+  
+            <?php if (empty($_SESSION["EmpleadoRol"])): ?>
+                <a href="<?php echo htmlspecialchars($agendarUrl); ?>" class="btn-primary-modern">
                 Agendar cita
-              </a>
-              <a href="#servicios" class="btn-secondary-modern">
+                </a>
+            <?php endif; ?>
+
+            <a href="#servicios" class="btn-secondary-modern">
                 Ver servicios
-              </a>
+            </a>
+
             </div>
 
             <div class="hero-meta d-flex flex-column flex-md-row gap-3 mt-4 justify-content-center justify-content-lg-start">
