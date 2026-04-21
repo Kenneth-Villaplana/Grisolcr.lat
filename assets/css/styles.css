@@ -2961,6 +2961,8 @@ footer {
   margin-bottom: 12px;
   letter-spacing: -0.5px;
   animation: fadeUp 0.8s ease;
+   color: #e2e8f0 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .catalogo-subtitle {
@@ -2968,6 +2970,8 @@ footer {
   opacity: 0.9;
   line-height: 1.6;
   margin-bottom: 18px;
+   color: #e2e8f0 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* badges */
