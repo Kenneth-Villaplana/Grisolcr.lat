@@ -3,6 +3,10 @@
 require_once __DIR__ . '/layout.php';
 include_once __DIR__ . '/../Controller/puntoVentaController.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $controller = new PuntoVentaController();
 $productos = $controller->getProductos();
 $cedulaPrefill = $_GET['cedula'] ?? '';
@@ -20,6 +24,24 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
 
 <body>
     <?php MostrarMenu(); ?>
+
+    <?php MostrarMenu(); ?>
+
+    <?php if (!empty($_SESSION["txtMensaje"])): ?>
+        <div class="container mt-3">
+            <div class="alert <?= !empty($_SESSION["registroExitoso"]) ? 'alert-success' : 'alert-danger' ?>
+            alert-dismissible fade show" role="alert">
+                <?= $_SESSION["txtMensaje"]; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        <?php
+        unset($_SESSION["txtMensaje"]);
+        unset($_SESSION["registroExitoso"]);
+        ?>
+    <?php endif; ?>
+
+    <main class="container py-5 pv-wrapper"></main>
 
     <main class="container py-5 pv-wrapper ">
 
