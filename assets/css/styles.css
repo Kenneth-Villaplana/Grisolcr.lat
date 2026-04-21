@@ -1637,7 +1637,9 @@ a.btn-inv-ghost:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
   height: 100%;
 }
-
+body:has(.pv-wrapper) {
+  background: #eef2f6;
+}
 .pv-header-center {
   text-align: center;
 }
