@@ -29,7 +29,7 @@ $productos = ObtenerProductos();
   <div class="container hero-content text-center">
 
     <h1 class="catalogo-title">
-      Encuentra tu estilo perfecto
+      Encuentre su estilo perfecto
     </h1>
 
     <p class="catalogo-subtitle">
