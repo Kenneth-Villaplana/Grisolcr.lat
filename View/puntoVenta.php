@@ -6,6 +6,8 @@ include_once __DIR__ . '/../Controller/puntoVentaController.php';
 $controller = new PuntoVentaController();
 $productos = $controller->getProductos();
 $cedulaPrefill = $_GET['cedula'] ?? '';
+$mensajeSesion = $_SESSION["txtMensaje"] ?? '';
+$esExitoSesion = !empty($_SESSION["registroExitoso"]);
 ?>
 
 <!DOCTYPE html>
@@ -255,6 +257,28 @@ $cedulaPrefill = $_GET['cedula'] ?? '';
             });
         </script>
     <?php endif; ?>
+
+<?php if (!empty($mensajeSesion)): ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalBody = document.getElementById("modalAlertaPOSBody");
+            const modalElemento = document.getElementById("modalAlertaPOS");
+
+            if (modalBody) {
+                modalBody.textContent = <?= json_encode($mensajeSesion) ?>;
+            }
+
+            if (modalElemento) {
+                const modal = new bootstrap.Modal(modalElemento);
+                modal.show();
+            }
+        });
+    </script>
+    <?php
+        unset($_SESSION["txtMensaje"]);
+        unset($_SESSION["registroExitoso"]);
+    ?>
+<?php endif; ?>
 
     <script src="../assets/js/puntoVenta.js?v=<?= time(); ?>"></script>
 
