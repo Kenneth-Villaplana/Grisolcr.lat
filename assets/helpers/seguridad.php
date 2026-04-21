@@ -207,7 +207,15 @@ function obtenerPermisosVista() {
    usa la url (request_uri) y elimina cualquier parámetro
    ejemplo: /view/facturacion.php?id=1 -> facturacion.php */
 function obtenerVistaActual() {
-    return basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    $ruta = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $vista = basename($ruta);
+
+    // Si entra desde el dominio raíz, tratarlo como index.php
+    if (empty($vista) || $vista === '/' || $ruta === '/') {
+        return 'index.php';
+    }
+
+    return $vista;
 }
 
 
