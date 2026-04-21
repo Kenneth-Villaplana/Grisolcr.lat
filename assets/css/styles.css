@@ -3221,47 +3221,41 @@ footer {
 
 /* celulares */
 @media (max-width: 768px) {
-    .catalogo-hero {
+  .catalogo-hero {
     min-height: auto;
-    padding: 3rem 0 3.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 3.2rem 0 3.4rem;
   }
 
   .catalogo-hero .container {
-    position: relative;
-    z-index: 3 !important;
     padding-left: 18px;
     padding-right: 18px;
   }
 
   .catalogo-title {
-    font-size: clamp(1.8rem, 4vw + 0.8rem, 2.3rem);
+    font-size: clamp(1.8rem, 4vw + 0.8rem, 2.4rem);
     line-height: 1.2;
     margin-bottom: 12px;
   }
 
   .catalogo-subtitle {
-    max-width: 100%;
     font-size: 0.95rem;
     line-height: 1.55;
-    margin: 0 auto;
-    padding: 0 6px;
+    max-width: 100%;
+    padding: 0 4px;
   }
 
   .hero-badges {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
-    margin-top: 16px;
-    padding: 0 4px;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 0 6px;
   }
 
   .hero-badges span {
-    font-size: 0.78rem;
-    padding: 7px 10px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
     line-height: 1.2;
     white-space: normal;
     text-align: center;
@@ -3271,26 +3265,22 @@ footer {
     width: 180px;
     height: 180px;
     top: -40px;
-    left: -60px;
-    filter: blur(45px);
+    left: -55px;
   }
 
   .orb-2 {
     width: 150px;
     height: 150px;
     bottom: -35px;
-    right: 2%;
-    filter: blur(45px);
+    right: 6%;
   }
 
   .orb-3 {
-    width: 130px;
-    height: 130px;
-    top: 14%;
-    right: -40px;
-    filter: blur(45px);
+    width: 140px;
+    height: 140px;
+    top: 12%;
+    right: -45px;
   }
-
 
     #contenedorProductos {
     row-gap: 16px;

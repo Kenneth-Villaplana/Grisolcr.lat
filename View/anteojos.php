@@ -98,10 +98,10 @@ $productos = ObtenerProductos();
                     <div class="product-card">
                         <div class="product-img-wrapper">
                             <img src="<?= $imgSrc ?>" 
-                                class="product-image product-image-clickable"
-                                alt="<?= htmlspecialchars($p['Nombre']) ?>"
-                                data-img="<?= $imgSrc ?>"
-                                data-nombre="<?= htmlspecialchars($p['Nombre']) ?>">
+                                class="product-image"
+                                alt="<?= htmlspecialchars($p['Nombre']) ?>">
+                        </div>
+
                         <div class="product-body">
                             <h5 class="product-title"><?= htmlspecialchars($p['Nombre']) ?></h5>
 
