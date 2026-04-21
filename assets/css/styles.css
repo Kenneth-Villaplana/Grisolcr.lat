@@ -2954,7 +2954,7 @@ footer {
 
 .catalogo-toolbar-title {
   margin: 0;
-   font-size: 1.9rem;
+   font-size: 0.94rem;
    margin-bottom: 2px;
   font-weight: 700;
   color: #1f2937;
@@ -2963,7 +2963,7 @@ footer {
 
 .catalogo-toolbar-subtitle {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.93rem;
   color: #64748b;
    
 }
