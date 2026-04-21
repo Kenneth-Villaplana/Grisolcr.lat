@@ -43,13 +43,6 @@ $productos = ObtenerProductos();
       <span>✔ Alta calidad</span>
     </div>
 
-    <!-- botón -->
-    <div class="hero-actions">
-      <a href="#catalogo" class="btn btn-hero-primary">
-        Ver catálogo
-      </a>
-    </div>
-
   </div>
 </header>
 
