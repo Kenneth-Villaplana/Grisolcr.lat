@@ -19,27 +19,27 @@ const CONTROLLER_PATH = "../Controller/puntoVentaController.php";
 document.addEventListener("DOMContentLoaded", () => {
 
     productosContainer = document.getElementById("productos-container");
-    cartSubtotal       = document.getElementById("cart-subtotal");
-    cartDiscount       = document.getElementById("cart-discount");
-    cartTax            = document.getElementById("cart-tax");
-    cartTotal          = document.getElementById("cart-total");
+    cartSubtotal = document.getElementById("cart-subtotal");
+    cartDiscount = document.getElementById("cart-discount");
+    cartTax = document.getElementById("cart-tax");
+    cartTotal = document.getElementById("cart-total");
 
-    btnFinalizar       = document.getElementById("btnFinalizar");
-    metodoPagoSelect   = document.getElementById("metodoPago");
-    cedulaInput        = document.getElementById("cedulaCliente");
-    nombreClienteSpan  = document.getElementById("nombreCliente");
-    searchInput        = document.getElementById("searchInput");
+    btnFinalizar = document.getElementById("btnFinalizar");
+    metodoPagoSelect = document.getElementById("metodoPago");
+    cedulaInput = document.getElementById("cedulaCliente");
+    nombreClienteSpan = document.getElementById("nombreCliente");
+    searchInput = document.getElementById("searchInput");
 
-    montoAbonoInput    = document.getElementById("montoAbono");
+    montoAbonoInput = document.getElementById("montoAbono");
 
     facturarEmpresaCheckbox = document.getElementById("facturarEmpresa");
-    datosEmpresaDiv         = document.getElementById("datosEmpresa");
-    empresaNombreInput      = document.getElementById("empresaNombre");
+    datosEmpresaDiv = document.getElementById("datosEmpresa");
+    empresaNombreInput = document.getElementById("empresaNombre");
     empresaIdentificacionInput = document.getElementById("empresaIdentificacion");
 
     montoEfectivoInput = document.getElementById("montoEfectivo");
-    cambioTexto        = document.getElementById("cambioTexto");
-    bloqueEfectivo     = document.getElementById("bloqueEfectivo");
+    cambioTexto = document.getElementById("cambioTexto");
+    bloqueEfectivo = document.getElementById("bloqueEfectivo");
 
     validarEstadoCaja();
     cargarProductos();
@@ -74,27 +74,27 @@ document.addEventListener("DOMContentLoaded", () => {
             if (ced.length === 0) empresaNombreInput.value = "";
         });
     }
-    
-    
-const telefonoInput = document.getElementById("telefonoCliente");
-const telefonoError = document.getElementById("telefonoError");
 
-if (telefonoInput && telefonoError) {
-    telefonoInput.addEventListener("input", () => {
-        const valor = telefonoInput.value.replace(/\D/g, ""); // solo números
-        telefonoInput.value = valor;
 
-        if (valor.length > 0 && valor.length < 8) {
-            telefonoError.classList.remove("d-none");
-        } else {
-            telefonoError.classList.add("d-none");
-        }
-    });
-}
+    const telefonoInput = document.getElementById("telefonoCliente");
+    const telefonoError = document.getElementById("telefonoError");
 
-//cambio 
+    if (telefonoInput && telefonoError) {
+        telefonoInput.addEventListener("input", () => {
+            const valor = telefonoInput.value.replace(/\D/g, ""); // solo números
+            telefonoInput.value = valor;
 
- if (metodoPagoSelect) {
+            if (valor.length > 0 && valor.length < 8) {
+                telefonoError.classList.remove("d-none");
+            } else {
+                telefonoError.classList.add("d-none");
+            }
+        });
+    }
+
+    //cambio 
+
+    if (metodoPagoSelect) {
         metodoPagoSelect.addEventListener("change", manejarMetodoPago);
     }
 
@@ -102,7 +102,7 @@ if (telefonoInput && telefonoError) {
         montoEfectivoInput.addEventListener("input", calcularCambio);
     }
 
-    
+
     if (montoAbonoInput) {
         montoAbonoInput.addEventListener("input", calcularCambio);
     }
@@ -139,15 +139,15 @@ function cargarProductos() {
     })
         .then(res => res.json())
         .then(data => {
-          window.productos = data
-        .filter(p => parseInt(p.Cantidad) > 0)
-        .map(p => ({
-            id: parseInt(p.ProductoId),
-            nombre: p.Nombre,
-            precio: parseFloat(p.Precio),
-           descripcion: p.Descripcion || "",
-           imagen: p.Imagen || "no-image.jpg"
-        }));
+            window.productos = data
+                .filter(p => parseInt(p.Cantidad) > 0)
+                .map(p => ({
+                    id: parseInt(p.ProductoId),
+                    nombre: p.Nombre,
+                    precio: parseFloat(p.Precio),
+                    descripcion: p.Descripcion || "",
+                    imagen: p.Imagen || "no-image.jpg"
+                }));
 
             renderProductos();
         });
@@ -227,7 +227,7 @@ async function agregarAlCarrito(productId) {
     const stock = await obtenerStock(productId);
     const cantidadActual = existente ? existente.cantidad : 0;
 
-    
+
     if (cantidadActual >= stock) {
 
 
@@ -296,8 +296,8 @@ function calcularTotales() {
 
     cartSubtotal.textContent = subtotal.toFixed(2);
     cartDiscount.textContent = totalDescuento.toFixed(2);
-    cartTax.textContent      = totalImpuesto.toFixed(2);
-    cartTotal.textContent    = total.toFixed(2);
+    cartTax.textContent = totalImpuesto.toFixed(2);
+    cartTotal.textContent = total.toFixed(2);
 
     calcularCambio();
 }
@@ -391,17 +391,17 @@ function renderCarrito() {
                         </small>
 
                     </div>
-                    <div class="input-group input-group-sm item-control-cant" style="width:82px; flex-direction:column; align-items:flex-start; flex-shrink:0;">
-                        <span class="input-group-text">Desc.</span>
+                    <div class="input-group input-group-sm input-descuento" style="width:108px; flex-shrink:0;">
+                          <span class="input-group-text">Desc.</span>
 
-                        <input type="number" 
+                            <input type="number" 
                                min="0" 
                                max="100" 
                                value="${item.descuento}" 
                                class="form-control"
-                               onchange="actualizarDescuento(${item.id}, this.value)">
+                            onchange="actualizarDescuento(${item.id}, this.value)">
 
-                        <span class="input-group-text">%</span>
+                          <span class="input-group-text">%</span>
                     </div>
                     
                     <div class="input-group input-group-sm input-impuesto" style="width:108px; flex-shrink:0;">
@@ -437,7 +437,7 @@ async function validarCantidadTiempoReal(input) {
     let valor = parseInt(input.value) || 1;
     const stock = await obtenerStock(id);
 
-   const contenedor = input.closest(".input-group");
+    const contenedor = input.closest(".input-group");
     const mensaje = contenedor.querySelector(".stock-error");
 
     if (valor > stock) {
@@ -478,7 +478,7 @@ function mostrarMensajeStock(productId) {
             const mensaje = contenedor.querySelector(".stock-error");
             if (!mensaje) return;
 
-           
+
             mensaje.classList.remove("d-none");
 
             setTimeout(() => {
@@ -503,54 +503,54 @@ async function buscarCliente() {
 
         return;
     }
-try{
-    const res = await fetch(CONTROLLER_PATH, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "obtenerCliente", cedula: ced })
-    });
-
-    const data = await res.json();
-
-
-    /** si existe en bd **/
-    if (data?.PacienteId) {
-        nombreClienteSpan.textContent = data.NombreCompleto;
-        nombreClienteSpan.dataset.id = data.PacienteId;
-        nombreClienteSpan.dataset.nombre = data.NombreCompleto;
-        nombreClienteSpan.dataset.telefono = data.Telefono || "";
-
-        // mostrar teléfono
-        const telDiv = document.getElementById("telefonoClienteDiv");
-        const telInput = document.getElementById("telefonoCliente");
-
-        telDiv.style.display = "block";
-        telInput.value = data.Telefono || "";
-
-          sessionStorage.setItem("clientePOS", JSON.stringify(data));
-        return;
-    }
-
-    /** Si no esta registrado busca en Api**/
-    let nombreAPI = "";
-
     try {
-        const apiRes = await fetch(`https://apis.gometa.org/cedulas/${encodeURIComponent(ced)}`);
-        const apiData = await apiRes.json();
+        const res = await fetch(CONTROLLER_PATH, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "obtenerCliente", cedula: ced })
+        });
 
-        if (apiData?.results?.length > 0) {
-            const p = apiData.results[0];
+        const data = await res.json();
 
-            nombreAPI = `${p.firstname || ""} ${p.lastname1 || ""} ${p.lastname2 || ""}`.trim();
-            if (!nombreAPI && p.fullname) nombreAPI = p.fullname;
-            if (!nombreAPI && p.nombre)   nombreAPI = p.nombre;
+
+        /** si existe en bd **/
+        if (data?.PacienteId) {
+            nombreClienteSpan.textContent = data.NombreCompleto;
+            nombreClienteSpan.dataset.id = data.PacienteId;
+            nombreClienteSpan.dataset.nombre = data.NombreCompleto;
+            nombreClienteSpan.dataset.telefono = data.Telefono || "";
+
+            // mostrar teléfono
+            const telDiv = document.getElementById("telefonoClienteDiv");
+            const telInput = document.getElementById("telefonoCliente");
+
+            telDiv.style.display = "block";
+            telInput.value = data.Telefono || "";
+
+            sessionStorage.setItem("clientePOS", JSON.stringify(data));
+            return;
         }
 
-    } catch (error) {
-        console.error("Error consultando API:", error);
-    }
+        /** Si no esta registrado busca en Api**/
+        let nombreAPI = "";
 
-    nombreClienteSpan.innerHTML = `
+        try {
+            const apiRes = await fetch(`https://apis.gometa.org/cedulas/${encodeURIComponent(ced)}`);
+            const apiData = await apiRes.json();
+
+            if (apiData?.results?.length > 0) {
+                const p = apiData.results[0];
+
+                nombreAPI = `${p.firstname || ""} ${p.lastname1 || ""} ${p.lastname2 || ""}`.trim();
+                if (!nombreAPI && p.fullname) nombreAPI = p.fullname;
+                if (!nombreAPI && p.nombre) nombreAPI = p.nombre;
+            }
+
+        } catch (error) {
+            console.error("Error consultando API:", error);
+        }
+
+        nombreClienteSpan.innerHTML = `
             <span class="fw-semibold text-primary">
                 ${nombreAPI || "Cliente no encontrado"}
             </span><br>
@@ -561,16 +561,16 @@ try{
             </a>
         `;
 
-    nombreClienteSpan.dataset.id = "";
-    nombreClienteSpan.dataset.nombre = nombreAPI;
+        nombreClienteSpan.dataset.id = "";
+        nombreClienteSpan.dataset.nombre = nombreAPI;
 
-    // permitir digitar teléfono manual
-    const telDiv = document.getElementById("telefonoClienteDiv");
-    const telInput = document.getElementById("telefonoCliente");
+        // permitir digitar teléfono manual
+        const telDiv = document.getElementById("telefonoClienteDiv");
+        const telInput = document.getElementById("telefonoCliente");
 
-    telDiv.style.display = "block";
-    telInput.value = "";
-     sessionStorage.removeItem("clientePOS");
+        telDiv.style.display = "block";
+        telInput.value = "";
+        sessionStorage.removeItem("clientePOS");
 
     } catch (error) {
 
@@ -635,7 +635,7 @@ async function consultarEmpresaPorCedula(ced) {
 
         let nombre = `${p.firstname || ""} ${p.lastname1 || ""} ${p.lastname2 || ""}`.trim();
         if (!nombre && p.fullname) nombre = p.fullname;
-        if (!nombre && p.nombre)   nombre = p.nombre;
+        if (!nombre && p.nombre) nombre = p.nombre;
 
         empresaNombreInput.value = nombre;
 
@@ -687,19 +687,19 @@ async function validarEstadoCaja() {
 
 
 async function finalizarVenta() {
-    try{
+    try {
 
-    if (cart.length === 0) {
-        mostrarAlertaPOS("Debe agregar productos.");
-        return;
-    }
+        if (cart.length === 0) {
+            mostrarAlertaPOS("Debe agregar productos.");
+            return;
+        }
 
-    const subtotal = parseFloat(cartSubtotal.textContent);
-    const descuento = parseFloat(cartDiscount.textContent);
-    const iva = parseFloat(cartTax.textContent);
-    const total = parseFloat(cartTotal.textContent);
+        const subtotal = parseFloat(cartSubtotal.textContent);
+        const descuento = parseFloat(cartDiscount.textContent);
+        const iva = parseFloat(cartTax.textContent);
+        const total = parseFloat(cartTotal.textContent);
 
-    const montoAbono = parseFloat(montoAbonoInput?.value || 0);
+        const montoAbono = parseFloat(montoAbonoInput?.value || 0);
 
 
         if (isNaN(total)) {
@@ -707,131 +707,131 @@ async function finalizarVenta() {
             return;
         }
 
-    if (montoAbono < 0) {
-        mostrarAlertaPOS("El abono no puede ser negativo.");
-        return;
-    }
-
-    if (montoAbono > total) {
-        mostrarAlertaPOS("El abono no puede ser mayor al total de la factura.");
-        return;
-    }
-
-
-    //  VALIDACIÓN DE TELÉFONO (mínimo 8 dígitos)
-
-    const telefono = document.getElementById("telefonoCliente")?.value || "";
-    const soloNumeros = telefono.replace(/\D/g, "");
-
-    if (soloNumeros.length > 0 && soloNumeros.length < 8) {
-        document.getElementById("telefonoError").classList.remove("d-none");
-        mostrarAlertaPOS("El número de teléfono debe tener mínimo 8 dígitos.");
-        return;
-    }
- 
-
-
-const facturarEmpresa = facturarEmpresaCheckbox.checked;
-const metodoPago = metodoPagoSelect.value;
-
-let efectivo = 0;
-let cambio = 0;
-
-if (metodoPago === "efectivo") {
-
-    efectivo = parseFloat(montoEfectivoInput?.value || 0);
-
-    if (efectivo <= 0) {
-        mostrarAlertaPOS("Debe ingresar el efectivo recibido.");
-        return;
-    }
-
-    // con abono
-    if (montoAbono > 0) {
-
-        if (efectivo < montoAbono) {
-            mostrarAlertaPOS("El efectivo no cubre el abono.");
+        if (montoAbono < 0) {
+            mostrarAlertaPOS("El abono no puede ser negativo.");
             return;
         }
 
-        cambio = efectivo - montoAbono;
-
-    } 
-    //  sin abono
-    else {
-
-        if (efectivo < total) {
-            mostrarAlertaPOS("El efectivo es insuficiente.");
+        if (montoAbono > total) {
+            mostrarAlertaPOS("El abono no puede ser mayor al total de la factura.");
             return;
         }
 
-        cambio = efectivo - total;
-    }
-}
-    const payload = {
-        action: "generarVenta",
-        efectivo: efectivo,
-        cambio: cambio,
-        clienteId:     facturarEmpresa ? 0 : (nombreClienteSpan.dataset.id || 0),
-        clienteNombre: facturarEmpresa 
-            ? "" 
-            : (nombreClienteSpan.dataset.nombre || nombreClienteSpan.textContent || ""),
 
-        metodoPago: metodoPagoSelect.value,
-        telefono: telefono,  
+        //  VALIDACIÓN DE TELÉFONO (mínimo 8 dígitos)
 
-        facturarEmpresa: facturarEmpresa ? 1 : 0,
-        empresaNombre: facturarEmpresa ? empresaNombreInput.value : "",
-        empresaIdentificacion: facturarEmpresa ? empresaIdentificacionInput.value : "",
+        const telefono = document.getElementById("telefonoCliente")?.value || "";
+        const soloNumeros = telefono.replace(/\D/g, "");
 
-        cedulaIngresada: facturarEmpresa
-            ? empresaIdentificacionInput.value
-            : cedulaInput.value,    
-    
-        facturaElectronica: document.getElementById("facturaElectronica")?.checked ? 1 : 0,
-        montoAbono: montoAbono,
+        if (soloNumeros.length > 0 && soloNumeros.length < 8) {
+            document.getElementById("telefonoError").classList.remove("d-none");
+            mostrarAlertaPOS("El número de teléfono debe tener mínimo 8 dígitos.");
+            return;
+        }
 
-        productos: cart.map(i => ({
-            productoId: i.id,
-            descripcion: i.nombre,
-            cantidad: i.cantidad,
-            precioUnitario: i.precio,
-            descuento: i.descuento,
-            impuesto: i.impuesto || 0
-        }))
-    };
 
-    const res = await fetch(CONTROLLER_PATH, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    });
 
-    const result = await res.json();
+        const facturarEmpresa = facturarEmpresaCheckbox.checked;
+        const metodoPago = metodoPagoSelect.value;
 
-if (result.error === "CAJA_CERRADA") {
-    const modal = new bootstrap.Modal(
-        document.getElementById("modalCajaCerrada")
-    );
-    modal.show();
-    return;
-}
-    mostrarFacturaTicket(result.factura);
+        let efectivo = 0;
+        let cambio = 0;
 
-    window.cart = [];
-    cart = window.cart;
-    renderCarrito();
+        if (metodoPago === "efectivo") {
 
-    cedulaInput.value = "";
-    nombreClienteSpan.textContent = "Nombre del cliente aparecerá aquí";
-    nombreClienteSpan.dataset.id = "";
-    nombreClienteSpan.dataset.nombre = "";
+            efectivo = parseFloat(montoEfectivoInput?.value || 0);
 
-    montoAbonoInput.value = "";
+            if (efectivo <= 0) {
+                mostrarAlertaPOS("Debe ingresar el efectivo recibido.");
+                return;
+            }
 
-    document.getElementById("telefonoClienteDiv").style.display = "none";
+            // con abono
+            if (montoAbono > 0) {
 
-        } catch (error) {
+                if (efectivo < montoAbono) {
+                    mostrarAlertaPOS("El efectivo no cubre el abono.");
+                    return;
+                }
+
+                cambio = efectivo - montoAbono;
+
+            }
+            //  sin abono
+            else {
+
+                if (efectivo < total) {
+                    mostrarAlertaPOS("El efectivo es insuficiente.");
+                    return;
+                }
+
+                cambio = efectivo - total;
+            }
+        }
+        const payload = {
+            action: "generarVenta",
+            efectivo: efectivo,
+            cambio: cambio,
+            clienteId: facturarEmpresa ? 0 : (nombreClienteSpan.dataset.id || 0),
+            clienteNombre: facturarEmpresa
+                ? ""
+                : (nombreClienteSpan.dataset.nombre || nombreClienteSpan.textContent || ""),
+
+            metodoPago: metodoPagoSelect.value,
+            telefono: telefono,
+
+            facturarEmpresa: facturarEmpresa ? 1 : 0,
+            empresaNombre: facturarEmpresa ? empresaNombreInput.value : "",
+            empresaIdentificacion: facturarEmpresa ? empresaIdentificacionInput.value : "",
+
+            cedulaIngresada: facturarEmpresa
+                ? empresaIdentificacionInput.value
+                : cedulaInput.value,
+
+            facturaElectronica: document.getElementById("facturaElectronica")?.checked ? 1 : 0,
+            montoAbono: montoAbono,
+
+            productos: cart.map(i => ({
+                productoId: i.id,
+                descripcion: i.nombre,
+                cantidad: i.cantidad,
+                precioUnitario: i.precio,
+                descuento: i.descuento,
+                impuesto: i.impuesto || 0
+            }))
+        };
+
+        const res = await fetch(CONTROLLER_PATH, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+
+        if (result.error === "CAJA_CERRADA") {
+            const modal = new bootstrap.Modal(
+                document.getElementById("modalCajaCerrada")
+            );
+            modal.show();
+            return;
+        }
+        mostrarFacturaTicket(result.factura);
+
+        window.cart = [];
+        cart = window.cart;
+        renderCarrito();
+
+        cedulaInput.value = "";
+        nombreClienteSpan.textContent = "Nombre del cliente aparecerá aquí";
+        nombreClienteSpan.dataset.id = "";
+        nombreClienteSpan.dataset.nombre = "";
+
+        montoAbonoInput.value = "";
+
+        document.getElementById("telefonoClienteDiv").style.display = "none";
+
+    } catch (error) {
 
         console.error("Error en finalizarVenta:", error);
         mostrarAlertaPOS("Ocurrió un error al procesar la venta.");
@@ -875,26 +875,24 @@ function mostrarFacturaTicket(factura) {
             <strong>Factura #:</strong> ${encabezado.Id}<br>
             <strong>Fecha:</strong> ${encabezado.Fecha}<br>
             <strong>Pago:</strong> ${encabezado.MetodoPago}<br>
-            ${
-                        encabezado.MetodoPago === "efectivo"
-                            ? `
+            ${encabezado.MetodoPago === "efectivo"
+            ? `
                                 <strong>Recibido:</strong> ₡${encabezado.Efectivo || "0.00"}<br>
                             `
-                            : ""
-                    }
-            ${
-                esEmpresa
-                    ? `
+            : ""
+        }
+            ${esEmpresa
+            ? `
                         <strong>Empresa:</strong> ${empresaNombreEnc}<br>
                         <strong>Identificación:</strong> ${empresaIdentEnc}<br>
                     `
-                    : (
-                        encabezado.Cliente
-                            ? `<strong>Cliente:</strong> ${encabezado.Cliente}<br>
+            : (
+                encabezado.Cliente
+                    ? `<strong>Cliente:</strong> ${encabezado.Cliente}<br>
                                <strong>Teléfono:</strong> ${encabezado.Telefono || ""}<br>`
-                            : ""
-                    )
-            }
+                    : ""
+            )
+        }
 
             <hr>
 
@@ -927,17 +925,16 @@ function mostrarFacturaTicket(factura) {
             <strong>Descuento:</strong> -₡${encabezado.Descuento}<br>
             <strong>Impuesto:</strong> ₡${encabezado.IVA}<br>
             <hr>
-${
-    (parseFloat(encabezado.SaldoPendiente) > 0)
-        ? `
+${(parseFloat(encabezado.SaldoPendiente) > 0)
+            ? `
             <strong>Total factura:</strong> ₡${encabezado.Total}<br>
             <strong>Abono realizado:</strong> ₡${encabezado.Abono}<br>
             <strong>Pendiente:</strong> ₡${encabezado.SaldoPendiente}<br>
         `
-        : `
+            : `
             <h5 class="fw-bold">TOTAL: ₡${encabezado.Total}</h5>
         `
-}
+        }
 
 <hr>
             <p class="text-center">¡Gracias por su compra!</p>
@@ -974,7 +971,7 @@ ${
         setTimeout(() => modal.hide(), 300);
     };
 }
-   document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     const btnFinalizar = document.getElementById("btnFinalizar");
 

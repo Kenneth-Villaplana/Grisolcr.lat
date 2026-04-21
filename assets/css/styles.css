@@ -2116,9 +2116,10 @@ select.form-select,
 
 .cart-item-modern .item-controls {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 6px;
-  flex-wrap: nowrap !important;
+  flex-wrap: nowrap;
   width: 100%;
   overflow: hidden;
 }
@@ -2190,6 +2191,62 @@ select.form-select,
 .cart-item-modern .input-descuento .input-group-text,
 .cart-item-modern .input-impuesto .input-group-text {
   white-space: nowrap;
+}
+
+.cart-item-modern .input-descuento,
+.cart-item-modern .input-impuesto {
+  width: 108px !important;
+}
+
+.cart-item-modern {
+  overflow: hidden;
+}
+
+.cart-item-modern .item-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.cart-item-modern .item-controls::-webkit-scrollbar {
+  height: 6px;
+}
+
+.cart-item-modern .item-controls::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.cart-item-modern .item-controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cart-item-modern .item-total {
+  min-width: 110px;
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .cart-item-modern .item-title {
+    font-size: 0.95rem;
+  }
+
+  .cart-item-modern .item-controls {
+    gap: 8px;
+  }
+
+  .cart-item-modern .item-total {
+    min-width: 120px;
+  }
 }
 
 /* Inicio*/
