@@ -73,7 +73,8 @@ if (isset($_POST["btnCambiar"])) {
                     <input 
                         type="password" 
                         name="Contrasenna" 
-                        class="form-control campo-obligatorio" 
+                        class="form-control campo-obligatorio"
+                        placeholder="Nueva Contraseña"
                         required>
                 </div>
 
@@ -83,6 +84,7 @@ if (isset($_POST["btnCambiar"])) {
                         type="password" 
                         name="Confirmar" 
                         class="form-control campo-obligatorio" 
+                        placeholder="Confirmar Contraseña"
                         required>
                 </div>
                 <div class="col-12 text-center mt-3">
