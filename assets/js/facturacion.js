@@ -441,15 +441,25 @@ function renderizarPaginacionFacturas() {
         </li>
     `;
 
-    for (let i = 1; i <= totalPaginas; i++) {
-        contenedor.innerHTML += `
-            <li class="page-item ${paginaActualFacturas === i ? "active" : ""}">
-                <button class="page-link" onclick="cambiarPaginaFacturas(${i})">
-                    ${i}
-                </button>
-            </li>
-        `;
-    }
+    const paginasVisibles = generarPaginasVisibles(paginaActualFacturas, totalPaginas);
+
+    paginasVisibles.forEach(pagina => {
+        if (pagina === "...") {
+            contenedor.innerHTML += `
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+            `;
+        } else {
+            contenedor.innerHTML += `
+                <li class="page-item ${paginaActualFacturas === pagina ? "active" : ""}">
+                    <button class="page-link" onclick="cambiarPaginaFacturas(${pagina})">
+                        ${pagina}
+                    </button>
+                </li>
+            `;
+        }
+    });
 
     contenedor.innerHTML += `
         <li class="page-item ${paginaActualFacturas === totalPaginas ? "disabled" : ""}">
@@ -460,6 +470,47 @@ function renderizarPaginacionFacturas() {
     `;
 }
 
+function generarPaginasVisibles(paginaActual, totalPaginas) {
+    const paginas = [];
+
+    if (totalPaginas <= 9) {
+        for (let i = 1; i <= totalPaginas; i++) {
+            paginas.push(i);
+        }
+        return paginas;
+    }
+
+    paginas.push(1);
+
+    let inicio = Math.max(2, paginaActual - 2);
+    let fin = Math.min(totalPaginas - 1, paginaActual + 2);
+
+    if (paginaActual <= 4) {
+        inicio = 2;
+        fin = 6;
+    }
+
+    if (paginaActual >= totalPaginas - 3) {
+        inicio = totalPaginas - 5;
+        fin = totalPaginas - 1;
+    }
+
+    if (inicio > 2) {
+        paginas.push("...");
+    }
+
+    for (let i = inicio; i <= fin; i++) {
+        paginas.push(i);
+    }
+
+    if (fin < totalPaginas - 1) {
+        paginas.push("...");
+    }
+
+    paginas.push(totalPaginas);
+
+    return paginas;
+}
 
 function cambiarPaginaFacturas(pagina) {
     const totalPaginas = Math.ceil(facturasGlobal.length / facturasPorPagina);
