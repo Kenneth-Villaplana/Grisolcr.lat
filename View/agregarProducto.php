@@ -147,7 +147,7 @@ require_once __DIR__ . '/layout.php';
 
                     if (archivo.size > maxSizeBytes) {
                         imagenValida = false;
-                        mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
+                        mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.Intentalo nuevamente.`);
                         inputImagen.value = "";
                         nombreArchivo.textContent = "Ningún archivo seleccionado";
                         uploadBox.classList.remove("active");

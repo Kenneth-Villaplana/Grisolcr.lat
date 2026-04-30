@@ -234,7 +234,7 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                     const archivo = files[0];
 
                     if (archivo.size > maxSizeBytes) {
-                        mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
+                        mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB. Intentalo nuevamente.`);
                         inputImagen.value = "";
                         inputImagen.dataset.imagenInvalida = "true";
                         nombreArchivo.textContent = "Ningún archivo seleccionado";
