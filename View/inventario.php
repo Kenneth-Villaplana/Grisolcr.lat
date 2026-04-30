@@ -17,11 +17,33 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 /* OBTENER PRODUCTOS */
 
-$listaProductos = ObtenerProductos($productoFiltro);
+$listaProductosCompleta = ObtenerProductos($productoFiltro);
+
+/* PAGINACIÓN */
+
+$registrosPorPagina = 10;
+$paginaActual = isset($_GET['pagina']) && is_numeric($_GET['pagina'])
+    ? intval($_GET['pagina'])
+    : 1;
+
+if ($paginaActual < 1) {
+    $paginaActual = 1;
+}
+
+$totalRegistros = count($listaProductosCompleta);
+$totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+
+$inicio = ($paginaActual - 1) * $registrosPorPagina;
+
+$listaProductos = array_slice(
+    $listaProductosCompleta,
+    $inicio,
+    $registrosPorPagina
+);
 
 /* PRODUCTOS CON INVENTARIO BAJO */
 
-$productosBajos = array_filter($listaProductos, function ($producto) {
+$productosBajos = array_filter($listaProductosCompleta, function ($producto) {
     $cantidad = isset($producto['Cantidad']) ? (int) $producto['Cantidad'] : 0;
     return $cantidad <= 10;
 });
@@ -152,7 +174,8 @@ $productosBajos = array_filter($listaProductos, function ($producto) {
                         Filtrar por ID
                     </label>
 
-                    <input type="text" id="codigoInput" class="form-control inventario-input" placeholder="ID del producto"
+                    <input type="text" id="codigoInput" class="form-control inventario-input"
+                        placeholder="ID del producto"
                         value="<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>">
 
                 </div>
@@ -292,6 +315,34 @@ $productosBajos = array_filter($listaProductos, function ($producto) {
             <?php } ?>
 
         </div>
+
+        <?php if ($totalPaginas > 1 && $productoFiltro === null): ?>
+            <nav class="mt-5 d-flex justify-content-center" aria-label="Paginación de productos">
+                <ul class="pagination">
+
+                    <li class="page-item <?php echo ($paginaActual <= 1) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="inventario.php?pagina=<?php echo $paginaActual - 1; ?>">
+                            Anterior
+                        </a>
+                    </li>
+
+                    <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+                        <li class="page-item <?php echo ($i == $paginaActual) ? 'active' : ''; ?>">
+                            <a class="page-link" href="inventario.php?pagina=<?php echo $i; ?>">
+                                <?php echo $i; ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <li class="page-item <?php echo ($paginaActual >= $totalPaginas) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="inventario.php?pagina=<?php echo $paginaActual + 1; ?>">
+                            Siguiente
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        <?php endif; ?>
 
     </section>
 
