@@ -122,7 +122,7 @@ require_once __DIR__ . '/layout.php';
             const formAgregar = document.getElementById("formAgregarProducto");
             const mensajeError = document.getElementById("mensajeError");
 
-            const maxSizeMB = 5;
+            const maxSizeMB = 1;
             const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
             function mostrarError(msg) {
@@ -188,6 +188,10 @@ require_once __DIR__ . '/layout.php';
                 });
 
                 uploadBox.addEventListener("drop", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadBox.classList.remove("dragover");
+
                     const files = e.dataTransfer.files;
 
                     if (files && files.length > 0) {

@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$tamanoMaximoImagen = 5 * 1024 * 1024; // 5 MB
+$tamanoMaximoImagen = 1 * 1024 * 1024; // 5 MB
 $extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
 
 
