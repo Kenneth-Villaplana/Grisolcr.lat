@@ -30,6 +30,7 @@ $historialPaginado = array_slice($historial, $inicio, $porPagina);
 
 <body>
     <?php MostrarMenu(); ?>
+    <?php IncluirCSS(); ?>
 
     <main class="hc-main-wrapper">
         <div class="container-xl px-4"></div>
