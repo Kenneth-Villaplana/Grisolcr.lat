@@ -10,6 +10,7 @@ if (session_status() == PHP_SESSION_NONE) {
 /* FILTRO POR ID */
 
 $productoFiltro = null;
+$busquedaNombre = isset($_GET['buscar']) ? trim($_GET['buscar']) : '';
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $productoFiltro = intval($_GET['id']);
@@ -18,6 +19,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 /* OBTENER PRODUCTOS */
 
 $listaProductosCompleta = ObtenerProductos($productoFiltro);
+
+/* Filtro por nombre */
+
+if ($busquedaNombre !== '') {
+    $listaProductosCompleta = array_filter($listaProductosCompleta, function ($producto) use ($busquedaNombre) {
+        return stripos($producto['Nombre'], $busquedaNombre) !== false;
+    });
+}
 
 /* PAGINACIÓN */
 
@@ -323,7 +332,7 @@ $productosBajos = array_filter($listaProductosCompleta, function ($producto) {
                 <ul class="pagination justify-content-center align-items-center gap-2">
 
                     <li class="page-item <?php echo ($paginaActual <= 1) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="inventario.php?pagina=<?php echo $paginaActual - 1; ?>">
+                        <a class="page-link" href="inventario.php?pagina=<?php echo $i; ?>&buscar=<?php echo urlencode($busquedaNombre); ?>&id=<?php echo $productoFiltro; ?>">
                             ‹ Anterior
                         </a>
                     </li>
