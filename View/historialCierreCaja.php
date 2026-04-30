@@ -85,7 +85,7 @@ require_once __DIR__ . '/layout.php';
                         </table>
                     </div>
 
-                    <div class="d-flex justify-content-center mt-4">
+                    <div class="d-flex justify-content-center mt-4 app-pagination">
                         <nav>
                             <ul class="pagination cierre-pagination mb-0" id="paginacionCierres">
                                 <!-- JS inserta paginación aquí -->
