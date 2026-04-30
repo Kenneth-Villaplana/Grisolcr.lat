@@ -173,7 +173,7 @@ $productosBajos = array_filter($listaProductosCompleta, function ($producto) {
 
                     <input type="text" id="searchInput" class="form-control buscador-producto inventario-input"
                         placeholder="Ingrese nombre del producto...">
-
+                    value="<?php echo htmlspecialchars($busquedaNombre); ?>">
                 </div>
 
 
@@ -332,21 +332,24 @@ $productosBajos = array_filter($listaProductosCompleta, function ($producto) {
                 <ul class="pagination justify-content-center align-items-center gap-2">
 
                     <li class="page-item <?php echo ($paginaActual <= 1) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="inventario.php?pagina=<?php echo $i; ?>&buscar=<?php echo urlencode($busquedaNombre); ?>&id=<?php echo $productoFiltro; ?>">
+                        <a class="page-link"
+                            href="inventario.php?pagina=<?php echo $paginaActual - 1; ?>&buscar=<?php echo urlencode($busquedaNombre); ?>">
                             ‹ Anterior
                         </a>
                     </li>
 
                     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
                         <li class="page-item <?php echo ($i == $paginaActual) ? 'active' : ''; ?>">
-                            <a class="page-link" href="inventario.php?pagina=<?php echo $i; ?>">
+                            <a class="page-link"
+                                href="inventario.php?pagina=<?php echo $i; ?>&buscar=<?php echo urlencode($busquedaNombre); ?>">
                                 <?php echo $i; ?>
                             </a>
                         </li>
                     <?php endfor; ?>
 
                     <li class="page-item <?php echo ($paginaActual >= $totalPaginas) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="inventario.php?pagina=<?php echo $paginaActual + 1; ?>">
+                        <a class="page-link"
+                            href="inventario.php?pagina=<?php echo $paginaActual + 1; ?>&buscar=<?php echo urlencode($busquedaNombre); ?>">
                             Siguiente ›
                         </a>
                     </li>

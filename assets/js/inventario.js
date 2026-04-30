@@ -52,13 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (searchInput) {
-        searchInput.addEventListener('keyup', filtrarProductos);
-    }
+    //if (searchInput) {
+      //  searchInput.addEventListener('keyup', filtrarProductos);
+    //}
 
-    if (inputCodigo) {
-        inputCodigo.addEventListener('keyup', filtrarProductos);
-    }
+   // if (inputCodigo) {
+    //    inputCodigo.addEventListener('keyup', filtrarProductos);
+    //}
 
     /* ============================= */
     /* BUSCAR POR ID (RECARGA) */
