@@ -1,3 +1,6 @@
+let facturasGlobal = [];
+let paginaActualFacturas = 1;
+const facturasPorPagina = 5;
 
 const CONTROLLER_PATH = "/Controller/facturacionController.php";
 
@@ -33,30 +36,28 @@ async function cargarFacturas(filtro = {}) {
 
     try {
 
-        const res = await fetch(CONTROLLER_PATH, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                action: "obtenerFacturas",
-                ...filtro
-            })
-        });
+const facturas = await res.json();
+body.innerHTML = "";
 
-        const facturas = await res.json();
-        body.innerHTML = "";
+if (!Array.isArray(facturas) || facturas.length === 0) {
+    facturasGlobal = [];
+    renderizarPaginacionFacturas();
 
-        if (!Array.isArray(facturas) || facturas.length === 0) {
-            body.innerHTML = `
-                <tr>
-                    <td colspan="9" class="text-center text-muted py-4">
-                        No se encontraron facturas.
-                    </td>
-                </tr>
-            `;
-            return;
-        }
+    body.innerHTML = `
+        <tr>
+            <td colspan="10" class="text-center text-muted py-4">
+                No se encontraron facturas.
+            </td>
+        </tr>
+    `;
+    return;
+}
 
-        facturas.forEach(f => agregarFilaFactura(f));
+facturasGlobal = facturas;
+paginaActualFacturas = 1;
+
+mostrarFacturasPaginadas();
+renderizarPaginacionFacturas();
 
     } catch (error) {
 
@@ -393,6 +394,68 @@ function imprimirReciboAbono() {
             <body>${contenido}</body>
         </html>
     `);
+
+    function mostrarFacturasPaginadas() {
+    const body = document.getElementById("facturas-body");
+    if (!body) return;
+
+    body.innerHTML = "";
+
+    const inicio = (paginaActualFacturas - 1) * facturasPorPagina;
+    const fin = inicio + facturasPorPagina;
+    const facturasPagina = facturasGlobal.slice(inicio, fin);
+
+    facturasPagina.forEach(f => agregarFilaFactura(f));
+}
+
+
+function renderizarPaginacionFacturas() {
+    const contenedor = document.getElementById("paginacionFacturas");
+    if (!contenedor) return;
+
+    contenedor.innerHTML = "";
+
+    const totalPaginas = Math.ceil(facturasGlobal.length / facturasPorPagina);
+
+    if (totalPaginas <= 1) return;
+
+    contenedor.innerHTML += `
+        <li class="page-item ${paginaActualFacturas === 1 ? "disabled" : ""}">
+            <button class="page-link" onclick="cambiarPaginaFacturas(${paginaActualFacturas - 1})">
+                ‹ Anterior
+            </button>
+        </li>
+    `;
+
+    for (let i = 1; i <= totalPaginas; i++) {
+        contenedor.innerHTML += `
+            <li class="page-item ${paginaActualFacturas === i ? "active" : ""}">
+                <button class="page-link" onclick="cambiarPaginaFacturas(${i})">
+                    ${i}
+                </button>
+            </li>
+        `;
+    }
+
+    contenedor.innerHTML += `
+        <li class="page-item ${paginaActualFacturas === totalPaginas ? "disabled" : ""}">
+            <button class="page-link" onclick="cambiarPaginaFacturas(${paginaActualFacturas + 1})">
+                Siguiente ›
+            </button>
+        </li>
+    `;
+}
+
+
+function cambiarPaginaFacturas(pagina) {
+    const totalPaginas = Math.ceil(facturasGlobal.length / facturasPorPagina);
+
+    if (pagina < 1 || pagina > totalPaginas) return;
+
+    paginaActualFacturas = pagina;
+    mostrarFacturasPaginadas();
+    renderizarPaginacionFacturas();
+}
 
     ventana.document.close();
     ventana.focus();

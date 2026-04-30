@@ -49,7 +49,8 @@ $controller = new PuntoVentaController();
             <!-- Filtro número -->
             <div class="form-group">
               <label class="form-label mb-1">Número de factura</label>
-              <input type="text" id="codigoInput" class="form-control filtro-input text-center" placeholder="Número de factura">
+              <input type="text" id="codigoInput" class="form-control filtro-input text-center"
+                placeholder="Número de factura">
             </div>
 
             <!-- Filtro cédula -->
@@ -99,6 +100,14 @@ $controller = new PuntoVentaController();
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="d-flex justify-content-center mt-4 app-pagination">
+        <nav>
+          <ul class="pagination mb-0" id="paginacionFacturas">
+            <!-- JS inserta paginación aquí -->
+          </ul>
+        </nav>
       </div>
 
     </div>
