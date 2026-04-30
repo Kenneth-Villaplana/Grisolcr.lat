@@ -5985,7 +5985,6 @@ canvas {
 }
 
 .hc-header {
-  border-left: 5px solid #2563eb;
   padding-left: 14px;
 }
 
@@ -5999,6 +5998,25 @@ canvas {
 .hc-header-subtitle {
   color: #6b7280;
   font-size: 0.93rem;
+}
+
+.btn-back-custom {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-weight: 600;
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-back-custom:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
+    color: #0f172a;
 }
 
 
