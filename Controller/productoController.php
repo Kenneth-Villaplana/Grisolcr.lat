@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$tamanoMaximoImagen = 1 * 1024 * 1024; // 5 MB
+$tamanoMaximoImagen = 1 * 1024 * 1024; // 
 $extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
 
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])
     if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
 
         if ($_FILES['Imagen']['size'] > $tamanoMaximoImagen) {
-            header("Location: ../View/agregarProducto.php?error=" . urlencode("La imagen es muy pesada. Máximo permitido: 5 MB."));
+            header("Location: ../View/agregarProducto.php?error=" . urlencode("La imagen es muy pesada. Máximo permitido: 1 MB."));
             exit;
         }
 
@@ -122,7 +122,7 @@ if (isset($_POST["btnEditarProducto"])) {
     if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
 
         if ($_FILES['Imagen']['size'] > $tamanoMaximoImagen) {
-            $_SESSION["txtMensaje"] = "La imagen es muy pesada. Máximo permitido: 5 MB.";
+            $_SESSION["txtMensaje"] = "La imagen es muy pesada. Máximo permitido: 1 MB.";
             header("Location: ../View/editarProducto.php?id=" . $productoId);
             exit;
         }

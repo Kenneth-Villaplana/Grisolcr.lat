@@ -125,6 +125,8 @@ require_once __DIR__ . '/layout.php';
             const maxSizeMB = 1;
             const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
+            let imagenValida = true;
+
             function mostrarError(msg) {
                 if (!mensajeError) return;
                 mensajeError.textContent = msg;
@@ -138,10 +140,13 @@ require_once __DIR__ . '/layout.php';
             }
 
             function validarImagen(files) {
+                imagenValida = true;
+
                 if (files && files.length > 0) {
                     const archivo = files[0];
 
                     if (archivo.size > maxSizeBytes) {
+                        imagenValida = false;
                         mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
                         inputImagen.value = "";
                         nombreArchivo.textContent = "Ningún archivo seleccionado";
@@ -205,8 +210,10 @@ require_once __DIR__ . '/layout.php';
 
             if (formAgregar && inputImagen) {
                 formAgregar.addEventListener("submit", function (e) {
-                    if (!validarImagen(inputImagen.files)) {
+                    if (!imagenValida || !validarImagen(inputImagen.files)) {
                         e.preventDefault();
+                        mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
+                        return false;
                     }
                 });
             }

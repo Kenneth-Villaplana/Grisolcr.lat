@@ -213,6 +213,8 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
             const maxSizeMB = 1;
             const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
+            let imagenValida = true;
+
             function mostrarError(msg) {
                 if (!mensajeError) return;
                 mensajeError.textContent = msg;
@@ -226,10 +228,13 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
             }
 
             function validarImagen(files) {
+                imagenValida = true;
+
                 if (files && files.length > 0) {
                     const archivo = files[0];
 
                     if (archivo.size > maxSizeBytes) {
+                        imagenValida = false;
                         mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
                         inputImagen.value = "";
                         nombreArchivo.textContent = "Ningún archivo seleccionado";
@@ -292,10 +297,12 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
             }
         });
 
-        if (formEditar && inputImagen) {
-            formEditar.addEventListener("submit", function (e) {
-                if (!validarImagen(inputImagen.files)) {
+        if (formAgregar && inputImagen) {
+            formAgregar.addEventListener("submit", function (e) {
+                if (!imagenValida || !validarImagen(inputImagen.files)) {
                     e.preventDefault();
+                    mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
+                    return false;
                 }
             });
         }
