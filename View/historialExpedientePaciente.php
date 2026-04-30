@@ -59,7 +59,7 @@ $historialPaginado = array_slice($historial, $inicio, $porPagina);
 
             <div class="d-flex justify-content-end mb-3">
                 <a href="historialExpedientes.php" class="btn btn-back-custom">
-                    <i class="bi bi-arrow-left"></i> Volver
+                    <i class="bi bi-arrow-left"></i>Volver
                 </a>
             </div>
 
@@ -188,7 +188,7 @@ $historialPaginado = array_slice($historial, $inicio, $porPagina);
 
     <?php MostrarFooter(); ?>
     <?php IncluirScripts(); ?>
-    
+
     <script src="/assets/js/receta.js?v=5"></script>
 </body>
 

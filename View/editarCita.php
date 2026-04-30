@@ -10,14 +10,14 @@ procesarAccionesCita();
 
 $citas = obtenerCitasSegunRol();
 
-usort($citas, function($a, $b) {
+usort($citas, function ($a, $b) {
 
     $fechaA = new DateTime($a['Fecha']);
     $fechaB = new DateTime($b['Fecha']);
     $now = new DateTime();
 
     // Determinar tipo de cita
-    $getPrioridad = function($cita, $fecha) use ($now) {
+    $getPrioridad = function ($cita, $fecha) use ($now) {
 
         $estado = strtolower($cita['Estado']);
 
@@ -29,8 +29,10 @@ usort($citas, function($a, $b) {
             return ($fecha >= $now) ? 1 : 2;
         }
 
-        if ($estado === 'finalizada') return 3;
-        if ($estado === 'cancelada') return 4;
+        if ($estado === 'finalizada')
+            return 3;
+        if ($estado === 'cancelada')
+            return 4;
 
         return 5;
     };
@@ -38,14 +40,24 @@ usort($citas, function($a, $b) {
     $prioridadA = $getPrioridad($a, $fechaA);
     $prioridadB = $getPrioridad($b, $fechaB);
 
-    
+
     if ($prioridadA !== $prioridadB) {
         return $prioridadA - $prioridadB;
     }
 
-  
+
     return $fechaA <=> $fechaB;
 });
+
+$citasPorPagina = 10;
+    $paginaActual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
+    $paginaActual = max(1, $paginaActual);
+
+    $totalCitas = count($citas);
+    $totalPaginas = ceil($totalCitas / $citasPorPagina);
+
+    $inicio = ($paginaActual - 1) * $citasPorPagina;
+    $citasPaginadas = array_slice($citas, $inicio, $citasPorPagina);
 
 $mensajeExito = $_SESSION['mensaje_exito'] ?? "";
 $mensajeError = $_SESSION['mensaje_error'] ?? "";
@@ -56,13 +68,14 @@ if (!isset($_SESSION['UsuarioID'])) {
     exit;
 }
 
-$rolName    = $_SESSION['RolID']  ?? '';
-$rolId      = $_SESSION['Id_rol'] ?? null;
+$rolName = $_SESSION['RolID'] ?? '';
+$rolId = $_SESSION['Id_rol'] ?? null;
 $isPaciente = ($rolName === 'Paciente');
 $isEmpleado = ($rolName === 'Empleado');
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -76,428 +89,459 @@ $isEmpleado = ($rolName === 'Empleado');
 </head>
 
 <body class="bg-main">
-<?php MostrarMenu(); ?>
+    <?php MostrarMenu(); ?>
 
-<div class="container py-4">
+    <div class="container py-4">
 
-    
-    <div class="app-header text-center mb-5">
-        <div class="header-premium-icon">
-            <i data-lucide="calendar-clock"></i>
-        </div>
-        <h1 class="header-premium-title">
-            <?= $isPaciente ? 'Mis Citas' : 'Gestión de Citas' ?>
-        </h1>
-        <p class="header-premium-subtitle">
-            <?= $isPaciente
-                ? 'Gestiona y revisa todas tus citas programadas'
-                : 'Sistema interno para administrar las citas de los pacientes' ?>
-        </p>
-    </div>
 
-    
-    <div class="citas-filters mb-4">
-        <div class="filter-card">
-            <div class="filter-group">
-                <label class="filter-label"><i data-lucide="calendar"></i> Desde</label>
-                <input type="text" id="filterFrom" class="form-control" placeholder="Fecha inicio">
+        <div class="app-header text-center mb-5">
+            <div class="header-premium-icon">
+                <i data-lucide="calendar-clock"></i>
             </div>
-
-            <div class="filter-group">
-                <label class="filter-label"><i data-lucide="calendar"></i> Hasta</label>
-                <input type="text" id="filterTo" class="form-control" placeholder="Fecha fin">
-            </div>
-
-            <div class="filter-group filter-actions">
-                <button class="btn btn-outline-secondary" id="clearFilters">
-                    <i data-lucide="trash-2"></i> Limpiar
-                </button>
-            </div>
-        </div>
-    </div>
-
-  
-    <?php if ($mensajeExito): ?>
-        <div class="alert alert-success alert-dismissible fade show">
-            <i data-lucide="check-circle-2" class="me-2"></i><?= htmlspecialchars($mensajeExito) ?>
-            <button class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php endif; ?>
-
-    <?php if ($mensajeError): ?>
-        <div class="alert alert-danger alert-dismissible fade show">
-            <i data-lucide="alert-triangle" class="me-2"></i><?= htmlspecialchars($mensajeError) ?>
-            <button class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php endif; ?>
-
-    <?php if ($rolId == 4): ?>
-        <div class="no-permission text-center">
-            <i data-lucide="ban"></i>
-            <h4 class="mt-3">Acceso Restringido</h4>
-            <p>El rol de Cajero/a no tiene permisos para gestionar citas.</p>
-        </div>
-    <?php else: ?>
-
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4><?= $isPaciente ? 'Citas Programadas' : 'Todas las Citas del Sistema' ?></h4>
-
-            <?php if ($isEmpleado): ?>
-                <a href="agendarCita.php" class="btn btn-primary">
-                    <i data-lucide="plus-circle"></i> Nueva Cita
-                </a>
-            <?php endif; ?>
+            <h1 class="header-premium-title">
+                <?= $isPaciente ? 'Mis Citas' : 'Gestión de Citas' ?>
+            </h1>
+            <p class="header-premium-subtitle">
+                <?= $isPaciente
+                    ? 'Gestiona y revisa todas tus citas programadas'
+                    : 'Sistema interno para administrar las citas de los pacientes' ?>
+            </p>
         </div>
 
-        <div class="citas-container">
 
-            <?php if (empty($citas)): ?>
-                <div class="empty-state">
-                    <i data-lucide="calendar-x"></i>
-                    <h4>No hay citas registradas</h4>
+        <div class="citas-filters mb-4">
+            <div class="filter-card">
+                <div class="filter-group">
+                    <label class="filter-label"><i data-lucide="calendar"></i> Desde</label>
+                    <input type="text" id="filterFrom" class="form-control" placeholder="Fecha inicio">
                 </div>
-            <?php else: ?>
 
-                <?php foreach ($citas as $cita): ?>
-                    <?php
-                        $fechaHora  = new DateTime($cita['Fecha']);
-                        $fechaForm  = $fechaHora->format('d/m/Y');
-                        $horaForm   = $fechaHora->format('H:i');
+                <div class="filter-group">
+                    <label class="filter-label"><i data-lucide="calendar"></i> Hasta</label>
+                    <input type="text" id="filterTo" class="form-control" placeholder="Fecha fin">
+                </div>
+
+                <div class="filter-group filter-actions">
+                    <button class="btn btn-outline-secondary" id="clearFilters">
+                        <i data-lucide="trash-2"></i> Limpiar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <?php if ($mensajeExito): ?>
+            <div class="alert alert-success alert-dismissible fade show">
+                <i data-lucide="check-circle-2" class="me-2"></i><?= htmlspecialchars($mensajeExito) ?>
+                <button class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($mensajeError): ?>
+            <div class="alert alert-danger alert-dismissible fade show">
+                <i data-lucide="alert-triangle" class="me-2"></i><?= htmlspecialchars($mensajeError) ?>
+                <button class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($rolId == 4): ?>
+            <div class="no-permission text-center">
+                <i data-lucide="ban"></i>
+                <h4 class="mt-3">Acceso Restringido</h4>
+                <p>El rol de Cajero/a no tiene permisos para gestionar citas.</p>
+            </div>
+        <?php else: ?>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4><?= $isPaciente ? 'Citas Programadas' : 'Todas las Citas del Sistema' ?></h4>
+
+                <?php if ($isEmpleado): ?>
+                    <a href="agendarCita.php" class="btn btn-primary">
+                        <i data-lucide="plus-circle"></i> Nueva Cita
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <div class="citas-container">
+
+                <?php if (empty($citas)): ?>
+                    <div class="empty-state">
+                        <i data-lucide="calendar-x"></i>
+                        <h4>No hay citas registradas</h4>
+                    </div>
+                <?php else: ?>
+
+                    <?php foreach ($citasPaginadas as $cita): ?>
+                        <?php
+                        $fechaHora = new DateTime($cita['Fecha']);
+                        $fechaForm = $fechaHora->format('d/m/Y');
+                        $horaForm = $fechaHora->format('H:i');
                         $inputFecha = $fechaHora->format('Y-m-d');
-                        $inputHora  = $fechaHora->format('H:i');
+                        $inputHora = $fechaHora->format('H:i');
                         $citaPasada = ($fechaHora < new DateTime());
-                        $puedeModificar = (!$citaPasada && in_array($cita['Estado'], ['pendiente','confirmada']));
-                    ?>
+                        $puedeModificar = (!$citaPasada && in_array($cita['Estado'], ['pendiente', 'confirmada']));
+                        ?>
 
-                    <div class="cita-card <?= $citaPasada ? 'cita-pasada' : '' ?> estado-<?= strtolower($cita['Estado']) ?>"
-                         data-fecha="<?= $inputFecha ?>">
+                        <div class="cita-card <?= $citaPasada ? 'cita-pasada' : '' ?> estado-<?= strtolower($cita['Estado']) ?>"
+                            data-fecha="<?= $inputFecha ?>">
 
-                        <div class="cita-header">
-                            <div>
-                                <h5>
-                                    <i data-lucide="file-text"></i>
-                                    <span class="motivo-label">Motivo:</span>
-                                    <?= htmlspecialchars($cita['Motivo'] ?? '—') ?>
-                                </h5>
-                                <p>
-                                    ID #<?= (int)$cita['IdCita'] ?>
-                                   <?php if (!$isPaciente): ?>
-
-                                    <?php 
-                                        $nombrePaciente = "";
-
-                                        if (!empty($cita['PacienteNombre'])) {
-                                            $nombrePaciente = $cita['PacienteNombre'] . ' ' . ($cita['PacienteApellido'] ?? '');
-                                        } 
-                                        elseif (!empty($cita['PacienteNombreExt'])) {
-                                            $nombrePaciente = $cita['PacienteNombreExt'] . ' ' . ($cita['PacienteApellidoExt'] ?? '');
-                                        }
-                                    ?>
-
-                                    <?php if (!empty($nombrePaciente)): ?>
-                                        | Paciente: <?= htmlspecialchars($nombrePaciente) ?>
-                                    <?php endif; ?>
-
-                                <?php endif; ?>
-                                </p>
-                            </div>
-
-                            <span class="estado-badge estado-<?= strtolower($cita['Estado']) ?>">
-                                <?= ucfirst($cita['Estado']) ?>
-                            </span>
-                            <?php if ($citaPasada && $cita['Estado'] === 'pendiente'): ?>
-                                <span class="badge bg-warning text-dark ms-2">Vencida</span>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="cita-info-grid">
-                            <div class="info-item">
-                                <i data-lucide="calendar"></i>
-                                <div><strong>Fecha:</strong><br><?= $fechaForm ?></div>
-                            </div>
-
-                            <div class="info-item">
-                                <i data-lucide="clock"></i>
-                                <div><strong>Hora:</strong><br><?= $horaForm ?></div>
-                            </div>
-
-                            <div class="info-item">
-                                <i data-lucide="user-round"></i>
+                            <div class="cita-header">
                                 <div>
-                                    <strong>Profesional:</strong><br>
-                                    <?= !empty($cita['EmpleadoNombre'])
-                                        ? htmlspecialchars($cita['EmpleadoNombre'].' '.$cita['EmpleadoApellido'])
-                                        : '<span class="text-muted">No asignado</span>' ?>
+                                    <h5>
+                                        <i data-lucide="file-text"></i>
+                                        <span class="motivo-label">Motivo:</span>
+                                        <?= htmlspecialchars($cita['Motivo'] ?? '—') ?>
+                                    </h5>
+                                    <p>
+                                        ID #<?= (int) $cita['IdCita'] ?>
+                                        <?php if (!$isPaciente): ?>
+
+                                            <?php
+                                            $nombrePaciente = "";
+
+                                            if (!empty($cita['PacienteNombre'])) {
+                                                $nombrePaciente = $cita['PacienteNombre'] . ' ' . ($cita['PacienteApellido'] ?? '');
+                                            } elseif (!empty($cita['PacienteNombreExt'])) {
+                                                $nombrePaciente = $cita['PacienteNombreExt'] . ' ' . ($cita['PacienteApellidoExt'] ?? '');
+                                            }
+                                            ?>
+
+                                            <?php if (!empty($nombrePaciente)): ?>
+                                                | Paciente: <?= htmlspecialchars($nombrePaciente) ?>
+                                            <?php endif; ?>
+
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
+
+                                <span class="estado-badge estado-<?= strtolower($cita['Estado']) ?>">
+                                    <?= ucfirst($cita['Estado']) ?>
+                                </span>
+                                <?php if ($citaPasada && $cita['Estado'] === 'pendiente'): ?>
+                                    <span class="badge bg-warning text-dark ms-2">Vencida</span>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="cita-info-grid">
+                                <div class="info-item">
+                                    <i data-lucide="calendar"></i>
+                                    <div><strong>Fecha:</strong><br><?= $fechaForm ?></div>
+                                </div>
+
+                                <div class="info-item">
+                                    <i data-lucide="clock"></i>
+                                    <div><strong>Hora:</strong><br><?= $horaForm ?></div>
+                                </div>
+
+                                <div class="info-item">
+                                    <i data-lucide="user-round"></i>
+                                    <div>
+                                        <strong>Profesional:</strong><br>
+                                        <?= !empty($cita['EmpleadoNombre'])
+                                            ? htmlspecialchars($cita['EmpleadoNombre'] . ' ' . $cita['EmpleadoApellido'])
+                                            : '<span class="text-muted">No asignado</span>' ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <?php if ($puedeModificar): ?>
-                        <div class="cita-actions border-top pt-3 mt-3">
-                            <?php if ($isPaciente || $isEmpleado): ?>
-                                <button class="btn btn-reagendar btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#reagendarModal"
+                            <?php if ($puedeModificar): ?>
+                                <div class="cita-actions border-top pt-3 mt-3">
+                                    <?php if ($isPaciente || $isEmpleado): ?>
+                                        <button class="btn btn-reagendar btn-sm" data-bs-toggle="modal" data-bs-target="#reagendarModal"
+                                            data-cita-id="<?= $cita['IdCita'] ?>" data-cita-fecha="<?= $inputFecha ?>"
+                                            data-cita-hora="<?= $inputHora ?>" data-cita-nombre="<?= htmlspecialchars($cita['Motivo']) ?>"
+                                            data-doctor-id="<?= $cita['id_empleado'] ?>">
+                                            <i data-lucide="calendar-range"></i> Reagendar
+                                        </button>
+                                    <?php endif; ?>
+
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal"
                                         data-cita-id="<?= $cita['IdCita'] ?>"
-                                        data-cita-fecha="<?= $inputFecha ?>"
-                                        data-cita-hora="<?= $inputHora ?>"
-                                        data-cita-nombre="<?= htmlspecialchars($cita['Motivo']) ?>"
-                                        data-doctor-id="<?= $cita['id_empleado'] ?>">
-                                    <i data-lucide="calendar-range"></i> Reagendar
-                                </button>
-                            <?php endif; ?>
-
-                            <button class="btn btn-danger btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#cancelarModal"
-                                    data-cita-id="<?= $cita['IdCita'] ?>"
-                                    data-cita-nombre="<?= htmlspecialchars($cita['Motivo']) ?>"
-                                    data-cita-fecha="<?= $fechaForm ?>"
-                                    data-cita-hora="<?= $horaForm ?>">
-                                <i data-lucide="x-circle"></i> Cancelar
-                            </button>
-
-                            <?php if ($isEmpleado): ?>
-                                <button class="btn btn-success btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#finalizarModal"
-                                        data-cita-id="<?= $cita['IdCita'] ?>"
-                                        data-cita-nombre="<?= htmlspecialchars($cita['Motivo']) ?>"
-                                        data-cita-fecha="<?= $fechaForm ?>"
+                                        data-cita-nombre="<?= htmlspecialchars($cita['Motivo']) ?>" data-cita-fecha="<?= $fechaForm ?>"
                                         data-cita-hora="<?= $horaForm ?>">
-                                    <i data-lucide="check-circle-2"></i> Finalizar
-                                </button>
+                                        <i data-lucide="x-circle"></i> Cancelar
+                                    </button>
+
+                                    <?php if ($isEmpleado): ?>
+                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#finalizarModal"
+                                            data-cita-id="<?= $cita['IdCita'] ?>"
+                                            data-cita-nombre="<?= htmlspecialchars($cita['Motivo']) ?>" data-cita-fecha="<?= $fechaForm ?>"
+                                            data-cita-hora="<?= $horaForm ?>">
+                                            <i data-lucide="check-circle-2"></i> Finalizar
+                                        </button>
+                                    <?php endif; ?>
+                                </div>
                             <?php endif; ?>
+
                         </div>
-                        <?php endif; ?>
+                    <?php endforeach; ?>
+
+                    <?php if ($totalPaginas > 1): ?>
+                        <div class="d-flex justify-content-center mt-4 app-pagination">
+                            <nav>
+                                <ul class="pagination mb-0">
+
+                                    <li class="page-item <?= $paginaActual <= 1 ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?pagina=<?= $paginaActual - 1 ?>">
+                                            ‹ Anterior
+                                        </a>
+                                    </li>
+
+                                    <?php
+                                    $rango = 2;
+                                    $inicioPag = max(1, $paginaActual - $rango);
+                                    $finPag = min($totalPaginas, $paginaActual + $rango);
+
+                                    if ($inicioPag > 1) {
+                                        echo '<li class="page-item"><a class="page-link" href="?pagina=1">1</a></li>';
+                                        if ($inicioPag > 2) {
+                                            echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                        }
+                                    }
+
+                                    for ($i = $inicioPag; $i <= $finPag; $i++): ?>
+                                        <li class="page-item <?= $i == $paginaActual ? 'active' : '' ?>">
+                                            <a class="page-link" href="?pagina=<?= $i ?>">
+                                                <?= $i ?>
+                                            </a>
+                                        </li>
+                                    <?php endfor;
+
+                                    if ($finPag < $totalPaginas) {
+                                        if ($finPag < $totalPaginas - 1) {
+                                            echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                        }
+                                        echo '<li class="page-item"><a class="page-link" href="?pagina=' . $totalPaginas . '">' . $totalPaginas . '</a></li>';
+                                    }
+                                    ?>
+
+                                    <li class="page-item <?= $paginaActual >= $totalPaginas ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?pagina=<?= $paginaActual + 1 ?>">
+                                            Siguiente ›
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    <?php endif; ?>
+
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
+    </div>
+
+    </div>
+
+
+
+    <div class="modal fade" id="reagendarModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-confirm">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i data-lucide="calendar-range" class="me-2"></i>Reagendar Cita
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form method="POST" id="reagendarForm">
+                    <input type="hidden" name="action" value="reagendar_cita">
+                    <input type="hidden" name="cita_id" id="modalCitaId">
+
+                    <input type="hidden" id="doctorId">
+
+                    <div class="modal-body">
+
+                        <div class="modal-icon">
+                            <i data-lucide="calendar-search"></i>
+                        </div>
+
+                        <h5 class="mb-3">Selecciona una nueva fecha y hora</h5>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Cita actual</label>
+                            <div id="modalCitaInfo" class="cita-details small text-muted"></div>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <label class="form-label fw-bold d-block">Nueva fecha *</label>
+
+                            <div class="input-centered">
+                                <input type="text" class="form-control form-control-sm input-narrow" name="nueva_fecha"
+                                    id="nueva_fecha" placeholder="Selecciona una fecha" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <label class="form-label fw-bold d-block">Nueva hora *</label>
+
+                            <div class="input-centered">
+                                <input type="time" class="form-control form-control-sm input-narrow" name="nueva_hora"
+                                    id="nueva_hora" required>
+                            </div>
+                        </div>
+
+                        <div id="availabilityStatusEdit" class="availability-status" style="display:none;"></div>
+
+                        <div id="timeSlotsContainerEdit" class="time-slots-grid"></div>
+
+                        <div class="alert alert-info mt-3">
+                            <small>
+                                <i data-lucide="info" class="me-1"></i>
+                                La cita se actualizará con la nueva fecha y hora seleccionadas.
+                            </small>
+                        </div>
 
                     </div>
-                <?php endforeach; ?>
 
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel btn-modal" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-confirm btn-modal">
+                            <i data-lucide="calendar-check" class="me-1"></i>Confirmar Reagendación
+                        </button>
+                    </div>
+                </form>
 
-</div>
-
-</div>
-
-
-
-<div class="modal fade" id="reagendarModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-confirm">
-
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i data-lucide="calendar-range" class="me-2"></i>Reagendar Cita
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
+        </div>
+    </div>
 
-            <form method="POST" id="reagendarForm">
-                <input type="hidden" name="action" value="reagendar_cita">
-                <input type="hidden" name="cita_id" id="modalCitaId">
-                
-                <input type="hidden" id="doctorId">
+    <!-- Modal CANCELAR (PACIENTE / EMPLEADO) -->
+    <div class="modal fade" id="cancelarModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-confirm">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i data-lucide="circle-slash" class="me-2"></i>Cancelar Cita
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
 
                 <div class="modal-body">
 
                     <div class="modal-icon">
-                        <i data-lucide="calendar-search"></i>
+                        <i data-lucide="calendar-x"></i>
                     </div>
 
-                    <h5 class="mb-3">Selecciona una nueva fecha y hora</h5>
+                    <h5 class="mb-3">¿Deseas cancelar esta cita?</h5>
 
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Cita actual</label>
-                        <div id="modalCitaInfo" class="cita-details small text-muted"></div>
-                    </div>
+                    <p class="confirmation-text">
+                        Esta acción no se puede deshacer. La cita pasará al estado <strong>cancelada</strong>.
+                    </p>
 
-                    <div class="mb-3 text-center">
-                    <label class="form-label fw-bold d-block">Nueva fecha *</label>
-
-                    <div class="input-centered">
-                        <input type="text"
-                            class="form-control form-control-sm input-narrow"
-                            name="nueva_fecha"
-                            id="nueva_fecha"
-                            placeholder="Selecciona una fecha"
-                            required>
-                    </div>
-                </div>
-
-                <div class="mb-3 text-center">
-                    <label class="form-label fw-bold d-block">Nueva hora *</label>
-
-                    <div class="input-centered">
-                        <input type="time"
-                            class="form-control form-control-sm input-narrow"
-                            name="nueva_hora"
-                            id="nueva_hora"
-                            required>
-                    </div>
-                    </div>
-
-                    <div id="availabilityStatusEdit"
-                         class="availability-status"
-                         style="display:none;"></div>
-
-                    <div id="timeSlotsContainerEdit" class="time-slots-grid"></div>
-
-                    <div class="alert alert-info mt-3">
-                        <small>
-                            <i data-lucide="info" class="me-1"></i>
-                            La cita se actualizará con la nueva fecha y hora seleccionadas.
-                        </small>
-                    </div>
+                    <div id="cancelarCitaInfo" class="cita-details"></div>
 
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancel btn-modal" data-bs-dismiss="modal">
-                        Cancelar
+                        Mantener Cita
                     </button>
-                    <button type="submit" class="btn btn-confirm btn-modal">
-                        <i data-lucide="calendar-check" class="me-1"></i>Confirmar Reagendación
+
+                    <form method="POST" id="cancelarForm">
+                        <input type="hidden" name="action" value="cancelar_cita">
+                        <input type="hidden" name="cita_id" id="cancelarCitaId">
+                    </form>
+
+                    <button type="button" class="btn btn-danger btn-modal" id="cancelarConfirmarBtn">
+                        <i data-lucide="trash-2" class="me-1"></i>Cancelar Cita
                     </button>
                 </div>
-            </form>
 
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Modal CANCELAR (PACIENTE / EMPLEADO) -->
-<div class="modal fade" id="cancelarModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-confirm">
+    <!-- Modal FINALIZAR (SOLO EMPLEADO) -->
+    <div class="modal fade" id="finalizarModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-confirm">
 
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i data-lucide="circle-slash" class="me-2"></i>Cancelar Cita
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-
-                <div class="modal-icon">
-                    <i data-lucide="calendar-x"></i>
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i data-lucide="check-circle-2" class="me-2"></i>Finalizar Cita
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <h5 class="mb-3">¿Deseas cancelar esta cita?</h5>
+                <div class="modal-body">
 
-                <p class="confirmation-text">
-                    Esta acción no se puede deshacer. La cita pasará al estado <strong>cancelada</strong>.
-                </p>
+                    <div class="modal-icon">
+                        <i data-lucide="check"></i>
+                    </div>
 
-                <div id="cancelarCitaInfo" class="cita-details"></div>
+                    <h5 class="mb-3">¿Marcar esta cita como finalizada?</h5>
 
-            </div>
+                    <p class="confirmation-text">
+                        La cita pasará al estado <strong>finalizada</strong> y no podrá modificarse.
+                    </p>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-cancel btn-modal" data-bs-dismiss="modal">
-                    Mantener Cita
-                </button>
+                    <div id="finalizarCitaInfo" class="cita-details"></div>
 
-                <form method="POST" id="cancelarForm">
-                    <input type="hidden" name="action" value="cancelar_cita">
-                    <input type="hidden" name="cita_id" id="cancelarCitaId">
-                </form>
-
-                <button type="button" class="btn btn-danger btn-modal" id="cancelarConfirmarBtn">
-                    <i data-lucide="trash-2" class="me-1"></i>Cancelar Cita
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<!-- Modal FINALIZAR (SOLO EMPLEADO) -->
-<div class="modal fade" id="finalizarModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-confirm">
-
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i data-lucide="check-circle-2" class="me-2"></i>Finalizar Cita
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-
-                <div class="modal-icon">
-                    <i data-lucide="check"></i>
                 </div>
 
-                <h5 class="mb-3">¿Marcar esta cita como finalizada?</h5>
-
-                <p class="confirmation-text">
-                    La cita pasará al estado <strong>finalizada</strong> y no podrá modificarse.
-                </p>
-
-                <div id="finalizarCitaInfo" class="cita-details"></div>
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-cancel btn-modal" data-bs-dismiss="modal">
-                    Volver
-                </button>
-
-                <form method="POST" id="finalizarForm">
-                    <input type="hidden" name="action" value="finalizar_cita">
-                    <input type="hidden" name="cita_id" id="finalizarCitaId">
-
-                    <button type="submit" class="btn btn-success btn-modal">
-                        <i data-lucide="check-circle" class="me-1"></i>Finalizar Cita
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel btn-modal" data-bs-dismiss="modal">
+                        Volver
                     </button>
-                </form>
-            </div>
 
-        </div>
-    </div>
-</div>
+                    <form method="POST" id="finalizarForm">
+                        <input type="hidden" name="action" value="finalizar_cita">
+                        <input type="hidden" name="cita_id" id="finalizarCitaId">
 
+                        <button type="submit" class="btn btn-success btn-modal">
+                            <i data-lucide="check-circle" class="me-1"></i>Finalizar Cita
+                        </button>
+                    </form>
+                </div>
 
-<div class="modal fade custom-error-modal" id="errorModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content custom-error-modal-content">
-            <div class="custom-error-header">
-                <h5 class="m-0">
-                    <i data-lucide="alert-triangle" class="me-2"></i> Aviso Importante
-                </h5>
-                <button class="btn-close custom-close-btn" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="custom-error-body">
-                <p id="errorModalMessage"></p>
-            </div>
-            <div class="custom-error-footer">
-                <button class="btn custom-error-btn" data-bs-dismiss="modal">
-                    Entendido
-                </button>
             </div>
         </div>
     </div>
-</div>
 
-<?php MostrarFooter(); ?>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
-<script>
-    flatpickr.localize(flatpickr.l10ns.es);
-</script>
+    <div class="modal fade custom-error-modal" id="errorModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-error-modal-content">
+                <div class="custom-error-header">
+                    <h5 class="m-0">
+                        <i data-lucide="alert-triangle" class="me-2"></i> Aviso Importante
+                    </h5>
+                    <button class="btn-close custom-close-btn" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="custom-error-body">
+                    <p id="errorModalMessage"></p>
+                </div>
+                <div class="custom-error-footer">
+                    <button class="btn custom-error-btn" data-bs-dismiss="modal">
+                        Entendido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/js/gestionCita.js"></script>
+    <?php MostrarFooter(); ?>
 
-<script>
-    lucide.createIcons();
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    <script>
+        flatpickr.localize(flatpickr.l10ns.es);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/gestionCita.js"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
 
 </body>
+
 </html>
