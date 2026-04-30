@@ -5964,6 +5964,21 @@ canvas {
 /**/
 
 /*historial de expediente paciente*/
+
+.hc-main-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+.hc-header-title {
+    font-weight: 600;
+}
+
+.hc-header-subtitle {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
 .hc-wrapper {
   padding-top: 25px;
   padding-bottom: 40px;
