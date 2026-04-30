@@ -317,5 +317,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+const formEditar = document.getElementById("formEditarProducto");
+
+if (formEditar && inputImagen) {
+    formEditar.addEventListener("submit", function (e) {
+        if (!validarImagen(inputImagen.files)) {
+            e.preventDefault();
+        }
+    });
+}
+
 </body>
 </html>

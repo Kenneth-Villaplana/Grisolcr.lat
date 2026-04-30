@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    formEditar.submit();
+    formEditar.requestSubmit();
 });
     }
 
