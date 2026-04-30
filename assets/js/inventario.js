@@ -66,22 +66,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnBuscar && inputCodigo) {
 
-        btnBuscar.addEventListener('click', () => {
+btnBuscar.addEventListener('click', () => {
 
-            const codigo = inputCodigo.value.trim();
+    const texto = searchInput ? searchInput.value.trim() : "";
+    const codigo = inputCodigo ? inputCodigo.value.trim() : "";
 
-            if (codigo === '') {
-                mostrarError('Ingrese un ID para buscar.');
-                return;
-            }
+    if (texto === '' && codigo === '') {
+        mostrarError('Ingrese un nombre o ID para buscar.');
+        return;
+    }
 
-            const basePath =
-                window.location.pathname.substring(
-                    window.location.pathname.lastIndexOf('/') + 1
-                ) || 'inventario.php';
+    let url = 'inventario.php?';
 
-            window.location.href = `${basePath}?id=${encodeURIComponent(codigo)}`;
-        });
+    if (texto !== '') {
+        url += `buscar=${encodeURIComponent(texto)}`;
+    }
+
+    if (codigo !== '') {
+        url += (texto !== '' ? '&' : '') + `id=${encodeURIComponent(codigo)}`;
+    }
+
+    window.location.href = url;
+});
 
         inputCodigo.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') {
