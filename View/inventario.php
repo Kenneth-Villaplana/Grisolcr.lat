@@ -316,13 +316,15 @@ $productosBajos = array_filter($listaProductosCompleta, function ($producto) {
 
         </div>
 
+        <!-- Paginación -->
+
         <?php if ($totalPaginas > 1 && $productoFiltro === null): ?>
-            <nav class="mt-5 d-flex justify-content-center" aria-label="Paginación de productos">
-                <ul class="pagination">
+            <nav class="inventario-pagination mt-5" aria-label="Paginación de productos">
+                <ul class="pagination justify-content-center align-items-center gap-2">
 
                     <li class="page-item <?php echo ($paginaActual <= 1) ? 'disabled' : ''; ?>">
                         <a class="page-link" href="inventario.php?pagina=<?php echo $paginaActual - 1; ?>">
-                            Anterior
+                            ‹ Anterior
                         </a>
                     </li>
 
@@ -336,7 +338,7 @@ $productosBajos = array_filter($listaProductosCompleta, function ($producto) {
 
                     <li class="page-item <?php echo ($paginaActual >= $totalPaginas) ? 'disabled' : ''; ?>">
                         <a class="page-link" href="inventario.php?pagina=<?php echo $paginaActual + 1; ?>">
-                            Siguiente
+                            Siguiente ›
                         </a>
                     </li>
 
