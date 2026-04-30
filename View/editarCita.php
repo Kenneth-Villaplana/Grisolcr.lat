@@ -49,7 +49,7 @@ usort($citas, function ($a, $b) {
     return $fechaA <=> $fechaB;
 });
 
-$citasPorPagina = 10;
+$citasPorPagina = 6;
     $paginaActual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
     $paginaActual = max(1, $paginaActual);
 
