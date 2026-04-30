@@ -315,7 +315,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-</script>
 
 const formEditar = document.getElementById("formEditarProducto");
 
@@ -326,6 +325,8 @@ if (formEditar && inputImagen) {
         }
     });
 }
+
+</script>
 
 </body>
 </html>
