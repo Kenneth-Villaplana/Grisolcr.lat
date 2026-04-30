@@ -160,6 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
        btnAbrirModalEditar.addEventListener('click', () => {
 
+        const inputImagen = document.getElementById('Imagen');
+
+    if (inputImagen && inputImagen.dataset.imagenInvalida === "true") {
+    mostrarError("La imagen es muy pesada. Máximo permitido: 1 MB.");
+    return;
+    }
+
     if (inputPrecio && !inputPrecio.checkValidity()) {
         inputPrecio.reportValidity(); 
         return;

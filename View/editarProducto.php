@@ -234,9 +234,9 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                     const archivo = files[0];
 
                     if (archivo.size > maxSizeBytes) {
-                        imagenValida = false;
                         mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
                         inputImagen.value = "";
+                        inputImagen.dataset.imagenInvalida = "true";
                         nombreArchivo.textContent = "Ningún archivo seleccionado";
                         uploadBox.classList.remove("active");
                         return false;
@@ -244,6 +244,7 @@ $imgSrc = '/assets/img/' . rawurlencode($img);
                 }
 
                 ocultarError();
+                inputImagen.dataset.imagenInvalida = "false";
                 return true;
             }
 
