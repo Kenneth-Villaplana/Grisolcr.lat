@@ -172,8 +172,8 @@ $productosBajos = array_filter($listaProductosCompleta, function ($producto) {
                     </label>
 
                     <input type="text" id="searchInput" class="form-control buscador-producto inventario-input"
-                        placeholder="Ingrese nombre del producto...">
-                    value="<?php echo htmlspecialchars($busquedaNombre); ?>">
+                        placeholder="Ingrese nombre del producto..."
+                        value="<?php echo htmlspecialchars($busquedaNombre); ?>">
                 </div>
 
 
