@@ -2,12 +2,17 @@
 
 include_once __DIR__ . '/../Model/productoModel.php';
 
-if(session_status() == PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+$tamanoMaximoImagen = 5 * 1024 * 1024; // 5 MB
+$extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
 
 
+/* ============================= */
+/* ELIMINAR PRODUCTO */
+/* ============================= */
 if (isset($_GET['eliminarProducto'])) {
     $productoId = intval($_GET['eliminarProducto']);
     $resultado = EliminarProductoModel($productoId);
@@ -22,43 +27,51 @@ if (isset($_GET['eliminarProducto'])) {
 }
 
 
+/* ============================= */
+/* AGREGAR PRODUCTO */
+/* ============================= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST["btnEditarProducto"])) {
+
     $nombre = trim($_POST['Nombre'] ?? '');
     $descripcion = trim($_POST['Descripcion'] ?? '');
     $precio = floatval($_POST['Precio'] ?? 0);
     $cantidad = intval($_POST['Cantidad'] ?? 0);
 
-    $nombreImagen = "no-image.jpg"; // por defecto
+    $nombreImagen = "no-image.jpg";
 
-if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
+    if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
 
-    $carpetaDestino = __DIR__ . '/../assets/img/';
-
-    if (!is_dir($carpetaDestino)) {
-        mkdir($carpetaDestino, 0777, true);
-    }
-
-    $archivoTmp = $_FILES['Imagen']['tmp_name'];
-    $archivoNombre = basename($_FILES['Imagen']['name']);
-    $extension = strtolower(pathinfo($archivoNombre, PATHINFO_EXTENSION));
-
-    $extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
-
-    if (in_array($extension, $extPermitidas)) {
-
-        $nombreImagen = uniqid() . "." . $extension;
-
-        $movido = move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
-
-        if (!$movido) {
-            die("No se pudo mover la imagen a: " . $carpetaDestino . $nombreImagen);
+        if ($_FILES['Imagen']['size'] > $tamanoMaximoImagen) {
+            header("Location: ../View/agregarProducto.php?error=" . urlencode("La imagen es muy pesada. Máximo permitido: 5 MB."));
+            exit;
         }
-    } else {
-        die("Formato no permitido");
-    }
-}
 
-      //validaciones
+        $carpetaDestino = __DIR__ . '/../assets/img/';
+
+        if (!is_dir($carpetaDestino)) {
+            mkdir($carpetaDestino, 0777, true);
+        }
+
+        $archivoTmp = $_FILES['Imagen']['tmp_name'];
+        $archivoNombre = basename($_FILES['Imagen']['name']);
+        $extension = strtolower(pathinfo($archivoNombre, PATHINFO_EXTENSION));
+
+        if (in_array($extension, $extPermitidas)) {
+
+            $nombreImagen = uniqid() . "." . $extension;
+            $movido = move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
+
+            if (!$movido) {
+                header("Location: ../View/agregarProducto.php?error=" . urlencode("No se pudo guardar la imagen."));
+                exit;
+            }
+
+        } else {
+            header("Location: ../View/agregarProducto.php?error=" . urlencode("Formato de imagen no permitido."));
+            exit;
+        }
+    }
+
     if ($nombre === '' || $descripcion === '') {
         header("Location: ../View/agregarProducto.php?error=Datos incompletos");
         exit;
@@ -86,19 +99,33 @@ if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
 }
 
 
+/* ============================= */
+/* EDITAR PRODUCTO */
+/* ============================= */
 if (isset($_POST["btnEditarProducto"])) {
+
     $productoId = intval($_POST["ProductoId"] ?? 0);
     $nombre = trim($_POST["Nombre"] ?? '');
     $descripcion = trim($_POST["Descripcion"] ?? '');
     $precio = floatval($_POST["Precio"] ?? 0);
     $cantidad = intval($_POST["Cantidad"] ?? 0);
 
-    // Obtener producto actual para conservar imagen si no se sube otra
+    if ($productoId <= 0) {
+        $_SESSION["txtMensaje"] = "Producto inválido";
+        header("Location: ../View/inventario.php");
+        exit;
+    }
+
     $productoActual = ObtenerProductoPorId($productoId);
     $nombreImagen = $productoActual['Imagen'] ?? 'no-image.jpg';
 
-    // Si se sube una nueva imagen, reemplazar
     if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === 0) {
+
+        if ($_FILES['Imagen']['size'] > $tamanoMaximoImagen) {
+            $_SESSION["txtMensaje"] = "La imagen es muy pesada. Máximo permitido: 5 MB.";
+            header("Location: ../View/editarProducto.php?id=" . $productoId);
+            exit;
+        }
 
         $carpetaDestino = __DIR__ . '/../assets/img/';
 
@@ -110,12 +137,9 @@ if (isset($_POST["btnEditarProducto"])) {
         $archivoNombre = basename($_FILES['Imagen']['name']);
         $extension = strtolower(pathinfo($archivoNombre, PATHINFO_EXTENSION));
 
-        $extPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
-
         if (in_array($extension, $extPermitidas)) {
 
             $nombreImagen = uniqid() . "." . $extension;
-
             $movido = move_uploaded_file($archivoTmp, $carpetaDestino . $nombreImagen);
 
             if (!$movido) {
@@ -129,13 +153,6 @@ if (isset($_POST["btnEditarProducto"])) {
             header("Location: ../View/editarProducto.php?id=" . $productoId);
             exit;
         }
-    }
-
-    // validaciones
-    if ($productoId <= 0) {
-        $_SESSION["txtMensaje"] = "Producto inválido";
-        header("Location: ../View/inventario.php");
-        exit;
     }
 
     if ($nombre === '' || $descripcion === '') {
@@ -168,13 +185,4 @@ if (isset($_POST["btnEditarProducto"])) {
     exit;
 }
 
-if (isset($_GET['id'])) {
-    $productoId = $_GET['id'];
-    $productos = ObtenerProductos($productoId);
-    $producto = $productos[0] ?? null;
-
-    if (!$producto) {
-        die("Producto no encontrado");
-    }
-}
 ?>

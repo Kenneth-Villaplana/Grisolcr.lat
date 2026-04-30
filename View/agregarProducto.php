@@ -44,28 +44,29 @@ require_once __DIR__ . '/layout.php';
                     <!-- Nombre -->
                     <div class="mb-4">
                         <label for="Nombre" class="form-label fw-semibold">Nombre del producto</label>
-                        <input type="text" name="Nombre" id="Nombre" class="form-control input-modern" placeholder="Nombre del producto" required>
+                        <input type="text" name="Nombre" id="Nombre" class="form-control input-modern"
+                            placeholder="Nombre del producto" required>
                     </div>
 
                     <!-- Descripción -->
                     <div class="mb-4">
                         <label for="Descripcion" class="form-label fw-semibold">Descripción</label>
-                        <textarea name="Descripcion" id="Descripcion" class="form-control input-modern" rows="3"  placeholder="Descripción del producto"
-                            required></textarea>
+                        <textarea name="Descripcion" id="Descripcion" class="form-control input-modern" rows="3"
+                            placeholder="Descripción del producto" required></textarea>
                     </div>
 
                     <!-- Fila precio y cantidad -->
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="Precio" class="form-label fw-semibold">Precio</label>
-                            <input type="number" name="Precio" id="Precio" min="1" class="form-control input-modern" placeholder="₡ Precio"
-                                required>
+                            <input type="number" name="Precio" id="Precio" min="1" class="form-control input-modern"
+                                placeholder="₡ Precio" required>
                         </div>
 
                         <div class="col-md-6">
                             <label for="Cantidad" class="form-label fw-semibold">Cantidad</label>
-                            <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control input-modern"  placeholder="Cantidad disponible"
-                                required>
+                            <input type="number" name="Cantidad" id="Cantidad" min="1" class="form-control input-modern"
+                                placeholder="Cantidad disponible" required>
                         </div>
                     </div>
 
@@ -118,6 +119,40 @@ require_once __DIR__ . '/layout.php';
             const inputImagen = document.getElementById("Imagen");
             const nombreArchivo = document.getElementById("nombreArchivoImagen");
             const uploadBox = document.getElementById("uploadBox");
+            const formAgregar = document.getElementById("formAgregarProducto");
+            const mensajeError = document.getElementById("mensajeError");
+
+            const maxSizeMB = 5;
+            const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+            function mostrarError(msg) {
+                if (!mensajeError) return;
+                mensajeError.textContent = msg;
+                mensajeError.classList.remove("d-none");
+            }
+
+            function ocultarError() {
+                if (!mensajeError) return;
+                mensajeError.classList.add("d-none");
+                mensajeError.textContent = "";
+            }
+
+            function validarImagen(files) {
+                if (files && files.length > 0) {
+                    const archivo = files[0];
+
+                    if (archivo.size > maxSizeBytes) {
+                        mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
+                        inputImagen.value = "";
+                        nombreArchivo.textContent = "Ningún archivo seleccionado";
+                        uploadBox.classList.remove("active");
+                        return false;
+                    }
+                }
+
+                ocultarError();
+                return true;
+            }
 
             function actualizarNombreArchivo(files) {
                 if (files && files.length > 0) {
@@ -131,7 +166,9 @@ require_once __DIR__ . '/layout.php';
 
             if (inputImagen && nombreArchivo && uploadBox) {
                 inputImagen.addEventListener("change", function () {
-                    actualizarNombreArchivo(this.files);
+                    if (validarImagen(this.files)) {
+                        actualizarNombreArchivo(this.files);
+                    }
                 });
 
                 ["dragenter", "dragover"].forEach(eventName => {
@@ -154,8 +191,18 @@ require_once __DIR__ . '/layout.php';
                     const files = e.dataTransfer.files;
 
                     if (files && files.length > 0) {
-                        inputImagen.files = files;
-                        actualizarNombreArchivo(files);
+                        if (validarImagen(files)) {
+                            inputImagen.files = files;
+                            actualizarNombreArchivo(files);
+                        }
+                    }
+                });
+            }
+
+            if (formAgregar && inputImagen) {
+                formAgregar.addEventListener("submit", function (e) {
+                    if (!validarImagen(inputImagen.files)) {
+                        e.preventDefault();
                     }
                 });
             }

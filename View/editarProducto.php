@@ -236,6 +236,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputImagen = document.getElementById("Imagen");
     const nombreArchivo = document.getElementById("nombreArchivoImagenEditar");
     const uploadBox = document.getElementById("uploadBoxEditar");
+    const mensajeError = document.getElementById("mensajeError");
+
+    const maxSizeMB = 5;
+    const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+    function mostrarError(msg) {
+        if (!mensajeError) return;
+        mensajeError.textContent = msg;
+        mensajeError.classList.remove("d-none");
+    }
+
+    function ocultarError() {
+        if (!mensajeError) return;
+        mensajeError.textContent = "";
+        mensajeError.classList.add("d-none");
+    }
+
+    function validarImagen(files) {
+        if (files && files.length > 0) {
+            const archivo = files[0];
+
+            if (archivo.size > maxSizeBytes) {
+                mostrarError(`La imagen es muy pesada. Máximo permitido: ${maxSizeMB} MB.`);
+                inputImagen.value = "";
+                nombreArchivo.textContent = "Ningún archivo seleccionado";
+                uploadBox.classList.remove("active");
+                return false;
+            }
+        }
+
+        ocultarError();
+        return true;
+    }
 
     function actualizarNombreArchivo(files) {
         if (files && files.length > 0) {
@@ -249,7 +282,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (inputImagen && nombreArchivo && uploadBox) {
         inputImagen.addEventListener("change", function () {
-            actualizarNombreArchivo(this.files);
+            if (validarImagen(this.files)) {
+                actualizarNombreArchivo(this.files);
+            }
         });
 
         ["dragenter", "dragover"].forEach(eventName => {
@@ -272,8 +307,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const files = e.dataTransfer.files;
 
             if (files && files.length > 0) {
-                inputImagen.files = files;
-                actualizarNombreArchivo(files);
+                if (validarImagen(files)) {
+                    inputImagen.files = files;
+                    actualizarNombreArchivo(files);
+                }
             }
         });
     }
