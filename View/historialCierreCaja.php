@@ -85,6 +85,14 @@ require_once __DIR__ . '/layout.php';
                         </table>
                     </div>
 
+                    <div class="d-flex justify-content-center mt-4">
+                        <nav>
+                            <ul class="pagination cierre-pagination mb-0" id="paginacionCierres">
+                                <!-- JS inserta paginación aquí -->
+                            </ul>
+                        </nav>
+                    </div>
+
                 </div>
             </div>
 
@@ -96,12 +104,6 @@ require_once __DIR__ . '/layout.php';
     <?php IncluirScripts(); ?>
 
     <script src="../assets/js/cierreCaja.js?v=<?= time(); ?>"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            cargarHistorialCierres();
-        });
-    </script>
 
 </body>
 
