@@ -36,30 +36,39 @@ async function cargarFacturas(filtro = {}) {
 
     try {
 
-const facturas = await res.json();
-body.innerHTML = "";
+    const res = await fetch(CONTROLLER_PATH, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "obtenerFacturas",
+            ...filtro
+        })
+    });
 
-if (!Array.isArray(facturas) || facturas.length === 0) {
-    facturasGlobal = [];
+    const facturas = await res.json();
+    body.innerHTML = "";
+
+    if (!Array.isArray(facturas) || facturas.length === 0) {
+        facturasGlobal = [];
+        renderizarPaginacionFacturas();
+
+        body.innerHTML = `
+            <tr>
+                <td colspan="10" class="text-center text-muted py-4">
+                    No se encontraron facturas.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    facturasGlobal = facturas;
+    paginaActualFacturas = 1;
+
+    mostrarFacturasPaginadas();
     renderizarPaginacionFacturas();
 
-    body.innerHTML = `
-        <tr>
-            <td colspan="10" class="text-center text-muted py-4">
-                No se encontraron facturas.
-            </td>
-        </tr>
-    `;
-    return;
-}
-
-facturasGlobal = facturas;
-paginaActualFacturas = 1;
-
-mostrarFacturasPaginadas();
-renderizarPaginacionFacturas();
-
-    } catch (error) {
+} catch (error) {
 
         console.error("Error cargando facturas:", error);
 
@@ -395,7 +404,12 @@ function imprimirReciboAbono() {
         </html>
     `);
 
-    function mostrarFacturasPaginadas() {
+    ventana.document.close();
+    ventana.focus();
+    ventana.print();
+}
+
+function mostrarFacturasPaginadas() {
     const body = document.getElementById("facturas-body");
     if (!body) return;
 
@@ -455,9 +469,4 @@ function cambiarPaginaFacturas(pagina) {
     paginaActualFacturas = pagina;
     mostrarFacturasPaginadas();
     renderizarPaginacionFacturas();
-}
-
-    ventana.document.close();
-    ventana.focus();
-    ventana.print();
 }
