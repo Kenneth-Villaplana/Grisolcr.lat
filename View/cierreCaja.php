@@ -127,7 +127,8 @@ require_once __DIR__ . '/layout.php';
 
                                         <div class="cc-alerta-cierre mt-2 alerta-bottom">
                                             ⚠️ Una vez realizado el cierre de caja, no se podrán registrar más ventas en
-                                            el día. Solo se podrá hacer un cierre por día, así que asegúrese de que toda la información esté correcta antes de proceder.
+                                            el día. Solo se podrá hacer un cierre por día, así que asegúrese de que toda
+                                            la información esté correcta antes de proceder.
                                         </div>
                                     </div>
                                 </div>
@@ -215,6 +216,11 @@ require_once __DIR__ . '/layout.php';
                             </div>
                         </div>
                     </div>
+
+                    <nav class="inventario-pagination mt-4" aria-label="Paginación de cierres">
+                        <ul class="pagination justify-content-center align-items-center gap-2" id="paginacionCierres">
+                        </ul>
+                    </nav>
     </main>
 
     <?php MostrarFooter(); ?>

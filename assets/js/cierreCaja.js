@@ -1,5 +1,8 @@
 const CC_PATH = "../Controller/cierreCajaController.php";
 
+let cierresGlobal = [];
+let paginaCierresActual = 1;
+const registrosCierresPorPagina = 10;
 
 const num = (id) => {
     const el = document.getElementById(id);
@@ -227,108 +230,170 @@ async function cargarHistorialCierres() {
             body: JSON.stringify({ action: "historial" })
         });
 
-        const tbody = document.getElementById("tablaCierres");
-        const contador = document.getElementById("cantidadCierres");
+        cierresGlobal = Array.isArray(data) ? data : [];
+        paginaCierresActual = 1;
 
-         const elTotal = document.getElementById("resumen-total");
-        const elEfectivo = document.getElementById("resumen-efectivo");
-        const elTarjeta = document.getElementById("resumen-tarjeta");
-        const elSinpe = document.getElementById("resumen-sinpe");
-        const elTransferencia = document.getElementById("resumen-transferencia");
-
-        if (!tbody) return;
-const money = (val) => {
-            return Number(val || 0).toLocaleString("es-CR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-        };
-
-        if (!data.length) {
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="11" class="text-center text-muted py-4">
-                        No hay cierres registrados
-                    </td>
-                </tr>`;
-            if (contador) contador.textContent = 0;
-
-            if (elTotal) elTotal.textContent = "₡0.00";
-            if (elEfectivo) elEfectivo.textContent = "₡0.00";
-            if (elTarjeta) elTarjeta.textContent = "₡0.00";
-            if (elSinpe) elSinpe.textContent = "₡0.00";
-            if (elTransferencia) elTransferencia.textContent = "₡0.00";
-
-            return;
-        }
-
-        tbody.innerHTML = "";
-        if (contador) contador.textContent = data.length;
-
-         let total = 0;
-        let efectivo = 0;
-        let tarjeta = 0;
-        let sinpe = 0;
-        let transferencia = 0;
-
-    
-        let html = "";
-
-         data.forEach(c => {
-
-            const totalCobrado = parseFloat(c.TotalCobrado) || 0;
-            const ef = parseFloat(c.Efectivo) || 0;
-            const tj = parseFloat(c.Tarjeta) || 0;
-            const sp = parseFloat(c.Sinpe) || 0;
-            const tr = parseFloat(c.Transferencia) || 0;
-            const contado = parseFloat(c.EfectivoContado) || 0;
-            const diff = parseFloat(c.Diferencia) || 0;
-
-            //  acumular
-            total += totalCobrado;
-            efectivo += ef;
-            tarjeta += tj;
-            sinpe += sp;
-            transferencia += tr;
-
-            const diffClass =
-                diff === 0 ? "monto-total" :
-                diff > 0 ? "monto-positivo" :
-                "monto-negativo";
-
-            html += `
-                <tr>
-                    <td>${c.Fecha}</td>
-                    <td><span class="cajero-name">${c.Cajero}</span></td>
-                    <td>${c.Facturas}</td>
-
-                    <td><span class="monto-pill monto-total">₡${money(totalCobrado)}</span></td>
-                    <td><span class="monto-pill monto-total">₡${money(ef)}</span></td>
-                    <td><span class="monto-pill monto-total">₡${money(tj)}</span></td>
-                    <td><span class="monto-pill monto-total">₡${money(sp)}</span></td>
-                    <td><span class="monto-pill monto-total">₡${money(tr)}</span></td>
-
-                    <td><span class="monto-pill monto-total">₡${money(contado)}</span></td>
-
-                    <td><span class="monto-pill ${diffClass}">₡${money(diff)}</span></td>
-
-                    <td>${c.HoraCierre}</td>
-                </tr>
-            `;
-        });
-
-        tbody.innerHTML = html;
-
-        // ACTUALIZAR RESUMEN SUPERIOR
-        if (elTotal) elTotal.textContent = "₡" + money(total);
-        if (elEfectivo) elEfectivo.textContent = "₡" + money(efectivo);
-        if (elTarjeta) elTarjeta.textContent = "₡" + money(tarjeta);
-        if (elSinpe) elSinpe.textContent = "₡" + money(sinpe);
-        if (elTransferencia) elTransferencia.textContent = "₡" + money(transferencia);
+        renderHistorialCierres();
 
     } catch (e) {
         console.error("Error cargando historial:", e);
         mostrarAlerta("Error cargando historial de cierres.");
     }
+}
+        function renderHistorialCierres() {
+    const tbody = document.getElementById("tablaCierres");
+    const contador = document.getElementById("cantidadCierres");
 
+    const elTotal = document.getElementById("resumen-total");
+    const elEfectivo = document.getElementById("resumen-efectivo");
+    const elTarjeta = document.getElementById("resumen-tarjeta");
+    const elSinpe = document.getElementById("resumen-sinpe");
+    const elTransferencia = document.getElementById("resumen-transferencia");
+
+    if (!tbody) return;
+
+    const money = (val) => {
+        return Number(val || 0).toLocaleString("es-CR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    };
+
+    if (!cierresGlobal.length) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="11" class="text-center text-muted py-4">
+                    No hay cierres registrados
+                </td>
+            </tr>`;
+
+        if (contador) contador.textContent = 0;
+        if (elTotal) elTotal.textContent = "₡0.00";
+        if (elEfectivo) elEfectivo.textContent = "₡0.00";
+        if (elTarjeta) elTarjeta.textContent = "₡0.00";
+        if (elSinpe) elSinpe.textContent = "₡0.00";
+        if (elTransferencia) elTransferencia.textContent = "₡0.00";
+
+        paginaCierresActual = 1;
+        renderPaginacionCierres();
+        return;
+    }
+
+    if (contador) contador.textContent = cierresGlobal.length;
+
+    let total = 0;
+    let efectivo = 0;
+    let tarjeta = 0;
+    let sinpe = 0;
+    let transferencia = 0;
+
+    cierresGlobal.forEach(c => {
+        total += parseFloat(c.TotalCobrado) || 0;
+        efectivo += parseFloat(c.Efectivo) || 0;
+        tarjeta += parseFloat(c.Tarjeta) || 0;
+        sinpe += parseFloat(c.Sinpe) || 0;
+        transferencia += parseFloat(c.Transferencia) || 0;
+    });
+
+    const inicio = (paginaCierresActual - 1) * registrosCierresPorPagina;
+    const fin = inicio + registrosCierresPorPagina;
+    const cierresPagina = cierresGlobal.slice(inicio, fin);
+
+    let html = "";
+
+    cierresPagina.forEach(c => {
+        const totalCobrado = parseFloat(c.TotalCobrado) || 0;
+        const ef = parseFloat(c.Efectivo) || 0;
+        const tj = parseFloat(c.Tarjeta) || 0;
+        const sp = parseFloat(c.Sinpe) || 0;
+        const tr = parseFloat(c.Transferencia) || 0;
+        const contado = parseFloat(c.EfectivoContado) || 0;
+        const diff = parseFloat(c.Diferencia) || 0;
+
+        const diffClass =
+            diff === 0 ? "monto-total" :
+            diff > 0 ? "monto-positivo" :
+            "monto-negativo";
+
+        html += `
+            <tr>
+                <td>${c.Fecha}</td>
+                <td><span class="cajero-name">${c.Cajero}</span></td>
+                <td>${c.Facturas}</td>
+                <td><span class="monto-pill monto-total">₡${money(totalCobrado)}</span></td>
+                <td><span class="monto-pill monto-total">₡${money(ef)}</span></td>
+                <td><span class="monto-pill monto-total">₡${money(tj)}</span></td>
+                <td><span class="monto-pill monto-total">₡${money(sp)}</span></td>
+                <td><span class="monto-pill monto-total">₡${money(tr)}</span></td>
+                <td><span class="monto-pill monto-total">₡${money(contado)}</span></td>
+                <td><span class="monto-pill ${diffClass}">₡${money(diff)}</span></td>
+                <td>${c.HoraCierre}</td>
+            </tr>
+        `;
+    });
+
+    tbody.innerHTML = html;
+
+    if (elTotal) elTotal.textContent = "₡" + money(total);
+    if (elEfectivo) elEfectivo.textContent = "₡" + money(efectivo);
+    if (elTarjeta) elTarjeta.textContent = "₡" + money(tarjeta);
+    if (elSinpe) elSinpe.textContent = "₡" + money(sinpe);
+    if (elTransferencia) elTransferencia.textContent = "₡" + money(transferencia);
+
+    renderPaginacionCierres();
+}
+
+function renderPaginacionCierres() {
+    const contenedor = document.getElementById("paginacionCierres");
+    if (!contenedor) return;
+
+    const totalPaginas = Math.ceil(cierresGlobal.length / registrosCierresPorPagina);
+
+    if (paginaCierresActual > totalPaginas) {
+        paginaCierresActual = totalPaginas || 1;
+    }
+
+    if (totalPaginas <= 1) {
+        contenedor.innerHTML = "";
+        return;
+    }
+
+    let html = `
+        <li class="page-item ${paginaCierresActual <= 1 ? 'disabled' : ''}">
+            <button class="page-link" type="button" data-pagina="${paginaCierresActual - 1}">
+                ‹ Anterior
+            </button>
+        </li>
+    `;
+
+    for (let i = 1; i <= totalPaginas; i++) {
+        html += `
+            <li class="page-item ${i === paginaCierresActual ? 'active' : ''}">
+                <button class="page-link" type="button" data-pagina="${i}">
+                    ${i}
+                </button>
+            </li>
+        `;
+    }
+
+    html += `
+        <li class="page-item ${paginaCierresActual >= totalPaginas ? 'disabled' : ''}">
+            <button class="page-link" type="button" data-pagina="${paginaCierresActual + 1}">
+                Siguiente ›
+            </button>
+        </li>
+    `;
+
+    contenedor.innerHTML = html;
+
+    contenedor.querySelectorAll("button[data-pagina]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const nuevaPagina = parseInt(btn.dataset.pagina);
+
+            if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
+                paginaCierresActual = nuevaPagina;
+                renderHistorialCierres();
+            }
+        });
+    });
 }
