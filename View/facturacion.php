@@ -163,7 +163,7 @@ $controller = new PuntoVentaController();
         </div>
 
         <label class="form-label fw-semibold mt-3">Método de pago</label>
-        <select id="abonoMetodoPago" class="form-control">
+        <select id="abonoMetodoPago" class="form-select">
           <option value="">Seleccione un método</option>
           <option value="Efectivo">Efectivo</option>
           <option value="Tarjeta">Tarjeta</option>
