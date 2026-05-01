@@ -374,18 +374,16 @@ require_once __DIR__ . '/layout.php';
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Diagnóstico final</label>
 
-                                    <select id="diagnosticoSelect" class="form-select input-modern" multiple>
-                                        <option value="Astigmatismo">Astigmatismo</option>
-                                        <option value="Miopía">Miopía</option>
-                                        <option value="Hipermetropía">Hipermetropía</option>
-                                        <option value="Presbicia">Presbicia</option>
-                                    </select>
-
-                                    <small class="text-muted">
-                                        Puede seleccionar una o varias condiciones.
-                                    </small>
+                                    <div class="diagnostico-container">
+                                        <label><input type="checkbox" value="Astigmatismo"> Astigmatismo</label>
+                                        <label><input type="checkbox" value="Miopía"> Miopía</label>
+                                        <label><input type="checkbox" value="Hipermetropía"> Hipermetropía</label>
+                                        <label><input type="checkbox" value="Presbicia"> Presbicia</label>
+                                    </div>
 
                                     <input type="hidden" name="Diagnostico" id="Diagnostico" class="campo-obligatorio">
+
+                                    <small class="text-muted">Puede seleccionar una o varias condiciones.</small>
                                 </div>
                             </div>
                         </div>

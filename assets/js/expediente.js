@@ -163,6 +163,7 @@ function limpiarBusqueda() {
     document.getElementById('btnAgregarExpediente').style.display = 'none';
     document.getElementById('btnHistorial').style.display = 'none';
 }
+
 document.addEventListener("DOMContentLoaded", () => {
     const inputCedula = document.getElementById("cedula");
 
@@ -174,4 +175,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+});
+
+document.getElementById("formExpediente").addEventListener("submit", function () {
+    const checks = document.querySelectorAll(".diagnostico-container input:checked");
+    const hidden = document.getElementById("Diagnostico");
+
+    const valores = Array.from(checks).map(c => c.value);
+
+    hidden.value = valores.join(" - ");
 });
