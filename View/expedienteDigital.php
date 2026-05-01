@@ -438,6 +438,16 @@ require_once __DIR__ . '/layout.php';
 
 
         document.getElementById('formExpediente').addEventListener('submit', function (e) {
+
+            const checksDiagnostico = document.querySelectorAll(".diagnostico-container input:checked");
+            const hiddenDiagnostico = document.getElementById("Diagnostico");
+
+            if (hiddenDiagnostico) {
+                hiddenDiagnostico.value = Array.from(checksDiagnostico)
+                    .map(c => c.value)
+                    .join(" - ");
+            }
+
             const obligatorios = document.querySelectorAll('.campo-obligatorio');
             let primeroInvalido = null;
 
@@ -472,19 +482,6 @@ require_once __DIR__ . '/layout.php';
                 primeroInvalido.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 primeroInvalido.focus();
             }
-        });
-
-
-        const formExpediente = document.getElementById('formExpediente');
-
-        formExpediente.addEventListener('submit', function () {
-            const select = document.getElementById('diagnosticoSelect');
-            const hidden = document.getElementById('Diagnostico');
-
-            const seleccionados = Array.from(select.selectedOptions)
-                .map(option => option.value);
-
-            hidden.value = seleccionados.join(' - ');
         });
 
     </script>
