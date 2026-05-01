@@ -372,8 +372,20 @@ require_once __DIR__ . '/layout.php';
                                 </div>
 
                                 <div class="col-12">
-                                    <textarea name="Diagnostico" class="form-control input-modern campo-obligatorio"
-                                        placeholder="Diagnóstico final / recomendaciones"></textarea>
+                                    <label class="form-label fw-semibold">Diagnóstico final</label>
+
+                                    <select id="diagnosticoSelect" class="form-select input-modern" multiple>
+                                        <option value="Astigmatismo">Astigmatismo</option>
+                                        <option value="Miopía">Miopía</option>
+                                        <option value="Hipermetropía">Hipermetropía</option>
+                                        <option value="Presbicia">Presbicia</option>
+                                    </select>
+
+                                    <small class="text-muted">
+                                        Puede seleccionar una o varias condiciones.
+                                    </small>
+
+                                    <input type="hidden" name="Diagnostico" id="Diagnostico" class="campo-obligatorio">
                                 </div>
                             </div>
                         </div>
@@ -464,7 +476,21 @@ require_once __DIR__ . '/layout.php';
             }
         });
 
+
+        const formExpediente = document.getElementById('formExpediente');
+
+        formExpediente.addEventListener('submit', function () {
+            const select = document.getElementById('diagnosticoSelect');
+            const hidden = document.getElementById('Diagnostico');
+
+            const seleccionados = Array.from(select.selectedOptions)
+                .map(option => option.value);
+
+            hidden.value = seleccionados.join(' - ');
+        });
+
     </script>
+
     <script> lucide.createIcons(); </script>
 </body>
 
