@@ -403,6 +403,9 @@ input[type=number]::-webkit-outer-spin-button {
   background: #f1f5f9;
 }
 
+/* ============================
+  metedo de pago en abono 
+============================ */
 .modal-abono .form-control,
 .modal-abono .form-select {
     height: 48px;
@@ -411,6 +414,19 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 0.95rem;
 }
 
+.modal-abono-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-abono-body .abono-input {
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+}
 
 /* ============================
    TABLA + SCROLL

@@ -152,35 +152,36 @@ $controller = new PuntoVentaController();
           <button class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body modal-abono-body">
+
           <input type="hidden" id="abonoFacturaId">
 
           <label class="form-label fw-semibold">Saldo pendiente</label>
-          <input type="text" id="abonoSaldo" class="form-control mb-3" readonly>
+          <input type="text" id="abonoSaldo" class="form-control abono-input" readonly>
 
           <label class="form-label fw-semibold">Monto a abonar</label>
-          <input type="number" id="abonoMonto" class="form-control" min="0" step="0.01" placeholder="Ej. 15000">
+          <input type="number" id="abonoMonto" class="form-control abono-input" min="0" step="0.01"
+            placeholder="Ej. 15000">
+
+          <label class="form-label fw-semibold">Método de pago</label>
+          <select id="abonoMetodoPago" class="form-select abono-input">
+            <option value="">Seleccione un método</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta">Tarjeta</option>
+            <option value="SINPE Móvil">SINPE Móvil</option>
+            <option value="Transferencia">Transferencia</option>
+          </select>
+
         </div>
 
-        <div class="modal-body modal-abono"></div>
-        <label class="form-label fw-semibold mt-3">Método de pago</label>
-        <select id="abonoMetodoPago" class="form-select">
-          <option value="">Seleccione un método</option>
-          <option value="Efectivo">Efectivo</option>
-          <option value="Tarjeta">Tarjeta</option>
-          <option value="SINPE Móvil">SINPE Móvil</option>
-          <option value="Transferencia">Transferencia</option>
-        </select>
-      </div>
-      <div class="modal-footer border-0 pt-0">
+        <div class="modal-footer border-0 pt-0">
+          <button class="btn btn-save-modern rounded-pill w-100" onclick="guardarAbono()">
+            Confirmar
+          </button>
+        </div>
 
-        <button class="btn btn-save-modern rounded-pill d-flex align-items-center gap-2" onclick="guardarAbono()">
-          <i class=" "></i> Confirmar
-        </button>
       </div>
-
     </div>
-  </div>
   </div>
 
 
