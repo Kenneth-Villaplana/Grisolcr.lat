@@ -208,6 +208,8 @@ function abrirAbono(facturaId, saldo) {
 
     document.getElementById("abonoMonto").value = "";
 
+    document.getElementById("abonoMetodoPago").value = "";
+
     new bootstrap.Modal(document.getElementById("modalAbono")).show();
 }
 
@@ -218,6 +220,7 @@ async function guardarAbono() {
         const facturaId = document.getElementById("abonoFacturaId")?.value;
         const saldo = parseFloat(document.getElementById("abonoSaldo")?.value);
         const monto = parseFloat(document.getElementById("abonoMonto")?.value);
+        const metodoPago = document.getElementById("abonoMetodoPago")?.value;
 
         if (!monto || monto <= 0) {
             alert("Ingrese un monto válido.");
@@ -227,6 +230,10 @@ async function guardarAbono() {
             alert("El abono no puede ser mayor al saldo.");
             return;
         }
+        if (!metodoPago) {
+    alert("Seleccione el método de pago.");
+    return;
+}
 
         const res = await fetch(CONTROLLER_PATH, {
             method: "POST",
@@ -243,7 +250,7 @@ async function guardarAbono() {
         if (result.success) {
             document.querySelector("#modalAbono .btn-close")?.click();
 
-            mostrarReciboAbono(facturaId, monto);
+            mostrarReciboAbono(facturaId, monto, metodoPago);
             cargarFacturas();
         }
 
@@ -253,7 +260,7 @@ async function guardarAbono() {
     }
 }
 
-async function mostrarReciboAbono(facturaId, montoAbonado) {
+async function mostrarReciboAbono(facturaId, montoAbonado, metodoPago) {
     try {
 
         const res = await fetch(CONTROLLER_PATH, {
@@ -303,6 +310,7 @@ async function mostrarReciboAbono(facturaId, montoAbonado) {
 
                 <p style="margin:4px 0;"><strong>Total original:</strong> ₡${Number(f.Total || 0).toLocaleString()}</p>
                 <p style="margin:4px 0;"><strong>Abono realizado:</strong> ₡${Number(montoAbonado || 0).toLocaleString()}</p>
+                <p style="margin:4px 0;"><strong>Método de pago:</strong> ${metodoPago || "-"}</p>
                 <p style="margin:4px 0;"><strong>Total abonado acumulado:</strong> ₡${Number(f.Abonado || 0).toLocaleString()}</p>
                 <p style="margin:4px 0;"><strong>Saldo pendiente:</strong> ₡${Number(f.Pendiente || 0).toLocaleString()}</p>
 

@@ -162,6 +162,15 @@ $controller = new PuntoVentaController();
           <input type="number" id="abonoMonto" class="form-control" min="0" step="0.01" placeholder="Ej. 15000">
         </div>
 
+        <label class="form-label fw-semibold mt-3">Método de pago</label>
+        <select id="abonoMetodoPago" class="form-control">
+          <option value="">Seleccione un método</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Tarjeta">Tarjeta</option>
+          <option value="SINPE Móvil">SINPE Móvil</option>
+          <option value="Transferencia">Transferencia</option>
+        </select>
+
         <div class="modal-footer border-0 pt-0">
 
           <button class="btn btn-save-modern rounded-pill d-flex align-items-center gap-2" onclick="guardarAbono()">
