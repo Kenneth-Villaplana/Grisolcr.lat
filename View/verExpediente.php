@@ -294,7 +294,7 @@ function campo($label, $valor)
                                     <th>Prisma</th>
                                     <th>Base</th>
                                     <th>AV</th>
-                                    <th>AO</th>
+                                    <th>ADD</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -308,7 +308,7 @@ function campo($label, $valor)
                                         <td><?= $row['Prisma'] ?></td>
                                         <td><?= $row['Base'] ?></td>
                                         <td><?= $row['AV'] ?></td>
-                                        <td><?= $row['AO'] ?></td>
+                                        <td><?= $row['ADD'] ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
