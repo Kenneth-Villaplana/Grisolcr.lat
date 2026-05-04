@@ -105,6 +105,7 @@ if (!$receta) {
                         <th>CIL</th>
                         <th>EJE</th>
                         <th>PRISMA</th>
+                        <th>ADD</th>
                         
                     </tr>
                 </thead>
@@ -115,6 +116,7 @@ if (!$receta) {
                         <td><?= $receta['Cilindro_OD'] ?></td>
                         <td><?= $receta['Eje_OD'] ?></td>
                         <td><?= $receta['Prisma_OD'] ?></td>
+                        <td><?= $receta['ADD_OD'] ?></td>
                         
                     </tr>
 
@@ -124,6 +126,7 @@ if (!$receta) {
                         <td><?= $receta['Cilindro_OI'] ?></td>
                         <td><?= $receta['Eje_OI'] ?></td>
                         <td><?= $receta['Prisma_OI'] ?></td>
+                        <td><?= $receta['ADD_OI'] ?></td>
                         
                     </tr>
                 </tbody>
