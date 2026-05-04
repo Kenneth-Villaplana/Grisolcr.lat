@@ -37,7 +37,7 @@ try {
     $prismaOD = $_POST['Prisma_OD'] ?? null;
     $baseOD = $_POST['Base_OD'] ?? null;
     $avOD = $_POST['AV_OD'] ?? null;
-    $aoOD = $_POST['AO_OD'] ?? null;
+    $addOD = $_POST['ADD_OD'] ?? null;
 
     // Ojo Izquierdo
     $esferaOI = $_POST['Esfera_OI'] ?? null;
@@ -47,7 +47,7 @@ try {
     $prismaOI = $_POST['Prisma_OI'] ?? null;
     $baseOI = $_POST['Base_OI'] ?? null;
     $avOI = $_POST['AV_OI'] ?? null;
-    $aoOI = $_POST['AO_OI'] ?? null;
+    $addOI = $_POST['ADD_OI'] ?? null;
 
     $observaciones = $_POST['Observaciones'] ?? null;
     $altura = $_POST['Altura'] ?? null;
@@ -136,7 +136,7 @@ try {
     $stmt->bind_param("isddsddsdd",
         $nuevoId, $ojo,
         $esferaOD, $cilindroOD, $ejeOD, $dpOD,
-        $prismaOD, $baseOD, $avOD, $aoOD
+        $prismaOD, $baseOD, $avOD, $addOD
     );
     $stmt->execute();
     $stmt->close();
@@ -150,7 +150,7 @@ try {
     $stmt->bind_param("isddsddsdd",
         $nuevoId, $ojo,
         $esferaOI, $cilindroOI, $ejeOI, $dpOI,
-        $prismaOI, $baseOI, $avOI, $aoOI
+        $prismaOI, $baseOI, $avOI, $addOI
     );
     $stmt->execute();
     $stmt->close();

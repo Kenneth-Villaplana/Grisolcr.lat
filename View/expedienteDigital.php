@@ -318,7 +318,7 @@ require_once __DIR__ . '/layout.php';
                                         <th>Prisma</th>
                                         <th>Base</th>
                                         <th>A.V</th>
-                                        <th>A.O</th>
+                                        <th>ADD</th>
                                     </tr>
                                 </thead>
 
@@ -334,7 +334,7 @@ require_once __DIR__ . '/layout.php';
                                         <td><input type="text" name="Prisma_OD" class="form-control input-modern"></td>
                                         <td><input type="text" name="Base_OD" class="form-control input-modern"></td>
                                         <td><input type="text" name="AV_OD" class="form-control input-modern"></td>
-                                        <td><input type="text" name="AO_OD" class="form-control input-modern"></td>
+                                        <td><input type="text" name="ADD_OD" class="form-control input-modern"></td>
                                     </tr>
 
                                     <tr>
@@ -349,7 +349,7 @@ require_once __DIR__ . '/layout.php';
                                         <td><input type="text" name="Prisma_OI" class="form-control input-modern"></td>
                                         <td><input type="text" name="Base_OI" class="form-control input-modern"></td>
                                         <td><input type="text" name="AV_OI" class="form-control input-modern"></td>
-                                        <td><input type="text" name="AO_OI" class="form-control input-modern"></td>
+                                        <td><input type="text" name="ADD_OI" class="form-control input-modern"></td>
                                     </tr>
                                 </tbody>
                             </table>
