@@ -133,7 +133,7 @@ try {
   
     $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?)");
     $ojo = 'Derecho';
-    $stmt->bind_param("isddsddsdd",
+    $stmt->bind_param("isddsddsds",
         $nuevoId, $ojo,
         $esferaOD, $cilindroOD, $ejeOD, $dpOD,
         $prismaOD, $baseOD, $avOD, $addOD
@@ -147,7 +147,7 @@ try {
    
     $stmt = $conn->prepare("CALL InsertarExamenFinal(?,?,?,?,?,?,?,?,?,?)");
     $ojo = 'Izquierdo';
-    $stmt->bind_param("isddsddsdd",
+    $stmt->bind_param("isddsddsds",
         $nuevoId, $ojo,
         $esferaOI, $cilindroOI, $ejeOI, $dpOI,
         $prismaOI, $baseOI, $avOI, $addOI
