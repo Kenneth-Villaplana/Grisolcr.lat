@@ -3758,12 +3758,9 @@ footer {
 
 .modal-producto-header .btn-close {
   position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  background-color: transparent;
-  border: none;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
 
   filter: brightness(0); 
   opacity: 1;
@@ -3771,9 +3768,9 @@ footer {
   transition: transform 0.25s ease;
 }
 
-/* mantener giro */
+/* giro */
 .modal-producto-header .btn-close:hover {
-  transform: translateX(-50%) rotate(90deg);
+  transform: translateY(-50%) rotate(90deg);
 }
 
 .modal-producto-body {
