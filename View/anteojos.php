@@ -111,6 +111,21 @@ $productos = ObtenerProductos();
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalProductoLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-producto-dialog">
+                    <div class="modal-content modal-producto-content">
+                        <div class="modal-header modal-producto-header">
+                            <h5 class="modal-title" id="modalProductoLabel">Producto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+
+                        <div class="modal-body modal-producto-body">
+                            <img id="modalProductoImg" src="" alt="Imagen del producto" class="modal-producto-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <?php endforeach; ?>
 
             </div>
@@ -124,5 +139,23 @@ $productos = ObtenerProductos();
 
 <script src="../assets/js/producto.js"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const modalProducto = document.getElementById('modalProducto');
+    const modalImg = document.getElementById('modalProductoImg');
+    const modalTitle = document.getElementById('modalProductoLabel');
+
+    modalProducto.addEventListener('show.bs.modal', function (event) {
+        const card = event.relatedTarget;
+
+        const img = card.getAttribute('data-img');
+        const nombre = card.getAttribute('data-nombre');
+
+        modalImg.src = img;
+        modalImg.alt = nombre;
+        modalTitle.textContent = nombre;
+    });
+});
+</script>
 </body>
 </html>

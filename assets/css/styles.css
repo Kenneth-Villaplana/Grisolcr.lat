@@ -3722,7 +3722,62 @@ footer {
     font-size: 0.92rem;
   }
 }
+.product-card {
+  cursor: pointer;
+}
 
+.modal-producto-content {
+  border-radius: 22px;
+  border: none;
+  overflow: hidden;
+}
+
+.modal-producto-header {
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.modal-producto-header .modal-title {
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.modal-producto-body {
+  background: #f8fafc;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-producto-img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+@media (max-width: 575.98px) {
+  .modal-producto-dialog {
+    margin: 12px;
+  }
+
+  .modal-producto-content {
+    border-radius: 18px;
+  }
+
+  .modal-producto-body {
+    padding: 16px;
+  }
+
+  .modal-producto-img {
+    max-height: 65vh;
+  }
+
+  .modal-producto-header .modal-title {
+    font-size: 1rem;
+  }
+}
 
 
 /* login*/
