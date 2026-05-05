@@ -95,12 +95,17 @@ $productos = ObtenerProductos();
                     ?>
 
                    <div class="col-6 col-md-6 col-lg-4 producto-item" data-precio="<?= $p['Precio'] ?>">
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="<?= $imgSrc ?>" 
-                                class="product-image"
-                                alt="<?= htmlspecialchars($p['Nombre']) ?>">
-                        </div>
+                      <div class="product-card"
+                             data-bs-toggle="modal"
+                             data-bs-target="#modalProducto"
+                             data-img="<?= $imgSrc ?>"
+                             data-nombre="<?= htmlspecialchars($p['Nombre'], ENT_QUOTES, 'UTF-8') ?>">
+
+                            <div class="product-img-wrapper">
+                                <img src="<?= $imgSrc ?>" 
+                                     class="product-image"
+                                     alt="<?= htmlspecialchars($p['Nombre']) ?>">
+                            </div>
 
                         <div class="product-body">
                             <h5 class="product-title"><?= htmlspecialchars($p['Nombre']) ?></h5>
@@ -112,7 +117,14 @@ $productos = ObtenerProductos();
                     </div>
                 </div>
 
-                <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalProductoLabel" aria-hidden="true">
+                <?php endforeach; ?>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+  <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalProductoLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-producto-dialog">
                     <div class="modal-content modal-producto-content">
                         <div class="modal-header modal-producto-header">
@@ -126,13 +138,6 @@ $productos = ObtenerProductos();
                     </div>
                 </div>
             </div>
-                <?php endforeach; ?>
-
-            </div>
-        </div>
-
-    </div>
-</section>
 
 <?php MostrarFooter(); ?>
 <?php IncluirScripts(); ?>
@@ -145,17 +150,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalImg = document.getElementById('modalProductoImg');
     const modalTitle = document.getElementById('modalProductoLabel');
 
-    modalProducto.addEventListener('show.bs.modal', function (event) {
-        const card = event.relatedTarget;
+    if (modalProducto) {
+        modalProducto.addEventListener('show.bs.modal', function (event) {
+            const card = event.relatedTarget;
 
-        const img = card.getAttribute('data-img');
-        const nombre = card.getAttribute('data-nombre');
-
-        modalImg.src = img;
-        modalImg.alt = nombre;
-        modalTitle.textContent = nombre;
-    });
+            modalImg.src = card.getAttribute('data-img');
+            modalImg.alt = card.getAttribute('data-nombre');
+            modalTitle.textContent = card.getAttribute('data-nombre');
+        });
+    }
 });
 </script>
+
 </body>
 </html>
