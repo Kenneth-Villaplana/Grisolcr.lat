@@ -3758,14 +3758,24 @@ footer {
 
 .modal-producto-header .btn-close {
   position: absolute;
-  top: 50%;
+  top: 53%;
   right: 16px;
   transform: translateY(-50%);
 
   filter: brightness(0); 
   opacity: 1;
 
+  border: none;
+  box-shadow: none;
+  outline: none;
+
   transition: transform 0.25s ease;
+}
+
+.modal-producto-header .btn-close:focus,
+.modal-producto-header .btn-close:active {
+  outline: none;
+  box-shadow: none;
 }
 
 /* giro */
