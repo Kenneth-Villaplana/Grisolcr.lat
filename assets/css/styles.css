@@ -3745,13 +3745,9 @@ footer {
 
 
 .modal-producto-header {
+  padding: 18px 16px 8px;
+  border-bottom: 1px solid #e5e7eb;
   background: transparent;
-  border: none;
-   padding: 0;
-  height: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
 }
 
@@ -3763,10 +3759,22 @@ footer {
 
 .modal-producto-header .btn-close {
   position: absolute;
-  right: 16px;
-  top: 14px;
+  right: 18px;
+  top: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  opacity: 1;
+  padding: 10px;
+  transition: 0.25s ease;
+  z-index: 5;
 }
 
+.modal-producto-header .btn-close:hover {
+  background-color: #e2e8f0;
+  transform: rotate(90deg);
+}
 
 .modal-producto-body {
   padding: 10px 20px 25px;
@@ -3791,8 +3799,7 @@ footer {
 
 
 .modal-producto-img:hover {
-  transform: scale(1.02);
-  transition: 0.3s ease;
+  transform: none;
 }
 
 /* RESPONSIVE */
@@ -3801,9 +3808,10 @@ footer {
     margin: 12px;
   }
 
-  .modal-producto-header {
-    padding: 16px 45px 8px;
+   .modal-producto-header {
+    padding: 18px 14px 8px;
   }
+
 
   .modal-producto-header .modal-title {
     font-size: 1.05rem;
@@ -3816,6 +3824,11 @@ footer {
   .modal-producto-img {
     max-height: 55vh;
     padding: 16px;
+  }
+
+  .modal-producto-header .btn-close {
+    right: 14px;
+    top: 10px;
   }
 }
 
