@@ -3745,10 +3745,9 @@ footer {
 
 
 .modal-producto-header {
-  padding: 18px 16px 8px;
-  border-bottom: 1px solid #e5e7eb;
-  background: transparent;
   position: relative;
+  padding: 22px 16px 12px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 /* TITULO CENTRADO */
@@ -3759,21 +3758,25 @@ footer {
 
 .modal-producto-header .btn-close {
   position: absolute;
-  right: 18px;
-  top: 10px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #f1f5f9;
+  top: -14px; /* la sube para que no choque con la línea */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: transparent !important; /* quita círculo */
+  border: none;
+  box-shadow: none;
+  padding: 0;
+
+  width: auto;
+  height: auto;
+
   opacity: 1;
-  padding: 10px;
-  transition: 0.25s ease;
-  z-index: 5;
+  transition: transform 0.25s ease;
 }
 
+/* EFECTO DE GIRO (se mantiene) */
 .modal-producto-header .btn-close:hover {
-  background-color: #e2e8f0;
-  transform: rotate(90deg);
+  transform: translateX(-50%) rotate(90deg);
 }
 
 .modal-producto-body {
