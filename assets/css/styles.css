@@ -3725,83 +3725,88 @@ footer {
 .product-card {
   cursor: pointer;
 }
-.modal-producto-content {
-  border: none;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #f8fafc; 
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+.modal-backdrop.show {
+  background: rgba(15, 23, 42, 0.55);
 }
 
+/* CONTENEDOR */
+.modal-producto-dialog {
+  max-width: 720px;
+}
 
-.modal-producto-header {
-  background: transparent; 
+/* CAJA PRINCIPAL (SIN LOOK DE CARD) */
+.modal-producto-content {
+  background: #f8fafc;
   border: none;
-  padding: 22px 50px 10px;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* HEADER LIMPIO (SIN DIVISIONES) */
+.modal-producto-header {
+  background: transparent;
+  border: none;
+  padding: 20px 50px 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 
-.modal-producto-header::after {
-  display: none; 
-}
-
+/* TITULO CENTRADO */
 .modal-producto-header .modal-title {
   width: 100%;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #111827;
 }
 
+/* ❌ NO TOCAR (se mantiene tu estilo actual) */
 .modal-producto-header .btn-close {
   position: absolute;
-  right: 20px;
-  top: 18px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #f1f5f9;
-  opacity: 1;
-  padding: 10px;
-  transition: 0.25s ease;
+  right: 16px;
+  top: 14px;
 }
 
-.modal-producto-header .btn-close:hover {
-  background-color: #e2e8f0;
-  transform: rotate(90deg);
-}
-
+/* BODY TOTALMENTE LIMPIO */
 .modal-producto-body {
-  background: transparent; 
-  border: none;
-  padding: 20px 24px 26px;
+  padding: 10px 20px 25px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.modal-producto-body::before {
-  content: "";
-  position: absolute;
-}
-
+/* IMAGEN ESTILO “SHOWCASE” */
 .modal-producto-img {
   width: 100%;
-  max-height: 65vh;
+  max-height: 60vh;
   object-fit: contain;
-  border-radius: 16px;
+
   background: #ffffff;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 24px;
+
+  /* sombra suave tipo ecommerce */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
-/* Responsive modal */
+/* HOVER SUAVE (opcional pero moderno) */
+.modal-producto-img:hover {
+  transform: scale(1.02);
+  transition: 0.3s ease;
+}
+
+/* RESPONSIVE */
 @media (max-width: 575.98px) {
-  .modal-producto-content {
-    border-radius: 18px;
+  .modal-producto-dialog {
+    margin: 12px;
   }
 
   .modal-producto-header {
-    padding: 18px 45px 8px;
+    padding: 16px 45px 8px;
   }
 
   .modal-producto-header .modal-title {
@@ -3809,12 +3814,12 @@ footer {
   }
 
   .modal-producto-body {
-    padding: 16px;
+    padding: 10px 12px 18px;
   }
 
   .modal-producto-img {
-    max-height: 60vh;
-    padding: 14px;
+    max-height: 55vh;
+    padding: 16px;
   }
 }
 
