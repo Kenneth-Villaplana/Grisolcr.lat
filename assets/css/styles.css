@@ -3758,7 +3758,7 @@ footer {
 
 .modal-producto-header .btn-close {
   position: absolute;
-   top: 21px !important;
+   top: 25px !important;
   right: 16px !important;
   transform: translateY(-50%);
 
