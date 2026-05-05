@@ -3758,23 +3758,20 @@ footer {
 
 .modal-producto-header .btn-close {
   position: absolute;
-  top: -14px; /* la sube para que no choque con la línea */
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  
-  background: transparent !important; /* quita círculo */
+
+  background-color: transparent;
   border: none;
-  box-shadow: none;
-  padding: 0;
 
-  width: auto;
-  height: auto;
-
+  filter: brightness(0); 
   opacity: 1;
+
   transition: transform 0.25s ease;
 }
 
-/* EFECTO DE GIRO (se mantiene) */
+/* mantener giro */
 .modal-producto-header .btn-close:hover {
   transform: translateX(-50%) rotate(90deg);
 }
