@@ -294,10 +294,19 @@ async function mostrarReciboAbono(facturaId, montoAbonado, metodoPago) {
 
         const html = `
             <div id="ticketAbono" style="font-family: monospace; font-size: 13px; color: #000;">
-                <div style="text-align:center; margin-bottom:10px;">
-                    <h5 style="margin:0;">Óptica Grisol</h5>
-                    <div>Recibo de abono</div>
-                </div>
+            <div style="text-align:center; margin-bottom:10px;">
+               <img src="../assets/img/logo-nuevo.jpg"
+               alt="Óptica Grisol"
+               style="width:120px; max-width:100%; display:block; margin:0 auto 4px auto;">
+
+               <h3 style="margin:0; font-size:20px; font-weight:bold;">
+               Óptica Grisol
+               </h3>
+
+            <div style="font-size:12px; margin-top:3px;">
+             Tel: 25925460 - 88139883
+            </div>
+            </div>
 
                 <hr>
 
