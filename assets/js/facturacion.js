@@ -377,53 +377,78 @@ function imprimirReciboAbono() {
     }
 
     const contenido = ticket.outerHTML;
-    const ventana = window.open("", "_blank", "width=300,height=600");
+    const ventana = window.open("about:blank", "_blank", "width=400,height=600");
 
     if (!ventana) {
         alert("El navegador bloqueó la ventana de impresión.");
         return;
     }
 
+    ventana.document.open();
     ventana.document.write(`
+        <!DOCTYPE html>
         <html>
-            <head>
-                <style>
-                    @page {
-                        size: 80mm auto;
-                        margin: 0;
-                    }
+        <head>
+            <title>Recibo de abono</title>
+            <style>
+                @page {
+                    size: 80mm auto;
+                    margin: 0;
+                }
 
-                    html, body {
-                        width: 80mm;
-                        margin: 0;
-                        padding: 8px;
-                        font-family: monospace;
-                        font-size: 12px;
-                    }
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    background: white !important;
+                    color: black !important;
+                    font-family: monospace;
+                    font-size: 12px;
+                }
 
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                    }
+                #ticketAbono {
+                    width: 80mm;
+                    padding: 8px;
+                    background: white !important;
+                    color: black !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                }
 
-                    td, th {
-                        padding: 3px 0;
-                    }
+                img {
+                    display: block;
+                    margin: 0 auto 5px auto;
+                    max-width: 110px;
+                    height: auto;
+                }
 
-                    hr {
-                        border: none;
-                        border-top: 1px dashed #000;
-                        margin: 6px 0;
-                    }
-                </style>
-            </head>
-            <body>${contenido}</body>
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                th, td {
+                    padding: 3px 0;
+                    font-size: 12px;
+                }
+
+                hr {
+                    border: none;
+                    border-top: 1px dashed black;
+                    margin: 6px 0;
+                }
+            </style>
+        </head>
+        <body>
+            ${contenido}
+        </body>
         </html>
     `);
-
     ventana.document.close();
-    ventana.focus();
-    ventana.print();
+
+    setTimeout(() => {
+        ventana.focus();
+        ventana.print();
+    }, 500);
 }
 
 function mostrarFacturasPaginadas() {
