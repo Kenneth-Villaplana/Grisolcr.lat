@@ -222,18 +222,20 @@ async function guardarAbono() {
         const monto = parseFloat(document.getElementById("abonoMonto")?.value);
         const metodoPago = document.getElementById("abonoMetodoPago")?.value;
 
-        if (!monto || monto <= 0) {
-            alert("Ingrese un monto válido.");
-            return;
-        }
-        if (monto > saldo) {
-            alert("El abono no puede ser mayor al saldo.");
-            return;
-        }
-        if (!metodoPago) {
-    alert("Seleccione el método de pago.");
-    return;
-}
+    if (!monto || monto <= 0) {
+         mostrarAlertaFacturacion("Ingrese un monto válido.");
+         return;
+    }
+
+    if (monto > saldo) {
+        mostrarAlertaFacturacion("El abono no puede ser mayor al saldo.");
+        return;
+    }
+
+    if (!metodoPago) {
+        mostrarAlertaFacturacion("Seleccione el método de pago.");
+        return;
+    }
 
         const res = await fetch(CONTROLLER_PATH, {
             method: "POST",
@@ -565,4 +567,39 @@ function cambiarPaginaFacturas(pagina) {
     paginaActualFacturas = pagina;
     mostrarFacturasPaginadas();
     renderizarPaginacionFacturas();
+}
+
+function mostrarAlertaFacturacion(mensaje) {
+    let modal = document.getElementById("modalAlertaFacturacion");
+
+    if (!modal) {
+        document.body.insertAdjacentHTML("beforeend", `
+            <div class="modal fade" id="modalAlertaFacturacion" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4">
+                        <div class="modal-body p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="fw-bold mb-0">Aviso</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <p class="mb-3" id="modalAlertaFacturacionTexto"></p>
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">
+                                    Aceptar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        modal = document.getElementById("modalAlertaFacturacion");
+    }
+
+    document.getElementById("modalAlertaFacturacionTexto").textContent = mensaje;
+
+    new bootstrap.Modal(modal).show();
 }
