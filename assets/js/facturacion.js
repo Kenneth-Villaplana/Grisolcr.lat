@@ -295,7 +295,7 @@ async function mostrarReciboAbono(facturaId, montoAbonado, metodoPago) {
         const html = `
             <div id="ticketAbono" style="font-family: monospace; font-size: 13px; color: #000;">
             <div style="text-align:center; margin-bottom:10px;">
-               <img src="../assets/img/logo-nuevo.png"
+               <img src="/assets/img/logo-nuevo.png"
                alt="Óptica Grisol"
                style="width:120px; max-width:100%; display:block; margin:0 auto 4px auto;">
 
