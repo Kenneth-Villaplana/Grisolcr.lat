@@ -870,8 +870,19 @@ function mostrarFacturaTicket(factura) {
     modalBody.innerHTML = `
         <div id="ticketFactura" style="font-size:14px;">
 
-            <h5 class="text-center fw-bold">Óptica Grisol</h5>
-            <small class="text-center d-block">Venta al detalle</small>
+            <div style="text-align:center; margin-bottom:10px;">
+    <img src="/assets/img/logo-nuevo.png"
+         alt="Óptica Grisol"
+         style="width:120px; max-width:100%; display:block; margin:0 auto 4px auto;">
+
+    <h3 style="margin:0; font-size:20px; font-weight:bold;">
+        Óptica Grisol
+    </h3>
+
+    <div style="font-size:12px; margin-top:3px;">
+        Tel: 25925460 - 88139883
+    </div>
+</div>
 
             <hr>
 
@@ -955,19 +966,64 @@ ${(parseFloat(encabezado.SaldoPendiente) > 0)
         const ticketHTML = document.getElementById("ticketFactura").outerHTML;
         const ventana = window.open("", "_blank", "width=300,height=600");
 
-        ventana.document.write(`
-            <html>
-                <head>
-                    <style>
-                        body { font-family: monospace; margin:0; padding:10px; }
-                        #ticketFactura { width: 200px; }
-                        .ticket-table { width: 100%; font-size: 12px; }
-                        .ticket-table th, .ticket-table td { text-align:left; padding-right:5px; }
-                    </style>
-                </head>
-                <body>${ticketHTML}</body>
-            </html>
-        `);
+ventana.document.write(`
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Factura</title>
+            <style>
+                @page {
+                    size: 80mm auto;
+                    margin: 0;
+                }
+
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    background: white !important;
+                    color: black !important;
+                    font-family: monospace;
+                    font-size: 12px;
+                }
+
+                #ticketFactura {
+                    width: 80mm;
+                    padding: 8px;
+                    background: white !important;
+                    color: black !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                }
+
+                img {
+                    display: block;
+                    margin: 0 auto 5px auto;
+                    max-width: 110px;
+                    height: auto;
+                }
+
+                .ticket-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 12px;
+                }
+
+                .ticket-table th,
+                .ticket-table td {
+                    text-align: left;
+                    padding: 3px 2px;
+                }
+
+                hr {
+                    border: none;
+                    border-top: 1px dashed black;
+                    margin: 6px 0;
+                }
+            </style>
+        </head>
+        <body>${ticketHTML}</body>
+    </html>
+`);
 
         ventana.print();
 
