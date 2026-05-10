@@ -870,32 +870,22 @@ function mostrarFacturaTicket(factura) {
     modalBody.innerHTML = `
         <div id="ticketFactura" style="font-size:14px;">
 
-            <div style="text-align:center; margin-bottom:10px;">
-    <img src="/assets/img/logo-nuevo.png"
- alt="Óptica Grisol"
-     style="
-        width:160px;
-        max-width:100%;
-        display:block;
-        margin:0 auto 6px auto;
-     ">
+           <div style="text-align:center; margin-bottom:10px;">
 
-<h2 style="
-    margin:0;
-    font-size:28px;
-    font-weight:900;
-    letter-spacing:1px;
-">
-    Óptica Grisol
-</h2>
+    <img 
+        src="/assets/img/logo-nuevo.png"
+        alt="Óptica Grisol"
+        style="width:160px; max-width:100%; display:block; margin:0 auto 6px auto;"
+    >
 
-<div style="
-    font-size:14px;
-    font-weight:600;
-    margin-top:4px;
-">
-    Tel: 25925460 - 88139883
-</div>
+    <h2 style="margin:0; font-size:28px; font-weight:900; letter-spacing:1px;">
+        Óptica Grisol
+    </h2>
+
+    <div style="font-size:14px; font-weight:600; margin-top:4px;">
+        Tel: 25925460 - 88139883
+    </div>
+
 </div>
 
             <hr>
