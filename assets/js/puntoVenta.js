@@ -951,6 +951,18 @@ ${(parseFloat(encabezado.SaldoPendiente) > 0)
         `
             : `
             <h5 class="fw-bold">TOTAL: ₡${encabezado.Total}</h5>
+
+            <strong>Pendiente:</strong> ₡0.00<br>
+
+            <div style="
+                text-align:center;
+                margin-top:10px;
+                font-size:18px;
+                font-weight:800;
+                letter-spacing:1px;
+            ">
+                CANCELADA
+            </div>
         `
         }
 
