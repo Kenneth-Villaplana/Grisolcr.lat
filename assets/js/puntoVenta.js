@@ -944,27 +944,17 @@ function mostrarFacturaTicket(factura) {
             <strong>Impuesto:</strong> ₡${encabezado.IVA}<br>
             <hr>
 ${(parseFloat(encabezado.SaldoPendiente) > 0)
-            ? `
-            <strong>Total factura:</strong> ₡${encabezado.Total}<br>
-            <strong>Abono realizado:</strong> ₡${encabezado.Abono}<br>
-            <strong>Pendiente:</strong> ₡${encabezado.SaldoPendiente}<br>
-        `
-            : `
-            <h5 class="fw-bold">TOTAL: ₡${encabezado.Total}</h5>
-
-            <strong>Pendiente:</strong> ₡0.00<br>
-
-            <div style="
-                text-align:center;
-                margin-top:10px;
-                font-size:18px;
-                font-weight:800;
-                letter-spacing:1px;
-            ">
-                CANCELADA
-            </div>
-        `
-        }
+    ? `
+        <strong>Total factura:</strong> ₡${encabezado.Total}<br>
+        <strong>Abono realizado:</strong> ₡${encabezado.Abono}<br>
+        <strong>Pendiente:</strong> ₡${encabezado.SaldoPendiente}<br>
+    `
+    : `
+        <strong>Total:</strong> ₡${encabezado.Total}<br>
+        <strong>Pendiente:</strong> ₡0.00<br>
+        <strong>Factura:</strong> Cancelada<br>
+    `
+}
 
 <hr>
             <p class="text-center">¡Gracias por su compra!</p>
